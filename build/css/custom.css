@@ -348,7 +348,9 @@ body {
 .page-title .title_left {
   width: 45%;
   float: left;
-  display: block; }
+  display: block;
+  margin-bottom:10px;
+}
 
 .page-title .title_left h3 {
   margin: 9px 0; }
@@ -636,7 +638,8 @@ a:hover, a:focus {
 
 .panel_toolbox {
   float: right;
-  min-width: 70px; }
+  // min-width: 70px;
+}
 
 .panel_toolbox > li {
   float: left;
