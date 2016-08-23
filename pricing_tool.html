@@ -32,6 +32,9 @@
       .price_input_sm {
         width: 50px;
       }
+      .modal-dialog .form-horizontal .form-group {
+        margin-bottom: 5px;
+      }
     </style>
   </head>
   <body class="nav-sm">
@@ -279,7 +282,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>[Accelerator]<small>     Product Prcing Overview</small></h3>
+                <h3>[Accelerator]<small>  Prcing Overview</small></h3>
               </div>
             </div>
             <div class="clearfix"></div>
@@ -294,12 +297,17 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content" style="display:none;">
+                  <div class="x_content">
                     <form class="form-horizontal form-label-left">
                       <div class="form-group col-md-6">
                         <label class="control-label col-md-3">Marketplace ID</label>
                         <div class="col-md-6 col-xs-12">
-                          <input type="text" class="form-control col-md-4 col-xs-12" placeholder="Marketplace ID">
+                          <select class="form-control">
+                            <option value="3DAMAZON">3DAMAZON</option>
+                            <option value="BCAMAZON">BCAMAZON</option>
+                            <option value="CVAMAZON">CVAMAZON</option>
+                            <option value="PXAMAZON">PXAMAZON</option>
+                          </select>
                         </div>
                       </div>
                       <div class="form-group col-md-6">
@@ -319,7 +327,7 @@
                           </select>
                         </div>
                       </div>
-                      <div class="form-group col-md-4">
+                      <div class="form-group col-md-6">
                         <label class="control-label col-md-3">Category</label>
                         <div class="col-md-6 col-xs-12">
                           <select class="form-control">
@@ -337,8 +345,16 @@
                           </select>
                         </div>
                       </div>
-                      <div class="form-group col-md-4">
-                        <label class="control-label col-md-4">SUb-Category</label>
+                      <div class="form-group col-md-6">
+                        <label class="control-label col-md-3">SKU Status</label>
+                        <div class="col-md-6 col-xs-12">
+                          <select class="form-control">
+                            <option value=""></option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label class="control-label col-md-3">Sub-Category</label>
                         <div class="col-md-6 col-xs-12">
                           <select class="form-control">
                             <option></option>
@@ -355,8 +371,16 @@
                           </select>
                         </div>
                       </div>
-                      <div class="form-group col-md-4">
-                        <label class="control-label col-md-6">Sub-Sub-Category</label>
+                      <div class="form-group col-md-6">
+                        <label class="control-label col-md-3">Sourcing Status</label>
+                        <div class="col-md-6 col-xs-12">
+                          <select class="form-control">
+                            <option value=""></option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label class="control-label col-md-3">Sub-Sub-Category</label>
                         <div class="col-md-6 col-xs-12">
                           <select class="form-control">
                             <option></option>
@@ -382,23 +406,7 @@
                         </div>
                       </div>
                       <div class="form-group col-md-6">
-                        <label class="control-label col-md-3">Sourcing Status</label>
-                        <div class="col-md-6 col-xs-12">
-                          <select class="form-control">
-                            <option value=""></option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="form-group col-md-6">
                         <label class="control-label col-md-3">SKU Type</label>
-                        <div class="col-md-6 col-xs-12">
-                          <select class="form-control">
-                            <option value=""></option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label class="control-label col-md-3">SKU Status</label>
                         <div class="col-md-6 col-xs-12">
                           <select class="form-control">
                             <option value=""></option>
@@ -481,8 +489,111 @@
                             </td>
                             <td>0.00    </td>
                             <td>0.00    </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system"><br/>
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                               <input type='Button' value="Detail" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-md">
+                              <div class="modal fade bs-example-modal-md" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                <div class="modal-dialog modal-md">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                                      </button>
+                                      <h4 class="modal-title" id="myModalLabel2">Overview [ BCLAZHK ] - 24697-MM-NA - 15621-AA-NA</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                       <form class="form-horizontal form-label-left">
+                                        <div class="form-group col-md-12">
+                                          <label class="control-label col-md-3">Marketplace ID</label>
+                                          <div class="col-md-6 col-xs-12">
+                                            <input type="text" class="form-control col-md-4 col-xs-12" value="BCLAZHK" readonly="readonly">
+                                          </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                          <label class="control-label col-md-3">Master SKU</label>
+                                          <div class="col-md-6 col-xs-12">
+                                            <input type="text" class="form-control col-md-4 col-xs-12" value="24697-MM-NA" readonly="readonly">
+                                          </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                          <label class="control-label col-md-3">ESG SKU</label>
+                                          <div class="col-md-6 col-xs-12">
+                                            <input type="text" class="form-control col-md-4 col-xs-12" value="15621-AA-NA" readonly="readonly">
+                                          </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                          <label class="control-label col-md-3">Product Name</label>
+                                          <div class="col-md-6 col-xs-12">
+                                            <input type="text" class="form-control col-md-4 col-xs-12" value="Biloop Cry Translator" readonly="readonly">
+                                          </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                          <label class="control-label col-md-3">Sourcing status</label>
+                                          <div class="col-md-6 col-xs-12">
+                                            <select class="form-control col-md-4 col-xs-12">
+                                              <option value="">Readily Available</option>
+                                              <option value="">Out Of Stock</option>
+                                            </select>
+                                            <!-- <input type="text"  value="15621-AA-NA" readonly="readonly"> -->
+                                          </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                          <label class="control-label col-md-3">ETRADE QTY</label>
+                                          <div class="col-md-6 col-xs-12">
+                                            <input type="text" class="form-control col-md-4 col-xs-12" value="0">
+                                          </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                          <label class="control-label col-md-3">ES_HK QTY</label>
+                                          <div class="col-md-6 col-xs-12">
+                                            <input type="text" class="form-control col-md-4 col-xs-12" value="0">
+                                          </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                          <label class="control-label col-md-3">ES_DG QTY</label>
+                                          <div class="col-md-6 col-xs-12">
+                                            <input type="text" class="form-control col-md-4 col-xs-12" value="0">
+                                          </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                          <label class="control-label col-md-3">Item Price</label>
+                                          <div class="col-md-6 col-xs-12">
+                                            <input type="text" class="form-control col-md-4 col-xs-12" value="279.58">
+                                          </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                          <label class="control-label col-md-3">Selling Price</label>
+                                          <div class="col-md-6 col-xs-12">
+                                            <input type="text" class="form-control col-md-4 col-xs-12" value="279.58">
+                                          </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                          <label class="control-label col-md-3">Profit</label>
+                                          <div class="col-md-6 col-xs-12">
+                                            <input type="text" class="form-control col-md-4 col-xs-12" value="0.00">
+                                          </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                          <label class="control-label col-md-3">Margin</label>
+                                          <div class="col-md-6 col-xs-12">
+                                            <input type="text" class="form-control col-md-4 col-xs-12" value="0.00">
+                                          </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                          <label class="control-label col-md-3">Update On</label>
+                                          <div class="control-label col-md-4">  2016-02-18 09:41:11</div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                          <label class="control-label col-md-3">Update By</label>
+                                          <div class="control-label col-md-4"> Systems </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                      <button type="button" class="btn btn-primary">Save</button>
+                                    </div>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
                             </td>
                         </tr>
                         <tr>
@@ -508,8 +619,8 @@
                             </td>
                             <td>0.00    </td>
                             <td>0.00    </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-md">
                             </td>
                         </tr>
                         <tr>
@@ -535,8 +646,8 @@
                             </td>
                             <td>0.00    </td>
                             <td>0.00    </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-md">
                             </td>
                         </tr>
                         <tr>
@@ -562,8 +673,8 @@
                             </td>
                             <td>45.90   </td>
                             <td>52.16   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -589,8 +700,8 @@
                             </td>
                             <td>45.90   </td>
                             <td>52.16   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -616,8 +727,62 @@
                             </td>
                             <td>45.90   </td>
                             <td>52.16   </td>
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="a-center ">
+                              <input type="checkbox" class="flat" name="table_records">
+                            </td>
+                            <td>BCLAZHK</td>
+                            <td>24697-MM-NA</td>
+                            <td>15621-AA-NA</td>
+                            <td>Biloop Cry Translator</td>
+                            <td>Readily Available</td>
                             <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type="text" value='0' name='etrade_qty' class="price_input_sm">
+                            </td>
+                            <td>
+                              <input type="text" value='0' name='etrade_qty' class="price_input_sm">
+                            </td>
+                            <td>
+                              <input type="text" value='0' name='etrade_qty' class="price_input_sm">
+                            </td>
+                            <td>
+                              <input type="text" value="279.58" name="item_price" class="price_input_sm">
+                            </td>
+                            <td>30.61   </td>
+                            <td>51.88   </td>
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="a-center ">
+                              <input type="checkbox" class="flat" name="table_records">
+                            </td>
+                            <td>BCLAZHK</td>
+                            <td>24697-MM-NA</td>
+                            <td>15621-AA-NA</td>
+                            <td>Biloop Cry Translator</td>
+                            <td>Readily Available</td>
+                            <td>
+                              <input type="text" value='0' name='etrade_qty' class="price_input_sm">
+                            </td>
+                            <td>
+                              <input type="text" value='0' name='etrade_qty' class="price_input_sm">
+                            </td>
+                            <td>
+                              <input type="text" value='0' name='etrade_qty' class="price_input_sm">
+                            </td>
+                            <td>
+                              <input type="text" value="279.58" name="item_price" class="price_input_sm">
+                            </td>
+                            <td>30.61   </td>
+                            <td>51.88   </td>
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -644,61 +809,29 @@
                             <td>30.61   </td>
                             <td>51.88   </td>
                             <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td>BCLAZHK</td>
-                            <td>24697-MM-NA</td>
-                            <td>15621-AA-NA</td>
-                            <td>Biloop Cry Translator</td>
-                            <td>Readily Available</td>
-                            <td>
-                              <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                            </td>
-                            <td>
-                              <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                            </td>
-                            <td>
-                              <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                            </td>
-                            <td>
-                              <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                            </td>
-                            <td>30.61   </td>
-                            <td>51.88   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td>BCLAZHK</td>
-                            <td>24697-MM-NA</td>
-                            <td>15621-AA-NA</td>
-                            <td>Biloop Cry Translator</td>
-                            <td>Readily Available</td>
-                            <td>
-                              <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                            </td>
-                            <td>
-                              <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                            </td>
-                            <td>
-                              <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                            </td>
-                            <td>
-                              <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                            </td>
-                            <td>30.61   </td>
-                            <td>51.88   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip modal" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system" data-target=".bs-example-modal-sm">
+                              <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog modal-sm">
+                      <div class="modal-content">
+
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                          </button>
+                          <h4 class="modal-title" id="myModalLabel2">Modal title</h4>
+                        </div>
+                        <div class="modal-body">
+                          <h4>Text in a modal</h4>
+                          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                          <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
                             </td>
                         </tr>
                         <tr>
@@ -724,8 +857,8 @@
                             </td>
                             <td>35.27   </td>
                             <td>50.39   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -751,8 +884,8 @@
                             </td>
                             <td>35.27   </td>
                             <td>50.39   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -778,8 +911,8 @@
                             </td>
                             <td>35.27   </td>
                             <td>50.39   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -805,8 +938,8 @@
                             </td>
                             <td>30.61   </td>
                             <td>51.88   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -832,8 +965,8 @@
                             </td>
                             <td>30.61   </td>
                             <td>51.88   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -859,8 +992,8 @@
                             </td>
                             <td>30.61   </td>
                             <td>51.88   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -886,8 +1019,8 @@
                             </td>
                             <td>30.43   </td>
                             <td>51.58   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -913,8 +1046,8 @@
                             </td>
                             <td>30.43   </td>
                             <td>51.58   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -940,8 +1073,8 @@
                             </td>
                             <td>30.43   </td>
                             <td>51.58   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -967,8 +1100,8 @@
                             </td>
                             <td>29.93   </td>
                             <td>50.73   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -994,8 +1127,8 @@
                             </td>
                             <td>29.93   </td>
                             <td>50.73   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1021,8 +1154,8 @@
                             </td>
                             <td>29.93   </td>
                             <td>50.73   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1048,8 +1181,8 @@
                             </td>
                             <td>25.70   </td>
                             <td>52.45   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1075,8 +1208,8 @@
                             </td>
                             <td>25.70   </td>
                             <td>52.45   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1102,8 +1235,8 @@
                             </td>
                             <td>25.70   </td>
                             <td>52.45   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1129,8 +1262,8 @@
                             </td>
                             <td>328.02  </td>
                             <td>52.91   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1156,8 +1289,8 @@
                             </td>
                             <td>328.02  </td>
                             <td>52.91   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1183,8 +1316,8 @@
                             </td>
                             <td>328.02  </td>
                             <td>52.91   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1210,8 +1343,8 @@
                             </td>
                             <td>30.49   </td>
                             <td>51.68   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1237,8 +1370,8 @@
                             </td>
                             <td>30.49   </td>
                             <td>51.68   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1264,8 +1397,8 @@
                             </td>
                             <td>30.49   </td>
                             <td>51.68   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1291,8 +1424,8 @@
                             </td>
                             <td>29.79   </td>
                             <td>50.49   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1318,8 +1451,8 @@
                             </td>
                             <td>29.79   </td>
                             <td>50.49   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1345,8 +1478,8 @@
                             </td>
                             <td>29.79   </td>
                             <td>50.49   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1372,8 +1505,8 @@
                             </td>
                             <td>30.03   </td>
                             <td>50.90   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1399,8 +1532,8 @@
                             </td>
                             <td>30.03   </td>
                             <td>50.90   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1426,8 +1559,8 @@
                             </td>
                             <td>30.03   </td>
                             <td>50.90   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1453,8 +1586,8 @@
                             </td>
                             <td>136.76  </td>
                             <td>51.61   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1480,8 +1613,8 @@
                             </td>
                             <td>136.76  </td>
                             <td>51.61   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1507,8 +1640,8 @@
                             </td>
                             <td>136.76  </td>
                             <td>51.61   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1534,8 +1667,8 @@
                             </td>
                             <td>48.60   </td>
                             <td>51.70   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1561,8 +1694,8 @@
                             </td>
                             <td>48.60   </td>
                             <td>51.70   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1588,8 +1721,8 @@
                             </td>
                             <td>48.60   </td>
                             <td>51.70   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1615,8 +1748,8 @@
                             </td>
                             <td>1969.05 </td>
                             <td>53.95   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1642,8 +1775,8 @@
                             </td>
                             <td>1969.05 </td>
                             <td>53.95   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1669,8 +1802,8 @@
                             </td>
                             <td>1969.05 </td>
                             <td>53.95   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1696,8 +1829,8 @@
                             </td>
                             <td>29.91   </td>
                             <td>50.69   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1723,8 +1856,8 @@
                             </td>
                             <td>29.91   </td>
                             <td>50.69   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1750,8 +1883,8 @@
                             </td>
                             <td>29.91   </td>
                             <td>50.69   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1777,8 +1910,8 @@
                             </td>
                             <td>1446.47 </td>
                             <td>49.03   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1804,8 +1937,8 @@
                             </td>
                             <td>1446.47 </td>
                             <td>49.03   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1831,8 +1964,8 @@
                             </td>
                             <td>1446.47 </td>
                             <td>49.03   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1858,8 +1991,8 @@
                             </td>
                             <td>52.97   </td>
                             <td>51.93   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1885,8 +2018,8 @@
                             </td>
                             <td>52.97   </td>
                             <td>51.93   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1912,8 +2045,8 @@
                             </td>
                             <td>52.97   </td>
                             <td>51.93   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1939,8 +2072,8 @@
                             </td>
                             <td>41.59   </td>
                             <td>51.99   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1966,8 +2099,8 @@
                             </td>
                             <td>41.59   </td>
                             <td>51.99   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -1993,8 +2126,8 @@
                             </td>
                             <td>41.59   </td>
                             <td>51.99   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2013,11 +2146,11 @@
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>12.82   </td>
                             <td>56.98   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2036,11 +2169,11 @@
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>43.58   </td>
                             <td>79.24   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2059,11 +2192,11 @@
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>12.82   </td>
                             <td>56.98   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2082,11 +2215,11 @@
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>12.75   </td>
                             <td>56.67   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2105,11 +2238,11 @@
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>12.56   </td>
                             <td>55.82   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2128,11 +2261,11 @@
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>17.60   </td>
                             <td>70.40   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2151,11 +2284,11 @@
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>79.33   </td>
                             <td>49.58   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2174,11 +2307,11 @@
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>12.77   </td>
                             <td>56.76   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2197,11 +2330,11 @@
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>12.50   </td>
                             <td>55.56   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2220,11 +2353,11 @@
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>12.59   </td>
                             <td>55.96   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2243,11 +2376,11 @@
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>1758.04 </td>
                             <td>94.52   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2266,11 +2399,11 @@
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>31.95   </td>
                             <td>57.57   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2289,11 +2422,11 @@
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>1199.21 </td>
                             <td>71.38   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2312,11 +2445,11 @@
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>12.55   </td>
                             <td>55.78   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2335,11 +2468,11 @@
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>5775.40 </td>
                             <td>84.31   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2358,11 +2491,11 @@
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>128.40  </td>
                             <td>87.35   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2381,11 +2514,11 @@
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>8.92    </td>
                             <td>45.79   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2397,18 +2530,18 @@
                             <td>15675-AA-NA</td>
                             <td>3Doodler PLA Plastic: PLA</td>
                             <td>Readily Available</td>
-                            <td>294</td>
+                            <td><input type="text" value='294' name='etrade_qty' class="price_input_sm"></td>
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>7.14    </td>
                             <td>51.04   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2420,18 +2553,18 @@
                             <td>15675-AA-NA</td>
                             <td>3Doodler PLA Plastic: PLA</td>
                             <td>Readily Available</td>
-                            <td>294</td>
+                            <td><input type="text" value='294' name='etrade_qty' class="price_input_sm"></td>
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>23.51   </td>
                             <td>81.07   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2443,18 +2576,18 @@
                             <td>15675-AA-NA</td>
                             <td>3Doodler PLA Plastic: PLA</td>
                             <td>Readily Available</td>
-                            <td>294</td>
+                            <td><input type="text" value='294' name='etrade_qty' class="price_input_sm"></td>
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>23.08   </td>
                             <td>79.59   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2466,18 +2599,18 @@
                             <td>15675-AA-NA</td>
                             <td>3Doodler PLA Plastic: PLA</td>
                             <td>Readily Available</td>
-                            <td>294</td>
+                            <td><input type="text" value='294' name='etrade_qty' class="price_input_sm"></td>
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>22.81   </td>
                             <td>78.66   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2489,18 +2622,18 @@
                             <td>15675-AA-NA</td>
                             <td>3Doodler PLA Plastic: PLA</td>
                             <td>Readily Available</td>
-                            <td>294</td>
+                            <td><input type="text" value='294' name='etrade_qty' class="price_input_sm"></td>
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>23.51   </td>
                             <td>81.07   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2512,18 +2645,18 @@
                             <td>15675-AA-NA</td>
                             <td>3Doodler PLA Plastic: PLA</td>
                             <td>Readily Available</td>
-                            <td>294</td>
+                            <td><input type="text" value='294' name='etrade_qty' class="price_input_sm"></td>
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>23.42   </td>
                             <td>80.76   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2535,18 +2668,18 @@
                             <td>15675-AA-NA</td>
                             <td>3Doodler PLA Plastic: PLA</td>
                             <td>Readily Available</td>
-                            <td>294</td>
+                            <td><input type="text" value='294' name='etrade_qty' class="price_input_sm"></td>
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>23.18   </td>
                             <td>79.93   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2558,18 +2691,18 @@
                             <td>15675-AA-NA</td>
                             <td>3Doodler PLA Plastic: PLA</td>
                             <td>Readily Available</td>
-                            <td>294</td>
+                            <td><input type="text" value='294' name='etrade_qty' class="price_input_sm"></td>
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>24.45   </td>
                             <td>84.31   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                         <tr>
@@ -2581,18 +2714,18 @@
                             <td>15675-AA-NA</td>
                             <td>3Doodler PLA Plastic: PLA</td>
                             <td>Readily Available</td>
-                            <td>294</td>
+                            <td><input type="text" value='294' name='etrade_qty' class="price_input_sm"></td>
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
                             <td>
                               <input type="text" value='0' name='etrade_qty' class="price_input_sm">
                             </td>
-                            <td>5.00  </td>
+                            <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
                             <td>254.24  </td>
                             <td>85.03   </td>
-                            <td>
-                              <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                              <input type='Button' value="Detail" class="btn btn-primary" >
                             </td>
                         </tr>
                       </tbody>
@@ -2600,7 +2733,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="navbar navbar-default navbar-fixed-bottom">
                 <div class="x_panel">
                   <div class="">
                     <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
@@ -2651,101 +2784,14 @@
     <script src="bower_components/pdfmake/build/pdfmake.min.js"></script>
     <script src="bower_components/pdfmake/build/vfs_fonts.js"></script>
     <script src="bower_components/jquery.tagsinput/src/jquery.tagsinput.js"></script>
-     <script src="bower_components/iCheck/icheck.min.js"></script>
-
+    <script src="bower_components/iCheck/icheck.min.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="build/js/custom.js"></script>
+    <script src="build/js/custom-datatable.js"></script>
 
     <!-- Datatables -->
     <script>
-      $(document).ready(function() {
-        var handleDataTableButtons = function() {
-          if ($("#datatable-buttons").length) {
-            $("#datatable-buttons").DataTable({
-              dom: "Bfrtip",
-              buttons: [
-                {
-                  extend: "copy",
-                  className: "btn-sm"
-                },
-                {
-                  extend: "csv",
-                  className: "btn-sm"
-                },
-                {
-                  extend: "excel",
-                  className: "btn-sm"
-                },
-                {
-                  extend: "pdfHtml5",
-                  className: "btn-sm"
-                },
-                {
-                  extend: "print",
-                  className: "btn-sm"
-                },
-              ],
-              responsive: true,
-              fixedHeader: true,
-              keys: true,
-            });
-          }
-        };
 
-        TableManageButtons = function() {
-          "use strict";
-          return {
-            init: function() {
-              handleDataTableButtons();
-            }
-          };
-        }();
-
-        $('#datatable').dataTable();
-        $('#datatable-keytable').DataTable({
-          keys: true
-        });
-
-        $('#datatable-responsive').DataTable({
-          fixedHeader: true,
-          keys: true,
-        });
-
-        $('#datatable-scroller').DataTable({
-          ajax: "js/datatables/json/scroller-demo.json",
-          deferRender: true,
-          scrollY: 380,
-          scrollCollapse: true,
-          scroller: true
-        });
-
-        var table = $('#datatable-fixed-header').DataTable({
-          fixedHeader: true,
-          iDisplayLength:25
-          // keys: true,
-        });
-
-        TableManageButtons.init();
-      });
-
-      function onAddTag(tag) {
-        alert("Added a SKU: " + tag);
-      }
-
-      function onRemoveTag(tag) {
-        alert("Removed a SKU: " + tag);
-      }
-
-      function onChangeTag(input, tag) {
-        alert("Changed a SKU: " + tag);
-      }
-
-      $(document).ready(function() {
-        $('#tags_1').tagsInput({
-          width: 'auto',
-          defaultText:'add a SKU',
-        });
-      });
     </script>
     <!-- /Datatables -->
   </body>
