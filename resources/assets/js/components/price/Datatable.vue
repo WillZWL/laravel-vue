@@ -21,36 +21,36 @@
                   <th>ES_HK QTY</th>
                   <th>ES_DG QTY</th>
                   <th>Item Price</th>
-                  <th>Prodfit</th>
+                  <th>Profit</th>
                   <th>Margin</th>
                   <th>Detail Or Update</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr v-for="item in items">
                     <td class="a-center ">
                       <input type="checkbox" class="flat" name="table_records">
                     </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
+                    <td>{{item.markerplace_id}}</td>
+                    <td>{{item.master_sku}}</td>
+                    <td>{{item.sku}}</td>
+                    <td>{{item.prod_name}}</td>
+                    <td>{{item.sourcing_status}}</td>
                     <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
+                      <input type="text" value="{{item.etrade_qty}}" name='etrade_qty' class="price_input_sm">
                     </td>
                     <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
+                      <input type="text" value="{{item.es_hk_qty}}" name='es_hk_qty' class="price_input_sm">
                     </td>
                     <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
+                      <input type="text" value='{{item.es_dg_qty}}' name='es_dg_qty' class="price_input_sm">
                     </td>
                     <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
+                      <input type="text" value="{{item.item_price}}" name="item_price" class="price_input_sm">
                     </td>
-                    <td>0.00    </td>
-                    <td>0.00    </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
+                    <td>{{item.profit}}</td>
+                    <td>{{item.margin}}</td>
+                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: {{item.modify_on}}  Update By:{{item.modify_by}}">
                        <input type='Button' value="Detail" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-md">
                       <div class="modal fade bs-example-modal-md" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
                         <div class="modal-dialog modal-md">
@@ -58,32 +58,32 @@
                             <div class="modal-header">
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
                               </button>
-                              <h4 class="modal-title" id="myModalLabel2">Overview [ BCLAZHK ] - 24697-MM-NA - 15621-AA-NA</h4>
+                              <h4 class="modal-title" id="myModalLabel2">Overview [ {{item.markerplace_id}} ] - {{item.master_sku}} - {{item.sku}}</h4>
                             </div>
                             <div class="modal-body">
                                <form class="form-horizontal form-label-left">
                                 <div class="form-group col-md-12">
                                   <label class="control-label col-md-3">Marketplace ID</label>
                                   <div class="col-md-6 col-xs-12">
-                                    <input type="text" class="form-control col-md-4 col-xs-12" value="BCLAZHK" readonly="readonly">
+                                    <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.markerplace_id}}" readonly="readonly">
                                   </div>
                                 </div>
                                 <div class="form-group col-md-12">
                                   <label class="control-label col-md-3">Master SKU</label>
                                   <div class="col-md-6 col-xs-12">
-                                    <input type="text" class="form-control col-md-4 col-xs-12" value="24697-MM-NA" readonly="readonly">
+                                    <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.master_sku}}" readonly="readonly">
                                   </div>
                                 </div>
                                 <div class="form-group col-md-12">
                                   <label class="control-label col-md-3">ESG SKU</label>
                                   <div class="col-md-6 col-xs-12">
-                                    <input type="text" class="form-control col-md-4 col-xs-12" value="15621-AA-NA" readonly="readonly">
+                                    <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.sku}}" readonly="readonly">
                                   </div>
                                 </div>
                                 <div class="form-group col-md-12">
                                   <label class="control-label col-md-3">Product Name</label>
                                   <div class="col-md-6 col-xs-12">
-                                    <input type="text" class="form-control col-md-4 col-xs-12" value="Biloop Cry Translator" readonly="readonly">
+                                    <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.prod_name}}" readonly="readonly">
                                   </div>
                                 </div>
                                 <div class="form-group col-md-12">
@@ -99,52 +99,52 @@
                                 <div class="form-group col-md-12">
                                   <label class="control-label col-md-3">ETRADE QTY</label>
                                   <div class="col-md-6 col-xs-12">
-                                    <input type="text" class="form-control col-md-4 col-xs-12" value="0">
+                                    <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.etrade_qty}}">
                                   </div>
                                 </div>
                                 <div class="form-group col-md-12">
                                   <label class="control-label col-md-3">ES_HK QTY</label>
                                   <div class="col-md-6 col-xs-12">
-                                    <input type="text" class="form-control col-md-4 col-xs-12" value="0">
+                                    <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.es_hk_qty}}">
                                   </div>
                                 </div>
                                 <div class="form-group col-md-12">
                                   <label class="control-label col-md-3">ES_DG QTY</label>
                                   <div class="col-md-6 col-xs-12">
-                                    <input type="text" class="form-control col-md-4 col-xs-12" value="0">
+                                    <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.es_dg_qty}}">
                                   </div>
                                 </div>
                                 <div class="form-group col-md-12">
                                   <label class="control-label col-md-3">Item Price</label>
                                   <div class="col-md-6 col-xs-12">
-                                    <input type="text" class="form-control col-md-4 col-xs-12" value="279.58">
+                                    <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.item_price}}">
                                   </div>
                                 </div>
                                 <div class="form-group col-md-12">
                                   <label class="control-label col-md-3">Selling Price</label>
                                   <div class="col-md-6 col-xs-12">
-                                    <input type="text" class="form-control col-md-4 col-xs-12" value="279.58">
+                                    <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.item_price}}">
                                   </div>
                                 </div>
                                 <div class="form-group col-md-12">
                                   <label class="control-label col-md-3">Profit</label>
                                   <div class="col-md-6 col-xs-12">
-                                    <input type="text" class="form-control col-md-4 col-xs-12" value="0.00">
+                                    <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.profit}}">
                                   </div>
                                 </div>
                                 <div class="form-group col-md-12">
                                   <label class="control-label col-md-3">Margin</label>
                                   <div class="col-md-6 col-xs-12">
-                                    <input type="text" class="form-control col-md-4 col-xs-12" value="0.00">
+                                    <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.margin}}">
                                   </div>
                                 </div>
                                 <div class="form-group col-md-12">
                                   <label class="control-label col-md-3">Update On</label>
-                                  <div class="control-label col-md-4">  2016-02-18 09:41:11</div>
+                                  <div class="control-label col-md-4">{{item.modify_on}}</div>
                                 </div>
                                 <div class="form-group col-md-12">
                                   <label class="control-label col-md-3">Update By</label>
-                                  <div class="control-label col-md-4"> Systems </div>
+                                  <div class="control-label col-md-4">{{item.modify_by}}</div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -155,2116 +155,6 @@
                           </div>
                         </div>
                       </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>0.00    </td>
-                    <td>0.00    </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-md">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>0.00    </td>
-                    <td>0.00    </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-md">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>45.90   </td>
-                    <td>52.16   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>45.90   </td>
-                    <td>52.16   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>45.90   </td>
-                    <td>52.16   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>30.61   </td>
-                    <td>51.88   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>30.61   </td>
-                    <td>51.88   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>30.61   </td>
-                    <td>51.88   </td>
-                    <td>
-                      <input type='Button' value="Detail" class="btn btn-primary" data-toggle="tooltip modal" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system" data-target=".bs-example-modal-sm">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>35.27   </td>
-                    <td>50.39   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>35.27   </td>
-                    <td>50.39   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>35.27   </td>
-                    <td>50.39   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>30.61   </td>
-                    <td>51.88   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>30.61   </td>
-                    <td>51.88   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>30.61   </td>
-                    <td>51.88   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>30.43   </td>
-                    <td>51.58   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>30.43   </td>
-                    <td>51.58   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>30.43   </td>
-                    <td>51.58   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>29.93   </td>
-                    <td>50.73   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>29.93   </td>
-                    <td>50.73   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>29.93   </td>
-                    <td>50.73   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>25.70   </td>
-                    <td>52.45   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>25.70   </td>
-                    <td>52.45   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>25.70   </td>
-                    <td>52.45   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>328.02  </td>
-                    <td>52.91   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>328.02  </td>
-                    <td>52.91   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>328.02  </td>
-                    <td>52.91   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>30.49   </td>
-                    <td>51.68   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>30.49   </td>
-                    <td>51.68   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>30.49   </td>
-                    <td>51.68   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>29.79   </td>
-                    <td>50.49   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>29.79   </td>
-                    <td>50.49   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>29.79   </td>
-                    <td>50.49   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>30.03   </td>
-                    <td>50.90   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>30.03   </td>
-                    <td>50.90   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>30.03   </td>
-                    <td>50.90   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>136.76  </td>
-                    <td>51.61   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>136.76  </td>
-                    <td>51.61   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>136.76  </td>
-                    <td>51.61   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>48.60   </td>
-                    <td>51.70   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>48.60   </td>
-                    <td>51.70   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>48.60   </td>
-                    <td>51.70   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>1969.05 </td>
-                    <td>53.95   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>1969.05 </td>
-                    <td>53.95   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>1969.05 </td>
-                    <td>53.95   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>29.91   </td>
-                    <td>50.69   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>29.91   </td>
-                    <td>50.69   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>29.91   </td>
-                    <td>50.69   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>1446.47 </td>
-                    <td>49.03   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>1446.47 </td>
-                    <td>49.03   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>1446.47 </td>
-                    <td>49.03   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>52.97   </td>
-                    <td>51.93   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>52.97   </td>
-                    <td>51.93   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>52.97   </td>
-                    <td>51.93   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>41.59   </td>
-                    <td>51.99   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>41.59   </td>
-                    <td>51.99   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZHK</td>
-                    <td>24697-MM-NA</td>
-                    <td>15621-AA-NA</td>
-                    <td>Biloop Cry Translator</td>
-                    <td>Readily Available</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value="279.58" name="item_price" class="price_input_sm">
-                    </td>
-                    <td>41.59   </td>
-                    <td>51.99   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25932-MM-NA</td>
-                    <td>15669-AA-NA</td>
-                    <td>3Doodler ABS Meta Mixed Filament Pack (25 Strands) (AB-MIX2) </td>
-                    <td>Readily Available</td>
-                    <td>217</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>12.82   </td>
-                    <td>56.98   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25932-MM-NA</td>
-                    <td>15669-AA-NA</td>
-                    <td>3Doodler ABS Meta Mixed Filament Pack (25 Strands) (AB-MIX2) </td>
-                    <td>Readily Available</td>
-                    <td>217</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>43.58   </td>
-                    <td>79.24   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25932-MM-NA</td>
-                    <td>15669-AA-NA</td>
-                    <td>3Doodler ABS Meta Mixed Filament Pack (25 Strands) (AB-MIX2) </td>
-                    <td>Readily Available</td>
-                    <td>217</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>12.82   </td>
-                    <td>56.98   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25932-MM-NA</td>
-                    <td>15669-AA-NA</td>
-                    <td>3Doodler ABS Meta Mixed Filament Pack (25 Strands) (AB-MIX2) </td>
-                    <td>Readily Available</td>
-                    <td>217</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>12.75   </td>
-                    <td>56.67   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25932-MM-NA</td>
-                    <td>15669-AA-NA</td>
-                    <td>3Doodler ABS Meta Mixed Filament Pack (25 Strands) (AB-MIX2) </td>
-                    <td>Readily Available</td>
-                    <td>217</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>12.56   </td>
-                    <td>55.82   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25932-MM-NA</td>
-                    <td>15669-AA-NA</td>
-                    <td>3Doodler ABS Meta Mixed Filament Pack (25 Strands) (AB-MIX2) </td>
-                    <td>Readily Available</td>
-                    <td>217</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>17.60   </td>
-                    <td>70.40   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25932-MM-NA</td>
-                    <td>15669-AA-NA</td>
-                    <td>3Doodler ABS Meta Mixed Filament Pack (25 Strands) (AB-MIX2) </td>
-                    <td>Readily Available</td>
-                    <td>217</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>79.33   </td>
-                    <td>49.58   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25932-MM-NA</td>
-                    <td>15669-AA-NA</td>
-                    <td>3Doodler ABS Meta Mixed Filament Pack (25 Strands) (AB-MIX2) </td>
-                    <td>Readily Available</td>
-                    <td>217</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>12.77   </td>
-                    <td>56.76   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25932-MM-NA</td>
-                    <td>15669-AA-NA</td>
-                    <td>3Doodler ABS Meta Mixed Filament Pack (25 Strands) (AB-MIX2) </td>
-                    <td>Readily Available</td>
-                    <td>217</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>12.50   </td>
-                    <td>55.56   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25932-MM-NA</td>
-                    <td>15669-AA-NA</td>
-                    <td>3Doodler ABS Meta Mixed Filament Pack (25 Strands) (AB-MIX2) </td>
-                    <td>Readily Available</td>
-                    <td>217</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>12.59   </td>
-                    <td>55.96   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25932-MM-NA</td>
-                    <td>15669-AA-NA</td>
-                    <td>3Doodler ABS Meta Mixed Filament Pack (25 Strands) (AB-MIX2) </td>
-                    <td>Readily Available</td>
-                    <td>217</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>1758.04 </td>
-                    <td>94.52   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25932-MM-NA</td>
-                    <td>15669-AA-NA</td>
-                    <td>3Doodler ABS Meta Mixed Filament Pack (25 Strands) (AB-MIX2) </td>
-                    <td>Readily Available</td>
-                    <td>217</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>31.95   </td>
-                    <td>57.57   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25932-MM-NA</td>
-                    <td>15669-AA-NA</td>
-                    <td>3Doodler ABS Meta Mixed Filament Pack (25 Strands) (AB-MIX2) </td>
-                    <td>Readily Available</td>
-                    <td>217</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>1199.21 </td>
-                    <td>71.38   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25932-MM-NA</td>
-                    <td>15669-AA-NA</td>
-                    <td>3Doodler ABS Meta Mixed Filament Pack (25 Strands) (AB-MIX2) </td>
-                    <td>Readily Available</td>
-                    <td>217</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>12.55   </td>
-                    <td>55.78   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25932-MM-NA</td>
-                    <td>15669-AA-NA</td>
-                    <td>3Doodler ABS Meta Mixed Filament Pack (25 Strands) (AB-MIX2) </td>
-                    <td>Readily Available</td>
-                    <td>217</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>5775.40 </td>
-                    <td>84.31   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25932-MM-NA</td>
-                    <td>15669-AA-NA</td>
-                    <td>3Doodler ABS Meta Mixed Filament Pack (25 Strands) (AB-MIX2) </td>
-                    <td>Readily Available</td>
-                    <td>217</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>128.40  </td>
-                    <td>87.35   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25932-MM-NA</td>
-                    <td>15669-AA-NA</td>
-                    <td>3Doodler ABS Meta Mixed Filament Pack (25 Strands) (AB-MIX2) </td>
-                    <td>Readily Available</td>
-                    <td>217</td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>8.92    </td>
-                    <td>45.79   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25938-MM-NA</td>
-                    <td>15675-AA-NA</td>
-                    <td>3Doodler PLA Plastic: PLA</td>
-                    <td>Readily Available</td>
-                    <td><input type="text" value='294' name='etrade_qty' class="price_input_sm"></td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>7.14    </td>
-                    <td>51.04   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25938-MM-NA</td>
-                    <td>15675-AA-NA</td>
-                    <td>3Doodler PLA Plastic: PLA</td>
-                    <td>Readily Available</td>
-                    <td><input type="text" value='294' name='etrade_qty' class="price_input_sm"></td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>23.51   </td>
-                    <td>81.07   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25938-MM-NA</td>
-                    <td>15675-AA-NA</td>
-                    <td>3Doodler PLA Plastic: PLA</td>
-                    <td>Readily Available</td>
-                    <td><input type="text" value='294' name='etrade_qty' class="price_input_sm"></td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>23.08   </td>
-                    <td>79.59   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25938-MM-NA</td>
-                    <td>15675-AA-NA</td>
-                    <td>3Doodler PLA Plastic: PLA</td>
-                    <td>Readily Available</td>
-                    <td><input type="text" value='294' name='etrade_qty' class="price_input_sm"></td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>22.81   </td>
-                    <td>78.66   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25938-MM-NA</td>
-                    <td>15675-AA-NA</td>
-                    <td>3Doodler PLA Plastic: PLA</td>
-                    <td>Readily Available</td>
-                    <td><input type="text" value='294' name='etrade_qty' class="price_input_sm"></td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>23.51   </td>
-                    <td>81.07   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25938-MM-NA</td>
-                    <td>15675-AA-NA</td>
-                    <td>3Doodler PLA Plastic: PLA</td>
-                    <td>Readily Available</td>
-                    <td><input type="text" value='294' name='etrade_qty' class="price_input_sm"></td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>23.42   </td>
-                    <td>80.76   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25938-MM-NA</td>
-                    <td>15675-AA-NA</td>
-                    <td>3Doodler PLA Plastic: PLA</td>
-                    <td>Readily Available</td>
-                    <td><input type="text" value='294' name='etrade_qty' class="price_input_sm"></td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>23.18   </td>
-                    <td>79.93   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25938-MM-NA</td>
-                    <td>15675-AA-NA</td>
-                    <td>3Doodler PLA Plastic: PLA</td>
-                    <td>Readily Available</td>
-                    <td><input type="text" value='294' name='etrade_qty' class="price_input_sm"></td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>24.45   </td>
-                    <td>84.31   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
-                    </td>
-                </tr>
-                <tr>
-                    <td class="a-center ">
-                      <input type="checkbox" class="flat" name="table_records">
-                    </td>
-                    <td>BCLAZU</td>
-                    <td>25938-MM-NA</td>
-                    <td>15675-AA-NA</td>
-                    <td>3Doodler PLA Plastic: PLA</td>
-                    <td>Readily Available</td>
-                    <td><input type="text" value='294' name='etrade_qty' class="price_input_sm"></td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td>
-                      <input type="text" value='0' name='etrade_qty' class="price_input_sm">
-                    </td>
-                    <td><input type="text" value='5.00' name='etrade_qty' class="price_input_sm">  </td>
-                    <td>254.24  </td>
-                    <td>85.03   </td>
-                    <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: 2016-02-18 09:41:11  Update By:system">
-                      <input type='Button' value="Detail" class="btn btn-primary" >
                     </td>
                 </tr>
               </tbody>
@@ -2285,5 +175,1533 @@
 </template>
 
 <script>
-
+    export default {
+        data() {
+            return {
+                items: [
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'24697-MM-NA',
+                    sku:'15621-AA-NA',
+                    prod_name:'Biloop Cry Translator',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'279.58',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-02-18 09:41:11',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25893-MM-NA',
+                    sku:'15630-AA-NA',
+                    prod_name:'Gangsta Gold - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:3,
+                    es_dg_qty:0,
+                    item_price:'10.01',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-21 04:25:04',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25894-MM-NA',
+                    sku:'15631-AA-NA',
+                    prod_name:'Blue Steel - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:201,
+                    es_hk_qty:2,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-19 08:25:03',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25895-MM-NA',
+                    sku:'15632-AA-NA',
+                    prod_name:'Basilica White - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:310,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-25 04:25:07',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25896-MM-NA',
+                    sku:'15633-AA-NA',
+                    prod_name:'Martian Mars Red - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:284,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-05 04:25:06',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25897-MM-NA',
+                    sku:'15634-AA-NA',
+                    prod_name:'Diamonds &amp; Pearls - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:148,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:25:06',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25898-MM-NA',
+                    sku:'15635-AA-NA',
+                    prod_name:'Teal-tastic - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:183,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-06-09 10:26:49',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25899-MM-NA',
+                    sku:'15636-AA-NA',
+                    prod_name:'OJ Orange - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:301,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-25 04:25:14',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25900-MM-NA',
+                    sku:'15637-AA-NA',
+                    prod_name:'Glow in the Dark PLA - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:144,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-13 04:25:14',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25901-MM-NA',
+                    sku:'15638-AA-NA',
+                    prod_name:'Clearly Blue - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:247,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-25 04:25:08',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25902-MM-NA',
+                    sku:'15639-AA-NA',
+                    prod_name:'Clearly Pink - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:144,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:25:06',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25903-MM-NA',
+                    sku:'15640-AA-NA',
+                    prod_name:'Clearly Green - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:526,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-21 04:25:06',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25904-MM-NA',
+                    sku:'15641-AA-NA',
+                    prod_name:'Clearly Clear - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:238,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-26 04:25:23',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25905-MM-NA',
+                    sku:'15642-AA-NA',
+                    prod_name:'Robo Silver - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:298,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-26 04:25:19',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25906-MM-NA',
+                    sku:'15643-AA-NA',
+                    prod_name:'Perfectly Purple - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:155,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-25 04:25:14',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25907-MM-NA',
+                    sku:'15644-AA-NA',
+                    prod_name:'Island Blue - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:545,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-21 04:25:05',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25908-MM-NA',
+                    sku:'15645-AA-NA',
+                    prod_name:'Brownie Brown - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:302,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-21 04:25:04',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25909-MM-NA',
+                    sku:'15646-AA-NA',
+                    prod_name:'Snow White - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:150,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-25 04:25:30',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25910-MM-NA',
+                    sku:'15647-AA-NA',
+                    prod_name:'Rubber Ducky Yellow - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:294,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-25 04:25:30',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25911-MM-NA',
+                    sku:'15648-AA-NA',
+                    prod_name:'Chili Pepper Red - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:192,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-25 04:25:07',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25912-MM-NA',
+                    sku:'15649-AA-NA',
+                    prod_name:'Greener Grass - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:204,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-25 04:25:30',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25913-MM-NA',
+                    sku:'15650-AA-NA',
+                    prod_name:'Royal Blue - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:209,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-25 04:25:07',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25914-MM-NA',
+                    sku:'15651-AA-NA',
+                    prod_name:'Tuxedo Black - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:257,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-25 04:25:30',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25915-MM-NA',
+                    sku:'15652-AA-NA',
+                    prod_name:'Totally Teal - Single Color ABS Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:275,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-04 02:25:27',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25916-MM-NA',
+                    sku:'15653-AA-NA',
+                    prod_name:'Glow in the Dark ABS - Single Color ABS Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:116,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-26 04:25:23',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25917-MM-NA',
+                    sku:'15654-AA-NA',
+                    prod_name:'Hot Pink - Single Color ABS Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:367,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-25 04:25:07',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25918-MM-NA',
+                    sku:'15655-AA-NA',
+                    prod_name:'Highlighter Orange - Single Color ABS Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:170,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-26 14:25:02',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25919-MM-NA',
+                    sku:'15656-AA-NA',
+                    prod_name:'Grrreally Green - Single Color ABS Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:200,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-26 14:25:02',
+                    modify_by:'odiliawong',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25920-MM-NA',
+                    sku:'15657-AA-NA',
+                    prod_name:'Super Yellow - Single Color ABS Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:181,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-26 14:25:02',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25921-MM-NA',
+                    sku:'15658-AA-NA',
+                    prod_name:'Skyline Silver - Single color ABS pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:157,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-21 04:25:05',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25922-MM-NA',
+                    sku:'15659-AA-NA',
+                    prod_name:'Plum Purple - Single Color ABS Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:268,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-06-30 04:25:04',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25923-MM-NA',
+                    sku:'15660-AA-NA',
+                    prod_name:'3Doodler ABS Plastic Filament Strands for the 3Doodler (Lagoon Blue, 25 Strands)(AB08-BLGN)',
+                    sourcing_status:'A',
+                    etrade_qty:134,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-25 04:25:07',
+                    modify_by:'ginapan',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25924-MM-NA',
+                    sku:'15661-AA-NA',
+                    prod_name:'3Doodler ABS Plastic Filament Strands for the 3Doodler (Choco Brown, 25 Strands)(AB07-CHOC)',
+                    sourcing_status:'A',
+                    etrade_qty:197,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-25 04:25:30',
+                    modify_by:'ginapan',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25925-MM-NA',
+                    sku:'15662-AA-NA',
+                    prod_name:'3Doodler ABS Plastic Filament Strands for the 3Doodler (Polar White, 25 Strands)(AB06-POLA)',
+                    sourcing_status:'A',
+                    etrade_qty:283,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-26 14:25:02',
+                    modify_by:'ginapan',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25926-MM-NA',
+                    sku:'15663-AA-NA',
+                    prod_name:'Sunnyside Yellow - Single Color ABS Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:249,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-20 03:25:14',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25927-MM-NA',
+                    sku:'15664-AA-NA',
+                    prod_name:'3Doodler ABS Plastic Filament Strands for the 3Doodler (Riding Hood Red, 25 Strands)(AB04-HOOD)',
+                    sourcing_status:'A',
+                    etrade_qty:197,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-26 14:25:02',
+                    modify_by:'ginapan',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25928-MM-NA',
+                    sku:'15665-AA-NA',
+                    prod_name:'EverGreen - Single Color ABS Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:195,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-20 03:25:14',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25929-MM-NA',
+                    sku:'15666-AA-NA',
+                    prod_name:'3Doodler ABS Plastic Filament Strands for the 3Doodler (Grand Bleu, 25 Strands)(AB02-BLEU)',
+                    sourcing_status:'A',
+                    etrade_qty:130,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-26 14:25:02',
+                    modify_by:'ginapan',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25930-MM-NA',
+                    sku:'15667-AA-NA',
+                    prod_name:'3Doodler  Black Belt Black - Single color ABS pack (25 strands) (AB01-BBB)',
+                    sourcing_status:'A',
+                    etrade_qty:182,
+                    es_hk_qty:1,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-26 14:25:02',
+                    modify_by:'helenwang',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25931-MM-NA',
+                    sku:'15668-AA-NA',
+                    prod_name:'3Doodler ABS Essentials Mixed Filament Pack (25 Strands) (AB-MIX1)',
+                    sourcing_status:'A',
+                    etrade_qty:519,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-26 04:25:22',
+                    modify_by:'ginapan',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25932-MM-NA',
+                    sku:'15669-AA-NA',
+                    prod_name:'3Doodler ABS Meta Mixed Filament Pack (25 Strands) (AB-MIX2)',
+                    sourcing_status:'A',
+                    etrade_qty:300,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-26 04:25:22',
+                    modify_by:'ginapan',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25933-MM-NA',
+                    sku:'15670-AA-NA',
+                    prod_name:'3Doodler ABS Put On Yo Shades Mixed Filament Pack (25 Strands) (AB-MIX3) ',
+                    sourcing_status:'A',
+                    etrade_qty:431,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:25:13',
+                    modify_by:'ginapan',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25934-MM-NA',
+                    sku:'15671-AA-NA',
+                    prod_name:'3Doodler PLA Essentials Mixed Filament Pack (25 Strands) (PL-MIX1)',
+                    sourcing_status:'A',
+                    etrade_qty:224,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-20 10:25:03',
+                    modify_by:'ginapan',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25935-MM-NA',
+                    sku:'15672-AA-NA',
+                    prod_name:'3Doodler PLA Meta Mixed Filament Pack (25 Strands) (PL-MIX2)',
+                    sourcing_status:'A',
+                    etrade_qty:246,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-06-24 06:25:01',
+                    modify_by:'ginapan',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25936-MM-NA',
+                    sku:'15673-AA-NA',
+                    prod_name:'3Doodler PLA Clearly Awesome Mixed Filament Pack (25 Strands) (PL-MIX3)',
+                    sourcing_status:'A',
+                    etrade_qty:298,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-06-03 03:25:19',
+                    modify_by:'ginapan',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25937-MM-NA',
+                    sku:'15674-AA-NA',
+                    prod_name:'3Doodler PLA Full Metal Jacket Mixed Filament Pack (25 Strands)(PL-MIX4)',
+                    sourcing_status:'A',
+                    etrade_qty:290,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-25 04:25:09',
+                    modify_by:'ginapan',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'25938-MM-NA',
+                    sku:'15675-AA-NA',
+                    prod_name:'3Doodler PLA Plastic: PLA ',
+                    sourcing_status:'A',
+                    etrade_qty:295,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-06-03 03:25:19',
+                    modify_by:'ginapan',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'31799-MM-NA',
+                    sku:'15677-UK-NA',
+                    prod_name:'UK Plug Pack',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'0.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-04-29 05:45:32',
+                    modify_by:'ginapan',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'31800-MM-NA',
+                    sku:'15678-US-NA',
+                    prod_name:'US Plug Pack',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'0.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-04-29 05:45:32',
+                    modify_by:'ginapan',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'31797-MM-NA',
+                    sku:'15679-AU-NA',
+                    prod_name:'AU Plug Pack',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'0.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-04-29 05:45:33',
+                    modify_by:'ginapan',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'31798-MM-NA',
+                    sku:'15680-EU-NA',
+                    prod_name:'EU Plug Pack',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'0.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-04-29 05:45:33',
+                    modify_by:'ginapan',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'26096-MM-NA',
+                    sku:'15681-AA-NA',
+                    prod_name:'3Doodler 3D Printing Pen',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'99.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-05-26 10:07:12',
+                    modify_by:'ping',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26403-MM-NA',
+                    sku:'15682-AA-NA',
+                    prod_name:'Sh!t in the woods womens fitted t-shirt (S)',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'180.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:42:46',
+                    modify_by:'ext-AAF-main',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26404-MM-NA',
+                    sku:'15683-AA-NA',
+                    prod_name:'Sh!t in the woods womens fitted t-shirt (M)',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'180.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:42:31',
+                    modify_by:'ext-AAF-main',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26405-MM-NA',
+                    sku:'15684-AA-NA',
+                    prod_name:'Sh!t in the woods womens fitted t-shirt (L)',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'180.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:42:09',
+                    modify_by:'ext-AAF-main',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'26406-MM-NA',
+                    sku:'15685-AA-NA',
+                    prod_name:'Sh!t in the woods womens fitted t-shirt (XL)',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'0.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:45:48',
+                    modify_by:'ext-AAF-main',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26407-MM-NA',
+                    sku:'15686-AA-NA',
+                    prod_name:'Sh!t in the woods mens t-shirt (S)',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'180.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:41:09',
+                    modify_by:'ext-AAF-main',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26408-MM-NA',
+                    sku:'15687-AA-NA',
+                    prod_name:'Sh!t in the woods mens t-shirt (M)',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'180.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:40:44',
+                    modify_by:'ext-AAF-main',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26409-MM-NA',
+                    sku:'15688-AA-NA',
+                    prod_name:'Sh!t in the woods mens t-shirt (L)',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'180.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:40:26',
+                    modify_by:'ext-AAF-main',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26410-MM-NA',
+                    sku:'15689-AA-NA',
+                    prod_name:'Sh!t in the woods mens t-shirt (XL)',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'180.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:41:49',
+                    modify_by:'ext-AAF-main',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'26411-MM-NA',
+                    sku:'15690-AA-NA',
+                    prod_name:'3Doodler DoodleStand for 3Doodler 3D Printing Pen (DOODSTND)',
+                    sourcing_status:'A',
+                    etrade_qty:20,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-27 16:11:09',
+                    modify_by:'ping',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'26497-MM-NA',
+                    sku:'15691-AA-NA',
+                    prod_name:'Radioactive Yellow - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:190,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-19 08:25:03',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'26498-MM-NA',
+                    sku:'15692-AA-NA',
+                    prod_name:'Pink Flamingo - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:223,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-21 04:25:05',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'26499-MM-NA',
+                    sku:'15693-AA-NA',
+                    prod_name:'Rainforest Green - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:210,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-05 04:25:06',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'26500-MM-NA',
+                    sku:'15694-AA-NA',
+                    prod_name:'Cotton Candy Pink - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:257,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-25 04:25:08',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'26501-MM-NA',
+                    sku:'15695-AA-NA',
+                    prod_name:'Foggy Day grey - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:304,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-14 04:25:08',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'26502-MM-NA',
+                    sku:'15696-AA-NA',
+                    prod_name:'Cafe au lait - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:240,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-25 04:25:14',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'26503-MM-NA',
+                    sku:'15697-AA-NA',
+                    prod_name:'Clearly Yellow - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:253,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:25:06',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'26504-MM-NA',
+                    sku:'15698-AA-NA',
+                    prod_name:'Clearly Black - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:176,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:25:06',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'26505-MM-NA',
+                    sku:'15699-AA-NA',
+                    prod_name:'Clearly Clementine - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:192,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:25:06',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'26506-MM-NA',
+                    sku:'15700-AA-NA',
+                    prod_name:'Clearly Cherry - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:192,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-04 02:25:23',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'26507-MM-NA',
+                    sku:'15701-AA-NA',
+                    prod_name:'Clearly Teal - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:191,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:25:06',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'26508-MM-NA',
+                    sku:'15702-AA-NA',
+                    prod_name:'Clearly Stormy - Single Color PLA Pack (25 strands)',
+                    sourcing_status:'A',
+                    etrade_qty:253,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'9.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:25:06',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'26509-MM-NA',
+                    sku:'15703-AA-NA',
+                    prod_name:'3Doodler Nozzle Set (DOODNZZL)',
+                    sourcing_status:'A',
+                    etrade_qty:99,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'19.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-27 16:11:09',
+                    modify_by:'ping',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'26510-MM-NA',
+                    sku:'15705-AA-NA',
+                    prod_name:'3Doodler Pedal for 3Doodler 3D Printing Pen (DOODPDAL)',
+                    sourcing_status:'A',
+                    etrade_qty:184,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'19.99',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-26 07:26:24',
+                    modify_by:'sophiacheung',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26605-MM-GR',
+                    sku:'15707-AA-NA',
+                    prod_name:'Devotec USB Fuel charger Green',
+                    sourcing_status:'A',
+                    etrade_qty:242,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'10.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-04-28 06:50:56',
+                    modify_by:'sebastian',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26605-MM-RD',
+                    sku:'15708-AA-NA',
+                    prod_name:'Devotec USB Fuel charger Red',
+                    sourcing_status:'A',
+                    etrade_qty:12,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'0.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-04-28 06:52:22',
+                    modify_by:'sebastian',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26605-MM-WH',
+                    sku:'15709-AA-NA',
+                    prod_name:'Devotec USB Fuel charger White',
+                    sourcing_status:'A',
+                    etrade_qty:96,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'0.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-04-28 06:53:17',
+                    modify_by:'sebastian',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26850-MM-NA',
+                    sku:'15710-AA-NA',
+                    prod_name:'Plush Moonie key chain',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'30.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:28:55',
+                    modify_by:'ext-AAF-main',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26882-MM-NA',
+                    sku:'15711-AA-NA',
+                    prod_name:'Cosmetics bag set',
+                    sourcing_status:'A',
+                    etrade_qty:15,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'0.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:18:29',
+                    modify_by:'ext-AAF-main',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'26860-MM-NA',
+                    sku:'15713-AA-NA',
+                    prod_name:'Memo pad (Lamma)',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'0.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:29:54',
+                    modify_by:'ext-AAF-main',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26883-MM-NA',
+                    sku:'15714-AA-NA',
+                    prod_name:'Hello Kitty Love Moonie T-shirt (S)',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'368.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:34:05',
+                    modify_by:'ext-AAF-main',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26885-MM-NA',
+                    sku:'15715-AA-NA',
+                    prod_name:'Hello Kitty Love Moonie T-shirt (L)',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'368.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:33:27',
+                    modify_by:'ext-AAF-main',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26865-MM-NA',
+                    sku:'15716-AA-NA',
+                    prod_name:'Animals Asia black hoodie (M)',
+                    sourcing_status:'A',
+                    etrade_qty:18,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'200.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-06-20 04:25:07',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26863-MM-NA',
+                    sku:'15718-AA-NA',
+                    prod_name:'Animals Asia black hoodie (XS)',
+                    sourcing_status:'A',
+                    etrade_qty:38,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'200.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-18 04:25:04',
+                    modify_by:'karychu',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26868-MM-NA',
+                    sku:'15719-AA-NA',
+                    prod_name:'Animals Asia black hoodie (XXL)',
+                    sourcing_status:'A',
+                    etrade_qty:25,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'200.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-04 02:25:26',
+                    modify_by:'cherie',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26873-MM-NA',
+                    sku:'15720-AA-NA',
+                    prod_name:'Journey to Freedom womens fitted T-shirt (S)',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'180.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:39:10',
+                    modify_by:'ext-AAF-main',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26874-MM-NA',
+                    sku:'15721-AA-NA',
+                    prod_name:'Journey to Freedom womens fitted T-shirt (M)',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'180.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:38:54',
+                    modify_by:'ext-AAF-main',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26875-MM-NA',
+                    sku:'15722-AA-NA',
+                    prod_name:'Journey to Freedom womens fitted T-shirt (L)',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'180.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:38:37',
+                    modify_by:'ext-AAF-main',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26887-MM-NA',
+                    sku:'15723-AA-NA',
+                    prod_name:'Animals Asia logo mens polo shirt (L)',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'200.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:39:43',
+                    modify_by:'ext-AAF-main',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26886-MM-NA',
+                    sku:'15724-AA-NA',
+                    prod_name:'Animals Asia logo mens polo shirt (M)',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'200.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:40:01',
+                    modify_by:'ext-AAF-main',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26864-MM-NA',
+                    sku:'15725-AA-NA',
+                    prod_name:'Animals Asia black hoodie (S)',
+                    sourcing_status:'A',
+                    etrade_qty:20,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'200.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-06-15 04:25:02',
+                    modify_by:'karychu',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26866-MM-NA',
+                    sku:'15726-AA-NA',
+                    prod_name:'Animals Asia black hoodie (L)',
+                    sourcing_status:'A',
+                    etrade_qty:20,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'200.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-11 07:25:03',
+                    modify_by:'karychu',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26867-MM-NA',
+                    sku:'15727-AA-NA',
+                    prod_name:'Animals Asia black hoodie (XL)',
+                    sourcing_status:'A',
+                    etrade_qty:17,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'200.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-07 08:25:02',
+                    modify_by:'karychu',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26884-MM-NA',
+                    sku:'15728-AA-NA',
+                    prod_name:'Hello Kitty Love Moonie T-shirt (M)',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'368.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:33:44',
+                    modify_by:'ext-AAF-main',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26859-MM-NA',
+                    sku:'15729-AA-NA',
+                    prod_name:'Memo pad (Jasper)',
+                    sourcing_status:'A',
+                    etrade_qty:0,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'0.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-15 03:29:38',
+                    modify_by:'ext-AAF-main',
+                },
+                {
+                    markerplace_id:'BCLAZUS',
+                    master_sku:'26855-MM-NA',
+                    sku:'15730-AA-NA',
+                    prod_name:'Freedom Moon Book (hardback)',
+                    sourcing_status:'A',
+                    etrade_qty:63,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'0.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-07 08:25:01',
+                    modify_by:'system',
+                },
+                {
+                    markerplace_id:'BCLAZHK',
+                    master_sku:'26856-MM-NA',
+                    sku:'15731-AA-NA',
+                    prod_name:'Note cards with envelopes',
+                    sourcing_status:'A',
+                    etrade_qty:135,
+                    es_hk_qty:0,
+                    es_dg_qty:0,
+                    item_price:'0.00',
+                    profit:'0.00',
+                    margin:'0.00',
+                    modify_on:'2016-07-20 03:25:15',
+                    modify_by:'system',
+                }
+            ]
+            }
+        }
+    }
+    $(document).ready(function() {
+        var handleDataTableButtons = function() {
+            if ($("#datatable-buttons").length) {
+              $("#datatable-buttons").DataTable({
+                dom: "Bfrtip",
+                buttons: [
+                  {
+                    extend: "copy",
+                    className: "btn-sm"
+                  },
+                  {
+                    extend: "csv",
+                    className: "btn-sm"
+                  },
+                  {
+                    extend: "excel",
+                    className: "btn-sm"
+                  },
+                  {
+                    extend: "pdfHtml5",
+                    className: "btn-sm"
+                  },
+                  {
+                    extend: "print",
+                    className: "btn-sm"
+                  },
+                ],
+                responsive: true,
+                fixedHeader: true,
+                keys: true,
+              });
+            }
+        };
+        var TableManageButtons = function() {
+            "use strict";
+            return {
+              init: function() {
+                handleDataTableButtons();
+              }
+            };
+        }();
+        var table = $('#datatable-fixed-header').DataTable({
+            fixedHeader: true,
+            bSort:false,
+            iDisplayLength:25
+        });
+        TableManageButtons.init();
+    });
 </script>
+<style>
+
+</style>

@@ -150,3 +150,24 @@
         </div>
     </div>
 </template>
+<script>
+//add a tag
+function onAddTag(tag) {
+  alert("Added a SKU: " + tag);
+}
+
+function onRemoveTag(tag) {
+  alert("Removed a SKU: " + tag);
+}
+
+function onChangeTag(input, tag) {
+  alert("Changed a SKU: " + tag);
+}
+
+$(document).ready(function() {
+    $('#tags_1').tagsInput({
+      width: 'auto',
+      defaultText:'add a SKU',
+    });
+});
+</script>

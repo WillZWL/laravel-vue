@@ -277,24 +277,3 @@ if (typeof NProgress != 'undefined') {
     jQuery.fn[sr] = function(fn){  return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr); };
 
 })(jQuery,'smartresize');
-
-
-//add a tag
-function onAddTag(tag) {
-alert("Added a SKU: " + tag);
-}
-
-function onRemoveTag(tag) {
-alert("Removed a SKU: " + tag);
-}
-
-function onChangeTag(input, tag) {
-alert("Changed a SKU: " + tag);
-}
-
-$(document).ready(function() {
-    $('#tags_1').tagsInput({
-      width: 'auto',
-      defaultText:'add a SKU',
-    });
-});

@@ -16,10 +16,9 @@ require('laravel-elixir-livereload');
  */
 
 elixir(function(mix) {
-
-    mix.browserify('main.js')
+    mix.styles(['custom.css'], 'public/css/custom.css');
+    mix.browserify('main.js');
     mix.browserify('custom.js');
-    mix.browserify('custom-datatable.js');
-    mix.version(['public/js/main.js', 'public/js/custom.js', 'public/js/custom-datatable.js']);
+    mix.version(['public/js/main.js', 'public/js/custom.js']);
     mix.livereload();
 });
