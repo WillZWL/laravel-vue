@@ -8,4 +8,6 @@ Scout is a front template.
 git clone http://gitlab.eservicesgroup.com/esg-systems/scout.git
 cd scout
 bower install
+npm install
+gulp
 ```
