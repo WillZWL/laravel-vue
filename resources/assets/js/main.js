@@ -12,7 +12,7 @@ Vue.use(VueResource)
 
 var router = new VueRouter({
     history: true,
-    root: 'dashboard'
+    root: ''
 })
 
 
@@ -21,6 +21,10 @@ router.map({
         name: 'price',
         component: require('./components/Price.vue')
     },
+    '/product/': {
+        name: 'product',
+        component: require('./components/Product.vue')
+    }
 
 })
 

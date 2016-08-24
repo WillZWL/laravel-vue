@@ -1652,7 +1652,7 @@
             ]
             }
         }
-    }
+    };
     $(document).ready(function() {
         var handleDataTableButtons = function() {
             if ($("#datatable-buttons").length) {

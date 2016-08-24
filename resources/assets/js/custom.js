@@ -29,7 +29,7 @@ $(document).ready(function() {
         // normalize content
         contentHeight -= $NAV_MENU.height() + footerHeight;
 
-        // $RIGHT_COL.css('min-height', contentHeight);
+        $RIGHT_COL.css('min-height', contentHeight);
     };
 
     $SIDEBAR_MENU.find('a').on('click', function(ev) {
