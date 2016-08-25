@@ -17,8 +17,8 @@ This template develop by Vue.js,  For more information about Vue.js, you can fin
 ```
 git clone http://gitlab.eservicesgroup.com/esg-systems/scout.git
 cd scout/public
-
 ```
+
 View this Demo, you need a server, you can easy start a server by run:
 ```
 php -S localhost:8080 or other port
@@ -31,7 +31,9 @@ To contribute, please ensure that you have stable [Node.js](https://nodejs.org/)
 
 you can check if you have install those by running `node -v`, `npm -v` and `bower -v`.
 
-Test if Gulp CLI is installed by running `gulp --version`.  If the command isn't found, run `npm install -g gulp`.  For more information about installing Gulp, see the Gulp's [Getting Started](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md).
+Test if Gulp CLI is installed by running `gulp --version`.  If the command isn't found, run `npm install -g gulp`.
+For more information about installing Gulp, see the Gulp's [Getting Started](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md).
+
 
 If all of those develop tool are ready, follow the steps below.
 
@@ -44,11 +46,53 @@ If all of those develop tool are ready, follow the steps below.
 7. `gulp --production`
 8. commit code
 
+
+## Introduce of File Directory
+
+```
+scout
+|--bower_compoents                    Bower dependencies Directory
+|--node_modules                       Npm dependencies  Directory
+|--public                             Production package Directory
+|   |---css                           Compile css Directory
+|   |---fonts                         Fonts Directory
+|   |---images                        image Directory
+|   |---js                            Compile Directory
+|   |---index.html                    entry file
+|--resources                          Resources Directory, Where you write your Code
+|   |---assets
+|        |---css                      Project css Directory
+|        |---js                       Project Js Directory
+|             |--components           Vue components Directory
+|               |--layout
+|               |--price
+|               |--price.vue          vue file
+|             |--App.vue                  App.vue
+|             |--custom.js
+|             |--main.js                  main.js, entry vue file, route
+|--bower.json                         bower.json, Manage JS && css dependencies
+|--gulpfile.js                        gulp command, for manage JS and CSS resources file, package, copy file and etc
+|--package.json                       Node dependencies,
+
+```
+
+When start a new page, you should write your route on main.js
+
+```
+
+Notice: Nerver write your code in the Public Directory, Public Directory only for publish package,
+The `gulp --production` will help you Compile Resources Directory, and publish to public
+
+```
+
+
+
 ## More information:
 
 Vue Component syntax is same as html, you can install vue component for your editor,
 
 When you start a new page, you can view Price.vue as a reference,
+
 
 
 ## Thanks
