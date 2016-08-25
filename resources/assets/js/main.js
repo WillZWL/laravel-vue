@@ -18,11 +18,15 @@ var router = new VueRouter({
 
 router.map({
     '/': {
-        name: 'price',
+        name: 'dashboard',
+        component: require('./components/Dashboard.vue')
+    },
+    '/price-overview/': {
+        name: 'price-overview',
         component: require('./components/Price.vue')
     },
-    '/product/': {
-        name: 'product',
+    '/product-overview/': {
+        name: 'product-overview',
         component: require('./components/Product.vue')
     }
 

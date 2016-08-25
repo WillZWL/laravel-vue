@@ -2,8 +2,8 @@
 <div class="container body">
     <div id="app">
         <div class="main_container">
-            <navbar></navbar>
             <sidebar></sidebar>
+            <navbar></navbar>
             <!-- Main content -->
             <div class="right_col" role="main">
                 <section class="content">
