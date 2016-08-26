@@ -1610,24 +1610,32 @@
             dom: "Bfrtip",
              buttons: [
               {
-                extend: "copy",
-                className: "btn-sm"
-              },
-              {
                 extend: "csv",
-                className: "btn-sm"
+                className: "btn-sm",
+                exportOptions: {
+                    columns: [1,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                }
               },
               {
                 extend: "excel",
-                className: "btn-sm"
+                className: "btn-sm",
+                exportOptions: {
+                    columns: [1,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                }
               },
               {
                 extend: "pdfHtml5",
-                className: "btn-sm"
+                className: "btn-sm",
+                exportOptions: {
+                    columns: [1,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                }
               },
               {
                 extend: "print",
-                className: "btn-sm"
+                className: "btn-sm",
+                exportOptions: {
+                    columns: [1,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                }
               },
             ],
             fixedHeader: true,

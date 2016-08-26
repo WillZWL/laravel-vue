@@ -14,7 +14,8 @@
                     </div>
                     <div class="x_content">
                         <div class="x_title">
-                            <a class="toggle-vis btn btn-success" data-column="1">Marketplace ID</a>
+                              <a class="toggle-vis btn btn-success" data-column="0">Checkbox</a>
+                            - <a class="toggle-vis btn btn-success" data-column="1">Marketplace ID</a>
                             - <a class="toggle-vis btn btn-success" data-column="2">ESG Master SKU</a>
                             - <a class="toggle-vis btn btn-success" data-column="3">ESG SKU</a>
                             - <a class="toggle-vis btn btn-success" data-column="4">Product Name</a>
@@ -27,6 +28,7 @@
                             - <a class="toggle-vis btn btn-success" data-column="11">Selling Price</a>
                             - <a class="toggle-vis btn btn-success" data-column="12">Profit</a>
                             - <a class="toggle-vis btn btn-success" data-column="13">Margin</a>
+                            <!-- - <a class="toggle-vis btn btn-success" data-column="14">Detail</a> -->
                         </div>
                     </div>
                 </div>
