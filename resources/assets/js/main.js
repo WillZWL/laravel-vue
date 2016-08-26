@@ -2,7 +2,10 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
+import VueConfig from './vue.config'
+import routerMap from './routers'
 
+// Vue.config.debug = true
 
 Vue.use(VueRouter)
 
@@ -15,21 +18,6 @@ var router = new VueRouter({
     root: ''
 })
 
-
-router.map({
-    '/': {
-        name: 'dashboard',
-        component: require('./components/Dashboard.vue')
-    },
-    '/price-overview/': {
-        name: 'price-overview',
-        component: require('./components/Price.vue')
-    },
-    '/product-overview/': {
-        name: 'product-overview',
-        component: require('./components/Product.vue')
-    }
-
-})
+routerMap(router);
 
 router.start(App, 'body')

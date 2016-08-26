@@ -67,16 +67,18 @@ scout
 |               |--layout
 |               |--price
 |               |--price.vue          vue file
-|             |--App.vue              App.vue
+|             |--App.vue              App.vue —— Layouts of the Project
 |             |--custom.js
-|             |--main.js              main.js, entry vue file, route
+|             |--main.js              main.js, entry vue file
+|             |--routers.js           route map file
+|             |--vue.config.js        config
 |--bower.json                         bower.json, Manage JS && css dependencies
-|--gulpfile.js                        gulp command, for manage JS and CSS resources file, package, copy file and etc
+|--gulpfile.js                        gulp command, For manage JS and CSS resources file, package, copy file and etc
 |--package.json                       Node dependencies,
 
 ```
 
-When start a new page, you should write your route on main.js
+When start a new page, you should write your route on routers.js
 
 ```
 

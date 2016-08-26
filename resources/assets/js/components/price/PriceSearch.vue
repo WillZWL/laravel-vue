@@ -141,7 +141,7 @@
               <!-- <div class="ln_solid"></div> -->
               <div class="form-group col-md-12">
                 <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
-                  <button type="submit" class="btn btn-primary">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Reset</button>
                   <button type="submit" class="btn btn-success">Search</button>
                 </div>
               </div>
