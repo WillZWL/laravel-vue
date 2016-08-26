@@ -8,7 +8,7 @@ The goal of this project:
 3. Easy develop && Maintenance
 4. Work fine with other project
 
-This template develop by Vue.js,  For more information about Vue.js, you can find Vue.js Document by [Getting Started](http://cn.vuejs.org/).
+This template develop by Vue.js,  For more information about Vue.js, you can find Vue.js Document by [Getting Started](http://vuejs.org/).
 
 **[Template Demo](http://scout.eservicesgroup.com/)**
 
@@ -67,9 +67,9 @@ scout
 |               |--layout
 |               |--price
 |               |--price.vue          vue file
-|             |--App.vue                  App.vue
+|             |--App.vue              App.vue
 |             |--custom.js
-|             |--main.js                  main.js, entry vue file, route
+|             |--main.js              main.js, entry vue file, route
 |--bower.json                         bower.json, Manage JS && css dependencies
 |--gulpfile.js                        gulp command, for manage JS and CSS resources file, package, copy file and etc
 |--package.json                       Node dependencies,
@@ -90,6 +90,8 @@ The `gulp --production` will help you Compile Resources Directory, and publish t
 ## More information:
 
 Vue Component syntax is same as html, you can install vue component for your editor,
+
+If you are using SublimeText you can get proper syntax highlighting for `*.vue` files with [vue-syntax-highlight](https://github.com/vuejs/vue-syntax-highlight).
 
 When you start a new page, you can view Price.vue as a reference,
 

@@ -156,7 +156,7 @@
             // normalize content
             contentHeight -= $('.nav_menu').height() + footerHeight;
 
-            $('.right_col').css('min-height', contentHeight);
+            // $('.right_col').css('min-height', contentHeight);
         };
 
         $('#sidebar-menu').find('a').on('click', function(ev) {
@@ -198,13 +198,13 @@
         });
 
         // check active menu
-        $('#sidebar-menu').find('a[href="' + CURRENT_URL + '"]').parent('li').addClass('current-page');
+        // $('#sidebar-menu').find('a[href="' + CURRENT_URL + '"]').parent('li').addClass('current-page');
 
-        $('#sidebar-menu').find('a').filter(function () {
-            return this.href == CURRENT_URL;
-        }).parent('li').addClass('current-page').parents('ul').slideDown(function() {
-            setContentHeight();
-        }).parent().addClass('active');
+        // $('#sidebar-menu').find('a').filter(function () {
+        //     return this.href == CURRENT_URL;
+        // }).parent('li').addClass('current-page').parents('ul').slideDown(function() {
+        //     setContentHeight();
+        // }).parent().addClass('active');
 
         // recompute content when resizing
         $(window).smartresize(function(){
