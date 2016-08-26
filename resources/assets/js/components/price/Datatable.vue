@@ -1,6 +1,34 @@
 <template>
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
+            <div class="x_title">
+                <h2>Show OR Hide columns: <small>"Green" for Show, "Red" for "Hide"</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-down"></i></a></li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="x_title">
+                    <a class="toggle-vis btn btn-success" data-column="1">Marketplace ID</a>
+                    - <a class="toggle-vis btn btn-success" data-column="2">ESG Master SKU</a>
+                    - <a class="toggle-vis btn btn-success" data-column="3">ESG SKU</a>
+                    - <a class="toggle-vis btn btn-success" data-column="4">Product Name</a>
+                    - <a class="toggle-vis btn btn-success" data-column="5">Sourcing status</a>
+                    - <a class="toggle-vis btn btn-success" data-column="6">ETRADE QTY</a>
+                    - <a class="toggle-vis btn btn-success" data-column="7">ES_HK QTY</a>
+                    - <a class="toggle-vis btn btn-success" data-column="8">ES_DG QTY</a>
+                    - <a class="toggle-vis btn btn-success" data-column="9">Listing QTY</a>
+                    - <a class="toggle-vis btn btn-success" data-column="10">Item Cost</a>
+                    - <a class="toggle-vis btn btn-success" data-column="11">Selling Price</a>
+                    - <a class="toggle-vis btn btn-success" data-column="12">Profit</a>
+                    - <a class="toggle-vis btn btn-success" data-column="13">Margin</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
           <div class="x_title">
             <h2>Filters <small>[Base]</small></h2>
             <div class="clearfix"></div>
@@ -20,7 +48,9 @@
                   <th width="5%">ETRADE QTY</th>
                   <th>ES_HK QTY</th>
                   <th>ES_DG QTY</th>
-                  <th>Item Price</th>
+                  <th>Listing QTY</th>
+                  <th>Item Cost</th>
+                  <th>Selling Price</th>
                   <th>Profit</th>
                   <th>Margin</th>
                   <th>Detail Or Update</th>
@@ -46,7 +76,13 @@
                       <input type="text" value='{{item.es_dg_qty}}' name='es_dg_qty' class="price_input_sm">
                     </td>
                     <td>
+                      <input type="text" value='{{item.es_dg_qty}}' name='es_dg_qty' class="price_input_sm">
+                    </td>
+                    <td>
                       <input type="text" value="{{item.item_price}}" name="item_price" class="price_input_sm">
+                    </td>
+                    <td>
+                      <input type="text" value="{{item.item_price + 2}}" name="item_price" class="price_input_sm">
                     </td>
                     <td>{{item.profit}}</td>
                     <td>{{item.margin}}</td>
@@ -1581,36 +1617,6 @@
     };
     $(document).ready(function() {
         var handleDataTableButtons = function() {
-            if ($("#datatable-buttons").length) {
-              $("#datatable-buttons").DataTable({
-                dom: "Bfrtip",
-                buttons: [
-                  {
-                    extend: "copy",
-                    className: "btn-sm"
-                  },
-                  {
-                    extend: "csv",
-                    className: "btn-sm"
-                  },
-                  {
-                    extend: "excel",
-                    className: "btn-sm"
-                  },
-                  {
-                    extend: "pdfHtml5",
-                    className: "btn-sm"
-                  },
-                  {
-                    extend: "print",
-                    className: "btn-sm"
-                  },
-                ],
-                responsive: true,
-                fixedHeader: true,
-                keys: true,
-              });
-            }
         };
         var TableManageButtons = function() {
             "use strict";
@@ -1621,10 +1627,47 @@
             };
         }();
         var table = $('#datatable-fixed-header').DataTable({
+            dom: "Bfrtip",
+             buttons: [
+              {
+                extend: "copy",
+                className: "btn-sm"
+              },
+              {
+                extend: "csv",
+                className: "btn-sm"
+              },
+              {
+                extend: "excel",
+                className: "btn-sm"
+              },
+              {
+                extend: "pdfHtml5",
+                className: "btn-sm"
+              },
+              {
+                extend: "print",
+                className: "btn-sm"
+              },
+            ],
             fixedHeader: true,
             bSort:false,
             iDisplayLength:25
         });
+        $('a.toggle-vis').on( 'click', function (e) {
+            e.preventDefault();
+            // Get the column API object
+            var column = table.column( $(this).attr('data-column') );
+            // Toggle the visibility
+            column.visible( ! column.visible() );
+            if (!column.visible()) {
+                $(this).removeClass("btn-success").addClass('btn-danger');
+            } else {
+                $(this).removeClass("btn-danger").addClass('btn-success');
+            }
+
+            console.log(column.visible());
+        } );
         TableManageButtons.init();
     });
 </script>

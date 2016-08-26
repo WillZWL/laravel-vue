@@ -12,7 +12,7 @@
           <div class="x_content">
             <form class="form-horizontal form-label-left">
               <div class="form-group col-md-6">
-                <label class="control-label col-md-3">Marketplace ID</label>
+                <label class="control-label col-md-4">Marketplace ID</label>
                 <div class="col-md-6 col-xs-12">
                   <select class="form-control">
                     <option value="3DAMAZON">3DAMAZON</option>
@@ -23,7 +23,7 @@
                 </div>
               </div>
               <div class="form-group col-md-6">
-                <label class="control-label col-md-3">Brand</label>
+                <label class="control-label col-md-4">Brand</label>
                 <div class="col-md-6 col-xs-12">
                   <select class="form-control">
                     <option value=""></option>
@@ -40,7 +40,23 @@
                 </div>
               </div>
               <div class="form-group col-md-6">
-                <label class="control-label col-md-3">Category</label>
+                <label class="control-label col-md-4">Country</label>
+                <div class="col-md-6 col-xs-12">
+                  <select class="form-control">
+                    <option value=""></option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label class="control-label col-md-4">Merchant</label>
+                <div class="col-md-6 col-xs-12">
+                  <select class="form-control">
+                    <option value=""></option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label class="control-label col-md-4">Category</label>
                 <div class="col-md-6 col-xs-12">
                   <select class="form-control">
                     <option></option>
@@ -58,7 +74,7 @@
                 </div>
               </div>
               <div class="form-group col-md-6">
-                <label class="control-label col-md-3">SKU Status</label>
+                <label class="control-label col-md-4">SKU Type</label>
                 <div class="col-md-6 col-xs-12">
                   <select class="form-control">
                     <option value=""></option>
@@ -66,7 +82,7 @@
                 </div>
               </div>
               <div class="form-group col-md-6">
-                <label class="control-label col-md-3">Sub-Category</label>
+                <label class="control-label col-md-4">Sub-Category</label>
                 <div class="col-md-6 col-xs-12">
                   <select class="form-control">
                     <option></option>
@@ -84,7 +100,7 @@
                 </div>
               </div>
               <div class="form-group col-md-6">
-                <label class="control-label col-md-3">Sourcing Status</label>
+                <label class="control-label col-md-4">Sku Status</label>
                 <div class="col-md-6 col-xs-12">
                   <select class="form-control">
                     <option value=""></option>
@@ -92,7 +108,7 @@
                 </div>
               </div>
               <div class="form-group col-md-6">
-                <label class="control-label col-md-3">Sub-Sub-Category</label>
+                <label class="control-label col-md-4">Sub-Sub-Category</label>
                 <div class="col-md-6 col-xs-12">
                   <select class="form-control">
                     <option></option>
@@ -110,7 +126,7 @@
                 </div>
               </div>
               <div class="form-group col-md-6">
-                <label class="control-label col-md-3">Brand Manager</label>
+                <label class="control-label col-md-4">Sourcing Status</label>
                 <div class="col-md-6 col-xs-12">
                   <select class="form-control">
                     <option value=""></option>
@@ -118,7 +134,7 @@
                 </div>
               </div>
               <div class="form-group col-md-6">
-                <label class="control-label col-md-3">SKU Type</label>
+                <label class="control-label col-md-4">Brand Manager</label>
                 <div class="col-md-6 col-xs-12">
                   <select class="form-control">
                     <option value=""></option>
@@ -126,13 +142,13 @@
                 </div>
               </div>
               <div class="form-group col-md-6">
-                <label class="control-label col-md-3">Inventory</label>
+                <label class="control-label col-md-4">Inventory</label>
                 <div class="col-md-6 col-xs-12">
                   <input type="text" class="form-control col-md-4 col-xs-12" placeholder=">,<,= ">
                 </div>
               </div>
               <div class="form-group col-md-6">
-                <label class="control-label col-md-3">SKU List</label>
+                <label class="control-label col-md-4">SKU List</label>
                 <div class="col-md-6 col-xs-12">
                   <input id="tags_1" type="text" class="tags form-control" value="15621-AA-NA, 12521-BK-NA, 13232-AA-NA" />
                   <div id="suggestions-container" style="position: relative; float: left; width: 250px; margin: 10px;"></div>
@@ -141,7 +157,7 @@
               <!-- <div class="ln_solid"></div> -->
               <div class="form-group col-md-12">
                 <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
-                  <button type="submit" class="btn btn-primary">Reset</button>
+                  <button type="submit" class="btn btn-dark">Reset</button>
                   <button type="submit" class="btn btn-success">Search</button>
                 </div>
               </div>

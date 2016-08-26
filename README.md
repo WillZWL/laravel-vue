@@ -25,6 +25,19 @@ php -S localhost:8080 or other port
 ```
 then you can view the demo by (http://localhost:8080)
 
+### Set up on Production Server
+
+#### Nginx
+On Nginx, the following directive should add in your site configuration :
+```
+location / {
+    try_files $uri $uri/ /index.html;
+}
+```
+
+#### Apache
+On Apache, ensure to enable the mod_rewrite module is enable. and add .htaccess in scout/public
+
 
 ## How to contribute
 To contribute, please ensure that you have stable [Node.js](https://nodejs.org/) , [npm](https://npmjs.com), and [Bower](https://bower.io/) installed.

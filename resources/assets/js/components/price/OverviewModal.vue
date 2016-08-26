@@ -61,7 +61,7 @@
               </div>
             </div>
             <div class="form-group col-md-12">
-              <label class="control-label col-md-3">Item Price</label>
+              <label class="control-label col-md-3">Item Cost</label>
               <div class="col-md-6 col-xs-12">
                 <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.item_price}}">
               </div>
