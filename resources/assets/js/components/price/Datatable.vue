@@ -1,39 +1,17 @@
 <template>
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
-            <div class="x_title">
-                <h2>Show OR Hide columns: <small>"Green" for Show, "Red" for "Hide"</small></h2>
-                <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-down"></i></a></li>
-                </ul>
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                <div class="x_title">
-                    <a class="toggle-vis btn btn-success" data-column="1">Marketplace ID</a>
-                    - <a class="toggle-vis btn btn-success" data-column="2">ESG Master SKU</a>
-                    - <a class="toggle-vis btn btn-success" data-column="3">ESG SKU</a>
-                    - <a class="toggle-vis btn btn-success" data-column="4">Product Name</a>
-                    - <a class="toggle-vis btn btn-success" data-column="5">Sourcing status</a>
-                    - <a class="toggle-vis btn btn-success" data-column="6">ETRADE QTY</a>
-                    - <a class="toggle-vis btn btn-success" data-column="7">ES_HK QTY</a>
-                    - <a class="toggle-vis btn btn-success" data-column="8">ES_DG QTY</a>
-                    - <a class="toggle-vis btn btn-success" data-column="9">Listing QTY</a>
-                    - <a class="toggle-vis btn btn-success" data-column="10">Item Cost</a>
-                    - <a class="toggle-vis btn btn-success" data-column="11">Selling Price</a>
-                    - <a class="toggle-vis btn btn-success" data-column="12">Profit</a>
-                    - <a class="toggle-vis btn btn-success" data-column="13">Margin</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
           <div class="x_title">
             <h2>Filters <small>[Base]</small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li></li>
+            </ul>
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
+            <div class="modal fade custom_header" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                <customheader></customheader>
+            </div>
             <table id="datatable-fixed-header" class="table table-striped table-bordered bulk_action jambo_table" width="100%">
               <thead>
                 <tr>
@@ -53,7 +31,7 @@
                   <th>Selling Price</th>
                   <th>Profit</th>
                   <th>Margin</th>
-                  <th>Detail Or Update</th>
+                  <th><b class="btn btn-success" data-toggle="modal" data-target=".custom_header">Custom Header</b></th>
                 </tr>
               </thead>
               <tbody>
@@ -90,7 +68,7 @@
                        <input type='Button' value="Detail" class="btn btn-primary" data-toggle="modal" data-target=".overview-modal{{$index}}">
                         <div class="modal fade overview-modal{{$index}}" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
                             <!-- detail overview-->
-                            <overviewmodal :item="item"></overviewmodal>
+                            <OverviewModal :item="item"></overviewmodal>
                        </div>
                     </td>
                 </tr>
@@ -113,9 +91,11 @@
 
 <script>
     import Overviewmodal from './OverviewModal.vue'
+    import Customheader from './CustomHeader.vue'
     export default {
         components: {
-            Overviewmodal
+            Overviewmodal,
+            Customheader
         },
         /* for test
         // ready () {
