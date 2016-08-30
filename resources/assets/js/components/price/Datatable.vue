@@ -1635,7 +1635,19 @@
                         }
                     ]
                 });
-            }
+                $('a.toggle-vis').on( 'click', function (e) {
+                    e.preventDefault();
+                    // Get the column API object
+                    var column = table.column( $(this).attr('data-column') );
+                    // Toggle the visibility
+                    column.visible( ! column.visible() );
+                    if (!column.visible()) {
+                        $(this).removeClass("btn-success").addClass('btn-danger');
+                    } else {
+                        $(this).removeClass("btn-danger").addClass('btn-success');
+                    }
+                });
+            },
         }
     };
 </script>
