@@ -36,6 +36,7 @@
     "select2": "^4.0.2",
     "switchery": "^0.8.1",
     "starrr": "^2.0.0",
-    "jquery.tagsinput": "^1.3.6"
+    "jquery.tagsinput": "^1.3.6",
+    "jquery-pjax":"1.9.6"
   }
 }
