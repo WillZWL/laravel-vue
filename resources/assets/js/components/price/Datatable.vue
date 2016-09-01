@@ -26,7 +26,7 @@
                             <th>Sourcing status</th>
                             <th width="5%">ETRADE QTY</th>
                             <th>ES_HK QTY</th>
-                            <th>ES_DG QTY</th>
+                            <th>ES_DGME QTY</th>
                             <th>Listing QTY</th>
                             <th>Item Cost</th>
                             <th>Selling Price</th>
@@ -131,13 +131,6 @@
                             },
                             {
                                 extend: "excel",
-                                className: "btn-sm",
-                                exportOptions: {
-                                    columns: [1,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-                                }
-                            },
-                            {
-                                extend: "pdfHtml5",
                                 className: "btn-sm",
                                 exportOptions: {
                                     columns: [1,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]

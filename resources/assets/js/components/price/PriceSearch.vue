@@ -11,7 +11,7 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content" id="pjax-container">
-                <form data-pjax name="fm" class="form-horizontal form-label-left" action="http://price_tool/api/price">
+                <form data-pjax name="fm" class="form-horizontal form-label-left">
                     <div class="form-group col-md-6">
                         <label class="control-label col-md-4">Marketplace ID</label>
                         <div class="col-md-6 col-xs-12">
@@ -107,8 +107,16 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label col-md-4">Inventory</label>
-                        <div class="col-md-6 col-xs-12">
-                            <input type="text" class="form-control col-md-4 col-xs-12" placeholder=">,<,= ">
+                        <div class="col-md-3 col-xs-12">
+                            <select class="form-control" name='warehouse_id'>
+                                <option value=""></option>
+                                <option value="">ETRADE QTY</option>
+                                <option value="">ES_HK QTY</option>
+                                <option value="">ES_DGME QTY</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 col-xs-12">
+                            <input type="text" name="inventory" class="form-control col-md-4 col-xs-12" placeholder=">,<,= ">
                         </div>
                     </div>
                     <div class="form-group col-md-6">
@@ -198,10 +206,13 @@ export default {
                 $("select").val("");
             });
 
-            $('#tags_1').tagsInput({
-                width: 'auto',
-                defaultText:'add a SKU',
+            $("input[name='inventory']").keydown(function(event){
+                if(event.keyCode == 13) {
+                    event.preventDefault();
+                    return false;
+                }
             });
+
         },
         PutSelectorContent (selector, list) {
             for (var i in list) {
@@ -234,8 +245,6 @@ export default {
             })
         },
         fetchMerchant () {
-            // console.log(this.$http.headers.common['access_token']);
-            // var access_token = this.$http.headers.common['access_token'];
             this.$http({
                 url:this.api_url+'merchant?access_token='+this.access_token,
                 method:'GET',
@@ -255,10 +264,100 @@ export default {
             var str = $("form[name='fm']").serialize();
             var search_result = {};
             this.$http({
-                url:'http://price_tool/api/price?'+str,
-                method: 'GET'
+                // url:'http://price_tool/api/price?'+str,
+                // method: 'GET'
             }).then(function (response) {
-                search_result = response.data;
+                search_result = [
+                 {
+                     markerplace_id:'BCLAZHK',
+                     master_sku:'24697-MM-NA',
+                     sku:'15621-AA-NA',
+                     prod_name:'Biloop Cry Translator',
+                     sourcing_status:'A',
+                     etrade_qty:0,
+                     es_hk_qty:0,
+                     es_dg_qty:0,
+                     item_price:'279.58',
+                     profit:'0.00',
+                     margin:'0.00',
+                     modify_on:'2016-02-18 09:41:11',
+                     modify_by:'system',
+                 },
+                 {
+                     markerplace_id:'BCLAZUS',
+                     master_sku:'25893-MM-NA',
+                     sku:'15630-AA-NA',
+                     prod_name:'Gangsta Gold - Single Color PLA Pack (25 strands)',
+                     sourcing_status:'A',
+                     etrade_qty:0,
+                     es_hk_qty:3,
+                     es_dg_qty:0,
+                     item_price:'10.01',
+                     profit:'0.00',
+                     margin:'0.00',
+                     modify_on:'2016-07-21 04:25:04',
+                     modify_by:'system',
+                 },
+                 {
+                     markerplace_id:'BCLAZUS',
+                     master_sku:'25894-MM-NA',
+                     sku:'15631-AA-NA',
+                     prod_name:'Blue Steel - Single Color PLA Pack (25 strands)',
+                     sourcing_status:'A',
+                     etrade_qty:201,
+                     es_hk_qty:2,
+                     es_dg_qty:0,
+                     item_price:'9.99',
+                     profit:'0.00',
+                     margin:'0.00',
+                     modify_on:'2016-07-19 08:25:03',
+                     modify_by:'system',
+                 },
+                 {
+                     markerplace_id:'BCLAZUS',
+                     master_sku:'25895-MM-NA',
+                     sku:'15632-AA-NA',
+                     prod_name:'Basilica White - Single Color PLA Pack (25 strands)',
+                     sourcing_status:'A',
+                     etrade_qty:310,
+                     es_hk_qty:0,
+                     es_dg_qty:0,
+                     item_price:'9.99',
+                     profit:'0.00',
+                     margin:'0.00',
+                     modify_on:'2016-07-25 04:25:07',
+                     modify_by:'system',
+                 },
+                 {
+                     markerplace_id:'BCLAZUS',
+                     master_sku:'25896-MM-NA',
+                     sku:'15633-AA-NA',
+                     prod_name:'Martian Mars Red - Single Color PLA Pack (25 strands)',
+                     sourcing_status:'A',
+                     etrade_qty:284,
+                     es_hk_qty:0,
+                     es_dg_qty:0,
+                     item_price:'9.99',
+                     profit:'0.00',
+                     margin:'0.00',
+                     modify_on:'2016-07-05 04:25:06',
+                     modify_by:'system',
+                 },
+                 {
+                     markerplace_id:'BCLAZUS',
+                     master_sku:'25897-MM-NA',
+                     sku:'15634-AA-NA',
+                     prod_name:'Diamonds &amp; Pearls - Single Color PLA Pack (25 strands)',
+                     sourcing_status:'A',
+                     etrade_qty:148,
+                     es_hk_qty:0,
+                     es_dg_qty:0,
+                     item_price:'9.99',
+                     profit:'0.00',
+                     margin:'0.00',
+                     modify_on:'2016-07-15 03:25:06',
+                     modify_by:'system',
+                }]
             }).then(function(){
                 this.$dispatch('form-search', search_result);
             })

@@ -26,7 +26,7 @@
                             <ul class="nav child_menu">
                                 <li><a  v-link="'/'">Dashboard</a>
                                 </li>
-                                <li><a  :href="'price-overview'">Price Overview</a>
+                                <li><a  v-link="'price-overview'">Price Overview</a>
                                 </li>
                                 <li><a  v-link="'product-overview'">Product Overview</a>
                                 </li>
@@ -222,7 +222,7 @@
                 });
             } else {
                 // prevent closing menu if we are on child menu
-                if (!$li.parent().is('.child_menu')) {
+                if ($li.parent().is('.child_menu')) {
                     $('#sidebar-menu').find('li').removeClass('active active-sm');
                     $('#sidebar-menu').find('li ul').slideUp();
                 }
