@@ -21,14 +21,15 @@
                             - <a class="toggle-vis btn btn-success" data-column="3">ESG SKU</a>
                             - <a class="toggle-vis btn btn-success" data-column="4">Product Name</a>
                             - <a class="toggle-vis btn btn-success" data-column="5">Sourcing status</a>
-                            - <a class="toggle-vis btn btn-success" data-column="6">ETRADE QTY</a>
-                            - <a class="toggle-vis btn btn-success" data-column="7">ES_HK QTY</a>
-                            - <a class="toggle-vis btn btn-success" data-column="8">ES_DG QTY</a>
-                            - <a class="toggle-vis btn btn-success" data-column="9">Listing QTY</a>
-                            - <a class="toggle-vis btn btn-success" data-column="10">Item Cost</a>
-                            - <a class="toggle-vis btn btn-success" data-column="11">Selling Price</a>
-                            - <a class="toggle-vis btn btn-success" data-column="12">Profit</a>
-                            - <a class="toggle-vis btn btn-success" data-column="13">Margin</a>
+                            - <a class="toggle-vis btn btn-success" data-column="6">Delivery Type</a>
+                            - <a class="toggle-vis btn btn-success" data-column="7">ETRADE QTY</a>
+                            - <a class="toggle-vis btn btn-success" data-column="8">ES_HK QTY</a>
+                            - <a class="toggle-vis btn btn-success" data-column="9">ES_DG QTY</a>
+                            - <a class="toggle-vis btn btn-success" data-column="10">Listing QTY</a>
+                            - <a class="toggle-vis btn btn-success" data-column="11">Item Cost</a>
+                            - <a class="toggle-vis btn btn-success" data-column="12">Selling Price</a>
+                            - <a class="toggle-vis btn btn-success" data-column="13">Profit</a>
+                            - <a class="toggle-vis btn btn-success" data-column="14">Margin</a>
                             <!-- - <a class="toggle-vis btn btn-success" data-column="14">Detail</a> -->
                         </div>
                     </div>

@@ -24,7 +24,8 @@
                             <th>ESG SKU</th>
                             <th>Product Name</th>
                             <th>Sourcing status</th>
-                            <th width="5%">ETRADE QTY</th>
+                            <th>Delivery Type</th>
+                            <th>ETRADE QTY</th>
                             <th>ES_HK QTY</th>
                             <th>ES_DGME QTY</th>
                             <th>Listing QTY</th>
@@ -47,6 +48,15 @@
                             <td>{{item.sku}}</td>
                             <td>{{item.prod_name}}</td>
                             <td>{{item.sourcing_status}}</td>
+                            <td>
+                                <div class="col-md col-xs-12">
+                                    <select name="delivery_type" class="form-control">
+                                        <option value="STD">STD</option>
+                                        <option value="EXPED">EXPED</option>
+                                        <option value="FBA">FBA</option>
+                                    </select>
+                                </div>
+                            </td>
                             <td>
                                 <input type="text" value="{{item.etrade_qty}}" name="etrade_qty" class="price_input_sm">
                             </td>
@@ -126,21 +136,21 @@
                                 extend: "csv",
                                 className: "btn-sm",
                                 exportOptions: {
-                                    columns: [1,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                                    columns: [1,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
                                 }
                             },
                             {
                                 extend: "excel",
                                 className: "btn-sm",
                                 exportOptions: {
-                                    columns: [1,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                                    columns: [1,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
                                 }
                             },
                             {
                                 extend: "print",
                                 className: "btn-sm",
                                 exportOptions: {
-                                    columns: [1,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                                    columns: [1,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
                                 }
                             }
                         ]
