@@ -1,5 +1,5 @@
 <template>
-    <pricesearch ></pricesearch>
+    <pricesearch></pricesearch>
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
@@ -93,8 +93,8 @@
 </template>
 
 <script>
-    import Overviewmodal from './OverviewModal.vue'
     import Pricesearch from './PriceSearch.vue'
+    import Overviewmodal from './OverviewModal.vue'
     import Customheader from './CustomHeader.vue'
     export default {
         components: {
@@ -104,7 +104,7 @@
         },
         // for test
         ready() {
-            this.initDatatable()
+            // this.initDatatable()
         },
         data() {
             return {
@@ -112,13 +112,9 @@
             }
         },
         methods: {
-            /* for test fetch data from other server*/
             initDatatable() {
                 this.$http({
-                    url:'http://price_tool/api/price',
-                    method: 'GET'
-                }).then(function (response) {
-                    this.$set('items', response.data);
+
                 }).then(function() {
                     var table = $('#datatable-fixed-header').DataTable({
                         dom: "Bfrtip",
@@ -228,10 +224,14 @@
                         }
                     }
                 })
-            },
-
-            fetchData() {
-                alert('ssss');
+            }
+        },
+        events: {
+            'form-search': function(search_result) {
+                this.$set('items', search_result);
+                var table = $('#datatable-fixed-header').DataTable();
+                table.destroy();
+                this.initDatatable();
             }
         }
     };
