@@ -1,7 +1,16559 @@
-!function t(e,n,i){function o(a,r){if(!n[a]){if(!e[a]){var l="function"==typeof require&&require;if(!r&&l)return l(a,!0);if(s)return s(a,!0);var c=new Error("Cannot find module '"+a+"'");throw c.code="MODULE_NOT_FOUND",c}var u=n[a]={exports:{}};e[a][0].call(u.exports,function(t){var n=e[a][1][t];return o(n?n:t)},u,u.exports,t,e,n,i)}return n[a].exports}for(var s="function"==typeof require&&require,a=0;a<i.length;a++)o(i[a]);return o}({1:[function(t,e,n){function i(t){if(c===setTimeout)return setTimeout(t,0);try{return c(t,0)}catch(e){try{return c.call(null,t,0)}catch(e){return c.call(this,t,0)}}}function o(t){if(u===clearTimeout)return clearTimeout(t);try{return u(t)}catch(e){try{return u.call(null,t)}catch(e){return u.call(this,t)}}}function s(){f&&d&&(f=!1,d.length?p=d.concat(p):v=-1,p.length&&a())}function a(){if(!f){var t=i(s);f=!0;for(var e=p.length;e;){for(d=p,p=[];++v<e;)d&&d[v].run();v=-1,e=p.length}d=null,f=!1,o(t)}}function r(t,e){this.fun=t,this.array=e}function l(){}var c,u,h=e.exports={};!function(){try{c=setTimeout}catch(t){c=function(){throw new Error("setTimeout is not defined")}}try{u=clearTimeout}catch(t){u=function(){throw new Error("clearTimeout is not defined")}}}();var d,p=[],f=!1,v=-1;h.nextTick=function(t){var e=new Array(arguments.length-1);if(arguments.length>1)for(var n=1;n<arguments.length;n++)e[n-1]=arguments[n];p.push(new r(t,e)),1!==p.length||f||i(a)},r.prototype.run=function(){this.fun.apply(null,this.array)},h.title="browser",h.browser=!0,h.env={},h.argv=[],h.version="",h.versions={},h.on=l,h.addListener=l,h.once=l,h.off=l,h.removeListener=l,h.removeAllListeners=l,h.emit=l,h.binding=function(t){throw new Error("process.binding is not supported")},h.cwd=function(){return"/"},h.chdir=function(t){throw new Error("process.chdir is not supported")},h.umask=function(){return 0}},{}],2:[function(t,e,n){function i(t){var e=t.unbuild;t.unbuild=function(t){if(!this.hotUpdating){var n=this.childVM&&this.childVM.constructor;s(n,this),t&&o(this.Component,this)}return e.call(this,t)}}function o(t,e){var n=t&&t.options.hotID;n&&(p[n]||(p[n]={Component:t,views:[],instances:[]}),p[n].views.push(e))}function s(t,e){var n=t&&t.options.hotID;n&&p[n].views.$remove(e)}function a(t,e){e.hotID=t,r(e,"created",function(){var e=p[t];e.Component||(e.Component=this.constructor),e.instances.push(this)}),r(e,"beforeDestroy",function(){p[t].instances.$remove(this)})}function r(t,e,n){var i=t[e];t[e]=i?Array.isArray(i)?i.concat(n):[i,n]:[n]}function l(t,e){if(t._bound){t.Component=e,t.hotUpdating=!0,t.vm._isCompiled=!1;var n=c(t.childVM),i=t.keepAlive;t.keepAlive=!1,t.mountComponent(),t.keepAlive=i,u(t.childVM,n,!0),t.vm._isCompiled=!0,t.hotUpdating=!1}}function c(t){return{cid:t.constructor.cid,data:t.$data,children:t.$children.map(c)}}function u(t,e,n){var i;n&&(i=d.config.async,d.config.async=!1),n||!t._props?t.$data=e.data:Object.keys(e.data).forEach(function(n){t._props[n]||(t.$data[n]=e.data[n])});var o=t.$children.every(function(t,n){return e.children[n]&&e.children[n].cid===t.constructor.cid});o&&t.$children.forEach(function(t,n){u(t,e.children[n])}),n&&(d.config.async=i)}function h(t){var e=t.match(/[^\/]+\.vue$/);return e?e[0]:t}var d,p=Object.create(null),f=!1,v=!1;n.install=function(t,e){if(!f){if(f=!0,d=t,v=e,n.compatible=!!d.internalDirectives,!n.compatible)return void console.warn("[HMR] vue-loader hot reload is only compatible with Vue.js 1.0.0+.");i(d.internalDirectives.component),console.log("[HMR] Vue component hot reload shim applied.");var o=d.elementDirective("router-view");o&&(i(o),console.log("[HMR] vue-router <router-view> hot reload shim applied."))}},n.createRecord=function(t,e){"function"==typeof e&&(e=e.options),"string"!=typeof e.el&&"object"!=typeof e.data&&(a(t,e),p[t]={Component:null,views:[],instances:[]})},n.update=function(t,e,n){var i=p[t];if(!i||i.instances.length&&!i.views.length){if(console.log("[HMR] Root or manually-mounted instance modified. Full reload may be required."),v)return;window.location.reload()}v||console.log("[HMR] Updating component: "+h(t));var o=i.Component;e&&(o=i.Component="function"==typeof e?e:d.extend(e),a(t,o.options)),n&&(o.options.template=n),o.options.name&&(o.options.components[o.options.name]=o),o.linker=null,i.views.forEach(function(t){l(t,o)}),window.__VUE_DEVTOOLS_GLOBAL_HOOK__&&window.__VUE_DEVTOOLS_GLOBAL_HOOK__.emit("flush")}},{}],3:[function(t,e,n){"use strict";function i(t){this.state=st,this.value=void 0,this.deferred=[];var e=this;try{t(function(t){e.resolve(t)},function(t){e.reject(t)})}catch(n){e.reject(n)}}function o(t,e){t instanceof rt?this.promise=t:this.promise=new rt(t.bind(e)),this.context=e}function s(t){ut=t.util,ct=t.config.debug||!t.config.silent}function a(t){"undefined"!=typeof console&&ct&&console.warn("[VueResource warn]: "+t)}function r(t){"undefined"!=typeof console&&console.error(t)}function l(t,e){return ut.nextTick(t,e)}function c(t){return t.replace(/^\s*|\s*$/g,"")}function u(t){return t?t.toLowerCase():""}function h(t){return"string"==typeof t}function d(t){return"function"==typeof t}function p(t){return null!==t&&"object"===("undefined"==typeof t?"undefined":nt(t))}function f(t){return p(t)&&Object.getPrototypeOf(t)==Object.prototype}function v(t,e,n){var i=o.resolve(t);return arguments.length<2?i:i.then(e,n)}function m(t,e,n){return n=n||{},d(n)&&(n=n.call(e)),b(t.bind({$vm:e,$options:n}),t,{$options:n})}function g(t,e){var n,i;if("number"==typeof t.length)for(n=0;n<t.length;n++)e.call(t[n],t[n],n);else if(p(t))for(i in t)t.hasOwnProperty(i)&&e.call(t[i],t[i],i);return t}function _(t){var e=ht.slice.call(arguments,1);return e.forEach(function(e){y(t,e)}),t}function b(t){var e=ht.slice.call(arguments,1);return e.forEach(function(e){y(t,e,!0)}),t}function y(t,e,n){for(var i in e)n&&(f(e[i])||dt(e[i]))?(f(e[i])&&!f(t[i])&&(t[i]={}),dt(e[i])&&!dt(t[i])&&(t[i]=[]),y(t[i],e[i],n)):void 0!==e[i]&&(t[i]=e[i])}function w(t,e){var n=e(t);return h(t.root)&&!n.match(/^(https?:)?\//)&&(n=t.root+"/"+n),n}function x(t,e){var n=Object.keys(j.options.params),i={},o=e(t);return g(t.params,function(t,e){n.indexOf(e)===-1&&(i[e]=t)}),i=j.params(i),i&&(o+=(o.indexOf("?")==-1?"?":"&")+i),o}function C(t,e){var n=[],i=e(t);return i=i.replace(/(\/?):([a-z]\w*)/gi,function(e,i,o){return a("The `:"+o+"` parameter syntax has been deprecated. Use the `{"+o+"}` syntax instead."),t.params[o]?(n.push(o),i+k(t.params[o])):""}),n.forEach(function(e){delete t.params[e]}),i}function k(t){return $(t,!0).replace(/%26/gi,"&").replace(/%3D/gi,"=").replace(/%2B/gi,"+")}function $(t,e){return encodeURIComponent(t).replace(/%40/gi,"@").replace(/%3A/gi,":").replace(/%24/g,"$").replace(/%2C/gi,",").replace(/%20/g,e?"%20":"+")}function E(t,e,n){var i=A(t),o=i.expand(e);return n&&n.push.apply(n,i.vars),o}function A(t){var e=["+","#",".","/",";","?","&"],n=[];return{vars:n,expand:function(i){return t.replace(/\{([^\{\}]+)\}|([^\{\}]+)/g,function(t,o,s){if(o){var a=null,r=[];if(e.indexOf(o.charAt(0))!==-1&&(a=o.charAt(0),o=o.substr(1)),o.split(/,/g).forEach(function(t){var e=/([^:\*]*)(?::(\d+)|(\*))?/.exec(t);r.push.apply(r,O(i,a,e[1],e[2]||e[3])),n.push(e[1])}),a&&"+"!==a){var l=",";return"?"===a?l="&":"#"!==a&&(l=a),(0!==r.length?a:"")+r.join(l)}return r.join(",")}return D(s)})}}}function O(t,e,n,i){var o=t[n],s=[];if(T(o)&&""!==o)if("string"==typeof o||"number"==typeof o||"boolean"==typeof o)o=o.toString(),i&&"*"!==i&&(o=o.substring(0,parseInt(i,10))),s.push(S(e,o,N(e)?n:null));else if("*"===i)Array.isArray(o)?o.filter(T).forEach(function(t){s.push(S(e,t,N(e)?n:null))}):Object.keys(o).forEach(function(t){T(o[t])&&s.push(S(e,o[t],t))});else{var a=[];Array.isArray(o)?o.filter(T).forEach(function(t){a.push(S(e,t))}):Object.keys(o).forEach(function(t){T(o[t])&&(a.push(encodeURIComponent(t)),a.push(S(e,o[t].toString())))}),N(e)?s.push(encodeURIComponent(n)+"="+a.join(",")):0!==a.length&&s.push(a.join(","))}else";"===e?s.push(encodeURIComponent(n)):""!==o||"&"!==e&&"?"!==e?""===o&&s.push(""):s.push(encodeURIComponent(n)+"=");return s}function T(t){return void 0!==t&&null!==t}function N(t){return";"===t||"&"===t||"?"===t}function S(t,e,n){return e="+"===t||"#"===t?D(e):encodeURIComponent(e),n?encodeURIComponent(n)+"="+e:e}function D(t){return t.split(/(%[0-9A-Fa-f]{2})/g).map(function(t){return/%[0-9A-Fa-f]/.test(t)||(t=encodeURI(t)),t}).join("")}function P(t){var e=[],n=E(t.url,t.params,e);return e.forEach(function(e){delete t.params[e]}),n}function j(t,e){var n,i=this||{},o=t;return h(t)&&(o={url:t,params:e}),o=b({},j.options,i.$options,o),j.transforms.forEach(function(t){n=R(t,n,i.$vm)}),n(o)}function R(t,e,n){return function(i){return t.call(n,i,e)}}function V(t,e,n){var i,o=dt(e),s=f(e);g(e,function(e,a){i=p(e)||dt(e),n&&(a=n+"["+(s||i?a:"")+"]"),!n&&o?t.add(e.name,e.value):i?V(t,e,a):t.add(a,e)})}function M(t){return new o(function(e){var n,i=new XDomainRequest,o={request:t};t.cancel=function(){i.abort()},i.open(t.method,j(t),!0),n=function(t){o.data=i.responseText,o.status=i.status,o.statusText=i.statusText||"",e(o)},i.timeout=0,i.onload=n,i.onabort=n,i.onerror=n,i.ontimeout=function(){},i.onprogress=function(){},i.send(t.data)})}function L(t,e){null===t.crossOrigin&&(t.crossOrigin=F(t)),t.crossOrigin&&(mt||(t.client=M),t.emulateHTTP=!1),e()}function F(t){var e=j.parse(j(t));return e.protocol!==vt.protocol||e.host!==vt.host}function H(t,e){t.emulateJSON&&f(t.data)&&(t.headers["Content-Type"]="application/x-www-form-urlencoded",t.data=j.params(t.data)),p(t.data)&&/FormData/i.test(t.data.toString())&&delete t.headers["Content-Type"],f(t.data)&&(t.data=JSON.stringify(t.data)),e(function(t){try{t.data=JSON.parse(t.data)}catch(e){}})}function I(t){return new o(function(e){var n,i,o="_jsonp"+Math.random().toString(36).substr(2),s={request:t,data:null};t.params[t.jsonp]=o,t.cancel=function(){n({type:"cancel"})},i=document.createElement("script"),i.src=j(t),i.type="text/javascript",i.async=!0,window[o]=function(t){s.data=t},n=function(t){"load"===t.type&&null!==s.data?s.status=200:"error"===t.type?s.status=404:s.status=0,e(s),delete window[o],document.body.removeChild(i)},i.onload=n,i.onerror=n,document.body.appendChild(i)})}function U(t,e){"JSONP"==t.method&&(t.client=I),e()}function B(t,e){d(t.beforeSend)&&t.beforeSend.call(this,t),e()}function q(t,e){t.emulateHTTP&&/^(PUT|PATCH|DELETE)$/i.test(t.method)&&(t.headers["X-HTTP-Method-Override"]=t.method,t.method="POST"),e()}function W(t,e){t.method=t.method.toUpperCase(),t.headers=_({},Z.headers.common,t.crossOrigin?{}:Z.headers.custom,Z.headers[t.method.toLowerCase()],t.headers),f(t.data)&&/^(GET|JSONP)$/i.test(t.method)&&(_(t.params,t.data),delete t.data),e()}function z(t,e){var n;t.timeout&&(n=setTimeout(function(){t.cancel()},t.timeout)),e(function(t){clearTimeout(n)})}function G(t){return new o(function(e){var n,i=new XMLHttpRequest,o={request:t};t.cancel=function(){i.abort()},i.open(t.method,j(t),!0),n=function(t){o.data="response"in i?i.response:i.responseText,o.status=1223===i.status?204:i.status,o.statusText=c(i.statusText||""),o.allHeaders=i.getAllResponseHeaders(),e(o)},i.timeout=0,i.onload=n,i.onabort=n,i.onerror=n,i.ontimeout=function(){},i.onprogress=function(){},f(t.xhr)&&_(i,t.xhr),f(t.upload)&&_(i.upload,t.upload),g(t.headers||{},function(t,e){i.setRequestHeader(e,t)}),i.send(t.data)})}function J(t){function e(e){return new o(function(o){function s(){n.pop().call(t,e,a)}function a(e){v(e,function(e){if(d(e))i.unshift(e);else if(p(e))return Y(e),i.forEach(function(n){n.call(t,e)}),void o(e);s()})}s()},t)}var n=[Q],i=[];return p(t)||(t=null),e.use=function(t){n.push(t)},e}function Q(t,e){var n=t.client||G;e(n(t))}function Y(t){var e=t.headers||t.allHeaders;return h(e)&&(e=K(e)),p(e)&&(t.headers=function(t){return t?e[u(t)]:e}),t.ok=t.status>=200&&t.status<300,t}function K(t){var e,n,i,o={};return g(t.split("\n"),function(t){i=t.indexOf(":"),n=c(u(t.slice(0,i))),e=c(t.slice(i+1)),o[n]?dt(o[n])?o[n].push(e):o[n]=[o[n],e]:o[n]=e}),o}function Z(t,e){var n,i,s=this||{},a=J(s.$vm);return Z.interceptors.forEach(function(t){a.use(t)}),e=p(t)?t:_({url:t},e),n=b({},Z.options,s.$options,e),i=a(n).then(function(t){return t.ok?t:o.reject(t)},function(t){return t instanceof Error&&r(t),o.reject(t)}),n.success&&i.success(n.success),n.error&&i.error(n.error),i}function X(t,e,n,i){var o=this||{},s={};return n=_({},X.actions,n),g(n,function(n,a){n=b({url:t,params:e||{}},i,n),s[a]=function(){return(o.$http||Z)(tt(n,arguments))}}),s}function tt(t,e){var n,i,o,s=_({},t),a={};switch(e.length){case 4:o=e[3],i=e[2];case 3:case 2:if(!d(e[1])){a=e[0],n=e[1],i=e[2];break}if(d(e[0])){i=e[0],o=e[1];break}i=e[1],o=e[2];case 1:d(e[0])?i=e[0]:/^(POST|PUT|PATCH)$/i.test(s.method)?n=e[0]:a=e[0];break;case 0:break;default:throw"Expected up to 4 arguments [params, data, success, error], got "+e.length+" arguments"}return s.data=n,s.params=_({},s.params,a),i&&(s.success=i),o&&(s.error=o),s}function et(t){et.installed||(s(t),t.url=j,t.http=Z,t.resource=X,t.Promise=o,Object.defineProperties(t.prototype,{$url:{get:function(){return m(t.url,this,this.$options.url)}},$http:{get:function(){return m(t.http,this,this.$options.http)}},$resource:{get:function(){return t.resource.bind(this)}},$promise:{get:function(){var e=this;return function(n){return new t.Promise(n,e)}}}}))}var nt="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol?"symbol":typeof t},it=0,ot=1,st=2;i.reject=function(t){return new i(function(e,n){n(t)})},i.resolve=function(t){return new i(function(e,n){e(t)})},i.all=function(t){return new i(function(e,n){function o(n){return function(i){a[n]=i,s+=1,s===t.length&&e(a)}}var s=0,a=[];0===t.length&&e(a);for(var r=0;r<t.length;r+=1)i.resolve(t[r]).then(o(r),n)})},i.race=function(t){return new i(function(e,n){for(var o=0;o<t.length;o+=1)i.resolve(t[o]).then(e,n)})};var at=i.prototype;at.resolve=function(t){var e=this;if(e.state===st){if(t===e)throw new TypeError("Promise settled with itself.");var n=!1;try{var i=t&&t.then;if(null!==t&&"object"===("undefined"==typeof t?"undefined":nt(t))&&"function"==typeof i)return void i.call(t,function(t){n||e.resolve(t),n=!0},function(t){n||e.reject(t),n=!0})}catch(o){return void(n||e.reject(o))}e.state=it,e.value=t,e.notify()}},at.reject=function(t){var e=this;if(e.state===st){if(t===e)throw new TypeError("Promise settled with itself.");e.state=ot,e.value=t,e.notify()}},at.notify=function(){var t=this;l(function(){if(t.state!==st)for(;t.deferred.length;){var e=t.deferred.shift(),n=e[0],i=e[1],o=e[2],s=e[3];try{t.state===it?o("function"==typeof n?n.call(void 0,t.value):t.value):t.state===ot&&("function"==typeof i?o(i.call(void 0,t.value)):s(t.value))}catch(a){s(a)}}})},at.then=function(t,e){var n=this;return new i(function(i,o){n.deferred.push([t,e,i,o]),n.notify()})},at["catch"]=function(t){return this.then(void 0,t)};var rt=window.Promise||i;o.all=function(t,e){return new o(rt.all(t),e)},o.resolve=function(t,e){return new o(rt.resolve(t),e)},o.reject=function(t,e){return new o(rt.reject(t),e)},o.race=function(t,e){return new o(rt.race(t),e)};var lt=o.prototype;lt.bind=function(t){return this.context=t,this},lt.then=function(t,e){return t&&t.bind&&this.context&&(t=t.bind(this.context)),e&&e.bind&&this.context&&(e=e.bind(this.context)),this.promise=this.promise.then(t,e),this},lt["catch"]=function(t){return t&&t.bind&&this.context&&(t=t.bind(this.context)),this.promise=this.promise["catch"](t),this},lt["finally"]=function(t){return this.then(function(e){return t.call(this),e},function(e){return t.call(this),rt.reject(e)})},lt.success=function(t){return a("The `success` method has been deprecated. Use the `then` method instead."),this.then(function(e){return t.call(this,e.data,e.status,e)||e})},lt.error=function(t){return a("The `error` method has been deprecated. Use the `catch` method instead."),this["catch"](function(e){return t.call(this,e.data,e.status,e)||e})},lt.always=function(t){a("The `always` method has been deprecated. Use the `finally` method instead.");var e=function(e){return t.call(this,e.data,e.status,e)||e};return this.then(e,e)};var ct=!1,ut={},ht=[],dt=Array.isArray,pt=document.documentMode,ft=document.createElement("a");j.options={url:"",root:null,params:{}},j.transforms=[P,C,x,w],j.params=function(t){var e=[],n=encodeURIComponent;return e.add=function(t,e){d(e)&&(e=e()),null===e&&(e=""),this.push(n(t)+"="+n(e))},V(e,t),e.join("&").replace(/%20/g,"+")},j.parse=function(t){return pt&&(ft.href=t,t=ft.href),ft.href=t,{href:ft.href,protocol:ft.protocol?ft.protocol.replace(/:$/,""):"",port:ft.port,host:ft.host,hostname:ft.hostname,pathname:"/"===ft.pathname.charAt(0)?ft.pathname:"/"+ft.pathname,search:ft.search?ft.search.replace(/^\?/,""):"",hash:ft.hash?ft.hash.replace(/^#/,""):""}};var vt=j.parse(location.href),mt="withCredentials"in new XMLHttpRequest,gt={"Content-Type":"application/json"};Z.options={method:"get",data:"",params:{},headers:{},xhr:null,upload:null,jsonp:"callback",beforeSend:null,crossOrigin:null,emulateHTTP:!1,emulateJSON:!1,timeout:0},Z.headers={put:gt,post:gt,patch:gt,"delete":gt,common:{Accept:"application/json, text/plain, */*"},custom:{"X-Requested-With":"XMLHttpRequest"}},Z.interceptors=[B,z,U,q,H,W,L],["get","put","post","patch","delete","jsonp"].forEach(function(t){Z[t]=function(e,n,i,o){return d(n)&&(o=i,i=n,n=void 0),p(i)&&(o=i,i=void 0),this(e,_({method:t,data:n,success:i},o))}}),X.actions={get:{method:"GET"},save:{method:"POST"},query:{method:"GET"},update:{method:"PUT"},remove:{method:"DELETE"},"delete":{method:"DELETE"}},"undefined"!=typeof window&&window.Vue&&window.Vue.use(et),e.exports=et},{}],4:[function(t,e,n){!function(t,i){"object"==typeof n&&"undefined"!=typeof e?e.exports=i():"function"==typeof define&&define.amd?define(i):t.VueRouter=i()}(this,function(){"use strict";function t(t,e,n){this.path=t,this.matcher=e,this.delegate=n}function e(t){this.routes={},this.children={},this.target=t}function n(e,i,o){return function(s,a){var r=e+s;return a?void a(n(r,i,o)):new t(e+s,i,o)}}function i(t,e,n){for(var i=0,o=0,s=t.length;o<s;o++)i+=t[o].path.length;e=e.substr(i);var a={path:e,handler:n};t.push(a)}function o(t,e,n,s){var a=e.routes;for(var r in a)if(a.hasOwnProperty(r)){var l=t.slice();i(l,r,a[r]),e.children[r]?o(l,e.children[r],n,s):n.call(s,l)}}function s(t,i){var s=new e;t(n("",s,this.delegate)),o([],s,function(t){i?i(this,t):this.add(t)},this)}function a(t){W||"undefined"==typeof console||console.error("[vue-router] "+t)}function r(t,e){try{return e?decodeURIComponent(t):decodeURI(t)}catch(n){a("malformed URI"+(e?" component: ":": ")+t)}}function l(t){return"[object Array]"===Object.prototype.toString.call(t)}function c(t){this.string=t}function u(t){this.name=t}function h(t){this.name=t}function d(){}function p(t,e,n){"/"===t.charAt(0)&&(t=t.substr(1));var i=t.split("/"),o=[];n.val="";for(var s=0,a=i.length;s<a;s++){var r,l=i[s];(r=l.match(/^:([^\/]+)$/))?(o.push(new u(r[1])),e.push(r[1]),n.val+="3"):(r=l.match(/^\*([^\/]+)$/))?(o.push(new h(r[1])),n.val+="2",e.push(r[1])):""===l?(o.push(new d),n.val+="1"):(o.push(new c(l)),n.val+="4")}return n.val=+n.val,o}function f(t){this.charSpec=t,this.nextStates=[]}function v(t){return t.sort(function(t,e){return e.specificity.val-t.specificity.val})}function m(t,e){for(var n=[],i=0,o=t.length;i<o;i++){var s=t[i];n=n.concat(s.match(e))}return n}function g(t){this.queryParams=t||{}}function _(t,e,n){for(var i=t.handlers,o=t.regex,s=e.match(o),a=1,r=new g(n),l=0,c=i.length;l<c;l++){for(var u=i[l],h=u.names,d={},p=0,f=h.length;p<f;p++)d[h[p]]=s[a++];r.push({handler:u.handler,params:d,isDynamic:!!h.length})}return r}function b(t,e){return e.eachChar(function(e){t=t.put(e)}),t}function y(t){return t=t.replace(/\+/gm,"%20"),r(t,!0)}function w(t){"undefined"!=typeof console&&console.error("[vue-router] "+t)}function x(t,e,n){var i=t.match(/(\?.*)$/);if(i&&(i=i[1],t=t.slice(0,-i.length)),"?"===e.charAt(0))return t+e;var o=t.split("/");n&&o[o.length-1]||o.pop();for(var s=e.replace(/^\//,"").split("/"),a=0;a<s.length;a++){var r=s[a];"."!==r&&(".."===r?o.pop():o.push(r))}return""!==o[0]&&o.unshift(""),o.join("/")}function C(t){return t&&"function"==typeof t.then}function k(t,e){var n=t&&(t.$options||t.options);return n&&n.route&&n.route[e]}function $(t,e){Y?Y.$options.components._=t.component:Y={resolve:Q.Vue.prototype._resolveComponent,$options:{components:{_:t.component}}},Y.resolve("_",function(n){t.component=n,e(n)})}function E(t,e,n){return void 0===e&&(e={}),t=t.replace(/:([^\/]+)/g,function(n,i){var o=e[i];return o||w('param "'+i+'" not found when generating path for "'+t+'" with params '+JSON.stringify(e)),o||""}),n&&(t+=J(n)),t}function A(t,e,n){var i=t.childVM;if(!i||!e)return!1;if(t.Component!==e.component)return!1;var o=k(i,"canReuse");return"boolean"==typeof o?o:!o||o.call(i,{to:n.to,from:n.from})}function O(t,e,n){var i=t.childVM,o=k(i,"canDeactivate");o?e.callHook(o,i,n,{expectBoolean:!0}):n()}function T(t,e,n){$(t,function(t){if(!e.aborted){var i=k(t,"canActivate");i?e.callHook(i,null,n,{expectBoolean:!0}):n()}})}function N(t,e,n){var i=t.childVM,o=k(i,"deactivate");o?e.callHooks(o,i,n):n()}function S(t,e,n,i,o){var s=e.activateQueue[n];if(!s)return j(t),t._bound&&t.setComponent(null),void(i&&i());var a=t.Component=s.component,r=k(a,"activate"),l=k(a,"data"),c=k(a,"waitForData");t.depth=n,t.activated=!1;var u=void 0,h=!(!l||c);if(o=o&&t.childVM&&t.childVM.constructor===a)u=t.childVM,u.$loadingRouteData=h;else if(j(t),t.unbuild(!0),u=t.build({_meta:{$loadingRouteData:h},created:function(){this._routerView=t}}),t.keepAlive){u.$loadingRouteData=h;var d=u._keepAliveRouterView;d&&(t.childView=d,u._keepAliveRouterView=null)}var p=function(){u.$destroy()},f=function(){if(o)return void(i&&i());var n=e.router;n._rendered||n._transitionOnLoad?t.transition(u):(t.setCurrent?t.setCurrent(u):t.childVM=u,u.$before(t.anchor,null,!1)),i&&i()},v=function(){t.childView&&S(t.childView,e,n+1,null,o||t.keepAlive),f()},m=function(){t.activated=!0,l&&c?P(u,e,l,v,p):(l&&P(u,e,l),v())};r?e.callHooks(r,u,m,{cleanup:p,postActivate:!0}):m()}function D(t,e){var n=t.childVM,i=k(n,"data");i&&P(n,e,i)}function P(t,e,n,i,o){t.$loadingRouteData=!0,e.callHooks(n,t,function(){t.$loadingRouteData=!1,t.$emit("route-data-loaded",t),i&&i()},{cleanup:o,postActivate:!0,processData:function(e){var n=[];if(R(e)&&Object.keys(e).forEach(function(i){var o=e[i];C(o)?n.push(o.then(function(e){t.$set(i,e)})):t.$set(i,o)}),n.length)return n[0].constructor.all(n)}})}function j(t){t.keepAlive&&t.childVM&&t.childView&&(t.childVM._keepAliveRouterView=t.childView),t.childView=null}function R(t){return"[object Object]"===Object.prototype.toString.call(t)}function V(t){return"[object Object]"===Object.prototype.toString.call(t)}function M(t){return t?Array.prototype.slice.call(t):[]}function L(t){var e=t.util,n=e.extend,i=e.isArray,o=e.defineReactive,s=t.prototype._init;t.prototype._init=function(t){t=t||{};var e=t._parent||t.parent||this,n=e.$router,i=e.$route;n&&(this.$router=n,n._children.push(this),this._defineMeta?this._defineMeta("$route",i):o(this,"$route",i)),s.call(this,t)};var a=t.prototype._destroy;t.prototype._destroy=function(){!this._isBeingDestroyed&&this.$router&&this.$router._children.$remove(this),a.apply(this,arguments)};var r=t.config.optionMergeStrategies,l=/^(data|activate|deactivate)$/;r&&(r.route=function(t,e){if(!e)return t;if(!t)return e;var o={};n(o,t);for(var s in e){var a=o[s],r=e[s];a&&l.test(s)?o[s]=(i(a)?a:[a]).concat(r):o[s]=r}return o})}function F(t){var e=t.util,n=t.directive("_component")||t.internalDirectives.component,i=e.extend({},n);e.extend(i,{_isRouterView:!0,bind:function(){var t=this.vm.$route;if(!t)return void w("<router-view> can only be used inside a router-enabled app.");this._isDynamicLiteral=!0,n.bind.call(this);for(var e=void 0,i=this.vm;i;){if(i._routerView){e=i._routerView;break}i=i.$parent}if(e)this.parentView=e,e.childView=this;else{var o=t.router;o._rootView=this}var s=t.router._currentTransition;if(!e&&s.done||e&&e.activated){var a=e?e.depth+1:0;S(this,s,a)}},unbind:function(){this.parentView&&(this.parentView.childView=null),n.unbind.call(this)}}),t.elementDirective("router-view",i)}function H(t){function e(t){return t.protocol===location.protocol&&t.hostname===location.hostname&&t.port===location.port}function n(t,e,n){if(e=e.trim(),e.indexOf(" ")===-1)return void n(t,e);for(var i=e.split(/\s+/),o=0,s=i.length;o<s;o++)n(t,i[o])}var i=t.util,o=i.bind,s=i.isObject,a=i.addClass,r=i.removeClass,l=t.directive("on").priority,c="__vue-router-link-update__",u=0;t.directive("link-active",{priority:9999,bind:function(){for(var t=this,e=String(u++),n=this.el.querySelectorAll("[v-link]"),i=0,o=n.length;i<o;i++){var s=n[i],a=s.getAttribute(c),r=a?a+","+e:e;s.setAttribute(c,r)}this.vm.$on(c,this.cb=function(n,i){n.activeIds.indexOf(e)>-1&&n.updateClasses(i,t.el)})},unbind:function(){this.vm.$off(c,this.cb)}}),t.directive("link",{priority:l-2,bind:function(){var t=this.vm;if(!t.$route)return void w("v-link can only be used inside a router-enabled app.");this.router=t.$route.router,this.unwatch=t.$watch("$route",o(this.onRouteUpdate,this));var e=this.el.getAttribute(c);e&&(this.el.removeAttribute(c),this.activeIds=e.split(",")),"A"===this.el.tagName&&"_blank"===this.el.getAttribute("target")||(this.handler=o(this.onClick,this),this.el.addEventListener("click",this.handler))},update:function(t){this.target=t,s(t)&&(this.append=t.append,this.exact=t.exact,this.prevActiveClass=this.activeClass,this.activeClass=t.activeClass),this.onRouteUpdate(this.vm.$route)},onClick:function(t){if(!(t.metaKey||t.ctrlKey||t.shiftKey||t.defaultPrevented||0!==t.button)){var n=this.target;if(n)t.preventDefault(),this.router.go(n);else{for(var i=t.target;"A"!==i.tagName&&i!==this.el;)i=i.parentNode;if("A"===i.tagName&&e(i)){t.preventDefault();var o=i.pathname;this.router.history.root&&(o=o.replace(this.router.history.rootRE,"")),this.router.go({path:o,replace:n&&n.replace,append:n&&n.append})}}}},onRouteUpdate:function(t){var e=this.router.stringifyPath(this.target);this.path!==e&&(this.path=e,this.updateActiveMatch(),this.updateHref()),this.activeIds?this.vm.$emit(c,this,t.path):this.updateClasses(t.path,this.el)},updateActiveMatch:function(){this.activeRE=this.path&&!this.exact?new RegExp("^"+this.path.replace(/\/$/,"").replace(at,"").replace(st,"\\$&")+"(\\/|$)"):null},updateHref:function(){if("A"===this.el.tagName){var t=this.path,e=this.router,n="/"===t.charAt(0),i=t&&("hash"===e.mode||n)?e.history.formatPath(t,this.append):t;i?this.el.href=i:this.el.removeAttribute("href")}},updateClasses:function(t,e){var i=this.activeClass||this.router._linkActiveClass;this.prevActiveClass&&this.prevActiveClass!==i&&n(e,this.prevActiveClass,r);var o=this.path.replace(at,"");t=t.replace(at,""),this.exact?o===t||"/"!==o.charAt(o.length-1)&&o===t.replace(ot,"")?n(e,i,a):n(e,i,r):this.activeRE&&this.activeRE.test(t)?n(e,i,a):n(e,i,r)},unbind:function(){this.el.removeEventListener("click",this.handler),this.unwatch&&this.unwatch()}})}function I(t,e){var n=e.component;lt.util.isPlainObject(n)&&(n=e.component=lt.extend(n)),"function"!=typeof n&&(e.component=null,w('invalid component for route "'+t+'".'))}var U={};U.classCallCheck=function(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")},t.prototype={to:function(t,e){var n=this.delegate;if(n&&n.willAddRoute&&(t=n.willAddRoute(this.matcher.target,t)),this.matcher.add(this.path,t),e){if(0===e.length)throw new Error("You must have an argument in the function passed to `to`");this.matcher.addChild(this.path,t,e,this.delegate)}return this}},e.prototype={add:function(t,e){this.routes[t]=e},addChild:function(t,i,o,s){var a=new e(i);this.children[t]=a;var r=n(t,a,s);s&&s.contextEntered&&s.contextEntered(i,r),o(r)}};var B=["/",".","*","+","?","|","(",")","[","]","{","}","\\"],q=new RegExp("(\\"+B.join("|\\")+")","g"),W=!1;c.prototype={eachChar:function(t){for(var e,n=this.string,i=0,o=n.length;i<o;i++)e=n.charAt(i),t({validChars:e})},regex:function(){return this.string.replace(q,"\\$1")},generate:function(){return this.string}},u.prototype={eachChar:function(t){t({invalidChars:"/",repeat:!0})},regex:function(){return"([^/]+)"},generate:function(t){var e=t[this.name];return null==e?":"+this.name:e}},h.prototype={eachChar:function(t){t({invalidChars:"",repeat:!0})},regex:function(){return"(.+)"},generate:function(t){var e=t[this.name];return null==e?":"+this.name:e}},d.prototype={eachChar:function(){},regex:function(){return""},generate:function(){return""}},f.prototype={get:function(t){for(var e=this.nextStates,n=0,i=e.length;n<i;n++){var o=e[n],s=o.charSpec.validChars===t.validChars;if(s=s&&o.charSpec.invalidChars===t.invalidChars)return o}},put:function(t){var e;return(e=this.get(t))?e:(e=new f(t),this.nextStates.push(e),t.repeat&&e.nextStates.push(e),e)},match:function(t){for(var e,n,i,o=this.nextStates,s=[],a=0,r=o.length;a<r;a++)e=o[a],n=e.charSpec,"undefined"!=typeof(i=n.validChars)?i.indexOf(t)!==-1&&s.push(e):"undefined"!=typeof(i=n.invalidChars)&&i.indexOf(t)===-1&&s.push(e);return s}};var z=Object.create||function(t){function e(){}return e.prototype=t,new e};g.prototype=z({splice:Array.prototype.splice,slice:Array.prototype.slice,push:Array.prototype.push,length:0,queryParams:null});var G=function(){this.rootState=new f,this.names={}};G.prototype={add:function(t,e){for(var n,i=this.rootState,o="^",s={},a=[],r=[],l=!0,c=0,u=t.length;c<u;c++){var h=t[c],f=[],v=p(h.path,f,s);r=r.concat(v);for(var m=0,g=v.length;m<g;m++){var _=v[m];_ instanceof d||(l=!1,i=i.put({validChars:"/"}),o+="/",i=b(i,_),o+=_.regex())}var y={handler:h.handler,names:f};a.push(y)}l&&(i=i.put({validChars:"/"}),o+="/"),i.handlers=a,i.regex=new RegExp(o+"$"),i.specificity=s,(n=e&&e.as)&&(this.names[n]={segments:r,handlers:a})},handlersFor:function(t){var e=this.names[t],n=[];if(!e)throw new Error("There is no route named "+t);for(var i=0,o=e.handlers.length;i<o;i++)n.push(e.handlers[i]);return n},hasRoute:function(t){return!!this.names[t]},generate:function(t,e){var n=this.names[t],i="";if(!n)throw new Error("There is no route named "+t);for(var o=n.segments,s=0,a=o.length;s<a;s++){var r=o[s];r instanceof d||(i+="/",i+=r.generate(e))}return"/"!==i.charAt(0)&&(i="/"+i),e&&e.queryParams&&(i+=this.generateQueryString(e.queryParams)),i},generateQueryString:function(t){var e=[],n=[];for(var i in t)t.hasOwnProperty(i)&&n.push(i);n.sort();for(var o=0,s=n.length;o<s;o++){i=n[o];var a=t[i];if(null!=a){var r=encodeURIComponent(i);if(l(a))for(var c=0,u=a.length;c<u;c++){var h=i+"[]="+encodeURIComponent(a[c]);e.push(h)}else r+="="+encodeURIComponent(a),e.push(r)}}return 0===e.length?"":"?"+e.join("&")},parseQueryString:function(t){for(var e=t.split("&"),n={},i=0;i<e.length;i++){var o,s=e[i].split("="),a=y(s[0]),r=a.length,l=!1;1===s.length?o="true":(r>2&&"[]"===a.slice(r-2)&&(l=!0,a=a.slice(0,r-2),n[a]||(n[a]=[])),o=s[1]?y(s[1]):""),l?n[a].push(o):n[a]=o}return n},recognize:function(t,e){W=e;var n,i,o,s,a=[this.rootState],l={},c=!1;if(s=t.indexOf("?"),s!==-1){var u=t.substr(s+1,t.length);t=t.substr(0,s),u&&(l=this.parseQueryString(u))}if(t=r(t)){for("/"!==t.charAt(0)&&(t="/"+t),n=t.length,n>1&&"/"===t.charAt(n-1)&&(t=t.substr(0,n-1),c=!0),i=0,o=t.length;i<o&&(a=m(a,t.charAt(i)),a.length);i++);var h=[];for(i=0,o=a.length;i<o;i++)a[i].handlers&&h.push(a[i]);a=v(h);var d=h[0];return d&&d.handlers?(c&&"(.+)$"===d.regex.source.slice(-5)&&(t+="/"),_(d,t,l)):void 0}}},G.prototype.map=s;var J=G.prototype.generateQueryString,Q={},Y=void 0,K=/#.*$/,Z=function(){function t(e){var n=e.root,i=e.onChange;U.classCallCheck(this,t),n&&"/"!==n?("/"!==n.charAt(0)&&(n="/"+n),this.root=n.replace(/\/$/,""),this.rootRE=new RegExp("^\\"+this.root)):this.root=null,this.onChange=i;var o=document.querySelector("base");this.base=o&&o.getAttribute("href")}return t.prototype.start=function(){var t=this;
-this.listener=function(e){var n=location.pathname+location.search;t.root&&(n=n.replace(t.rootRE,"")),t.onChange(n,e&&e.state,location.hash)},window.addEventListener("popstate",this.listener),this.listener()},t.prototype.stop=function(){window.removeEventListener("popstate",this.listener)},t.prototype.go=function(t,e,n){var i=this.formatPath(t,n);e?history.replaceState({},"",i):(history.replaceState({pos:{x:window.pageXOffset,y:window.pageYOffset}},"",location.href),history.pushState({},"",i));var o=t.match(K),s=o&&o[0];t=i.replace(K,"").replace(this.rootRE,""),this.onChange(t,null,s)},t.prototype.formatPath=function(t,e){return"/"===t.charAt(0)?this.root?this.root+"/"+t.replace(/^\//,""):t:x(this.base||location.pathname,t,e)},t}(),X=function(){function t(e){var n=e.hashbang,i=e.onChange;U.classCallCheck(this,t),this.hashbang=n,this.onChange=i}return t.prototype.start=function(){var t=this;this.listener=function(){var e=location.hash,n=e.replace(/^#!?/,"");"/"!==n.charAt(0)&&(n="/"+n);var i=t.formatPath(n);if(i!==e)return void location.replace(i);var o=location.search&&e.indexOf("?")>-1?"&"+location.search.slice(1):location.search;t.onChange(e.replace(/^#!?/,"")+o)},window.addEventListener("hashchange",this.listener),this.listener()},t.prototype.stop=function(){window.removeEventListener("hashchange",this.listener)},t.prototype.go=function(t,e,n){t=this.formatPath(t,n),e?location.replace(t):location.hash=t},t.prototype.formatPath=function(t,e){var n="/"===t.charAt(0),i="#"+(this.hashbang?"!":"");return n?i+t:i+x(location.hash.replace(/^#!?/,""),t,e)},t}(),tt=function(){function t(e){var n=e.onChange;U.classCallCheck(this,t),this.onChange=n,this.currentPath="/"}return t.prototype.start=function(){this.onChange("/")},t.prototype.stop=function(){},t.prototype.go=function(t,e,n){t=this.currentPath=this.formatPath(t,n),this.onChange(t)},t.prototype.formatPath=function(t,e){return"/"===t.charAt(0)?t:x(this.currentPath,t,e)},t}(),et=function(){function t(e,n,i){U.classCallCheck(this,t),this.router=e,this.to=n,this.from=i,this.next=null,this.aborted=!1,this.done=!1}return t.prototype.abort=function(){if(!this.aborted){this.aborted=!0;var t=!this.from.path&&"/"===this.to.path;t||this.router.replace(this.from.path||"/")}},t.prototype.redirect=function(t){this.aborted||(this.aborted=!0,"string"==typeof t?t=E(t,this.to.params,this.to.query):(t.params=t.params||this.to.params,t.query=t.query||this.to.query),this.router.replace(t))},t.prototype.start=function(t){for(var e=this,n=[],i=this.router._rootView;i;)n.unshift(i),i=i.childView;var o=n.slice().reverse(),s=this.activateQueue=M(this.to.matched).map(function(t){return t.handler}),a=void 0,r=void 0;for(a=0;a<o.length&&A(o[a],s[a],e);a++);a>0&&(r=o.slice(0,a),n=o.slice(a).reverse(),s=s.slice(a)),e.runQueue(n,O,function(){e.runQueue(s,T,function(){e.runQueue(n,N,function(){if(e.router._onTransitionValidated(e),r&&r.forEach(function(t){return D(t,e)}),n.length){var i=n[n.length-1],o=r?r.length:0;S(i,e,o,t)}else t()})})})},t.prototype.runQueue=function(t,e,n){function i(s){s>=t.length?n():e(t[s],o,function(){i(s+1)})}var o=this;i(0)},t.prototype.callHook=function(t,e,n){var i=arguments.length<=3||void 0===arguments[3]?{}:arguments[3],o=i.expectBoolean,s=void 0!==o&&o,a=i.postActivate,r=void 0!==a&&a,l=i.processData,c=i.cleanup,u=this,h=!1,d=function(){c&&c(),u.abort()},p=function(t){if(r?v():d(),t&&!u.router._suppress)throw w("Uncaught error during transition: "),t instanceof Error?t:new Error(t)},f=function(t){try{p(t)}catch(e){setTimeout(function(){throw e},0)}},v=function(){return h?void w("transition.next() should be called only once."):(h=!0,u.aborted?void(c&&c()):void(n&&n()))},m=function(e){"boolean"==typeof e?e?v():d():C(e)?e.then(function(t){t?v():d()},f):t.length||v()},g=function(t){var e=void 0;try{e=l(t)}catch(n){return p(n)}C(e)?e.then(v,f):v()},_={to:u.to,from:u.from,abort:d,next:l?g:v,redirect:function(){u.redirect.apply(u,arguments)}},b=void 0;try{b=t.call(e,_)}catch(y){return p(y)}s?m(b):C(b)?l?b.then(g,f):b.then(v,f):l&&V(b)?g(b):t.length||v()},t.prototype.callHooks=function(t,e,n,i){var o=this;Array.isArray(t)?this.runQueue(t,function(t,n,s){o.aborted||o.callHook(t,e,s,i)},n):this.callHook(t,e,n,i)},t}(),nt=/^(component|subRoutes|fullPath)$/,it=function ut(t,e){var n=this;U.classCallCheck(this,ut);var i=e._recognizer.recognize(t);i&&([].forEach.call(i,function(t){for(var e in t.handler)nt.test(e)||(n[e]=t.handler[e])}),this.query=i.queryParams,this.params=[].reduce.call(i,function(t,e){if(e.params)for(var n in e.params)t[n]=e.params[n];return t},{})),this.path=t,this.matched=i||e._notFoundHandler,Object.defineProperty(this,"router",{enumerable:!1,value:e}),Object.freeze(this)},ot=/\/$/,st=/[-.*+?^${}()|[\]\/\\]/g,at=/\?.*$/,rt={"abstract":tt,hash:X,html5:Z},lt=void 0,ct=function(){function t(){var e=this,n=arguments.length<=0||void 0===arguments[0]?{}:arguments[0],i=n.hashbang,o=void 0===i||i,s=n["abstract"],a=void 0!==s&&s,r=n.history,l=void 0!==r&&r,c=n.saveScrollPosition,u=void 0!==c&&c,h=n.transitionOnLoad,d=void 0!==h&&h,p=n.suppressTransitionError,f=void 0!==p&&p,v=n.root,m=void 0===v?null:v,g=n.linkActiveClass,_=void 0===g?"v-link-active":g;if(U.classCallCheck(this,t),!t.installed)throw new Error("Please install the Router with Vue.use() before creating an instance.");this.app=null,this._children=[],this._recognizer=new G,this._guardRecognizer=new G,this._started=!1,this._startCb=null,this._currentRoute={},this._currentTransition=null,this._previousTransition=null,this._notFoundHandler=null,this._notFoundRedirect=null,this._beforeEachHooks=[],this._afterEachHooks=[],this._rendered=!1,this._transitionOnLoad=d,this._root=m,this._abstract=a,this._hashbang=o;var b="undefined"!=typeof window&&window.history&&window.history.pushState;this._history=l&&b,this._historyFallback=l&&!b;var y=lt.util.inBrowser;this.mode=!y||this._abstract?"abstract":this._history?"html5":"hash";var w=rt[this.mode];this.history=new w({root:m,hashbang:this._hashbang,onChange:function(t,n,i){e._match(t,n,i)}}),this._saveScrollPosition=u,this._linkActiveClass=_,this._suppress=f}return t.prototype.map=function(t){for(var e in t)this.on(e,t[e]);return this},t.prototype.on=function(t,e){return"*"===t?this._notFound(e):this._addRoute(t,e,[]),this},t.prototype.redirect=function(t){for(var e in t)this._addRedirect(e,t[e]);return this},t.prototype.alias=function(t){for(var e in t)this._addAlias(e,t[e]);return this},t.prototype.beforeEach=function(t){return this._beforeEachHooks.push(t),this},t.prototype.afterEach=function(t){return this._afterEachHooks.push(t),this},t.prototype.go=function(t){var e=!1,n=!1;lt.util.isObject(t)&&(e=t.replace,n=t.append),t=this.stringifyPath(t),t&&this.history.go(t,e,n)},t.prototype.replace=function(t){"string"==typeof t&&(t={path:t}),t.replace=!0,this.go(t)},t.prototype.start=function(t,e,n){if(this._started)return void w("already started.");if(this._started=!0,this._startCb=n,!this.app){if(!t||!e)throw new Error("Must start vue-router with a component and a root container.");if(t instanceof lt)throw new Error("Must start vue-router with a component, not a Vue instance.");this._appContainer=e;var i=this._appConstructor="function"==typeof t?t:lt.extend(t);i.options.name=i.options.name||"RouterApp"}if(this._historyFallback){var o=window.location,s=new Z({root:this._root}),a=s.root?o.pathname.replace(s.rootRE,""):o.pathname;if(a&&"/"!==a)return void o.assign((s.root||"")+"/"+this.history.formatPath(a)+o.search)}this.history.start()},t.prototype.stop=function(){this.history.stop(),this._started=!1},t.prototype.stringifyPath=function(t){var e="";if(t&&"object"==typeof t){if(t.name){var n=lt.util.extend,i=this._currentTransition&&this._currentTransition.to.params,o=t.params||{},s=i?n(n({},i),o):o;e=encodeURI(this._recognizer.generate(t.name,s))}else t.path&&(e=encodeURI(t.path));if(t.query){var a=this._recognizer.generateQueryString(t.query);e+=e.indexOf("?")>-1?"&"+a.slice(1):a}}else e=encodeURI(t?t+"":"");return e},t.prototype._addRoute=function(t,e,n){if(I(t,e),e.path=t,e.fullPath=(n.reduce(function(t,e){return t+e.path},"")+t).replace("//","/"),n.push({path:t,handler:e}),this._recognizer.add(n,{as:e.name}),e.subRoutes)for(var i in e.subRoutes)this._addRoute(i,e.subRoutes[i],n.slice())},t.prototype._notFound=function(t){I("*",t),this._notFoundHandler=[{handler:t}]},t.prototype._addRedirect=function(t,e){"*"===t?this._notFoundRedirect=e:this._addGuard(t,e,this.replace)},t.prototype._addAlias=function(t,e){this._addGuard(t,e,this._match)},t.prototype._addGuard=function(t,e,n){var i=this;this._guardRecognizer.add([{path:t,handler:function(t,o){var s=E(e,t.params,o);n.call(i,s)}}])},t.prototype._checkGuard=function(t){var e=this._guardRecognizer.recognize(t,!0);return e?(e[0].handler(e[0],e.queryParams),!0):this._notFoundRedirect&&(e=this._recognizer.recognize(t),!e)?(this.replace(this._notFoundRedirect),!0):void 0},t.prototype._match=function(t,e,n){var i=this;if(!this._checkGuard(t)){var o=this._currentRoute,s=this._currentTransition;if(s){if(s.to.path===t)return;if(o.path===t)return s.aborted=!0,void(this._currentTransition=this._prevTransition);s.aborted=!0}var a=new it(t,this),r=new et(this,a,o);this._prevTransition=s,this._currentTransition=r,this.app||!function(){var t=i;i.app=new i._appConstructor({el:i._appContainer,created:function(){this.$router=t},_meta:{$route:a}})}();var l=this._beforeEachHooks,c=function(){r.start(function(){i._postTransition(a,e,n)})};l.length?r.runQueue(l,function(t,e,n){r===i._currentTransition&&r.callHook(t,null,n,{expectBoolean:!0})},c):c(),!this._rendered&&this._startCb&&this._startCb.call(null),this._rendered=!0}},t.prototype._onTransitionValidated=function(t){var e=this._currentRoute=t.to;this.app.$route!==e&&(this.app.$route=e,this._children.forEach(function(t){t.$route=e})),this._afterEachHooks.length&&this._afterEachHooks.forEach(function(e){return e.call(null,{to:t.to,from:t.from})}),this._currentTransition.done=!0},t.prototype._postTransition=function(t,e,n){var i=e&&e.pos;i&&this._saveScrollPosition?lt.nextTick(function(){window.scrollTo(i.x,i.y)}):n&&lt.nextTick(function(){var t=document.getElementById(n.slice(1));t&&window.scrollTo(window.scrollX,t.offsetTop)})},t}();return ct.installed=!1,ct.install=function(t){return ct.installed?void w("already installed."):(lt=t,L(lt),F(lt),H(lt),Q.Vue=lt,void(ct.installed=!0))},"undefined"!=typeof window&&window.Vue&&window.Vue.use(ct),ct})},{}],5:[function(t,e,n){(function(t,n){"use strict";function i(t,e,n){if(s(t,e))return void(t[e]=n);if(t._isVue)return void i(t._data,e,n);var o=t.__ob__;if(!o)return void(t[e]=n);if(o.convert(e,n),o.dep.notify(),o.vms)for(var a=o.vms.length;a--;){var r=o.vms[a];r._proxy(e),r._digest()}return n}function o(t,e){if(s(t,e)){delete t[e];var n=t.__ob__;if(!n)return void(t._isVue&&(delete t._data[e],t._digest()));if(n.dep.notify(),n.vms)for(var i=n.vms.length;i--;){var o=n.vms[i];o._unproxy(e),o._digest()}}}function s(t,e){return Pn.call(t,e)}function a(t){return jn.test(t)}function r(t){var e=(t+"").charCodeAt(0);return 36===e||95===e}function l(t){return null==t?"":t.toString()}function c(t){if("string"!=typeof t)return t;var e=Number(t);return isNaN(e)?t:e}function u(t){return"true"===t||"false"!==t&&t}function h(t){var e=t.charCodeAt(0),n=t.charCodeAt(t.length-1);return e!==n||34!==e&&39!==e?t:t.slice(1,-1)}function d(t){return t.replace(Rn,p)}function p(t,e){return e?e.toUpperCase():""}function f(t){return t.replace(Vn,"$1-$2").toLowerCase()}function v(t){return t.replace(Mn,p)}function m(t,e){return function(n){var i=arguments.length;return i?i>1?t.apply(e,arguments):t.call(e,n):t.call(e)}}function g(t,e){e=e||0;for(var n=t.length-e,i=new Array(n);n--;)i[n]=t[n+e];return i}function _(t,e){for(var n=Object.keys(e),i=n.length;i--;)t[n[i]]=e[n[i]];return t}function b(t){return null!==t&&"object"==typeof t}function y(t){return Ln.call(t)===Fn}function w(t,e,n,i){Object.defineProperty(t,e,{value:n,enumerable:!!i,writable:!0,configurable:!0})}function x(t,e){var n,i,o,s,a,r=function l(){var r=Date.now()-s;r<e&&r>=0?n=setTimeout(l,e-r):(n=null,a=t.apply(o,i),n||(o=i=null))};return function(){return o=this,i=arguments,s=Date.now(),n||(n=setTimeout(r,e)),a}}function C(t,e){for(var n=t.length;n--;)if(t[n]===e)return n;return-1}function k(t){var e=function n(){if(!n.cancelled)return t.apply(this,arguments)};return e.cancel=function(){e.cancelled=!0},e}function $(t,e){return t==e||!(!b(t)||!b(e))&&JSON.stringify(t)===JSON.stringify(e)}function E(t){this.size=0,this.limit=t,this.head=this.tail=void 0,this._keymap=Object.create(null)}function A(){var t,e=ri.slice(pi,hi).trim();if(e){t={};var n=e.match(yi);t.name=n[0],n.length>1&&(t.args=n.slice(1).map(O))}t&&(li.filters=li.filters||[]).push(t),pi=hi+1}function O(t){if(wi.test(t))return{value:c(t),dynamic:!1};var e=h(t),n=e===t;return{value:n?t:e,dynamic:n}}function T(t){var e=bi.get(t);if(e)return e;for(ri=t,fi=vi=!1,mi=gi=_i=0,pi=0,li={},hi=0,di=ri.length;hi<di;hi++)if(ui=ci,ci=ri.charCodeAt(hi),fi)39===ci&&92!==ui&&(fi=!fi);else if(vi)34===ci&&92!==ui&&(vi=!vi);else if(124===ci&&124!==ri.charCodeAt(hi+1)&&124!==ri.charCodeAt(hi-1))null==li.expression?(pi=hi+1,li.expression=ri.slice(0,hi).trim()):A();else switch(ci){case 34:vi=!0;break;case 39:fi=!0;break;case 40:_i++;break;case 41:_i--;break;case 91:gi++;break;case 93:gi--;break;case 123:mi++;break;case 125:mi--}return null==li.expression?li.expression=ri.slice(0,hi).trim():0!==pi&&A(),bi.put(t,li),li}function N(t){return t.replace(Ci,"\\$&")}function S(){var t=N(Si.delimiters[0]),e=N(Si.delimiters[1]),n=N(Si.unsafeDelimiters[0]),i=N(Si.unsafeDelimiters[1]);$i=new RegExp(n+"((?:.|\\n)+?)"+i+"|"+t+"((?:.|\\n)+?)"+e,"g"),Ei=new RegExp("^"+n+"((?:.|\\n)+?)"+i+"$"),ki=new E(1e3)}function D(t){ki||S();var e=ki.get(t);if(e)return e;if(!$i.test(t))return null;for(var n,i,o,s,a,r,l=[],c=$i.lastIndex=0;n=$i.exec(t);)i=n.index,i>c&&l.push({value:t.slice(c,i)}),o=Ei.test(n[0]),s=o?n[1]:n[2],a=s.charCodeAt(0),r=42===a,s=r?s.slice(1):s,l.push({tag:!0,value:s.trim(),html:o,oneTime:r}),c=i+n[0].length;return c<t.length&&l.push({value:t.slice(c)}),ki.put(t,l),l}function P(t,e){return t.length>1?t.map(function(t){return j(t,e)}).join("+"):j(t[0],e,!0)}function j(t,e,n){return t.tag?t.oneTime&&e?'"'+e.$eval(t.value)+'"':R(t.value,n):'"'+t.value+'"'}function R(t,e){if(Ai.test(t)){var n=T(t);return n.filters?"this._applyFilters("+n.expression+",null,"+JSON.stringify(n.filters)+",false)":"("+t+")"}return e?t:"("+t+")"}function V(t,e,n,i){F(t,1,function(){e.appendChild(t)},n,i)}function M(t,e,n,i){F(t,1,function(){W(t,e)},n,i)}function L(t,e,n){F(t,-1,function(){G(t)},e,n)}function F(t,e,n,i,o){var s=t.__v_trans;if(!s||!s.hooks&&!Xn||!i._isCompiled||i.$parent&&!i.$parent._isCompiled)return n(),void(o&&o());var a=e>0?"enter":"leave";s[a](n,o)}function H(e){if("string"==typeof e){var n=e;e=document.querySelector(e),e||"production"!==t.env.NODE_ENV&&Di("Cannot find element: "+n)}return e}function I(t){if(!t)return!1;var e=t.ownerDocument.documentElement,n=t.parentNode;return e===t||e===n||!(!n||1!==n.nodeType||!e.contains(n))}function U(t,e){var n=t.getAttribute(e);return null!==n&&t.removeAttribute(e),n}function B(t,e){var n=U(t,":"+e);return null===n&&(n=U(t,"v-bind:"+e)),n}function q(t,e){return t.hasAttribute(e)||t.hasAttribute(":"+e)||t.hasAttribute("v-bind:"+e)}function W(t,e){e.parentNode.insertBefore(t,e)}function z(t,e){e.nextSibling?W(t,e.nextSibling):e.parentNode.appendChild(t)}function G(t){t.parentNode.removeChild(t)}function J(t,e){e.firstChild?W(t,e.firstChild):e.appendChild(t)}function Q(t,e){var n=t.parentNode;n&&n.replaceChild(e,t)}function Y(t,e,n,i){t.addEventListener(e,n,i)}function K(t,e,n){t.removeEventListener(e,n)}function Z(t){var e=t.className;return"object"==typeof e&&(e=e.baseVal||""),e}function X(t,e){zn&&!/svg$/.test(t.namespaceURI)?t.className=e:t.setAttribute("class",e)}function tt(t,e){if(t.classList)t.classList.add(e);else{var n=" "+Z(t)+" ";n.indexOf(" "+e+" ")<0&&X(t,(n+e).trim())}}function et(t,e){if(t.classList)t.classList.remove(e);else{for(var n=" "+Z(t)+" ",i=" "+e+" ";n.indexOf(i)>=0;)n=n.replace(i," ");X(t,n.trim())}t.className||t.removeAttribute("class")}function nt(t,e){var n,i;if(st(t)&&ut(t.content)&&(t=t.content),t.hasChildNodes())for(it(t),i=e?document.createDocumentFragment():document.createElement("div");n=t.firstChild;)i.appendChild(n);return i}function it(t){for(var e;e=t.firstChild,ot(e);)t.removeChild(e);for(;e=t.lastChild,ot(e);)t.removeChild(e)}function ot(t){return t&&(3===t.nodeType&&!t.data.trim()||8===t.nodeType)}function st(t){return t.tagName&&"template"===t.tagName.toLowerCase()}function at(t,e){var n=Si.debug?document.createComment(t):document.createTextNode(e?" ":"");return n.__v_anchor=!0,n}function rt(t){if(t.hasAttributes())for(var e=t.attributes,n=0,i=e.length;n<i;n++){var o=e[n].name;if(Ri.test(o))return d(o.replace(Ri,""))}}function lt(t,e,n){for(var i;t!==e;)i=t.nextSibling,n(t),t=i;n(e)}function ct(t,e,n,i,o){function s(){if(r++,a&&r>=l.length){for(var t=0;t<l.length;t++)i.appendChild(l[t]);o&&o()}}var a=!1,r=0,l=[];lt(t,e,function(t){t===e&&(a=!0),l.push(t),L(t,n,s)})}function ut(t){return t&&11===t.nodeType}function ht(t){if(t.outerHTML)return t.outerHTML;var e=document.createElement("div");return e.appendChild(t.cloneNode(!0)),e.innerHTML}function dt(e,n){var i=e.tagName.toLowerCase(),o=e.hasAttributes();if(Vi.test(i)||Mi.test(i)){if(o)return pt(e,n)}else{if(yt(n,"components",i))return{id:i};var s=o&&pt(e,n);if(s)return s;if("production"!==t.env.NODE_ENV){var a=n._componentNameMap&&n._componentNameMap[i];a?Di("Unknown custom element: <"+i+"> - did you mean <"+a+">? HTML is case-insensitive, remember to use kebab-case in templates."):Li(e,i)&&Di("Unknown custom element: <"+i+'> - did you register the component correctly? For recursive components, make sure to provide the "name" option.')}}}function pt(t,e){var n=t.getAttribute("is");if(null!=n){if(yt(e,"components",n))return t.removeAttribute("is"),{id:n}}else if(n=B(t,"is"),null!=n)return{id:n,dynamic:!0}}function ft(t,e){var n,o,a;for(n in e)o=t[n],a=e[n],s(t,n)?b(o)&&b(a)&&ft(o,a):i(t,n,a);return t}function vt(t,e){var n=Object.create(t||null);return e?_(n,_t(e)):n}function mt(e){if(e.components){var n,i=e.components=_t(e.components),o=Object.keys(i);if("production"!==t.env.NODE_ENV)var s=e._componentNameMap={};for(var a=0,r=o.length;a<r;a++){var l=o[a];Vi.test(l)||Mi.test(l)?"production"!==t.env.NODE_ENV&&Di("Do not use built-in or reserved HTML elements as component id: "+l):("production"!==t.env.NODE_ENV&&(s[l.replace(/-/g,"").toLowerCase()]=f(l)),n=i[l],y(n)&&(i[l]=An.extend(n)))}}}function gt(t){var e,n,i=t.props;if(Hn(i))for(t.props={},e=i.length;e--;)n=i[e],"string"==typeof n?t.props[n]=null:n.name&&(t.props[n.name]=n);else if(y(i)){var o=Object.keys(i);for(e=o.length;e--;)n=i[o[e]],"function"==typeof n&&(i[o[e]]={type:n})}}function _t(e){if(Hn(e)){for(var n,i={},o=e.length;o--;){n=e[o];var s="function"==typeof n?n.options&&n.options.name||n.id:n.name||n.id;s?i[s]=n:"production"!==t.env.NODE_ENV&&Di('Array-syntax assets must provide a "name" or "id" field.')}return i}return e}function bt(e,n,i){function o(t){var o=Fi[t]||Hi;r[t]=o(e[t],n[t],i,t)}mt(n),gt(n),"production"!==t.env.NODE_ENV&&n.propsData&&!i&&Di("propsData can only be used as an instantiation option.");var a,r={};if(n["extends"]&&(e="function"==typeof n["extends"]?bt(e,n["extends"].options,i):bt(e,n["extends"],i)),n.mixins)for(var l=0,c=n.mixins.length;l<c;l++){var u=n.mixins[l],h=u.prototype instanceof An?u.options:u;e=bt(e,h,i)}for(a in e)o(a);for(a in n)s(e,a)||o(a);return r}function yt(e,n,i,o){if("string"==typeof i){var s,a=e[n],r=a[i]||a[s=d(i)]||a[s.charAt(0).toUpperCase()+s.slice(1)];return"production"!==t.env.NODE_ENV&&o&&!r&&Di("Failed to resolve "+n.slice(0,-1)+": "+i,e),r}}function wt(){this.id=Ii++,this.subs=[]}function xt(t){Wi=!1,t(),Wi=!0}function Ct(t){if(this.value=t,this.dep=new wt,w(t,"__ob__",this),Hn(t)){var e=In?kt:$t;e(t,Bi,qi),this.observeArray(t)}else this.walk(t)}function kt(t,e){t.__proto__=e}function $t(t,e,n){for(var i=0,o=n.length;i<o;i++){var s=n[i];w(t,s,e[s])}}function Et(t,e){if(t&&"object"==typeof t){var n;return s(t,"__ob__")&&t.__ob__ instanceof Ct?n=t.__ob__:Wi&&(Hn(t)||y(t))&&Object.isExtensible(t)&&!t._isVue&&(n=new Ct(t)),n&&e&&n.addVm(e),n}}function At(t,e,n){var i=new wt,o=Object.getOwnPropertyDescriptor(t,e);if(!o||o.configurable!==!1){var s=o&&o.get,a=o&&o.set,r=Et(n);Object.defineProperty(t,e,{enumerable:!0,configurable:!0,get:function(){var e=s?s.call(t):n;if(wt.target&&(i.depend(),r&&r.dep.depend(),Hn(e)))for(var o,a=0,l=e.length;a<l;a++)o=e[a],o&&o.__ob__&&o.__ob__.dep.depend();return e},set:function(e){var o=s?s.call(t):n;e!==o&&(a?a.call(t,e):n=e,r=Et(e),i.notify())}})}}function Ot(t){t.prototype._init=function(t){t=t||{},this.$el=null,this.$parent=t.parent,this.$root=this.$parent?this.$parent.$root:this,this.$children=[],this.$refs={},this.$els={},this._watchers=[],this._directives=[],this._uid=Gi++,this._isVue=!0,this._events={},this._eventsCount={},this._isFragment=!1,this._fragment=this._fragmentStart=this._fragmentEnd=null,this._isCompiled=this._isDestroyed=this._isReady=this._isAttached=this._isBeingDestroyed=this._vForRemoving=!1,this._unlinkFn=null,this._context=t._context||this.$parent,this._scope=t._scope,this._frag=t._frag,this._frag&&this._frag.children.push(this),this.$parent&&this.$parent.$children.push(this),t=this.$options=bt(this.constructor.options,t,this),this._updateRef(),this._data={},this._callHook("init"),this._initState(),this._initEvents(),this._callHook("created"),t.el&&this.$mount(t.el)}}function Tt(t){if(void 0===t)return"eof";var e=t.charCodeAt(0);switch(e){case 91:case 93:case 46:case 34:case 39:case 48:return t;case 95:case 36:return"ident";case 32:case 9:case 10:case 13:case 160:case 65279:case 8232:case 8233:return"ws"}return e>=97&&e<=122||e>=65&&e<=90?"ident":e>=49&&e<=57?"number":"else"}function Nt(t){var e=t.trim();return("0"!==t.charAt(0)||!isNaN(t))&&(a(e)?h(e):"*"+e)}function St(t){function e(){var e=t[u+1];if(h===oo&&"'"===e||h===so&&'"'===e)return u++,i="\\"+e,p[Qi](),!0}var n,i,o,s,a,r,l,c=[],u=-1,h=Xi,d=0,p=[];for(p[Yi]=function(){void 0!==o&&(c.push(o),o=void 0)},p[Qi]=function(){void 0===o?o=i:o+=i},p[Ki]=function(){p[Qi](),d++},p[Zi]=function(){if(d>0)d--,h=io,p[Qi]();else{if(d=0,o=Nt(o),o===!1)return!1;p[Yi]()}};null!=h;)if(u++,n=t[u],"\\"!==n||!e()){if(s=Tt(n),l=lo[h],a=l[s]||l["else"]||ro,a===ro)return;if(h=a[0],r=p[a[1]],r&&(i=a[2],i=void 0===i?n:i,r()===!1))return;if(h===ao)return c.raw=t,c}}function Dt(t){var e=Ji.get(t);return e||(e=St(t),e&&Ji.put(t,e)),e}function Pt(t,e){return Ut(e).get(t)}function jt(e,n,o){var s=e;if("string"==typeof n&&(n=St(n)),!n||!b(e))return!1;for(var a,r,l=0,c=n.length;l<c;l++)a=e,r=n[l],"*"===r.charAt(0)&&(r=Ut(r.slice(1)).get.call(s,s)),l<c-1?(e=e[r],b(e)||(e={},"production"!==t.env.NODE_ENV&&a._isVue&&co(n,a),i(a,r,e))):Hn(e)?e.$set(r,o):r in e?e[r]=o:("production"!==t.env.NODE_ENV&&e._isVue&&co(n,e),i(e,r,o));return!0}function Rt(){}function Vt(t,e){var n=ko.length;return ko[n]=e?t.replace(_o,"\\n"):t,'"'+n+'"'}function Mt(t){var e=t.charAt(0),n=t.slice(1);return fo.test(n)?t:(n=n.indexOf('"')>-1?n.replace(yo,Lt):n,e+"scope."+n)}function Lt(t,e){return ko[e]}function Ft(e){mo.test(e)&&"production"!==t.env.NODE_ENV&&Di("Avoid using reserved keywords in expression: "+e),ko.length=0;var n=e.replace(bo,Vt).replace(go,"");return n=(" "+n).replace(xo,Mt).replace(yo,Lt),Ht(n)}function Ht(e){try{return new Function("scope","return "+e+";")}catch(n){return"production"!==t.env.NODE_ENV&&Di(n.toString().match(/unsafe-eval|CSP/)?"It seems you are using the default build of Vue.js in an environment with Content Security Policy that prohibits unsafe-eval. Use the CSP-compliant build instead: http://vuejs.org/guide/installation.html#CSP-compliant-build":"Invalid expression. Generated function body: "+e),Rt}}function It(e){var n=Dt(e);return n?function(t,e){jt(t,n,e)}:void("production"!==t.env.NODE_ENV&&Di("Invalid setter expression: "+e))}function Ut(t,e){t=t.trim();var n=ho.get(t);if(n)return e&&!n.set&&(n.set=It(n.exp)),n;var i={exp:t};return i.get=Bt(t)&&t.indexOf("[")<0?Ht("scope."+t):Ft(t),e&&(i.set=It(t)),ho.put(t,i),i}function Bt(t){return wo.test(t)&&!Co.test(t)&&"Math."!==t.slice(0,5)}function qt(){Eo.length=0,Ao.length=0,Oo={},To={},No=!1}function Wt(){for(var t=!0;t;)t=!1,zt(Eo),zt(Ao),Eo.length?t=!0:(Bn&&Si.devtools&&Bn.emit("flush"),qt())}function zt(e){for(var n=0;n<e.length;n++){var i=e[n],o=i.id;if(Oo[o]=null,i.run(),"production"!==t.env.NODE_ENV&&null!=Oo[o]&&(To[o]=(To[o]||0)+1,To[o]>Si._maxUpdateCount)){Di('You may have an infinite update loop for watcher with expression "'+i.expression+'"',i.vm);break}}e.length=0}function Gt(t){var e=t.id;if(null==Oo[e]){var n=t.user?Ao:Eo;Oo[e]=n.length,n.push(t),No||(No=!0,oi(Wt))}}function Jt(t,e,n,i){i&&_(this,i);var o="function"==typeof e;if(this.vm=t,t._watchers.push(this),this.expression=e,this.cb=n,this.id=++So,this.active=!0,this.dirty=this.lazy,this.deps=[],this.newDeps=[],this.depIds=new si,this.newDepIds=new si,this.prevError=null,o)this.getter=e,this.setter=void 0;else{var s=Ut(e,this.twoWay);this.getter=s.get,this.setter=s.set}this.value=this.lazy?void 0:this.get(),this.queued=this.shallow=!1}function Qt(t,e){var n=void 0,i=void 0;e||(e=Do,e.clear());var o=Hn(t),s=b(t);if((o||s)&&Object.isExtensible(t)){if(t.__ob__){var a=t.__ob__.dep.id;if(e.has(a))return;e.add(a)}if(o)for(n=t.length;n--;)Qt(t[n],e);else if(s)for(i=Object.keys(t),n=i.length;n--;)Qt(t[i[n]],e)}}function Yt(t){return st(t)&&ut(t.content)}function Kt(t,e){var n=e?t:t.trim(),i=jo.get(n);if(i)return i;var o=document.createDocumentFragment(),s=t.match(Mo),a=Lo.test(t),r=Fo.test(t);if(s||a||r){var l=s&&s[1],c=Vo[l]||Vo.efault,u=c[0],h=c[1],d=c[2],p=document.createElement("div");for(p.innerHTML=h+t+d;u--;)p=p.lastChild;for(var f;f=p.firstChild;)o.appendChild(f)}else o.appendChild(document.createTextNode(t));return e||it(o),jo.put(n,o),o}function Zt(t){if(Yt(t))return Kt(t.innerHTML);if("SCRIPT"===t.tagName)return Kt(t.textContent);for(var e,n=Xt(t),i=document.createDocumentFragment();e=n.firstChild;)i.appendChild(e);return it(i),i}function Xt(t){if(!t.querySelectorAll)return t.cloneNode();var e,n,i,o=t.cloneNode(!0);if(Ho){var s=o;if(Yt(t)&&(t=t.content,s=o.content),n=t.querySelectorAll("template"),n.length)for(i=s.querySelectorAll("template"),e=i.length;e--;)i[e].parentNode.replaceChild(Xt(n[e]),i[e])}if(Io)if("TEXTAREA"===t.tagName)o.value=t.value;else if(n=t.querySelectorAll("textarea"),n.length)for(i=o.querySelectorAll("textarea"),e=i.length;e--;)i[e].value=n[e].value;return o}function te(t,e,n){var i,o;return ut(t)?(it(t),e?Xt(t):t):("string"==typeof t?n||"#"!==t.charAt(0)?o=Kt(t,n):(o=Ro.get(t),o||(i=document.getElementById(t.slice(1)),i&&(o=Zt(i),Ro.put(t,o)))):t.nodeType&&(o=Zt(t)),o&&e?Xt(o):o)}function ee(t,e,n,i,o,s){this.children=[],this.childFrags=[],this.vm=e,this.scope=o,this.inserted=!1,this.parentFrag=s,s&&s.childFrags.push(this),this.unlink=t(e,n,i,o,this);var a=this.single=1===n.childNodes.length&&!n.childNodes[0].__v_anchor;a?(this.node=n.childNodes[0],this.before=ne,this.remove=ie):(this.node=at("fragment-start"),this.end=at("fragment-end"),this.frag=n,J(this.node,n),n.appendChild(this.end),this.before=oe,this.remove=se),this.node.__v_frag=this}function ne(t,e){this.inserted=!0;var n=e!==!1?M:W;n(this.node,t,this.vm),I(this.node)&&this.callHook(ae)}function ie(){this.inserted=!1;var t=I(this.node),e=this;this.beforeRemove(),L(this.node,this.vm,function(){t&&e.callHook(re),e.destroy()})}function oe(t,e){this.inserted=!0;var n=this.vm,i=e!==!1?M:W;lt(this.node,this.end,function(e){i(e,t,n)}),I(this.node)&&this.callHook(ae)}function se(){this.inserted=!1;var t=this,e=I(this.node);this.beforeRemove(),ct(this.node,this.end,this.vm,this.frag,function(){e&&t.callHook(re),t.destroy()})}function ae(t){!t._isAttached&&I(t.$el)&&t._callHook("attached")}function re(t){t._isAttached&&!I(t.$el)&&t._callHook("detached")}function le(t,e){this.vm=t;var n,i="string"==typeof e;i||st(e)&&!e.hasAttribute("v-if")?n=te(e,!0):(n=document.createDocumentFragment(),n.appendChild(e)),this.template=n;var o,s=t.constructor.cid;if(s>0){var a=s+(i?e:ht(e));o=qo.get(a),o||(o=Fe(n,t.$options,!0),qo.put(a,o))}else o=Fe(n,t.$options,!0);this.linker=o}function ce(t,e,n){var i=t.node.previousSibling;if(i){for(t=i.__v_frag;!(t&&t.forId===n&&t.inserted||i===e);){if(i=i.previousSibling,!i)return;t=i.__v_frag}return t}}function ue(t){var e=t.node;if(t.end)for(;!e.__vue__&&e!==t.end&&e.nextSibling;)e=e.nextSibling;return e.__vue__}function he(t){for(var e=-1,n=new Array(Math.floor(t));++e<t;)n[e]=e;return n}function de(t,e,n,i){return i?"$index"===i?t:i.charAt(0).match(/\w/)?Pt(n,i):n[i]:e||n}function pe(t,e,n){for(var i,o,s,a=e?[]:null,r=0,l=t.options.length;r<l;r++)if(i=t.options[r],s=n?i.hasAttribute("selected"):i.selected){if(o=i.hasOwnProperty("_value")?i._value:i.value,!e)return o;a.push(o)}return a}function fe(t,e){for(var n=t.length;n--;)if($(t[n],e))return n;return-1}function ve(t,e){var n=e.map(function(t){var e=t.charCodeAt(0);return e>47&&e<58?parseInt(t,10):1===t.length&&(e=t.toUpperCase().charCodeAt(0),e>64&&e<91)?e:hs[t]});return n=[].concat.apply([],n),function(e){if(n.indexOf(e.keyCode)>-1)return t.call(this,e)}}function me(t){return function(e){return e.stopPropagation(),t.call(this,e)}}function ge(t){return function(e){return e.preventDefault(),t.call(this,e)}}function _e(t){return function(e){if(e.target===e.currentTarget)return t.call(this,e)}}function be(t){if(ms[t])return ms[t];var e=ye(t);return ms[t]=ms[e]=e,e}function ye(t){t=f(t);var e=d(t),n=e.charAt(0).toUpperCase()+e.slice(1);gs||(gs=document.createElement("div"));var i,o=ps.length;if("filter"!==e&&e in gs.style)return{kebab:t,camel:e};for(;o--;)if(i=fs[o]+n,i in gs.style)return{kebab:ps[o]+t,camel:i}}function we(t){var e=[];if(Hn(t))for(var n=0,i=t.length;n<i;n++){var o=t[n];if(o)if("string"==typeof o)e.push(o);else for(var s in o)o[s]&&e.push(s)}else if(b(t))for(var a in t)t[a]&&e.push(a);return e}function xe(t,e,n){if(e=e.trim(),e.indexOf(" ")===-1)return void n(t,e);for(var i=e.split(/\s+/),o=0,s=i.length;o<s;o++)n(t,i[o])}function Ce(t,e,n){function i(){++s>=o?n():t[s].call(e,i)}var o=t.length,s=0;t[0].call(e,i)}function ke(e,n,i){for(var o,s,r,l,c,u,h,p=[],v=Object.keys(n),m=v.length;m--;)if(s=v[m],o=n[s]||Ps,"production"===t.env.NODE_ENV||"$data"!==s)if(c=d(s),js.test(c)){if(h={name:s,path:c,options:o,mode:Ds.ONE_WAY,raw:null},r=f(s),null===(l=B(e,r))&&(null!==(l=B(e,r+".sync"))?h.mode=Ds.TWO_WAY:null!==(l=B(e,r+".once"))&&(h.mode=Ds.ONE_TIME)),null!==l)h.raw=l,u=T(l),l=u.expression,h.filters=u.filters,a(l)&&!u.filters?h.optimizedLiteral=!0:(h.dynamic=!0,"production"===t.env.NODE_ENV||h.mode!==Ds.TWO_WAY||Rs.test(l)||(h.mode=Ds.ONE_WAY,Di("Cannot bind two-way prop with non-settable parent path: "+l,i))),h.parentPath=l,"production"!==t.env.NODE_ENV&&o.twoWay&&h.mode!==Ds.TWO_WAY&&Di('Prop "'+s+'" expects a two-way binding type.',i);else if(null!==(l=U(e,r)))h.raw=l;else if("production"!==t.env.NODE_ENV){var g=c.toLowerCase();l=/[A-Z\-]/.test(s)&&(e.getAttribute(g)||e.getAttribute(":"+g)||e.getAttribute("v-bind:"+g)||e.getAttribute(":"+g+".once")||e.getAttribute("v-bind:"+g+".once")||e.getAttribute(":"+g+".sync")||e.getAttribute("v-bind:"+g+".sync")),l?Di("Possible usage error for prop `"+g+"` - did you mean `"+r+"`? HTML is case-insensitive, remember to use kebab-case for props in templates.",i):o.required&&Di("Missing required prop: "+s,i)}p.push(h)}else"production"!==t.env.NODE_ENV&&Di('Invalid prop key: "'+s+'". Prop keys must be valid identifiers.',i);else Di("Do not use $data as prop.",i);return $e(p)}function $e(t){return function(e,n){e._props={};for(var i,o,a,r,l,d=e.$options.propsData,p=t.length;p--;)if(i=t[p],l=i.raw,o=i.path,a=i.options,
-e._props[o]=i,d&&s(d,o)&&Ae(e,i,d[o]),null===l)Ae(e,i,void 0);else if(i.dynamic)i.mode===Ds.ONE_TIME?(r=(n||e._context||e).$get(i.parentPath),Ae(e,i,r)):e._context?e._bindDir({name:"prop",def:Ms,prop:i},null,null,n):Ae(e,i,e.$get(i.parentPath));else if(i.optimizedLiteral){var v=h(l);r=v===l?u(c(l)):v,Ae(e,i,r)}else r=a.type===Boolean&&(""===l||l===f(i.name))||l,Ae(e,i,r)}}function Ee(t,e,n,i){var o=e.dynamic&&Bt(e.parentPath),s=n;void 0===s&&(s=Te(t,e)),s=Se(e,s,t);var a=s!==n;Ne(e,s,t)||(s=void 0),o&&!a?xt(function(){i(s)}):i(s)}function Ae(t,e,n){Ee(t,e,n,function(n){At(t,e.path,n)})}function Oe(t,e,n){Ee(t,e,n,function(n){t[e.path]=n})}function Te(e,n){var i=n.options;if(!s(i,"default"))return i.type!==Boolean&&void 0;var o=i["default"];return b(o)&&"production"!==t.env.NODE_ENV&&Di('Invalid default value for prop "'+n.name+'": Props with type Object/Array must use a factory function to return the default value.',e),"function"==typeof o&&i.type!==Function?o.call(e):o}function Ne(e,n,i){if(!e.options.required&&(null===e.raw||null==n))return!0;var o=e.options,s=o.type,a=!s,r=[];if(s){Hn(s)||(s=[s]);for(var l=0;l<s.length&&!a;l++){var c=De(n,s[l]);r.push(c.expectedType),a=c.valid}}if(!a)return"production"!==t.env.NODE_ENV&&Di('Invalid prop: type check failed for prop "'+e.name+'". Expected '+r.map(Pe).join(", ")+", got "+je(n)+".",i),!1;var u=o.validator;return!(u&&!u(n))||("production"!==t.env.NODE_ENV&&Di('Invalid prop: custom validator check failed for prop "'+e.name+'".',i),!1)}function Se(e,n,i){var o=e.options.coerce;return o?"function"==typeof o?o(n):("production"!==t.env.NODE_ENV&&Di('Invalid coerce for prop "'+e.name+'": expected function, got '+typeof o+".",i),n):n}function De(t,e){var n,i;return e===String?(i="string",n=typeof t===i):e===Number?(i="number",n=typeof t===i):e===Boolean?(i="boolean",n=typeof t===i):e===Function?(i="function",n=typeof t===i):e===Object?(i="object",n=y(t)):e===Array?(i="array",n=Hn(t)):n=t instanceof e,{valid:n,expectedType:i}}function Pe(t){return t?t.charAt(0).toUpperCase()+t.slice(1):"custom type"}function je(t){return Object.prototype.toString.call(t).slice(8,-1)}function Re(t){Ls.push(t),Fs||(Fs=!0,oi(Ve))}function Ve(){for(var t=document.documentElement.offsetHeight,e=0;e<Ls.length;e++)Ls[e]();return Ls=[],Fs=!1,t}function Me(e,n,i,o){this.id=n,this.el=e,this.enterClass=i&&i.enterClass||n+"-enter",this.leaveClass=i&&i.leaveClass||n+"-leave",this.hooks=i,this.vm=o,this.pendingCssEvent=this.pendingCssCb=this.cancel=this.pendingJsCb=this.op=this.cb=null,this.justEntered=!1,this.entered=this.left=!1,this.typeCache={},this.type=i&&i.type,"production"!==t.env.NODE_ENV&&this.type&&this.type!==Hs&&this.type!==Is&&Di('invalid CSS transition type for transition="'+this.id+'": '+this.type,o);var s=this;["enterNextTick","enterDone","leaveNextTick","leaveDone"].forEach(function(t){s[t]=m(s[t],s)})}function Le(t){if(/svg$/.test(t.namespaceURI)){var e=t.getBoundingClientRect();return!(e.width||e.height)}return!(t.offsetWidth||t.offsetHeight||t.getClientRects().length)}function Fe(t,e,n){var i=n||!e._asComponent?ze(t,e):null,o=i&&i.terminal||un(t)||!t.hasChildNodes()?null:Ze(t.childNodes,e);return function(t,e,n,s,a){var r=g(e.childNodes),l=He(function(){i&&i(t,e,n,s,a),o&&o(t,r,n,s,a)},t);return Ue(t,l)}}function He(e,n){"production"===t.env.NODE_ENV&&(n._directives=[]);var i=n._directives.length;e();var o=n._directives.slice(i);o.sort(Ie);for(var s=0,a=o.length;s<a;s++)o[s]._bind();return o}function Ie(t,e){return t=t.descriptor.def.priority||ta,e=e.descriptor.def.priority||ta,t>e?-1:t===e?0:1}function Ue(t,e,n,i){function o(o){Be(t,e,o),n&&i&&Be(n,i)}return o.dirs=e,o}function Be(e,n,i){for(var o=n.length;o--;)n[o]._teardown(),"production"===t.env.NODE_ENV||i||e._directives.$remove(n[o])}function qe(t,e,n,i){var o=ke(e,n,t),s=He(function(){o(t,i)},t);return Ue(t,s)}function We(e,n,i){var o,s,a=n._containerAttrs,r=n._replacerAttrs;if(11!==e.nodeType)n._asComponent?(a&&i&&(o=an(a,i)),r&&(s=an(r,n))):s=an(e.attributes,n);else if("production"!==t.env.NODE_ENV&&a){var l=a.filter(function(t){return t.name.indexOf("_v-")<0&&!Ys.test(t.name)&&"slot"!==t.name}).map(function(t){return'"'+t.name+'"'});if(l.length){var c=l.length>1;Di("Attribute"+(c?"s ":" ")+l.join(", ")+(c?" are":" is")+" ignored on component <"+n.el.tagName.toLowerCase()+"> because the component is a fragment instance: http://vuejs.org/guide/components.html#Fragment-Instance")}}return n._containerAttrs=n._replacerAttrs=null,function(t,e,n){var i,a=t._context;a&&o&&(i=He(function(){o(a,e,null,n)},a));var r=He(function(){s&&s(t,e)},t);return Ue(t,r,a,i)}}function ze(t,e){var n=t.nodeType;return 1!==n||un(t)?3===n&&t.data.trim()?Je(t,e):null:Ge(t,e)}function Ge(t,e){if("TEXTAREA"===t.tagName){var n=D(t.value);n&&(t.setAttribute(":value",P(n)),t.value="")}var i,o=t.hasAttributes(),s=o&&g(t.attributes);return o&&(i=nn(t,s,e)),i||(i=tn(t,e)),i||(i=en(t,e)),!i&&o&&(i=an(s,e)),i}function Je(t,e){if(t._skip)return Qe;var n=D(t.wholeText);if(!n)return null;for(var i=t.nextSibling;i&&3===i.nodeType;)i._skip=!0,i=i.nextSibling;for(var o,s,a=document.createDocumentFragment(),r=0,l=n.length;r<l;r++)s=n[r],o=s.tag?Ye(s,e):document.createTextNode(s.value),a.appendChild(o);return Ke(n,a,e)}function Qe(t,e){G(e)}function Ye(t,e){function n(e){if(!t.descriptor){var n=T(t.value);t.descriptor={name:e,def:Ts[e],expression:n.expression,filters:n.filters}}}var i;return t.oneTime?i=document.createTextNode(t.value):t.html?(i=document.createComment("v-html"),n("html")):(i=document.createTextNode(" "),n("text")),i}function Ke(t,e){return function(n,i,o,s){for(var a,r,c,u=e.cloneNode(!0),h=g(u.childNodes),d=0,p=t.length;d<p;d++)a=t[d],r=a.value,a.tag&&(c=h[d],a.oneTime?(r=(s||n).$eval(r),a.html?Q(c,te(r,!0)):c.data=l(r)):n._bindDir(a.descriptor,c,o,s));Q(i,u)}}function Ze(t,e){for(var n,i,o,s=[],a=0,r=t.length;a<r;a++)o=t[a],n=ze(o,e),i=n&&n.terminal||"SCRIPT"===o.tagName||!o.hasChildNodes()?null:Ze(o.childNodes,e),s.push(n,i);return s.length?Xe(s):null}function Xe(t){return function(e,n,i,o,s){for(var a,r,l,c=0,u=0,h=t.length;c<h;u++){a=n[u],r=t[c++],l=t[c++];var d=g(a.childNodes);r&&r(e,a,i,o,s),l&&l(e,d,i,o,s)}}}function tn(t,e){var n=t.tagName.toLowerCase();if(!Vi.test(n)){var i=yt(e,"elementDirectives",n);return i?sn(t,n,"",e,i):void 0}}function en(t,e){var n=dt(t,e);if(n){var i=rt(t),o={name:"component",ref:i,expression:n.id,def:Js.component,modifiers:{literal:!n.dynamic}},s=function(t,e,n,s,a){i&&At((s||t).$refs,i,null),t._bindDir(o,e,n,s,a)};return s.terminal=!0,s}}function nn(t,e,n){if(null!==U(t,"v-pre"))return on;if(t.hasAttribute("v-else")){var i=t.previousElementSibling;if(i&&i.hasAttribute("v-if"))return on}for(var o,s,a,r,l,c,u,h,d,p,f=0,v=e.length;f<v;f++)o=e[f],s=o.name.replace(Zs,""),(l=s.match(Ks))&&(d=yt(n,"directives",l[1]),d&&d.terminal&&(!p||(d.priority||ea)>p.priority)&&(p=d,u=o.name,r=rn(o.name),a=o.value,c=l[1],h=l[2]));return p?sn(t,c,a,n,p,u,h,r):void 0}function on(){}function sn(t,e,n,i,o,s,a,r){var l=T(n),c={name:e,arg:a,expression:l.expression,filters:l.filters,raw:n,attr:s,modifiers:r,def:o};"for"!==e&&"router-view"!==e||(c.ref=rt(t));var u=function(t,e,n,i,o){c.ref&&At((i||t).$refs,c.ref,null),t._bindDir(c,e,n,i,o)};return u.terminal=!0,u}function an(e,n){function i(t,e,n){var i=n&&cn(n),o=!i&&T(a);m.push({name:t,attr:r,raw:l,def:e,arg:u,modifiers:h,expression:o&&o.expression,filters:o&&o.filters,interp:n,hasOneTime:i})}for(var o,s,a,r,l,c,u,h,d,p,f,v=e.length,m=[];v--;)if(o=e[v],s=r=o.name,a=l=o.value,p=D(a),u=null,h=rn(s),s=s.replace(Zs,""),p)a=P(p),u=s,i("bind",Ts.bind,p),"production"!==t.env.NODE_ENV&&"class"===s&&Array.prototype.some.call(e,function(t){return":class"===t.name||"v-bind:class"===t.name})&&Di('class="'+l+'": Do not mix mustache interpolation and v-bind for "class" on the same element. Use one or the other.',n);else if(Xs.test(s))h.literal=!Qs.test(s),i("transition",Js.transition);else if(Ys.test(s))u=s.replace(Ys,""),i("on",Ts.on);else if(Qs.test(s))c=s.replace(Qs,""),"style"===c||"class"===c?i(c,Js[c]):(u=c,i("bind",Ts.bind));else if(f=s.match(Ks)){if(c=f[1],u=f[2],"else"===c)continue;d=yt(n,"directives",c,!0),d&&i(c,d)}if(m.length)return ln(m)}function rn(t){var e=Object.create(null),n=t.match(Zs);if(n)for(var i=n.length;i--;)e[n[i].slice(1)]=!0;return e}function ln(t){return function(e,n,i,o,s){for(var a=t.length;a--;)e._bindDir(t[a],n,i,o,s)}}function cn(t){for(var e=t.length;e--;)if(t[e].oneTime)return!0}function un(t){return"SCRIPT"===t.tagName&&(!t.hasAttribute("type")||"text/javascript"===t.getAttribute("type"))}function hn(t,e){return e&&(e._containerAttrs=pn(t)),st(t)&&(t=te(t)),e&&(e._asComponent&&!e.template&&(e.template="<slot></slot>"),e.template&&(e._content=nt(t),t=dn(t,e))),ut(t)&&(J(at("v-start",!0),t),t.appendChild(at("v-end",!0))),t}function dn(e,n){var i=n.template,o=te(i,!0);if(o){var s=o.firstChild,a=s.tagName&&s.tagName.toLowerCase();return n.replace?(e===document.body&&"production"!==t.env.NODE_ENV&&Di("You are mounting an instance with a template to <body>. This will replace <body> entirely. You should probably use `replace: false` here."),o.childNodes.length>1||1!==s.nodeType||"component"===a||yt(n,"components",a)||q(s,"is")||yt(n,"elementDirectives",a)||s.hasAttribute("v-for")||s.hasAttribute("v-if")?o:(n._replacerAttrs=pn(s),fn(e,s),s)):(e.appendChild(o),e)}"production"!==t.env.NODE_ENV&&Di("Invalid template option: "+i)}function pn(t){if(1===t.nodeType&&t.hasAttributes())return g(t.attributes)}function fn(t,e){for(var n,i,o=t.attributes,s=o.length;s--;)n=o[s].name,i=o[s].value,e.hasAttribute(n)||na.test(n)?"class"===n&&!D(i)&&(i=i.trim())&&i.split(/\s+/).forEach(function(t){tt(e,t)}):e.setAttribute(n,i)}function vn(e,n){if(n){for(var i,o,s=e._slotContents=Object.create(null),a=0,r=n.children.length;a<r;a++)i=n.children[a],(o=i.getAttribute("slot"))&&(s[o]||(s[o]=[])).push(i),"production"!==t.env.NODE_ENV&&B(i,"slot")&&Di('The "slot" attribute must be static.',e.$parent);for(o in s)s[o]=mn(s[o],n);if(n.hasChildNodes()){var l=n.childNodes;if(1===l.length&&3===l[0].nodeType&&!l[0].data.trim())return;s["default"]=mn(n.childNodes,n)}}}function mn(t,e){var n=document.createDocumentFragment();t=g(t);for(var i=0,o=t.length;i<o;i++){var s=t[i];!st(s)||s.hasAttribute("v-if")||s.hasAttribute("v-for")||(e.removeChild(s),s=te(s,!0)),n.appendChild(s)}return n}function gn(e){function n(){}function i(t,e){var n=new Jt(e,t,null,{lazy:!0});return function(){return n.dirty&&n.evaluate(),wt.target&&n.depend(),n.value}}Object.defineProperty(e.prototype,"$data",{get:function(){return this._data},set:function(t){t!==this._data&&this._setData(t)}}),e.prototype._initState=function(){this._initProps(),this._initMeta(),this._initMethods(),this._initData(),this._initComputed()},e.prototype._initProps=function(){var e=this.$options,n=e.el,i=e.props;i&&!n&&"production"!==t.env.NODE_ENV&&Di("Props will not be compiled if no `el` option is provided at instantiation.",this),n=e.el=H(n),this._propsUnlinkFn=n&&1===n.nodeType&&i?qe(this,n,i,this._scope):null},e.prototype._initData=function(){var e=this.$options.data,n=this._data=e?e():{};y(n)||(n={},"production"!==t.env.NODE_ENV&&Di("data functions should return an object.",this));var i,o,a=this._props,r=Object.keys(n);for(i=r.length;i--;)o=r[i],a&&s(a,o)?"production"!==t.env.NODE_ENV&&Di('Data field "'+o+'" is already defined as a prop. To provide default value for a prop, use the "default" prop option; if you want to pass prop values to an instantiation call, use the "propsData" option.',this):this._proxy(o);Et(n,this)},e.prototype._setData=function(t){t=t||{};var e=this._data;this._data=t;var n,i,o;for(n=Object.keys(e),o=n.length;o--;)i=n[o],i in t||this._unproxy(i);for(n=Object.keys(t),o=n.length;o--;)i=n[o],s(this,i)||this._proxy(i);e.__ob__.removeVm(this),Et(t,this),this._digest()},e.prototype._proxy=function(t){if(!r(t)){var e=this;Object.defineProperty(e,t,{configurable:!0,enumerable:!0,get:function(){return e._data[t]},set:function(n){e._data[t]=n}})}},e.prototype._unproxy=function(t){r(t)||delete this[t]},e.prototype._digest=function(){for(var t=0,e=this._watchers.length;t<e;t++)this._watchers[t].update(!0)},e.prototype._initComputed=function(){var t=this.$options.computed;if(t)for(var e in t){var o=t[e],s={enumerable:!0,configurable:!0};"function"==typeof o?(s.get=i(o,this),s.set=n):(s.get=o.get?o.cache!==!1?i(o.get,this):m(o.get,this):n,s.set=o.set?m(o.set,this):n),Object.defineProperty(this,e,s)}},e.prototype._initMethods=function(){var t=this.$options.methods;if(t)for(var e in t)this[e]=m(t[e],this)},e.prototype._initMeta=function(){var t=this.$options._meta;if(t)for(var e in t)At(this,e,t[e])}}function _n(e){function n(t,e){for(var n,i,o,s=e.attributes,a=0,r=s.length;a<r;a++)n=s[a].name,oa.test(n)&&(n=n.replace(oa,""),i=s[a].value,Bt(i)&&(i+=".apply(this, $arguments)"),o=(t._scope||t._context).$eval(i,!0),o._fromParent=!0,t.$on(n.replace(oa),o))}function i(t,e,n){if(n){var i,s,a,r;for(s in n)if(i=n[s],Hn(i))for(a=0,r=i.length;a<r;a++)o(t,e,s,i[a]);else o(t,e,s,i)}}function o(e,n,i,s,a){var r=typeof s;if("function"===r)e[n](i,s,a);else if("string"===r){var l=e.$options.methods,c=l&&l[s];c?e[n](i,c,a):"production"!==t.env.NODE_ENV&&Di('Unknown method: "'+s+'" when registering callback for '+n+': "'+i+'".',e)}else s&&"object"===r&&o(e,n,i,s.handler,s)}function s(){this._isAttached||(this._isAttached=!0,this.$children.forEach(a))}function a(t){!t._isAttached&&I(t.$el)&&t._callHook("attached")}function r(){this._isAttached&&(this._isAttached=!1,this.$children.forEach(l))}function l(t){t._isAttached&&!I(t.$el)&&t._callHook("detached")}e.prototype._initEvents=function(){var t=this.$options;t._asComponent&&n(this,t.el),i(this,"$on",t.events),i(this,"$watch",t.watch)},e.prototype._initDOMHooks=function(){this.$on("hook:attached",s),this.$on("hook:detached",r)},e.prototype._callHook=function(t){this.$emit("pre-hook:"+t);var e=this.$options[t];if(e)for(var n=0,i=e.length;n<i;n++)e[n].call(this);this.$emit("hook:"+t)}}function bn(){}function yn(e,n,i,o,s,a){this.vm=n,this.el=i,this.descriptor=e,this.name=e.name,this.expression=e.expression,this.arg=e.arg,this.modifiers=e.modifiers,this.filters=e.filters,this.literal=this.modifiers&&this.modifiers.literal,this._locked=!1,this._bound=!1,this._listeners=null,this._host=o,this._scope=s,this._frag=a,"production"!==t.env.NODE_ENV&&this.el&&(this.el._vue_directives=this.el._vue_directives||[],this.el._vue_directives.push(this))}function wn(t){t.prototype._updateRef=function(t){var e=this.$options._ref;if(e){var n=(this._scope||this._context).$refs;t?n[e]===this&&(n[e]=null):n[e]=this}},t.prototype._compile=function(t){var e=this.$options,n=t;if(t=hn(t,e),this._initElement(t),1!==t.nodeType||null===U(t,"v-pre")){var i=this._context&&this._context.$options,o=We(t,e,i);vn(this,e._content);var s,a=this.constructor;e._linkerCachable&&(s=a.linker,s||(s=a.linker=Fe(t,e)));var r=o(this,t,this._scope),l=s?s(this,t):Fe(t,e)(this,t);this._unlinkFn=function(){r(),l(!0)},e.replace&&Q(n,t),this._isCompiled=!0,this._callHook("compiled")}},t.prototype._initElement=function(t){ut(t)?(this._isFragment=!0,this.$el=this._fragmentStart=t.firstChild,this._fragmentEnd=t.lastChild,3===this._fragmentStart.nodeType&&(this._fragmentStart.data=this._fragmentEnd.data=""),this._fragment=t):this.$el=t,this.$el.__vue__=this,this._callHook("beforeCompile")},t.prototype._bindDir=function(t,e,n,i,o){this._directives.push(new yn(t,this,e,n,i,o))},t.prototype._destroy=function(t,e){if(this._isBeingDestroyed)return void(e||this._cleanup());var n,i,o=this,s=function(){!n||i||e||o._cleanup()};t&&this.$el&&(i=!0,this.$remove(function(){i=!1,s()})),this._callHook("beforeDestroy"),this._isBeingDestroyed=!0;var a,r=this.$parent;for(r&&!r._isBeingDestroyed&&(r.$children.$remove(this),this._updateRef(!0)),a=this.$children.length;a--;)this.$children[a].$destroy();for(this._propsUnlinkFn&&this._propsUnlinkFn(),this._unlinkFn&&this._unlinkFn(),a=this._watchers.length;a--;)this._watchers[a].teardown();this.$el&&(this.$el.__vue__=null),n=!0,s()},t.prototype._cleanup=function(){this._isDestroyed||(this._frag&&this._frag.children.$remove(this),this._data&&this._data.__ob__&&this._data.__ob__.removeVm(this),this.$el=this.$parent=this.$root=this.$children=this._watchers=this._context=this._scope=this._directives=null,this._isDestroyed=!0,this._callHook("destroyed"),this.$off())}}function xn(e){e.prototype._applyFilters=function(t,e,n,i){var o,s,a,r,l,c,u,h,d;for(c=0,u=n.length;c<u;c++)if(o=n[i?u-c-1:c],s=yt(this.$options,"filters",o.name,!0),s&&(s=i?s.write:s.read||s,"function"==typeof s)){if(a=i?[t,e]:[t],l=i?2:1,o.args)for(h=0,d=o.args.length;h<d;h++)r=o.args[h],a[h+l]=r.dynamic?this.$get(r.value):r.value;t=s.apply(this,a)}return t},e.prototype._resolveComponent=function(n,i){var o;if(o="function"==typeof n?n:yt(this.$options,"components",n,!0))if(o.options)i(o);else if(o.resolved)i(o.resolved);else if(o.requested)o.pendingCallbacks.push(i);else{o.requested=!0;var s=o.pendingCallbacks=[i];o.call(this,function(t){y(t)&&(t=e.extend(t)),o.resolved=t;for(var n=0,i=s.length;n<i;n++)s[n](t)},function(e){"production"!==t.env.NODE_ENV&&Di("Failed to resolve async component"+("string"==typeof n?": "+n:"")+". "+(e?"\nReason: "+e:""))})}}}function Cn(t){function e(t){return JSON.parse(JSON.stringify(t))}t.prototype.$get=function(t,e){var n=Ut(t);if(n){if(e){var i=this;return function(){i.$arguments=g(arguments);var t=n.get.call(i,i);return i.$arguments=null,t}}try{return n.get.call(this,this)}catch(o){}}},t.prototype.$set=function(t,e){var n=Ut(t,!0);n&&n.set&&n.set.call(this,this,e)},t.prototype.$delete=function(t){o(this._data,t)},t.prototype.$watch=function(t,e,n){var i,o=this;"string"==typeof t&&(i=T(t),t=i.expression);var s=new Jt(o,t,e,{deep:n&&n.deep,sync:n&&n.sync,filters:i&&i.filters,user:!n||n.user!==!1});return n&&n.immediate&&e.call(o,s.value),function(){s.teardown()}},t.prototype.$eval=function(t,e){if(sa.test(t)){var n=T(t),i=this.$get(n.expression,e);return n.filters?this._applyFilters(i,null,n.filters):i}return this.$get(t,e)},t.prototype.$interpolate=function(t){var e=D(t),n=this;return e?1===e.length?n.$eval(e[0].value)+"":e.map(function(t){return t.tag?n.$eval(t.value):t.value}).join(""):t},t.prototype.$log=function(t){var n=t?Pt(this._data,t):this._data;if(n&&(n=e(n)),!t){var i;for(i in this.$options.computed)n[i]=e(this[i]);if(this._props)for(i in this._props)n[i]=e(this[i])}console.log(n)}}function kn(t){function e(t,e,i,o,s,a){e=n(e);var r=!I(e),l=o===!1||r?s:a,c=!r&&!t._isAttached&&!I(t.$el);return t._isFragment?(lt(t._fragmentStart,t._fragmentEnd,function(n){l(n,e,t)}),i&&i()):l(t.$el,e,t,i),c&&t._callHook("attached"),t}function n(t){return"string"==typeof t?document.querySelector(t):t}function i(t,e,n,i){e.appendChild(t),i&&i()}function o(t,e,n,i){W(t,e),i&&i()}function s(t,e,n){G(t),n&&n()}t.prototype.$nextTick=function(t){oi(t,this)},t.prototype.$appendTo=function(t,n,o){return e(this,t,n,o,i,V)},t.prototype.$prependTo=function(t,e,i){return t=n(t),t.hasChildNodes()?this.$before(t.firstChild,e,i):this.$appendTo(t,e,i),this},t.prototype.$before=function(t,n,i){return e(this,t,n,i,o,M)},t.prototype.$after=function(t,e,i){return t=n(t),t.nextSibling?this.$before(t.nextSibling,e,i):this.$appendTo(t.parentNode,e,i),this},t.prototype.$remove=function(t,e){if(!this.$el.parentNode)return t&&t();var n=this._isAttached&&I(this.$el);n||(e=!1);var i=this,o=function(){n&&i._callHook("detached"),t&&t()};if(this._isFragment)ct(this._fragmentStart,this._fragmentEnd,this,this._fragment,o);else{var a=e===!1?s:L;a(this.$el,this,o)}return this}}function $n(t){function e(t,e,i){var o=t.$parent;if(o&&i&&!n.test(e))for(;o;)o._eventsCount[e]=(o._eventsCount[e]||0)+i,o=o.$parent}t.prototype.$on=function(t,n){return(this._events[t]||(this._events[t]=[])).push(n),e(this,t,1),this},t.prototype.$once=function(t,e){function n(){i.$off(t,n),e.apply(this,arguments)}var i=this;return n.fn=e,this.$on(t,n),this},t.prototype.$off=function(t,n){var i;if(!arguments.length){if(this.$parent)for(t in this._events)i=this._events[t],i&&e(this,t,-i.length);return this._events={},this}if(i=this._events[t],!i)return this;if(1===arguments.length)return e(this,t,-i.length),this._events[t]=null,this;for(var o,s=i.length;s--;)if(o=i[s],o===n||o.fn===n){e(this,t,-1),i.splice(s,1);break}return this},t.prototype.$emit=function(t){var e="string"==typeof t;t=e?t:t.name;var n=this._events[t],i=e||!n;if(n){n=n.length>1?g(n):n;var o=e&&n.some(function(t){return t._fromParent});o&&(i=!1);for(var s=g(arguments,1),a=0,r=n.length;a<r;a++){var l=n[a],c=l.apply(this,s);c!==!0||o&&!l._fromParent||(i=!0)}}return i},t.prototype.$broadcast=function(t){var e="string"==typeof t;if(t=e?t:t.name,this._eventsCount[t]){var n=this.$children,i=g(arguments);e&&(i[0]={name:t,source:this});for(var o=0,s=n.length;o<s;o++){var a=n[o],r=a.$emit.apply(a,i);r&&a.$broadcast.apply(a,i)}return this}},t.prototype.$dispatch=function(t){var e=this.$emit.apply(this,arguments);if(e){var n=this.$parent,i=g(arguments);for(i[0]={name:t,source:this};n;)e=n.$emit.apply(n,i),n=e?n.$parent:null;return this}};var n=/^hook:/}function En(e){function n(){this._isAttached=!0,this._isReady=!0,this._callHook("ready")}e.prototype.$mount=function(e){return this._isCompiled?void("production"!==t.env.NODE_ENV&&Di("$mount() should be called only once.",this)):(e=H(e),e||(e=document.createElement("div")),this._compile(e),this._initDOMHooks(),I(this.$el)?(this._callHook("attached"),n.call(this)):this.$once("hook:attached",n),this)},e.prototype.$destroy=function(t,e){this._destroy(t,e)},e.prototype.$compile=function(t,e,n,i){return Fe(t,this.$options,!0)(this,t,e,n,i)}}function An(t){this._init(t)}function On(t,e,n){return n=n?parseInt(n,10):0,e=c(e),"number"==typeof e?t.slice(n,n+e):t}function Tn(t,e,n){if(t=ca(t),null==e)return t;if("function"==typeof e)return t.filter(e);e=(""+e).toLowerCase();for(var i,o,s,a,r="in"===n?3:2,l=Array.prototype.concat.apply([],g(arguments,r)),c=[],u=0,h=t.length;u<h;u++)if(i=t[u],s=i&&i.$value||i,a=l.length){for(;a--;)if(o=l[a],"$key"===o&&Sn(i.$key,e)||Sn(Pt(s,o),e)){c.push(i);break}}else Sn(i,e)&&c.push(i);return c}function Nn(t){function e(t,e,n){var o=i[n];return o&&("$key"!==o&&(b(t)&&"$value"in t&&(t=t.$value),b(e)&&"$value"in e&&(e=e.$value)),t=b(t)?Pt(t,o):t,e=b(e)?Pt(e,o):e),t===e?0:t>e?s:-s}var n=null,i=void 0;t=ca(t);var o=g(arguments,1),s=o[o.length-1];"number"==typeof s?(s=s<0?-1:1,o=o.length>1?o.slice(0,-1):o):s=1;var a=o[0];return a?("function"==typeof a?n=function(t,e){return a(t,e)*s}:(i=Array.prototype.concat.apply([],o),n=function(t,o,s){return s=s||0,s>=i.length-1?e(t,o,s):e(t,o,s)||n(t,o,s+1)}),t.slice().sort(n)):t}function Sn(t,e){var n;if(y(t)){var i=Object.keys(t);for(n=i.length;n--;)if(Sn(t[i[n]],e))return!0}else if(Hn(t)){for(n=t.length;n--;)if(Sn(t[n],e))return!0}else if(null!=t)return t.toString().toLowerCase().indexOf(e)>-1}function Dn(e){function n(t){return new Function("return function "+v(t)+" (options) { this._init(options) }")()}e.options={directives:Ts,elementDirectives:la,filters:ha,transitions:{},components:{},partials:{},replace:!0},e.util=zi,e.config=Si,e.set=i,e["delete"]=o,e.nextTick=oi,e.compiler=ia,e.FragmentFactory=le,e.internalDirectives=Js,e.parsers={path:uo,text:Oi,template:Uo,directive:xi,expression:$o},e.cid=0;var s=1;e.extend=function(e){e=e||{};var i=this,o=0===i.cid;if(o&&e._Ctor)return e._Ctor;var a=e.name||i.options.name;"production"!==t.env.NODE_ENV&&(/^[a-zA-Z][\w-]*$/.test(a)||(Di('Invalid component name: "'+a+'". Component names can only contain alphanumeric characaters and the hyphen.'),a=null));var r=n(a||"VueComponent");return r.prototype=Object.create(i.prototype),r.prototype.constructor=r,r.cid=s++,r.options=bt(i.options,e),r["super"]=i,r.extend=i.extend,Si._assetTypes.forEach(function(t){r[t]=i[t]}),a&&(r.options.components[a]=r),o&&(e._Ctor=r),r},e.use=function(t){if(!t.installed){var e=g(arguments,1);return e.unshift(this),"function"==typeof t.install?t.install.apply(t,e):t.apply(null,e),t.installed=!0,this}},e.mixin=function(t){e.options=bt(e.options,t)},Si._assetTypes.forEach(function(n){e[n]=function(i,o){return o?("production"!==t.env.NODE_ENV&&"component"===n&&(Vi.test(i)||Mi.test(i))&&Di("Do not use built-in or reserved HTML elements as component id: "+i),"component"===n&&y(o)&&(o.name||(o.name=i),o=e.extend(o)),this.options[n+"s"][i]=o,o):this.options[n+"s"][i]}}),_(e.transition,ji)}var Pn=Object.prototype.hasOwnProperty,jn=/^\s?(true|false|-?[\d\.]+|'[^']*'|"[^"]*")\s?$/,Rn=/-(\w)/g,Vn=/([a-z\d])([A-Z])/g,Mn=/(?:^|[-_\/])(\w)/g,Ln=Object.prototype.toString,Fn="[object Object]",Hn=Array.isArray,In="__proto__"in{},Un="undefined"!=typeof window&&"[object Object]"!==Object.prototype.toString.call(window),Bn=Un&&window.__VUE_DEVTOOLS_GLOBAL_HOOK__,qn=Un&&window.navigator.userAgent.toLowerCase(),Wn=qn&&qn.indexOf("trident")>0,zn=qn&&qn.indexOf("msie 9.0")>0,Gn=qn&&qn.indexOf("android")>0,Jn=qn&&/(iphone|ipad|ipod|ios)/i.test(qn),Qn=Jn&&qn.match(/os ([\d_]+)/),Yn=Qn&&Qn[1].split("_"),Kn=Yn&&Number(Yn[0])>=9&&Number(Yn[1])>=3&&!window.indexedDB,Zn=void 0,Xn=void 0,ti=void 0,ei=void 0;if(Un&&!zn){var ni=void 0===window.ontransitionend&&void 0!==window.onwebkittransitionend,ii=void 0===window.onanimationend&&void 0!==window.onwebkitanimationend;Zn=ni?"WebkitTransition":"transition",Xn=ni?"webkitTransitionEnd":"transitionend",ti=ii?"WebkitAnimation":"animation",ei=ii?"webkitAnimationEnd":"animationend"}var oi=function(){function t(){o=!1;var t=i.slice(0);i=[];for(var e=0;e<t.length;e++)t[e]()}var e,i=[],o=!1;if("undefined"==typeof MutationObserver||Kn){var s=Un?window:"undefined"!=typeof n?n:{};e=s.setImmediate||setTimeout}else{var a=1,r=new MutationObserver(t),l=document.createTextNode(a);r.observe(l,{characterData:!0}),e=function(){a=(a+1)%2,l.data=a}}return function(n,s){var a=s?function(){n.call(s)}:n;i.push(a),o||(o=!0,e(t,0))}}(),si=void 0;"undefined"!=typeof Set&&Set.toString().match(/native code/)?si=Set:(si=function(){this.set=Object.create(null)},si.prototype.has=function(t){return void 0!==this.set[t]},si.prototype.add=function(t){this.set[t]=1},si.prototype.clear=function(){this.set=Object.create(null)});var ai=E.prototype;ai.put=function(t,e){var n,i=this.get(t,!0);return i||(this.size===this.limit&&(n=this.shift()),i={key:t},this._keymap[t]=i,this.tail?(this.tail.newer=i,i.older=this.tail):this.head=i,this.tail=i,this.size++),i.value=e,n},ai.shift=function(){var t=this.head;return t&&(this.head=this.head.newer,this.head.older=void 0,t.newer=t.older=void 0,this._keymap[t.key]=void 0,this.size--),t},ai.get=function(t,e){var n=this._keymap[t];if(void 0!==n)return n===this.tail?e?n:n.value:(n.newer&&(n===this.head&&(this.head=n.newer),n.newer.older=n.older),n.older&&(n.older.newer=n.newer),n.newer=void 0,n.older=this.tail,this.tail&&(this.tail.newer=n),this.tail=n,e?n:n.value)};var ri,li,ci,ui,hi,di,pi,fi,vi,mi,gi,_i,bi=new E(1e3),yi=/[^\s'"]+|'[^']*'|"[^"]*"/g,wi=/^in$|^-?\d+/,xi=Object.freeze({parseDirective:T}),Ci=/[-.*+?^${}()|[\]\/\\]/g,ki=void 0,$i=void 0,Ei=void 0,Ai=/[^|]\|[^|]/,Oi=Object.freeze({compileRegex:S,parseText:D,tokensToExp:P}),Ti=["{{","}}"],Ni=["{{{","}}}"],Si=Object.defineProperties({debug:!1,silent:!1,async:!0,warnExpressionErrors:!0,devtools:"production"!==t.env.NODE_ENV,_delimitersChanged:!0,_assetTypes:["component","directive","elementDirective","filter","transition","partial"],_propBindingModes:{ONE_WAY:0,TWO_WAY:1,ONE_TIME:2},_maxUpdateCount:100},{delimiters:{get:function(){return Ti},set:function(t){Ti=t,S()},configurable:!0,enumerable:!0},unsafeDelimiters:{get:function(){return Ni},set:function(t){Ni=t,S()},configurable:!0,enumerable:!0}}),Di=void 0,Pi=void 0;"production"!==t.env.NODE_ENV&&!function(){var t="undefined"!=typeof console;Di=function(e,n){t&&!Si.silent&&console.error("[Vue warn]: "+e+(n?Pi(n):""))},Pi=function(t){var e=t._isVue?t.$options.name:t.name;return e?" (found in component: <"+f(e)+">)":""}}();var ji=Object.freeze({appendWithTransition:V,beforeWithTransition:M,removeWithTransition:L,applyTransition:F}),Ri=/^v-ref:/,Vi=/^(div|p|span|img|a|b|i|br|ul|ol|li|h1|h2|h3|h4|h5|h6|code|pre|table|th|td|tr|form|label|input|select|option|nav|article|section|header|footer)$/i,Mi=/^(slot|partial|component)$/i,Li=void 0;"production"!==t.env.NODE_ENV&&(Li=function(t,e){return e.indexOf("-")>-1?t.constructor===window.HTMLUnknownElement||t.constructor===window.HTMLElement:/HTMLUnknownElement/.test(t.toString())&&!/^(data|time|rtc|rb|details|dialog|summary)$/.test(e)});var Fi=Si.optionMergeStrategies=Object.create(null);Fi.data=function(e,n,i){return i?e||n?function(){var t="function"==typeof n?n.call(i):n,o="function"==typeof e?e.call(i):void 0;return t?ft(t,o):o}:void 0:n?"function"!=typeof n?("production"!==t.env.NODE_ENV&&Di('The "data" option should be a function that returns a per-instance value in component definitions.',i),e):e?function(){return ft(n.call(this),e.call(this))}:n:e},Fi.el=function(e,n,i){if(!i&&n&&"function"!=typeof n)return void("production"!==t.env.NODE_ENV&&Di('The "el" option should be a function that returns a per-instance value in component definitions.',i));var o=n||e;return i&&"function"==typeof o?o.call(i):o},Fi.init=Fi.created=Fi.ready=Fi.attached=Fi.detached=Fi.beforeCompile=Fi.compiled=Fi.beforeDestroy=Fi.destroyed=Fi.activate=function(t,e){return e?t?t.concat(e):Hn(e)?e:[e]:t},Si._assetTypes.forEach(function(t){Fi[t+"s"]=vt}),Fi.watch=Fi.events=function(t,e){if(!e)return t;if(!t)return e;var n={};_(n,t);for(var i in e){var o=n[i],s=e[i];o&&!Hn(o)&&(o=[o]),n[i]=o?o.concat(s):[s]}return n},Fi.props=Fi.methods=Fi.computed=function(t,e){if(!e)return t;if(!t)return e;var n=Object.create(null);return _(n,t),_(n,e),n};var Hi=function(t,e){return void 0===e?t:e},Ii=0;wt.target=null,wt.prototype.addSub=function(t){this.subs.push(t)},wt.prototype.removeSub=function(t){this.subs.$remove(t)},wt.prototype.depend=function(){wt.target.addDep(this)},wt.prototype.notify=function(){for(var t=g(this.subs),e=0,n=t.length;e<n;e++)t[e].update()};var Ui=Array.prototype,Bi=Object.create(Ui);["push","pop","shift","unshift","splice","sort","reverse"].forEach(function(t){var e=Ui[t];w(Bi,t,function(){for(var n=arguments.length,i=new Array(n);n--;)i[n]=arguments[n];var o,s=e.apply(this,i),a=this.__ob__;switch(t){case"push":o=i;break;case"unshift":o=i;break;case"splice":o=i.slice(2)}return o&&a.observeArray(o),a.dep.notify(),s})}),w(Ui,"$set",function(t,e){return t>=this.length&&(this.length=Number(t)+1),this.splice(t,1,e)[0]}),w(Ui,"$remove",function(t){if(this.length){var e=C(this,t);return e>-1?this.splice(e,1):void 0}});var qi=Object.getOwnPropertyNames(Bi),Wi=!0;Ct.prototype.walk=function(t){for(var e=Object.keys(t),n=0,i=e.length;n<i;n++)this.convert(e[n],t[e[n]])},Ct.prototype.observeArray=function(t){for(var e=0,n=t.length;e<n;e++)Et(t[e])},Ct.prototype.convert=function(t,e){At(this.value,t,e)},Ct.prototype.addVm=function(t){(this.vms||(this.vms=[])).push(t)},Ct.prototype.removeVm=function(t){this.vms.$remove(t)};var zi=Object.freeze({defineReactive:At,set:i,del:o,hasOwn:s,isLiteral:a,isReserved:r,_toString:l,toNumber:c,toBoolean:u,stripQuotes:h,camelize:d,hyphenate:f,classify:v,bind:m,toArray:g,extend:_,isObject:b,isPlainObject:y,def:w,debounce:x,indexOf:C,cancellable:k,looseEqual:$,isArray:Hn,hasProto:In,inBrowser:Un,devtools:Bn,isIE:Wn,isIE9:zn,isAndroid:Gn,isIos:Jn,iosVersionMatch:Qn,iosVersion:Yn,hasMutationObserverBug:Kn,get transitionProp(){return Zn},get transitionEndEvent(){return Xn},get animationProp(){return ti},get animationEndEvent(){return ei},nextTick:oi,get _Set(){return si},query:H,inDoc:I,getAttr:U,getBindAttr:B,hasBindAttr:q,before:W,after:z,remove:G,prepend:J,replace:Q,on:Y,off:K,setClass:X,addClass:tt,removeClass:et,extractContent:nt,trimNode:it,isTemplate:st,createAnchor:at,findRef:rt,mapNodeRange:lt,removeNodeRange:ct,isFragment:ut,getOuterHTML:ht,
-mergeOptions:bt,resolveAsset:yt,checkComponentAttr:dt,commonTagRE:Vi,reservedTagRE:Mi,get warn(){return Di}}),Gi=0,Ji=new E(1e3),Qi=0,Yi=1,Ki=2,Zi=3,Xi=0,to=1,eo=2,no=3,io=4,oo=5,so=6,ao=7,ro=8,lo=[];lo[Xi]={ws:[Xi],ident:[no,Qi],"[":[io],eof:[ao]},lo[to]={ws:[to],".":[eo],"[":[io],eof:[ao]},lo[eo]={ws:[eo],ident:[no,Qi]},lo[no]={ident:[no,Qi],0:[no,Qi],number:[no,Qi],ws:[to,Yi],".":[eo,Yi],"[":[io,Yi],eof:[ao,Yi]},lo[io]={"'":[oo,Qi],'"':[so,Qi],"[":[io,Ki],"]":[to,Zi],eof:ro,"else":[io,Qi]},lo[oo]={"'":[io,Qi],eof:ro,"else":[oo,Qi]},lo[so]={'"':[io,Qi],eof:ro,"else":[so,Qi]};var co;"production"!==t.env.NODE_ENV&&(co=function(t,e){Di('You are setting a non-existent path "'+t.raw+'" on a vm instance. Consider pre-initializing the property with the "data" option for more reliable reactivity and better performance.',e)});var uo=Object.freeze({parsePath:Dt,getPath:Pt,setPath:jt}),ho=new E(1e3),po="Math,Date,this,true,false,null,undefined,Infinity,NaN,isNaN,isFinite,decodeURI,decodeURIComponent,encodeURI,encodeURIComponent,parseInt,parseFloat",fo=new RegExp("^("+po.replace(/,/g,"\\b|")+"\\b)"),vo="break,case,class,catch,const,continue,debugger,default,delete,do,else,export,extends,finally,for,function,if,import,in,instanceof,let,return,super,switch,throw,try,var,while,with,yield,enum,await,implements,package,protected,static,interface,private,public",mo=new RegExp("^("+vo.replace(/,/g,"\\b|")+"\\b)"),go=/\s/g,_o=/\n/g,bo=/[\{,]\s*[\w\$_]+\s*:|('(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*"|`(?:[^`\\]|\\.)*\$\{|\}(?:[^`\\]|\\.)*`|`(?:[^`\\]|\\.)*`)|new |typeof |void /g,yo=/"(\d+)"/g,wo=/^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*|\['.*?'\]|\[".*?"\]|\[\d+\]|\[[A-Za-z_$][\w$]*\])*$/,xo=/[^\w$\.](?:[A-Za-z_$][\w$]*)/g,Co=/^(?:true|false|null|undefined|Infinity|NaN)$/,ko=[],$o=Object.freeze({parseExpression:Ut,isSimplePath:Bt}),Eo=[],Ao=[],Oo={},To={},No=!1,So=0;Jt.prototype.get=function(){this.beforeGet();var e,n=this.scope||this.vm;try{e=this.getter.call(n,n)}catch(i){"production"!==t.env.NODE_ENV&&Si.warnExpressionErrors&&Di('Error when evaluating expression "'+this.expression+'": '+i.toString(),this.vm)}return this.deep&&Qt(e),this.preProcess&&(e=this.preProcess(e)),this.filters&&(e=n._applyFilters(e,null,this.filters,!1)),this.postProcess&&(e=this.postProcess(e)),this.afterGet(),e},Jt.prototype.set=function(e){var n=this.scope||this.vm;this.filters&&(e=n._applyFilters(e,this.value,this.filters,!0));try{this.setter.call(n,n,e)}catch(i){"production"!==t.env.NODE_ENV&&Si.warnExpressionErrors&&Di('Error when evaluating setter "'+this.expression+'": '+i.toString(),this.vm)}var o=n.$forContext;if(o&&o.alias===this.expression){if(o.filters)return void("production"!==t.env.NODE_ENV&&Di("It seems you are using two-way binding on a v-for alias ("+this.expression+"), and the v-for has filters. This will not work properly. Either remove the filters or use an array of objects and bind to object properties instead.",this.vm));o._withLock(function(){n.$key?o.rawValue[n.$key]=e:o.rawValue.$set(n.$index,e)})}},Jt.prototype.beforeGet=function(){wt.target=this},Jt.prototype.addDep=function(t){var e=t.id;this.newDepIds.has(e)||(this.newDepIds.add(e),this.newDeps.push(t),this.depIds.has(e)||t.addSub(this))},Jt.prototype.afterGet=function(){wt.target=null;for(var t=this.deps.length;t--;){var e=this.deps[t];this.newDepIds.has(e.id)||e.removeSub(this)}var n=this.depIds;this.depIds=this.newDepIds,this.newDepIds=n,this.newDepIds.clear(),n=this.deps,this.deps=this.newDeps,this.newDeps=n,this.newDeps.length=0},Jt.prototype.update=function(e){this.lazy?this.dirty=!0:this.sync||!Si.async?this.run():(this.shallow=this.queued?!!e&&this.shallow:!!e,this.queued=!0,"production"!==t.env.NODE_ENV&&Si.debug&&(this.prevError=new Error("[vue] async stack trace")),Gt(this))},Jt.prototype.run=function(){if(this.active){var e=this.get();if(e!==this.value||(b(e)||this.deep)&&!this.shallow){var n=this.value;this.value=e;var i=this.prevError;if("production"!==t.env.NODE_ENV&&Si.debug&&i){this.prevError=null;try{this.cb.call(this.vm,e,n)}catch(o){throw oi(function(){throw i},0),o}}else this.cb.call(this.vm,e,n)}this.queued=this.shallow=!1}},Jt.prototype.evaluate=function(){var t=wt.target;this.value=this.get(),this.dirty=!1,wt.target=t},Jt.prototype.depend=function(){for(var t=this.deps.length;t--;)this.deps[t].depend()},Jt.prototype.teardown=function(){if(this.active){this.vm._isBeingDestroyed||this.vm._vForRemoving||this.vm._watchers.$remove(this);for(var t=this.deps.length;t--;)this.deps[t].removeSub(this);this.active=!1,this.vm=this.cb=this.value=null}};var Do=new si,Po={bind:function(){this.attr=3===this.el.nodeType?"data":"textContent"},update:function(t){this.el[this.attr]=l(t)}},jo=new E(1e3),Ro=new E(1e3),Vo={efault:[0,"",""],legend:[1,"<fieldset>","</fieldset>"],tr:[2,"<table><tbody>","</tbody></table>"],col:[2,"<table><tbody></tbody><colgroup>","</colgroup></table>"]};Vo.td=Vo.th=[3,"<table><tbody><tr>","</tr></tbody></table>"],Vo.option=Vo.optgroup=[1,'<select multiple="multiple">',"</select>"],Vo.thead=Vo.tbody=Vo.colgroup=Vo.caption=Vo.tfoot=[1,"<table>","</table>"],Vo.g=Vo.defs=Vo.symbol=Vo.use=Vo.image=Vo.text=Vo.circle=Vo.ellipse=Vo.line=Vo.path=Vo.polygon=Vo.polyline=Vo.rect=[1,'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"version="1.1">',"</svg>"];var Mo=/<([\w:-]+)/,Lo=/&#?\w+?;/,Fo=/<!--/,Ho=function(){if(Un){var t=document.createElement("div");return t.innerHTML="<template>1</template>",!t.cloneNode(!0).firstChild.innerHTML}return!1}(),Io=function(){if(Un){var t=document.createElement("textarea");return t.placeholder="t","t"===t.cloneNode(!0).value}return!1}(),Uo=Object.freeze({cloneNode:Xt,parseTemplate:te}),Bo={bind:function(){8===this.el.nodeType&&(this.nodes=[],this.anchor=at("v-html"),Q(this.el,this.anchor))},update:function(t){t=l(t),this.nodes?this.swap(t):this.el.innerHTML=t},swap:function(t){for(var e=this.nodes.length;e--;)G(this.nodes[e]);var n=te(t,!0,!0);this.nodes=g(n.childNodes),W(n,this.anchor)}};ee.prototype.callHook=function(t){var e,n;for(e=0,n=this.childFrags.length;e<n;e++)this.childFrags[e].callHook(t);for(e=0,n=this.children.length;e<n;e++)t(this.children[e])},ee.prototype.beforeRemove=function(){var t,e;for(t=0,e=this.childFrags.length;t<e;t++)this.childFrags[t].beforeRemove(!1);for(t=0,e=this.children.length;t<e;t++)this.children[t].$destroy(!1,!0);var n=this.unlink.dirs;for(t=0,e=n.length;t<e;t++)n[t]._watcher&&n[t]._watcher.teardown()},ee.prototype.destroy=function(){this.parentFrag&&this.parentFrag.childFrags.$remove(this),this.node.__v_frag=null,this.unlink()};var qo=new E(5e3);le.prototype.create=function(t,e,n){var i=Xt(this.template);return new ee(this.linker,this.vm,i,t,e,n)};var Wo=700,zo=800,Go=850,Jo=1100,Qo=1500,Yo=1500,Ko=1750,Zo=2100,Xo=2200,ts=2300,es=0,ns={priority:Xo,terminal:!0,params:["track-by","stagger","enter-stagger","leave-stagger"],bind:function(){var e=this.expression.match(/(.*) (?:in|of) (.*)/);if(e){var n=e[1].match(/\((.*),(.*)\)/);n?(this.iterator=n[1].trim(),this.alias=n[2].trim()):this.alias=e[1].trim(),this.expression=e[2]}if(!this.alias)return void("production"!==t.env.NODE_ENV&&Di('Invalid v-for expression "'+this.descriptor.raw+'": alias is required.',this.vm));this.id="__v-for__"+ ++es;var i=this.el.tagName;this.isOption=("OPTION"===i||"OPTGROUP"===i)&&"SELECT"===this.el.parentNode.tagName,this.start=at("v-for-start"),this.end=at("v-for-end"),Q(this.el,this.end),W(this.start,this.end),this.cache=Object.create(null),this.factory=new le(this.vm,this.el)},update:function(t){this.diff(t),this.updateRef(),this.updateModel()},diff:function(t){var e,n,i,o,a,r,l=t[0],c=this.fromObject=b(l)&&s(l,"$key")&&s(l,"$value"),u=this.params.trackBy,h=this.frags,d=this.frags=new Array(t.length),p=this.alias,f=this.iterator,v=this.start,m=this.end,g=I(v),_=!h;for(e=0,n=t.length;e<n;e++)l=t[e],o=c?l.$key:null,a=c?l.$value:l,r=!b(a),i=!_&&this.getCachedFrag(a,e,o),i?(i.reused=!0,i.scope.$index=e,o&&(i.scope.$key=o),f&&(i.scope[f]=null!==o?o:e),(u||c||r)&&xt(function(){i.scope[p]=a})):(i=this.create(a,p,e,o),i.fresh=!_),d[e]=i,_&&i.before(m);if(!_){var y=0,w=h.length-d.length;for(this.vm._vForRemoving=!0,e=0,n=h.length;e<n;e++)i=h[e],i.reused||(this.deleteCachedFrag(i),this.remove(i,y++,w,g));this.vm._vForRemoving=!1,y&&(this.vm._watchers=this.vm._watchers.filter(function(t){return t.active}));var x,C,k,$=0;for(e=0,n=d.length;e<n;e++)i=d[e],x=d[e-1],C=x?x.staggerCb?x.staggerAnchor:x.end||x.node:v,i.reused&&!i.staggerCb?(k=ce(i,v,this.id),k===x||k&&ce(k,v,this.id)===x||this.move(i,C)):this.insert(i,$++,C,g),i.reused=i.fresh=!1}},create:function(t,e,n,i){var o=this._host,s=this._scope||this.vm,a=Object.create(s);a.$refs=Object.create(s.$refs),a.$els=Object.create(s.$els),a.$parent=s,a.$forContext=this,xt(function(){At(a,e,t)}),At(a,"$index",n),i?At(a,"$key",i):a.$key&&w(a,"$key",null),this.iterator&&At(a,this.iterator,null!==i?i:n);var r=this.factory.create(o,a,this._frag);return r.forId=this.id,this.cacheFrag(t,r,n,i),r},updateRef:function(){var t=this.descriptor.ref;if(t){var e,n=(this._scope||this.vm).$refs;this.fromObject?(e={},this.frags.forEach(function(t){e[t.scope.$key]=ue(t)})):e=this.frags.map(ue),n[t]=e}},updateModel:function(){if(this.isOption){var t=this.start.parentNode,e=t&&t.__v_model;e&&e.forceUpdate()}},insert:function(t,e,n,i){t.staggerCb&&(t.staggerCb.cancel(),t.staggerCb=null);var o=this.getStagger(t,e,null,"enter");if(i&&o){var s=t.staggerAnchor;s||(s=t.staggerAnchor=at("stagger-anchor"),s.__v_frag=t),z(s,n);var a=t.staggerCb=k(function(){t.staggerCb=null,t.before(s),G(s)});setTimeout(a,o)}else{var r=n.nextSibling;r||(z(this.end,n),r=this.end),t.before(r)}},remove:function(t,e,n,i){if(t.staggerCb)return t.staggerCb.cancel(),void(t.staggerCb=null);var o=this.getStagger(t,e,n,"leave");if(i&&o){var s=t.staggerCb=k(function(){t.staggerCb=null,t.remove()});setTimeout(s,o)}else t.remove()},move:function(t,e){e.nextSibling||this.end.parentNode.appendChild(this.end),t.before(e.nextSibling,!1)},cacheFrag:function(e,n,i,o){var a,r=this.params.trackBy,l=this.cache,c=!b(e);o||r||c?(a=de(i,o,e,r),l[a]?"$index"!==r&&"production"!==t.env.NODE_ENV&&this.warnDuplicate(e):l[a]=n):(a=this.id,s(e,a)?null===e[a]?e[a]=n:"production"!==t.env.NODE_ENV&&this.warnDuplicate(e):Object.isExtensible(e)?w(e,a,n):"production"!==t.env.NODE_ENV&&Di("Frozen v-for objects cannot be automatically tracked, make sure to provide a track-by key.")),n.raw=e},getCachedFrag:function(e,n,i){var o,s=this.params.trackBy,a=!b(e);if(i||s||a){var r=de(n,i,e,s);o=this.cache[r]}else o=e[this.id];return o&&(o.reused||o.fresh)&&"production"!==t.env.NODE_ENV&&this.warnDuplicate(e),o},deleteCachedFrag:function(t){var e=t.raw,n=this.params.trackBy,i=t.scope,o=i.$index,a=s(i,"$key")&&i.$key,r=!b(e);if(n||a||r){var l=de(o,a,e,n);this.cache[l]=null}else e[this.id]=null,t.raw=null},getStagger:function(t,e,n,i){i+="Stagger";var o=t.node.__v_trans,s=o&&o.hooks,a=s&&(s[i]||s.stagger);return a?a.call(t,e,n):e*parseInt(this.params[i]||this.params.stagger,10)},_preProcess:function(t){return this.rawValue=t,t},_postProcess:function(t){if(Hn(t))return t;if(y(t)){for(var e,n=Object.keys(t),i=n.length,o=new Array(i);i--;)e=n[i],o[i]={$key:e,$value:t[e]};return o}return"number"!=typeof t||isNaN(t)||(t=he(t)),t||[]},unbind:function(){if(this.descriptor.ref&&((this._scope||this.vm).$refs[this.descriptor.ref]=null),this.frags)for(var t,e=this.frags.length;e--;)t=this.frags[e],this.deleteCachedFrag(t),t.destroy()}};"production"!==t.env.NODE_ENV&&(ns.warnDuplicate=function(t){Di('Duplicate value found in v-for="'+this.descriptor.raw+'": '+JSON.stringify(t)+'. Use track-by="$index" if you are expecting duplicate values.',this.vm)});var is={priority:Zo,terminal:!0,bind:function(){var e=this.el;if(e.__vue__)"production"!==t.env.NODE_ENV&&Di('v-if="'+this.expression+'" cannot be used on an instance root element.',this.vm),this.invalid=!0;else{var n=e.nextElementSibling;n&&null!==U(n,"v-else")&&(G(n),this.elseEl=n),this.anchor=at("v-if"),Q(e,this.anchor)}},update:function(t){this.invalid||(t?this.frag||this.insert():this.remove())},insert:function(){this.elseFrag&&(this.elseFrag.remove(),this.elseFrag=null),this.factory||(this.factory=new le(this.vm,this.el)),this.frag=this.factory.create(this._host,this._scope,this._frag),this.frag.before(this.anchor)},remove:function(){this.frag&&(this.frag.remove(),this.frag=null),this.elseEl&&!this.elseFrag&&(this.elseFactory||(this.elseFactory=new le(this.elseEl._context||this.vm,this.elseEl)),this.elseFrag=this.elseFactory.create(this._host,this._scope,this._frag),this.elseFrag.before(this.anchor))},unbind:function(){this.frag&&this.frag.destroy(),this.elseFrag&&this.elseFrag.destroy()}},os={bind:function(){var t=this.el.nextElementSibling;t&&null!==U(t,"v-else")&&(this.elseEl=t)},update:function(t){this.apply(this.el,t),this.elseEl&&this.apply(this.elseEl,!t)},apply:function(t,e){function n(){t.style.display=e?"":"none"}I(t)?F(t,e?1:-1,n,this.vm):n()}},ss={bind:function(){var t=this,e=this.el,n="range"===e.type,i=this.params.lazy,o=this.params.number,s=this.params.debounce,a=!1;if(Gn||n||(this.on("compositionstart",function(){a=!0}),this.on("compositionend",function(){a=!1,i||t.listener()})),this.focused=!1,n||i||(this.on("focus",function(){t.focused=!0}),this.on("blur",function(){t.focused=!1,t._frag&&!t._frag.inserted||t.rawListener()})),this.listener=this.rawListener=function(){if(!a&&t._bound){var i=o||n?c(e.value):e.value;t.set(i),oi(function(){t._bound&&!t.focused&&t.update(t._watcher.value)})}},s&&(this.listener=x(this.listener,s)),this.hasjQuery="function"==typeof jQuery,this.hasjQuery){var r=jQuery.fn.on?"on":"bind";jQuery(e)[r]("change",this.rawListener),i||jQuery(e)[r]("input",this.listener)}else this.on("change",this.rawListener),i||this.on("input",this.listener);!i&&zn&&(this.on("cut",function(){oi(t.listener)}),this.on("keyup",function(e){46!==e.keyCode&&8!==e.keyCode||t.listener()})),(e.hasAttribute("value")||"TEXTAREA"===e.tagName&&e.value.trim())&&(this.afterBind=this.listener)},update:function(t){t=l(t),t!==this.el.value&&(this.el.value=t)},unbind:function(){var t=this.el;if(this.hasjQuery){var e=jQuery.fn.off?"off":"unbind";jQuery(t)[e]("change",this.listener),jQuery(t)[e]("input",this.listener)}}},as={bind:function(){var t=this,e=this.el;this.getValue=function(){if(e.hasOwnProperty("_value"))return e._value;var n=e.value;return t.params.number&&(n=c(n)),n},this.listener=function(){t.set(t.getValue())},this.on("change",this.listener),e.hasAttribute("checked")&&(this.afterBind=this.listener)},update:function(t){this.el.checked=$(t,this.getValue())}},rs={bind:function(){var t=this,e=this,n=this.el;this.forceUpdate=function(){e._watcher&&e.update(e._watcher.get())};var i=this.multiple=n.hasAttribute("multiple");this.listener=function(){var t=pe(n,i);t=e.params.number?Hn(t)?t.map(c):c(t):t,e.set(t)},this.on("change",this.listener);var o=pe(n,i,!0);(i&&o.length||!i&&null!==o)&&(this.afterBind=this.listener),this.vm.$on("hook:attached",function(){oi(t.forceUpdate)}),I(n)||oi(this.forceUpdate)},update:function(t){var e=this.el;e.selectedIndex=-1;for(var n,i,o=this.multiple&&Hn(t),s=e.options,a=s.length;a--;)n=s[a],i=n.hasOwnProperty("_value")?n._value:n.value,n.selected=o?fe(t,i)>-1:$(t,i)},unbind:function(){this.vm.$off("hook:attached",this.forceUpdate)}},ls={bind:function(){function t(){var t=n.checked;return t&&n.hasOwnProperty("_trueValue")?n._trueValue:!t&&n.hasOwnProperty("_falseValue")?n._falseValue:t}var e=this,n=this.el;this.getValue=function(){return n.hasOwnProperty("_value")?n._value:e.params.number?c(n.value):n.value},this.listener=function(){var i=e._watcher.value;if(Hn(i)){var o=e.getValue();n.checked?C(i,o)<0&&i.push(o):i.$remove(o)}else e.set(t())},this.on("change",this.listener),n.hasAttribute("checked")&&(this.afterBind=this.listener)},update:function(t){var e=this.el;Hn(t)?e.checked=C(t,this.getValue())>-1:e.hasOwnProperty("_trueValue")?e.checked=$(t,e._trueValue):e.checked=!!t}},cs={text:ss,radio:as,select:rs,checkbox:ls},us={priority:zo,twoWay:!0,handlers:cs,params:["lazy","number","debounce"],bind:function(){this.checkFilters(),this.hasRead&&!this.hasWrite&&"production"!==t.env.NODE_ENV&&Di('It seems you are using a read-only filter with v-model="'+this.descriptor.raw+'". You might want to use a two-way filter to ensure correct behavior.',this.vm);var e,n=this.el,i=n.tagName;if("INPUT"===i)e=cs[n.type]||cs.text;else if("SELECT"===i)e=cs.select;else{if("TEXTAREA"!==i)return void("production"!==t.env.NODE_ENV&&Di("v-model does not support element type: "+i,this.vm));e=cs.text}n.__v_model=this,e.bind.call(this),this.update=e.update,this._unbind=e.unbind},checkFilters:function(){var t=this.filters;if(t)for(var e=t.length;e--;){var n=yt(this.vm.$options,"filters",t[e].name);("function"==typeof n||n.read)&&(this.hasRead=!0),n.write&&(this.hasWrite=!0)}},unbind:function(){this.el.__v_model=null,this._unbind&&this._unbind()}},hs={esc:27,tab:9,enter:13,space:32,"delete":[8,46],up:38,left:37,right:39,down:40},ds={priority:Wo,acceptStatement:!0,keyCodes:hs,bind:function(){if("IFRAME"===this.el.tagName&&"load"!==this.arg){var t=this;this.iframeBind=function(){Y(t.el.contentWindow,t.arg,t.handler,t.modifiers.capture)},this.on("load",this.iframeBind)}},update:function(e){if(this.descriptor.raw||(e=function(){}),"function"!=typeof e)return void("production"!==t.env.NODE_ENV&&Di("v-on:"+this.arg+'="'+this.expression+'" expects a function value, got '+e,this.vm));this.modifiers.stop&&(e=me(e)),this.modifiers.prevent&&(e=ge(e)),this.modifiers.self&&(e=_e(e));var n=Object.keys(this.modifiers).filter(function(t){return"stop"!==t&&"prevent"!==t&&"self"!==t&&"capture"!==t});n.length&&(e=ve(e,n)),this.reset(),this.handler=e,this.iframeBind?this.iframeBind():Y(this.el,this.arg,this.handler,this.modifiers.capture)},reset:function(){var t=this.iframeBind?this.el.contentWindow:this.el;this.handler&&K(t,this.arg,this.handler)},unbind:function(){this.reset()}},ps=["-webkit-","-moz-","-ms-"],fs=["Webkit","Moz","ms"],vs=/!important;?$/,ms=Object.create(null),gs=null,_s={deep:!0,update:function(t){"string"==typeof t?this.el.style.cssText=t:Hn(t)?this.handleObject(t.reduce(_,{})):this.handleObject(t||{})},handleObject:function(t){var e,n,i=this.cache||(this.cache={});for(e in i)e in t||(this.handleSingle(e,null),delete i[e]);for(e in t)n=t[e],n!==i[e]&&(i[e]=n,this.handleSingle(e,n))},handleSingle:function(e,n){if(e=be(e))if(null!=n&&(n+=""),n){var i=vs.test(n)?"important":"";i?("production"!==t.env.NODE_ENV&&Di("It's probably a bad idea to use !important with inline rules. This feature will be deprecated in a future version of Vue."),n=n.replace(vs,"").trim(),this.el.style.setProperty(e.kebab,n,i)):this.el.style[e.camel]=n}else this.el.style[e.camel]=""}},bs="http://www.w3.org/1999/xlink",ys=/^xlink:/,ws=/^v-|^:|^@|^(?:is|transition|transition-mode|debounce|track-by|stagger|enter-stagger|leave-stagger)$/,xs=/^(?:value|checked|selected|muted)$/,Cs=/^(?:draggable|contenteditable|spellcheck)$/,ks={value:"_value","true-value":"_trueValue","false-value":"_falseValue"},$s={priority:Go,bind:function(){var e=this.arg,n=this.el.tagName;e||(this.deep=!0);var i=this.descriptor,o=i.interp;if(o&&(i.hasOneTime&&(this.expression=P(o,this._scope||this.vm)),(ws.test(e)||"name"===e&&("PARTIAL"===n||"SLOT"===n))&&("production"!==t.env.NODE_ENV&&Di(e+'="'+i.raw+'": attribute interpolation is not allowed in Vue.js directives and special attributes.',this.vm),this.el.removeAttribute(e),this.invalid=!0),"production"!==t.env.NODE_ENV)){var s=e+'="'+i.raw+'": ';"src"===e&&Di(s+'interpolation in "src" attribute will cause a 404 request. Use v-bind:src instead.',this.vm),"style"===e&&Di(s+'interpolation in "style" attribute will cause the attribute to be discarded in Internet Explorer. Use v-bind:style instead.',this.vm)}},update:function(t){if(!this.invalid){var e=this.arg;this.arg?this.handleSingle(e,t):this.handleObject(t||{})}},handleObject:_s.handleObject,handleSingle:function(t,e){var n=this.el,i=this.descriptor.interp;if(this.modifiers.camel&&(t=d(t)),!i&&xs.test(t)&&t in n){var o="value"===t&&null==e?"":e;n[t]!==o&&(n[t]=o)}var s=ks[t];if(!i&&s){n[s]=e;var a=n.__v_model;a&&a.listener()}return"value"===t&&"TEXTAREA"===n.tagName?void n.removeAttribute(t):void(Cs.test(t)?n.setAttribute(t,e?"true":"false"):null!=e&&e!==!1?"class"===t?(n.__v_trans&&(e+=" "+n.__v_trans.id+"-transition"),X(n,e)):ys.test(t)?n.setAttributeNS(bs,t,e===!0?"":e):n.setAttribute(t,e===!0?"":e):n.removeAttribute(t))}},Es={priority:Qo,bind:function(){if(this.arg){var t=this.id=d(this.arg),e=(this._scope||this.vm).$els;s(e,t)?e[t]=this.el:At(e,t,this.el)}},unbind:function(){var t=(this._scope||this.vm).$els;t[this.id]===this.el&&(t[this.id]=null)}},As={bind:function(){"production"!==t.env.NODE_ENV&&Di("v-ref:"+this.arg+" must be used on a child component. Found on <"+this.el.tagName.toLowerCase()+">.",this.vm)}},Os={bind:function(){var t=this.el;this.vm.$once("pre-hook:compiled",function(){t.removeAttribute("v-cloak")})}},Ts={text:Po,html:Bo,"for":ns,"if":is,show:os,model:us,on:ds,bind:$s,el:Es,ref:As,cloak:Os},Ns={deep:!0,update:function(t){t?"string"==typeof t?this.setClass(t.trim().split(/\s+/)):this.setClass(we(t)):this.cleanup()},setClass:function(t){this.cleanup(t);for(var e=0,n=t.length;e<n;e++){var i=t[e];i&&xe(this.el,i,tt)}this.prevKeys=t},cleanup:function(t){var e=this.prevKeys;if(e)for(var n=e.length;n--;){var i=e[n];(!t||t.indexOf(i)<0)&&xe(this.el,i,et)}}},Ss={priority:Yo,params:["keep-alive","transition-mode","inline-template"],bind:function(){this.el.__vue__?"production"!==t.env.NODE_ENV&&Di('cannot mount component "'+this.expression+'" on already mounted element: '+this.el):(this.keepAlive=this.params.keepAlive,this.keepAlive&&(this.cache={}),this.params.inlineTemplate&&(this.inlineTemplate=nt(this.el,!0)),this.pendingComponentCb=this.Component=null,this.pendingRemovals=0,this.pendingRemovalCb=null,this.anchor=at("v-component"),Q(this.el,this.anchor),this.el.removeAttribute("is"),this.el.removeAttribute(":is"),this.descriptor.ref&&this.el.removeAttribute("v-ref:"+f(this.descriptor.ref)),this.literal&&this.setComponent(this.expression))},update:function(t){this.literal||this.setComponent(t)},setComponent:function(t,e){if(this.invalidatePending(),t){var n=this;this.resolveComponent(t,function(){n.mountComponent(e)})}else this.unbuild(!0),this.remove(this.childVM,e),this.childVM=null},resolveComponent:function(t,e){var n=this;this.pendingComponentCb=k(function(i){n.ComponentName=i.options.name||("string"==typeof t?t:null),n.Component=i,e()}),this.vm._resolveComponent(t,this.pendingComponentCb)},mountComponent:function(t){this.unbuild(!0);var e=this,n=this.Component.options.activate,i=this.getCached(),o=this.build();n&&!i?(this.waitingFor=o,Ce(n,o,function(){e.waitingFor===o&&(e.waitingFor=null,e.transition(o,t))})):(i&&o._updateRef(),this.transition(o,t))},invalidatePending:function(){this.pendingComponentCb&&(this.pendingComponentCb.cancel(),this.pendingComponentCb=null)},build:function(e){var n=this.getCached();if(n)return n;if(this.Component){var i={name:this.ComponentName,el:Xt(this.el),template:this.inlineTemplate,parent:this._host||this.vm,_linkerCachable:!this.inlineTemplate,_ref:this.descriptor.ref,_asComponent:!0,_isRouterView:this._isRouterView,_context:this.vm,_scope:this._scope,_frag:this._frag};e&&_(i,e);var o=new this.Component(i);return this.keepAlive&&(this.cache[this.Component.cid]=o),"production"!==t.env.NODE_ENV&&this.el.hasAttribute("transition")&&o._isFragment&&Di("Transitions will not work on a fragment instance. Template: "+o.$options.template,o),o}},getCached:function(){return this.keepAlive&&this.cache[this.Component.cid]},unbuild:function(t){this.waitingFor&&(this.keepAlive||this.waitingFor.$destroy(),this.waitingFor=null);var e=this.childVM;return!e||this.keepAlive?void(e&&(e._inactive=!0,e._updateRef(!0))):void e.$destroy(!1,t)},remove:function(t,e){var n=this.keepAlive;if(t){this.pendingRemovals++,this.pendingRemovalCb=e;var i=this;t.$remove(function(){i.pendingRemovals--,n||t._cleanup(),!i.pendingRemovals&&i.pendingRemovalCb&&(i.pendingRemovalCb(),i.pendingRemovalCb=null)})}else e&&e()},transition:function(t,e){var n=this,i=this.childVM;switch(i&&(i._inactive=!0),t._inactive=!1,this.childVM=t,n.params.transitionMode){case"in-out":t.$before(n.anchor,function(){n.remove(i,e)});break;case"out-in":n.remove(i,function(){t.$before(n.anchor,e)});break;default:n.remove(i),t.$before(n.anchor,e)}},unbind:function(){if(this.invalidatePending(),this.unbuild(),this.cache){for(var t in this.cache)this.cache[t].$destroy();this.cache=null}}},Ds=Si._propBindingModes,Ps={},js=/^[$_a-zA-Z]+[\w$]*$/,Rs=/^[A-Za-z_$][\w$]*(\.[A-Za-z_$][\w$]*|\[[^\[\]]+\])*$/,Vs=Si._propBindingModes,Ms={bind:function(){var t=this.vm,e=t._context,n=this.descriptor.prop,i=n.path,o=n.parentPath,s=n.mode===Vs.TWO_WAY,a=this.parentWatcher=new Jt(e,o,function(e){Oe(t,n,e)},{twoWay:s,filters:n.filters,scope:this._scope});if(Ae(t,n,a.value),s){var r=this;t.$once("pre-hook:created",function(){r.childWatcher=new Jt(t,i,function(t){a.set(t)},{sync:!0})})}},unbind:function(){this.parentWatcher.teardown(),this.childWatcher&&this.childWatcher.teardown()}},Ls=[],Fs=!1,Hs="transition",Is="animation",Us=Zn+"Duration",Bs=ti+"Duration",qs=Un&&window.requestAnimationFrame,Ws=qs?function(t){qs(function(){qs(t)})}:function(t){setTimeout(t,50)},zs=Me.prototype;zs.enter=function(t,e){this.cancelPending(),this.callHook("beforeEnter"),this.cb=e,tt(this.el,this.enterClass),t(),this.entered=!1,this.callHookWithCb("enter"),this.entered||(this.cancel=this.hooks&&this.hooks.enterCancelled,Re(this.enterNextTick))},zs.enterNextTick=function(){var t=this;this.justEntered=!0,Ws(function(){t.justEntered=!1});var e=this.enterDone,n=this.getCssTransitionType(this.enterClass);this.pendingJsCb?n===Hs&&et(this.el,this.enterClass):n===Hs?(et(this.el,this.enterClass),this.setupCssCb(Xn,e)):n===Is?this.setupCssCb(ei,e):e()},zs.enterDone=function(){this.entered=!0,this.cancel=this.pendingJsCb=null,et(this.el,this.enterClass),this.callHook("afterEnter"),this.cb&&this.cb()},zs.leave=function(t,e){this.cancelPending(),this.callHook("beforeLeave"),this.op=t,this.cb=e,tt(this.el,this.leaveClass),this.left=!1,this.callHookWithCb("leave"),this.left||(this.cancel=this.hooks&&this.hooks.leaveCancelled,this.op&&!this.pendingJsCb&&(this.justEntered?this.leaveDone():Re(this.leaveNextTick)))},zs.leaveNextTick=function(){var t=this.getCssTransitionType(this.leaveClass);if(t){var e=t===Hs?Xn:ei;this.setupCssCb(e,this.leaveDone)}else this.leaveDone()},zs.leaveDone=function(){this.left=!0,this.cancel=this.pendingJsCb=null,this.op(),et(this.el,this.leaveClass),this.callHook("afterLeave"),this.cb&&this.cb(),this.op=null},zs.cancelPending=function(){this.op=this.cb=null;var t=!1;this.pendingCssCb&&(t=!0,K(this.el,this.pendingCssEvent,this.pendingCssCb),this.pendingCssEvent=this.pendingCssCb=null),this.pendingJsCb&&(t=!0,this.pendingJsCb.cancel(),this.pendingJsCb=null),t&&(et(this.el,this.enterClass),et(this.el,this.leaveClass)),this.cancel&&(this.cancel.call(this.vm,this.el),this.cancel=null)},zs.callHook=function(t){this.hooks&&this.hooks[t]&&this.hooks[t].call(this.vm,this.el)},zs.callHookWithCb=function(t){var e=this.hooks&&this.hooks[t];e&&(e.length>1&&(this.pendingJsCb=k(this[t+"Done"])),e.call(this.vm,this.el,this.pendingJsCb))},zs.getCssTransitionType=function(t){if(!(!Xn||document.hidden||this.hooks&&this.hooks.css===!1||Le(this.el))){var e=this.type||this.typeCache[t];if(e)return e;var n=this.el.style,i=window.getComputedStyle(this.el),o=n[Us]||i[Us];if(o&&"0s"!==o)e=Hs;else{var s=n[Bs]||i[Bs];s&&"0s"!==s&&(e=Is)}return e&&(this.typeCache[t]=e),e}},zs.setupCssCb=function(t,e){this.pendingCssEvent=t;var n=this,i=this.el,o=this.pendingCssCb=function(s){s.target===i&&(K(i,t,o),n.pendingCssEvent=n.pendingCssCb=null,!n.pendingJsCb&&e&&e())};Y(i,t,o)};var Gs={priority:Jo,update:function(t,e){var n=this.el,i=yt(this.vm.$options,"transitions",t);t=t||"v",e=e||"v",n.__v_trans=new Me(n,t,i,this.vm),et(n,e+"-transition"),tt(n,t+"-transition")}},Js={style:_s,"class":Ns,component:Ss,prop:Ms,transition:Gs},Qs=/^v-bind:|^:/,Ys=/^v-on:|^@/,Ks=/^v-([^:]+)(?:$|:(.*)$)/,Zs=/\.[^\.]+/g,Xs=/^(v-bind:|:)?transition$/,ta=1e3,ea=2e3;on.terminal=!0;var na=/[^\w\-:\.]/,ia=Object.freeze({compile:Fe,compileAndLinkProps:qe,compileRoot:We,transclude:hn,resolveSlots:vn}),oa=/^v-on:|^@/;yn.prototype._bind=function(){var t=this.name,e=this.descriptor;if(("cloak"!==t||this.vm._isCompiled)&&this.el&&this.el.removeAttribute){var n=e.attr||"v-"+t;this.el.removeAttribute(n)}var i=e.def;if("function"==typeof i?this.update=i:_(this,i),this._setupParams(),this.bind&&this.bind(),this._bound=!0,this.literal)this.update&&this.update(e.raw);else if((this.expression||this.modifiers)&&(this.update||this.twoWay)&&!this._checkStatement()){var o=this;this.update?this._update=function(t,e){o._locked||o.update(t,e)}:this._update=bn;var s=this._preProcess?m(this._preProcess,this):null,a=this._postProcess?m(this._postProcess,this):null,r=this._watcher=new Jt(this.vm,this.expression,this._update,{filters:this.filters,twoWay:this.twoWay,deep:this.deep,preProcess:s,postProcess:a,scope:this._scope});this.afterBind?this.afterBind():this.update&&this.update(r.value)}},yn.prototype._setupParams=function(){if(this.params){var t=this.params;this.params=Object.create(null);for(var e,n,i,o=t.length;o--;)e=f(t[o]),i=d(e),n=B(this.el,e),null!=n?this._setupParamWatcher(i,n):(n=U(this.el,e),null!=n&&(this.params[i]=""===n||n))}},yn.prototype._setupParamWatcher=function(t,e){var n=this,i=!1,o=(this._scope||this.vm).$watch(e,function(e,o){if(n.params[t]=e,i){var s=n.paramWatchers&&n.paramWatchers[t];s&&s.call(n,e,o)}else i=!0},{immediate:!0,user:!1});(this._paramUnwatchFns||(this._paramUnwatchFns=[])).push(o)},yn.prototype._checkStatement=function(){var t=this.expression;if(t&&this.acceptStatement&&!Bt(t)){var e=Ut(t).get,n=this._scope||this.vm,i=function(t){n.$event=t,e.call(n,n),n.$event=null};return this.filters&&(i=n._applyFilters(i,null,this.filters)),this.update(i),!0}},yn.prototype.set=function(e){this.twoWay?this._withLock(function(){this._watcher.set(e)}):"production"!==t.env.NODE_ENV&&Di("Directive.set() can only be used inside twoWaydirectives.")},yn.prototype._withLock=function(t){var e=this;e._locked=!0,t.call(e),oi(function(){e._locked=!1})},yn.prototype.on=function(t,e,n){Y(this.el,t,e,n),(this._listeners||(this._listeners=[])).push([t,e])},yn.prototype._teardown=function(){if(this._bound){this._bound=!1,this.unbind&&this.unbind(),this._watcher&&this._watcher.teardown();var e,n=this._listeners;if(n)for(e=n.length;e--;)K(this.el,n[e][0],n[e][1]);var i=this._paramUnwatchFns;if(i)for(e=i.length;e--;)i[e]();"production"!==t.env.NODE_ENV&&this.el&&this.el._vue_directives.$remove(this),this.vm=this.el=this._watcher=this._listeners=null}};var sa=/[^|]\|[^|]/;Ot(An),gn(An),_n(An),wn(An),xn(An),Cn(An),kn(An),$n(An),En(An);var aa={priority:ts,params:["name"],bind:function(){var t=this.params.name||"default",e=this.vm._slotContents&&this.vm._slotContents[t];e&&e.hasChildNodes()?this.compile(e.cloneNode(!0),this.vm._context,this.vm):this.fallback()},compile:function(t,e,n){if(t&&e){if(this.el.hasChildNodes()&&1===t.childNodes.length&&1===t.childNodes[0].nodeType&&t.childNodes[0].hasAttribute("v-if")){var i=document.createElement("template");i.setAttribute("v-else",""),i.innerHTML=this.el.innerHTML,i._context=this.vm,t.appendChild(i)}var o=n?n._scope:this._scope;this.unlink=e.$compile(t,n,o,this._frag)}t?Q(this.el,t):G(this.el)},fallback:function(){this.compile(nt(this.el,!0),this.vm)},unbind:function(){this.unlink&&this.unlink()}},ra={priority:Ko,params:["name"],paramWatchers:{name:function(t){is.remove.call(this),t&&this.insert(t)}},bind:function(){this.anchor=at("v-partial"),Q(this.el,this.anchor),
-this.insert(this.params.name)},insert:function(t){var e=yt(this.vm.$options,"partials",t,!0);e&&(this.factory=new le(this.vm,e),is.insert.call(this))},unbind:function(){this.frag&&this.frag.destroy()}},la={slot:aa,partial:ra},ca=ns._postProcess,ua=/(\d{3})(?=\d)/g,ha={orderBy:Nn,filterBy:Tn,limitBy:On,json:{read:function(t,e){return"string"==typeof t?t:JSON.stringify(t,null,arguments.length>1?e:2)},write:function(t){try{return JSON.parse(t)}catch(e){return t}}},capitalize:function(t){return t||0===t?(t=t.toString(),t.charAt(0).toUpperCase()+t.slice(1)):""},uppercase:function(t){return t||0===t?t.toString().toUpperCase():""},lowercase:function(t){return t||0===t?t.toString().toLowerCase():""},currency:function(t,e,n){if(t=parseFloat(t),!isFinite(t)||!t&&0!==t)return"";e=null!=e?e:"$",n=null!=n?n:2;var i=Math.abs(t).toFixed(n),o=n?i.slice(0,-1-n):i,s=o.length%3,a=s>0?o.slice(0,s)+(o.length>3?",":""):"",r=n?i.slice(-1-n):"",l=t<0?"-":"";return l+e+a+o.slice(s).replace(ua,"$1,")+r},pluralize:function(t){var e=g(arguments,1),n=e.length;if(n>1){var i=t%10-1;return i in e?e[i]:e[n-1]}return e[0]+(1===t?"":"s")},debounce:function(t,e){if(t)return e||(e=300),x(t,e)}};Dn(An),An.version="1.0.26",setTimeout(function(){Si.devtools&&(Bn?Bn.emit("init",An):"production"!==t.env.NODE_ENV&&Un&&/Chrome\/\d+/.test(window.navigator.userAgent)&&console.log("Download the Vue Devtools for a better development experience:\nhttps://github.com/vuejs/vue-devtools"))},0),e.exports=An}).call(this,t("_process"),"undefined"!=typeof global?global:"undefined"!=typeof self?self:"undefined"!=typeof window?window:{})},{_process:1}],6:[function(t,e,n){var i=n.cache={};n.insert=function(t){if(!i[t]){i[t]=!0;var e=document.createElement("style");return e.setAttribute("type","text/css"),"textContent"in e?e.textContent=t:e.styleSheet.cssText=t,document.getElementsByTagName("head")[0].appendChild(e),e}}},{}],7:[function(t,e,n){"use strict";function i(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(n,"__esModule",{value:!0});var o=t("./components/layouts/Navbar.vue"),s=i(o),a=t("./components/layouts/Sidebar.vue"),r=i(a),l=t("./components/layouts/Footbar.vue"),c=i(l);n["default"]={components:{Navbar:s["default"],Sidebar:r["default"],Footbar:c["default"]},replace:!1},e.exports.__esModule&&(e.exports=e.exports["default"]),("function"==typeof e.exports?e.exports.options:e.exports).template='\n<div class="container body">\n    <div id="app">\n        <div class="main_container">\n            <sidebar></sidebar>\n            <navbar></navbar>\n            <!-- Main content -->\n            <div class="right_col" role="main">\n                <section class="content">\n                    <!-- Your Page Content Here -->\n                    <!-- route outlet -->\n                    <router-view></router-view>\n                </section>\n            </div>\n            <!-- /.content -->\n            <footbar></footbar>\n        </div>\n    </div>\n</div>\n',e.hot&&!function(){e.hot.accept();var n=t("vue-hot-reload-api");n.install(t("vue"),!0),n.compatible&&(e.hot.data?n.update("_v-7350826e",e.exports,("function"==typeof e.exports?e.exports.options:e.exports).template):n.createRecord("_v-7350826e",e.exports))}()},{"./components/layouts/Footbar.vue":11,"./components/layouts/Navbar.vue":12,"./components/layouts/Sidebar.vue":13,vue:5,"vue-hot-reload-api":2}],8:[function(t,e,n){"use strict";Object.defineProperty(n,"__esModule",{value:!0}),n["default"]={},e.exports.__esModule&&(e.exports=e.exports["default"]),("function"==typeof e.exports?e.exports.options:e.exports).template='\n   <div class="">\n       <div class="row top_tiles">\n           <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">\n               <div class="tile-stats">\n                   <div class="icon"><i class="fa fa-caret-square-o-right"></i>\n                   </div>\n                   <div class="count">179</div>\n                    <h3>New Sign ups</h3>\n                   <p>Lorem ipsum psdea itgum rixt.</p>\n               </div>\n           </div>\n           <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">\n               <div class="tile-stats">\n                   <div class="icon"><i class="fa fa-comments-o"></i>\n                   </div>\n                   <div class="count">179</div>\n                    <h3>New Sign ups</h3>\n                   <p>Lorem ipsum psdea itgum rixt.</p>\n               </div>\n           </div>\n           <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">\n               <div class="tile-stats">\n                   <div class="icon"><i class="fa fa-sort-amount-desc"></i>\n                   </div>\n                   <div class="count">179</div>\n                    <h3>New Sign ups</h3>\n\n                   <p>Lorem ipsum psdea itgum rixt.</p>\n               </div>\n           </div>\n           <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">\n               <div class="tile-stats">\n                   <div class="icon"><i class="fa fa-check-square-o"></i>\n                   </div>\n                   <div class="count">179</div>\n                    <h3>New Sign ups</h3>\n\n                   <p>Lorem ipsum psdea itgum rixt.</p>\n               </div>\n           </div>\n       </div>\n       <div class="row">\n           <div class="col-md-12">\n               <div class="x_panel">\n                   <div class="x_title">\n                        <h2>Transaction Summary <small>Weekly progress</small></h2>\n\n                       <div class="filter">\n                           <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc"> <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>\n<span>December 30, 2014 - January 28, 2015</span>  <b class="caret"></b>\n\n                           </div>\n                       </div>\n                       <div class="clearfix"></div>\n                   </div>\n                   <div class="x_content">\n                       <div class="col-md-9 col-sm-12 col-xs-12">\n                           <div class="demo-container" style="height:280px">\n                               <div id="placeholder33x" class="demo-placeholder"></div>\n                           </div>\n                           <div class="tiles">\n                               <div class="col-md-4 tile"> <span>Total Sessions</span>\n\n                                    <h2>231,809</h2>\n<span class="sparkline11 graph" style="height: 160px;">\n                                 <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>\n                             </span>\n\n                               </div>\n                               <div class="col-md-4 tile"> <span>Total Revenue</span>\n\n                                    <h2>$231,809</h2>\n<span class="sparkline22 graph" style="height: 160px;">\n                                 <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>\n                             </span>\n\n                               </div>\n                               <div class="col-md-4 tile"> <span>Total Sessions</span>\n\n                                    <h2>231,809</h2>\n<span class="sparkline11 graph" style="height: 160px;">\n                                 <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>\n                             </span>\n\n                               </div>\n                           </div>\n                       </div>\n                       <div class="col-md-3 col-sm-12 col-xs-12">\n                           <div>\n                               <div class="x_title">\n                                    <h2>Top Profiles</h2>\n\n                                   <ul class="nav navbar-right panel_toolbox">\n                                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>\n\n                                       </li>\n                                       <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>\n\n                                           <ul class="dropdown-menu" role="menu">\n                                               <li><a href="#">Settings 1</a>\n\n                                               </li>\n                                               <li><a href="#">Settings 2</a>\n\n                                               </li>\n                                           </ul>\n                                       </li>\n                                       <li><a class="close-link"><i class="fa fa-close"></i></a>\n\n                                       </li>\n                                   </ul>\n                                   <div class="clearfix"></div>\n                               </div>\n                               <ul class="list-unstyled top_profiles scroll-view">\n                                   <li class="media event">\n                                       <a class="pull-left border-aero profile_thumb"> <i class="fa fa-user aero"></i>\n\n                                       </a>\n                                       <div class="media-body"> <a class="title" href="#">Ms. Mary Jane</a>\n\n                                           <p><strong>$2300. </strong> Agent Avarage Sales</p>\n                                           <p> <small>12 Sales Today</small>\n\n                                           </p>\n                                       </div>\n                                   </li>\n                                   <li class="media event">\n                                       <a class="pull-left border-green profile_thumb"> <i class="fa fa-user green"></i>\n\n                                       </a>\n                                       <div class="media-body"> <a class="title" href="#">Ms. Mary Jane</a>\n\n                                           <p><strong>$2300. </strong> Agent Avarage Sales</p>\n                                           <p> <small>12 Sales Today</small>\n\n                                           </p>\n                                       </div>\n                                   </li>\n                                   <li class="media event">\n                                       <a class="pull-left border-blue profile_thumb"> <i class="fa fa-user blue"></i>\n\n                                       </a>\n                                       <div class="media-body"> <a class="title" href="#">Ms. Mary Jane</a>\n\n                                           <p><strong>$2300. </strong> Agent Avarage Sales</p>\n                                           <p> <small>12 Sales Today</small>\n\n                                           </p>\n                                       </div>\n                                   </li>\n                                   <li class="media event">\n                                       <a class="pull-left border-aero profile_thumb"> <i class="fa fa-user aero"></i>\n\n                                       </a>\n                                       <div class="media-body"> <a class="title" href="#">Ms. Mary Jane</a>\n\n                                           <p><strong>$2300. </strong> Agent Avarage Sales</p>\n                                           <p> <small>12 Sales Today</small>\n\n                                           </p>\n                                       </div>\n                                   </li>\n                                   <li class="media event">\n                                       <a class="pull-left border-green profile_thumb"> <i class="fa fa-user green"></i>\n\n                                       </a>\n                                       <div class="media-body"> <a class="title" href="#">Ms. Mary Jane</a>\n\n                                           <p><strong>$2300. </strong> Agent Avarage Sales</p>\n                                           <p> <small>12 Sales Today</small>\n\n                                           </p>\n                                       </div>\n                                   </li>\n                               </ul>\n                           </div>\n                       </div>\n                   </div>\n               </div>\n           </div>\n       </div>\n       <div class="row">\n           <div class="col-md-12">\n               <div class="x_panel">\n                   <div class="x_title">\n                        <h2>Weekly Summary <small>Activity shares</small></h2>\n\n                       <ul class="nav navbar-right panel_toolbox">\n                           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>\n\n                           </li>\n                           <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>\n\n                               <ul class="dropdown-menu" role="menu">\n                                   <li><a href="#">Settings 1</a>\n\n                                   </li>\n                                   <li><a href="#">Settings 2</a>\n\n                                   </li>\n                               </ul>\n                           </li>\n                           <li><a class="close-link"><i class="fa fa-close"></i></a>\n\n                           </li>\n                       </ul>\n                       <div class="clearfix"></div>\n                   </div>\n                   <div class="x_content">\n                       <div class="row" style="border-bottom: 1px solid #E0E0E0; padding-bottom: 5px; margin-bottom: 5px;">\n                           <div class="col-md-7" style="overflow:hidden;"> <span class="sparkline_one" style="height: 160px; padding: 10px 25px;">\n                             <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>\n                         </span>\n\n                                <h4 style="margin:18px">Weekly sales progress</h4>\n\n                           </div>\n                           <div class="col-md-5">\n                               <div class="row" style="text-align: center;">\n                                   <div class="col-md-4">\n                                       <canvas id="canvas1i" height="110" width="110" style="margin: 5px 10px 10px 0"></canvas>\n                                        <h4 style="margin:0">Bounce Rates</h4>\n\n                                   </div>\n                                   <div class="col-md-4">\n                                       <canvas id="canvas1i2" height="110" width="110" style="margin: 5px 10px 10px 0"></canvas>\n                                        <h4 style="margin:0">New Traffic</h4>\n\n                                   </div>\n                                   <div class="col-md-4">\n                                       <canvas id="canvas1i3" height="110" width="110" style="margin: 5px 10px 10px 0"></canvas>\n                                        <h4 style="margin:0">Device Share</h4>\n\n                                   </div>\n                               </div>\n                           </div>\n                       </div>\n                   </div>\n               </div>\n           </div>\n       </div>\n       <div class="row">\n           <div class="col-md-4">\n               <div class="x_panel">\n                   <div class="x_title">\n                        <h2>Top Profiles <small>Sessions</small></h2>\n\n                       <ul class="nav navbar-right panel_toolbox">\n                           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>\n\n                           </li>\n                           <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>\n\n                               <ul class="dropdown-menu" role="menu">\n                                   <li><a href="#">Settings 1</a>\n\n                                   </li>\n                                   <li><a href="#">Settings 2</a>\n\n                                   </li>\n                               </ul>\n                           </li>\n                           <li><a class="close-link"><i class="fa fa-close"></i></a>\n\n                           </li>\n                       </ul>\n                       <div class="clearfix"></div>\n                   </div>\n                   <div class="x_content">\n                       <article class="media event">\n                           <a class="pull-left date">\n                               <p class="month">April</p>\n                               <p class="day">23</p>\n                           </a>\n                           <div class="media-body"> <a class="title" href="#">Item One Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class="media event">\n                           <a class="pull-left date">\n                               <p class="month">April</p>\n                               <p class="day">23</p>\n                           </a>\n                           <div class="media-body"> <a class="title" href="#">Item Two Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class="media event">\n                           <a class="pull-left date">\n                               <p class="month">April</p>\n                               <p class="day">23</p>\n                           </a>\n                           <div class="media-body"> <a class="title" href="#">Item Two Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class="media event">\n                           <a class="pull-left date">\n                               <p class="month">April</p>\n                               <p class="day">23</p>\n                           </a>\n                           <div class="media-body"> <a class="title" href="#">Item Two Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class="media event">\n                           <a class="pull-left date">\n                               <p class="month">April</p>\n                               <p class="day">23</p>\n                           </a>\n                           <div class="media-body"> <a class="title" href="#">Item Three Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                   </div>\n               </div>\n           </div>\n           <div class="col-md-4">\n               <div class="x_panel">\n                   <div class="x_title">\n                        <h2>Top Profiles <small>Sessions</small></h2>\n\n                       <ul class="nav navbar-right panel_toolbox">\n                           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>\n\n                           </li>\n                           <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>\n\n                               <ul class="dropdown-menu" role="menu">\n                                   <li><a href="#">Settings 1</a>\n\n                                   </li>\n                                   <li><a href="#">Settings 2</a>\n\n                                   </li>\n                               </ul>\n                           </li>\n                           <li><a class="close-link"><i class="fa fa-close"></i></a>\n\n                           </li>\n                       </ul>\n                       <div class="clearfix"></div>\n                   </div>\n                   <div class="x_content">\n                       <article class="media event">\n                           <a class="pull-left date">\n                               <p class="month">April</p>\n                               <p class="day">23</p>\n                           </a>\n                           <div class="media-body"> <a class="title" href="#">Item One Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class="media event">\n                           <a class="pull-left date">\n                               <p class="month">April</p>\n                               <p class="day">23</p>\n                           </a>\n                           <div class="media-body"> <a class="title" href="#">Item Two Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class="media event">\n                           <a class="pull-left date">\n                               <p class="month">April</p>\n                               <p class="day">23</p>\n                           </a>\n                           <div class="media-body"> <a class="title" href="#">Item Two Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class="media event">\n                           <a class="pull-left date">\n                               <p class="month">April</p>\n                               <p class="day">23</p>\n                           </a>\n                           <div class="media-body"> <a class="title" href="#">Item Two Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class="media event">\n                           <a class="pull-left date">\n                               <p class="month">April</p>\n                               <p class="day">23</p>\n                           </a>\n                           <div class="media-body"> <a class="title" href="#">Item Three Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                   </div>\n               </div>\n           </div>\n           <div class="col-md-4">\n               <div class="x_panel">\n                   <div class="x_title">\n                        <h2>Top Profiles <small>Sessions</small></h2>\n\n                       <ul class="nav navbar-right panel_toolbox">\n                           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>\n\n                           </li>\n                           <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>\n\n                               <ul class="dropdown-menu" role="menu">\n                                   <li><a href="#">Settings 1</a>\n\n                                   </li>\n                                   <li><a href="#">Settings 2</a>\n\n                                   </li>\n                               </ul>\n                           </li>\n                           <li><a class="close-link"><i class="fa fa-close"></i></a>\n\n                           </li>\n                       </ul>\n                       <div class="clearfix"></div>\n                   </div>\n                   <div class="x_content">\n                       <article class="media event">\n                           <a class="pull-left date">\n                               <p class="month">April</p>\n                               <p class="day">23</p>\n                           </a>\n                           <div class="media-body"> <a class="title" href="#">Item One Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class="media event">\n                           <a class="pull-left date">\n                               <p class="month">April</p>\n                               <p class="day">23</p>\n                           </a>\n                           <div class="media-body"> <a class="title" href="#">Item Two Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class="media event">\n                           <a class="pull-left date">\n                               <p class="month">April</p>\n                               <p class="day">23</p>\n                           </a>\n                           <div class="media-body"> <a class="title" href="#">Item Two Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class="media event">\n                           <a class="pull-left date">\n                               <p class="month">April</p>\n                               <p class="day">23</p>\n                           </a>\n                           <div class="media-body"> <a class="title" href="#">Item Two Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class="media event">\n                           <a class="pull-left date">\n                               <p class="month">April</p>\n                               <p class="day">23</p>\n                           </a>\n                           <div class="media-body"> <a class="title" href="#">Item Three Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                   </div>\n               </div>\n           </div>\n       </div>\n   </div>\n',e.hot&&!function(){e.hot.accept();var n=t("vue-hot-reload-api");n.install(t("vue"),!0),n.compatible&&(e.hot.data?n.update("_v-7d822bc4",e.exports,("function"==typeof e.exports?e.exports.options:e.exports).template):n.createRecord("_v-7d822bc4",e.exports))}()},{vue:5,"vue-hot-reload-api":2}],9:[function(t,e,n){"use strict";function i(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(n,"__esModule",{value:!0});var o=t("./price/PriceHead.vue"),s=i(o),a=t("./price/Datatable.vue"),r=i(a);n["default"]={components:{Pricehead:s["default"],Datatable:r["default"]}},e.exports.__esModule&&(e.exports=e.exports["default"]),("function"==typeof e.exports?e.exports.options:e.exports).template='\n<pricehead></pricehead>\n<div class="row">\n    <datatable></datatable>\n</div>\n',e.hot&&!function(){e.hot.accept();var n=t("vue-hot-reload-api");n.install(t("vue"),!0),n.compatible&&(e.hot.data?n.update("_v-c406d15a",e.exports,("function"==typeof e.exports?e.exports.options:e.exports).template):n.createRecord("_v-c406d15a",e.exports))}()},{"./price/Datatable.vue":15,"./price/PriceHead.vue":17,vue:5,"vue-hot-reload-api":2}],10:[function(t,e,n){("function"==typeof e.exports?e.exports.options:e.exports).template='\n<div class="page-title">\n    <div class="title_left">\n        <h3>[Accelerator]<small>  Product Overview</small></h3>\n    </div>\n</div>\n<div class="clearfix"></div>\n',e.hot&&!function(){e.hot.accept();var n=t("vue-hot-reload-api");n.install(t("vue"),!0),n.compatible&&(e.hot.data?n.update("_v-c96f890e",e.exports,("function"==typeof e.exports?e.exports.options:e.exports).template):n.createRecord("_v-c96f890e",e.exports))}()},{vue:5,"vue-hot-reload-api":2}],11:[function(t,e,n){("function"==typeof e.exports?e.exports.options:e.exports).template='\n<!-- footer content -->\n<footer>\n    <div class="pull-right">Accelerator - Product Prcing Overview  <a href="#"> [Eservicesgroup.com]</a></div>\n  <div class="clearfix"></div>\n</footer>\n<!-- /footer content -->\n',e.hot&&!function(){e.hot.accept();var n=t("vue-hot-reload-api");n.install(t("vue"),!0),n.compatible&&(e.hot.data?n.update("_v-331903e9",e.exports,("function"==typeof e.exports?e.exports.options:e.exports).template):n.createRecord("_v-331903e9",e.exports))}()},{vue:5,"vue-hot-reload-api":2}],12:[function(t,e,n){("function"==typeof e.exports?e.exports.options:e.exports).template='\n<div class="top_nav">\n    <div class="nav_menu">\n        <nav class="" role="navigation">\n            <div class="nav toggle">\n                <a id="menu_toggle"><i class="fa fa-bars"></i></a>\n            </div>\n            <ul class="nav navbar-nav navbar-right">\n                <li class="">\n                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">\n                        <img src="images/img.jpg" alt="">John Doe <span class=" fa fa-angle-down"></span>\n                    </a>\n                    <ul class="dropdown-menu dropdown-usermenu pull-right">\n                        <li><a href="javascript:;"> Profile</a>\n                        </li>\n                        <li>\n                            <a href="javascript:;">\n                                <span class="badge bg-red pull-right">50%</span>\n                                <span>Settings</span>\n                            </a>\n                        </li>\n                        <li><a href="javascript:;">Help</a>\n                        </li>\n                        <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>\n                        </li>\n                    </ul>\n                </li>\n                <li role="presentation" class="dropdown">\n                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">    <i class="fa fa-envelope-o"></i>\n                        <span class="badge bg-green">6</span>\n                    </a>\n                    <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">\n                        <li>\n                            <a>\n                                <span class="image"><img src="images/img.jpg" alt="Profile Image"></span>\n                                <span>\n                                    <span>John Smith</span>\n                                    <span class="time">3 mins ago</span>\n                                </span>\n                                <span class="message">Film festivals used to be do-or-die moments for movie makers. They were where...</span>\n                            </a>\n                        </li>\n                        <li>\n                            <a>\n                                <span class="image"><img src="images/img.jpg" alt="Profile Image"></span>\n                                <span>\n                                    <span>John Smith</span>\n                                    <span class="time">3 mins ago</span>\n                                </span>\n                                <span class="message">Film festivals used to be do-or-die moments for movie makers. They were where...</span>\n                            </a>\n                        </li>\n                        <li>\n                            <a>\n                                <span class="image"><img src="images/img.jpg" alt="Profile Image"></span>\n                                <span>\n                                    <span>John Smith</span>\n                                    <span class="time">3 mins ago</span>\n                                </span>\n                                <span class="message">Film festivals used to be do-or-die moments for movie makers. They were where...</span>\n                            </a>\n                        </li>\n                        <li>\n                            <a>\n                                <span class="image"><img src="images/img.jpg" alt="Profile Image"></span>\n                                <span>\n                                    <span>John Smith</span>\n                                    <span class="time">3 mins ago</span>\n                                </span>\n                                <span class="message">Film festivals used to be do-or-die moments for movie makers. They were where...</span>\n                            </a>\n                        </li>\n                        <li>\n                            <div class="text-center">\n                                <a>\n                                    <strong>See All Alerts</strong>\n                                    <i class="fa fa-angle-right"></i>\n                                </a>\n                            </div>\n                        </li>\n                    </ul>\n                </li>\n            </ul>\n        </nav>\n    </div>\n</div>\n',
-e.hot&&!function(){e.hot.accept();var n=t("vue-hot-reload-api");n.install(t("vue"),!0),n.compatible&&(e.hot.data?n.update("_v-2f4e4388",e.exports,("function"==typeof e.exports?e.exports.options:e.exports).template):n.createRecord("_v-2f4e4388",e.exports))}()},{vue:5,"vue-hot-reload-api":2}],13:[function(t,e,n){"use strict";$(document).ready(function(){var t=(window.location.href.split("?")[0],function(){$(".right_col").css("min-height",$(window).height());var t=$("body").outerHeight(),e=$("body").hasClass("footer_fixed")?0:$("footer").height(),n=$(".left_col").eq(1).height()+$(".sidebar-footer").height(),i=t<n?n:t;i-=$(".nav_menu").height()+e});$("#sidebar-menu").find("a").on("click",function(e){var n=$(this).parent();n.is(".active")?(n.removeClass("active active-sm"),$("ul:first",n).slideUp(function(){t()})):(n.parent().is(".child_menu")&&($("#sidebar-menu").find("li").removeClass("active active-sm"),$("#sidebar-menu").find("li ul").slideUp()),n.addClass("active"),$("ul:first",n).slideDown(function(){t()}))}),$("#sidebar-menu").find("ul ul").removeClass("active"),$("#menu_toggle").on("click",function(){$("body").hasClass("nav-md")?($("#sidebar-menu").find("li.active ul").hide(),$("#sidebar-menu").find("li.active").addClass("active-sm").removeClass("active")):($("#sidebar-menu").find("li.active-sm ul").show(),$("#sidebar-menu").find("li.active-sm").addClass("active").removeClass("active-sm")),$("body").toggleClass("nav-md nav-sm"),t()}),$(window).smartresize(function(){t()}),t(),$.fn.mCustomScrollbar&&$(".menu_fixed").mCustomScrollbar({autoHideScrollbar:!0,theme:"minimal",mouseWheel:{preventDefault:!0}})}),e.exports.__esModule&&(e.exports=e.exports["default"]),("function"==typeof e.exports?e.exports.options:e.exports).template='\n<div class="col-md-3 left_col">\n    <div class="left_col scroll-view">\n        <div class="navbar nav_title" style="border: 0;">\n            <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>[Accelerator]</span></a>\n        </div>\n        <div class="clearfix"></div>\n        <!-- menu profile quick info -->\n        <div class="profile">\n            <div class="profile_pic">\n                <img src="images/img.jpg" alt="..." class="img-circle profile_img">\n            </div>\n            <div class="profile_info">\n                <span>Welcome,</span>\n                <h2>John Doe</h2>\n            </div>\n        </div>\n        <!-- /menu profile quick info -->\n        <!-- sidebar menu -->\n        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">\n            <div class="menu_section">\n                <h3>General</h3>\n                <ul class="nav side-menu">\n                    <li>\n                        <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>\n                        <ul class="nav child_menu">\n                            <li><a v-link="\'/\'">Dashboard</a>\n                            </li>\n                            <li><a v-link="\'price-overview\'">Price Overview</a>\n                            </li>\n                            <li><a v-link="\'product-overview\'">Product Overview</a>\n                            </li>\n                        </ul>\n                    </li>\n                    <li>\n                        <a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>\n                        <ul class="nav child_menu">\n                            <li><a href="form.html">General Form</a>\n                            </li>\n                            <li><a href="form_advanced.html">Advanced Components</a>\n                            </li>\n                            <li><a href="form_validation.html">Form Validation</a>\n                            </li>\n                            <li><a href="form_wizards.html">Form Wizard</a>\n                            </li>\n                            <li><a href="form_upload.html">Form Upload</a>\n                            </li>\n                            <li><a href="form_buttons.html">Form Buttons</a>\n                            </li>\n                        </ul>\n                    </li>\n                    <li>\n                        <a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>\n                        <ul class="nav child_menu">\n                            <li><a href="general_elements.html">General Elements</a>\n                            </li>\n                            <li><a href="media_gallery.html">Media Gallery</a>\n                            </li>\n                            <li><a href="typography.html">Typography</a>\n                            </li>\n                            <li><a href="icons.html">Icons</a>\n                            </li>\n                            <li><a href="glyphicons.html">Glyphicons</a>\n                            </li>\n                            <li><a href="widgets.html">Widgets</a>\n                            </li>\n                            <li><a href="invoice.html">Invoice</a>\n                            </li>\n                            <li><a href="inbox.html">Inbox</a>\n                            </li>\n                            <li><a href="calendar.html">Calendar</a>\n                            </li>\n                        </ul>\n                    </li>\n                    <li>\n                        <a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>\n                        <ul class="nav child_menu">\n                            <li><a href="tables.html">Tables</a>\n                            </li>\n                            <li><a href="tables_dynamic.html">Table Dynamic</a>\n                            </li>\n                        </ul>\n                    </li>\n                    <li>\n                        <a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>\n                        <ul class="nav child_menu">\n                            <li><a href="chartjs.html">Chart JS</a>\n                            </li>\n                            <li><a href="chartjs2.html">Chart JS2</a>\n                            </li>\n                            <li><a href="morisjs.html">Moris JS</a>\n                            </li>\n                            <li><a href="echarts.html">ECharts</a>\n                            </li>\n                            <li><a href="other_charts.html">Other Charts</a>\n                            </li>\n                        </ul>\n                    </li>\n                    <li>\n                        <a><i class="fa fa-clone"></i>Layouts <span class="fa fa-chevron-down"></span></a>\n                        <ul class="nav child_menu">\n                            <li><a href="fixed_sidebar.html">Fixed Sidebar</a>\n                            </li>\n                            <li><a href="fixed_footer.html">Fixed Footer</a>\n                            </li>\n                        </ul>\n                    </li>\n                </ul>\n            </div>\n            <div class="menu_section">\n                 <h3>Live On</h3>\n                <ul class="nav side-menu">\n                    <li>\n                        <a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>\n                        <ul class="nav child_menu">\n                            <li><a href="e_commerce.html">E-commerce</a>\n                            </li>\n                            <li><a href="projects.html">Projects</a>\n                            </li>\n                            <li><a href="project_detail.html">Project Detail</a>\n                            </li>\n                            <li><a href="contacts.html">Contacts</a>\n                            </li>\n                            <li><a href="profile.html">Profile</a>\n                            </li>\n                        </ul>\n                    </li>\n                    <li>\n                        <a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>\n                        <ul class="nav child_menu">\n                            <li><a href="page_403.html">403 Error</a>\n                            </li>\n                            <li><a href="page_404.html">404 Error</a>\n                            </li>\n                            <li><a href="page_500.html">500 Error</a>\n                            </li>\n                            <li><a href="plain_page.html">Plain Page</a>\n                            </li>\n                            <li><a href="login.html">Login Page</a>\n                            </li>\n                            <li><a href="pricing_tables.html">Pricing Tables</a>\n                            </li>\n                        </ul>\n                    </li>\n                    <li>\n                        <a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>\n                        <ul class="nav child_menu">\n                            <li>\n                                <a href="#level1_1">Level One</a>\n                                </li><li><a>Level One<span class="fa fa-chevron-down"></span></a>\n\n                                    <ul class="nav child_menu">\n                                        <li class="sub_menu"><a href="level2.html">Level Two</a>\n\n                                        </li>\n                                        <li><a href="#level2_1">Level Two</a>\n\n                                        </li>\n                                        <li><a href="#level2_2">Level Two</a>\n\n                                        </li>\n                                    </ul>\n                                </li>\n                                <li>\n                                    <a href="#level1_2">Level One</a>\n                                </li>\n                        </ul>\n                    </li>\n                    <li>\n                        <a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a>\n                    </li>\n                </ul>\n            </div>\n        </div>\n        <!-- /sidebar menu -->\n        <!-- /menu footer buttons -->\n        <div class="sidebar-footer hidden-small">\n            <a data-toggle="tooltip" data-placement="top" title="Settings">\n                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>\n            </a>\n            <a data-toggle="tooltip" data-placement="top" title="FullScreen">\n                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>\n            </a>\n            <a data-toggle="tooltip" data-placement="top" title="Lock">\n                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>\n            </a>\n            <a data-toggle="tooltip" data-placement="top" title="Logout">\n                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>\n            </a>\n        </div>\n        <!-- /menu footer buttons -->\n    </div>\n</div>\n',e.hot&&!function(){e.hot.accept();var n=t("vue-hot-reload-api");n.install(t("vue"),!0),n.compatible&&(e.hot.data?n.update("_v-d849ea40",e.exports,("function"==typeof e.exports?e.exports.options:e.exports).template):n.createRecord("_v-d849ea40",e.exports))}()},{vue:5,"vue-hot-reload-api":2}],14:[function(t,e,n){"use strict";e.exports.__esModule&&(e.exports=e.exports["default"]),("function"==typeof e.exports?e.exports.options:e.exports).template='\n<div class="modal-dialog modal-lg">\n    <div class="modal-content">\n        <div class="modal-header">\n            <button type="button" class="close" data-dismiss="modal" aria-label="Close">\n                <span aria-hidden="true">×</span>\n            </button>\n             <h4 class="modal-title" id="myModalLabel2">Show OR Hide columns: </h4>\n        </div>\n        <div class="modal-body">\n            <div class="x_panel">\n                <div class="x_title">\n                     <h2><small>"Green" for Show, "Red" for "Hide"</small></h2>\n                    <div class="clearfix"></div>\n                </div>\n                <div class="x_content">\n                    <div class="x_title">\n                          <a class="toggle-vis btn btn-success" data-column="0">Checkbox</a>\n                        - <a class="toggle-vis btn btn-success" data-column="1">Marketplace ID</a>\n                        - <a class="toggle-vis btn btn-success" data-column="2">ESG Master SKU</a>\n                        - <a class="toggle-vis btn btn-success" data-column="3">ESG SKU</a>\n                        - <a class="toggle-vis btn btn-success" data-column="4">Product Name</a>\n                        - <a class="toggle-vis btn btn-success" data-column="5">Sourcing status</a>\n                        - <a class="toggle-vis btn btn-success" data-column="6">Delivery Type</a>\n                        - <a class="toggle-vis btn btn-success" data-column="7">ETRADE QTY</a>\n                        - <a class="toggle-vis btn btn-success" data-column="8">ES_HK QTY</a>\n                        - <a class="toggle-vis btn btn-success" data-column="9">ES_DG QTY</a>\n                        - <a class="toggle-vis btn btn-success" data-column="10">Listing QTY</a>\n                        - <a class="toggle-vis btn btn-success" data-column="11">Item Cost</a>\n                        - <a class="toggle-vis btn btn-success" data-column="12">Selling Price</a>\n                        - <a class="toggle-vis btn btn-success" data-column="13">Profit</a>\n                        - <a class="toggle-vis btn btn-success" data-column="14">Margin</a>\n                        <!-- - <a class="toggle-vis btn btn-success" data-column="14">Detail</a> -->\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div class="modal-footer">\n            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n        </div>\n    </div>\n</div>\n',e.hot&&!function(){e.hot.accept();var n=t("vue-hot-reload-api");n.install(t("vue"),!0),n.compatible&&(e.hot.data?n.update("_v-4f31524a",e.exports,("function"==typeof e.exports?e.exports.options:e.exports).template):n.createRecord("_v-4f31524a",e.exports))}()},{vue:5,"vue-hot-reload-api":2}],15:[function(t,e,n){function i(t){return t&&t.__esModule?t:{"default":t}}var o=t("vueify/lib/insert-css"),s=o.insert("\n\n");Object.defineProperty(n,"__esModule",{value:!0});var a=t("./PriceSearch.vue"),r=i(a),l=t("./OverviewModal.vue"),c=i(l),u=t("./CustomHeader.vue"),h=i(u);n["default"]={components:{Pricesearch:r["default"],Overviewmodal:c["default"],Customheader:h["default"]},ready:function(){},data:function(){return{items:{}}},methods:{initDatatable:function(){this.$http({}).then(function(){var t=$("#datatable-fixed-header").DataTable({dom:"Bfrtip",fixedHeader:!0,bSort:!1,iDisplayLength:25,buttons:[{extend:"csv",className:"btn-sm",exportOptions:{columns:[1,2,3,4,5,6,7,8,9,10,11,12,13,14]}},{extend:"excel",className:"btn-sm",exportOptions:{columns:[1,2,3,4,5,6,7,8,9,10,11,12,13,14]}},{extend:"print",className:"btn-sm",exportOptions:{columns:[1,2,3,4,5,6,7,8,9,10,11,12,13,14]}}]});$("a.toggle-vis").on("click",function(e){e.preventDefault();var n=t.column($(this).attr("data-column"));n.visible(!n.visible()),n.visible()?$(this).removeClass("btn-danger").addClass("btn-success"):$(this).removeClass("btn-success").addClass("btn-danger")})}).then(function(){function t(){"all"===e&&$(".bulk_action input[name='table_records']").iCheck("check"),"none"===e&&$(".bulk_action input[name='table_records']").iCheck("uncheck");var t=$(".bulk_action input[name='table_records']:checked").length;t?($(".column-title").hide(),$(".bulk-actions").show(),$(".action-cnt").html(t+" Records Selected")):($(".column-title").show(),$(".bulk-actions").hide())}$("input.flat")[0]&&$("input.flat").iCheck({checkboxClass:"icheckbox_flat-green",radioClass:"iradio_flat-green"}),$("table input").on("ifChecked",function(){e="",$(this).parent().parent().parent().addClass("selected"),t()}),$("table input").on("ifUnchecked",function(){e="",$(this).parent().parent().parent().removeClass("selected"),t()});var e="";$(".bulk_action input").on("ifChecked",function(){e="",$(this).parent().parent().parent().addClass("selected"),t()}),$(".bulk_action input").on("ifUnchecked",function(){e="",$(this).parent().parent().parent().removeClass("selected"),t()}),$(".bulk_action input#check-all").on("ifChecked",function(){e="all",t()}),$(".bulk_action input#check-all").on("ifUnchecked",function(){e="none",t()})})}},events:{"form-search":function(t){this.$set("items",t);var e=$("#datatable-fixed-header").DataTable();e.destroy(),this.initDatatable()}}},e.exports.__esModule&&(e.exports=e.exports["default"]),("function"==typeof e.exports?e.exports.options:e.exports).template='\n<pricesearch></pricesearch>\n<div class="col-md-12 col-sm-12 col-xs-12">\n    <div class="x_panel">\n        <div class="x_title">\n            <h2>Filters <small>[Base]</small></h2>\n            <ul class="nav navbar-right panel_toolbox">\n                <li></li>\n            </ul>\n            <div class="clearfix"></div>\n        </div>\n        <div class="x_content">\n            <div class="modal fade custom_header" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">\n                <customheader></customheader>\n            </div>\n            <table id="datatable-fixed-header" class="table table-striped table-bordered bulk_action jambo_table" width="100%">\n                <thead>\n                    <tr>\n                        <th>\n                            <input type="checkbox" id="check-all" class="flat">\n                        </th>\n                        <th>Marketplace ID</th>\n                        <th>ESG Master SKU</th>\n                        <th>ESG SKU</th>\n                        <th>Product Name</th>\n                        <th>Sourcing status</th>\n                        <th>Delivery Type</th>\n                        <th>ETRADE QTY</th>\n                        <th>ES_HK QTY</th>\n                        <th>ES_DGME QTY</th>\n                        <th>Listing QTY</th>\n                        <th>Item Cost</th>\n                        <th>Selling Price</th>\n                        <th>Profit</th>\n                        <th>Margin</th>\n                        <th>\n                            <b class="btn btn-success" data-toggle="modal" data-target=".custom_header">Custom Header</b>\n                        </th>\n                    </tr>\n                </thead>\n                <tbody>\n                    <tr v-for="item in items">\n                        <td class="a-center ">\n                            <input type="checkbox" class="flat" name="table_records">\n                        </td>\n                        <td>{{item.markerplace_id}}</td>\n                        <td>{{item.master_sku}}</td>\n                        <td>{{item.sku}}</td>\n                        <td>{{item.prod_name}}</td>\n                        <td>{{item.sourcing_status}}</td>\n                        <td>\n                            <div class="col-md col-xs-12">\n                                <select name="delivery_type" class="form-control">\n                                    <option value="STD">STD</option>\n                                    <option value="EXPED">EXPED</option>\n                                    <option value="FBA">FBA</option>\n                                </select>\n                            </div>\n                        </td>\n                        <td>\n                            <input type="text" value="{{item.etrade_qty}}" name="etrade_qty" class="price_input_sm">\n                        </td>\n                        <td>\n                            <input type="text" value="{{item.es_hk_qty}}" name="es_hk_qty" class="price_input_sm">\n                        </td>\n                        <td>\n                            <input type="text" value="{{item.es_dg_qty}}" name="es_dg_qty" class="price_input_sm">\n                        </td>\n                        <td>\n                            <input type="text" value="{{item.es_dg_qty}}" name="es_dg_qty" class="price_input_sm">\n                        </td>\n                        <td>\n                            <input type="text" value="{{item.item_price}}" name="item_price" class="price_input_sm">\n                        </td>\n                        <td>\n                            <input type="text" value="{{item.item_price + 2}}" name="item_price" class="price_input_sm">\n                        </td>\n                        <td>{{item.profit}}</td>\n                        <td>{{item.margin}}</td>\n                        <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: {{item.modify_on}}  Update By:{{item.modify_by}}">\n                            <input type="Button" value="Detail" class="btn btn-primary" data-toggle="modal" data-target=".overview-modal{{$index}}">\n                            <div class="modal fade overview-modal{{$index}}" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">\n                                <!-- detail overview-->\n                                <overviewmodal :item="item"></overviewmodal>\n                            </div>\n                        </td>\n                    </tr>\n                </tbody>\n            </table>\n        </div>\n    </div>\n</div>\n<div class="navbar navbar-default navbar-fixed-bottom">\n    <div class="x_panel">\n        <div class="">\n            <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">\n                <button type="submit" class="btn btn-primary">Cancel</button>\n                <button type="submit" class="btn btn-success">Update</button>\n            </div>\n        </div>\n    </div>\n</div>\n',e.hot&&!function(){e.hot.accept();var n=t("vue-hot-reload-api");n.install(t("vue"),!0),n.compatible&&(e.hot.dispose(function(){o.cache["\n\n"]=!1,document.head.removeChild(s)}),e.hot.data?n.update("_v-8e336bb0",e.exports,("function"==typeof e.exports?e.exports.options:e.exports).template):n.createRecord("_v-8e336bb0",e.exports))}()},{"./CustomHeader.vue":14,"./OverviewModal.vue":16,"./PriceSearch.vue":18,vue:5,"vue-hot-reload-api":2,"vueify/lib/insert-css":6}],16:[function(t,e,n){"use strict";Object.defineProperty(n,"__esModule",{value:!0}),n["default"]={props:["item"]},e.exports.__esModule&&(e.exports=e.exports["default"]),("function"==typeof e.exports?e.exports.options:e.exports).template='\n<div class="modal-dialog modal-lg">\n    <div class="modal-content">\n        <div class="modal-header">\n            <button type="button" class="close" data-dismiss="modal" aria-label="Close">\n                <span aria-hidden="true">×</span>\n            </button>\n             <h4 class="modal-title" id="myModalLabel2">Overview [ {{item.markerplace_id}} ] - {{item.master_sku}} - {{item.sku}}</h4>\n        </div>\n        <div class="modal-body">\n            <form class="form-horizontal form-label-left">\n                <div class="form-group col-md-12">\n                    <label class="control-label col-md-3">Marketplace ID</label>\n                    <div class="col-md-6 col-xs-12">\n                        <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.markerplace_id}}" readonly="readonly">\n                    </div>\n                </div>\n                <div class="form-group col-md-12">\n                    <label class="control-label col-md-3">Master SKU</label>\n                    <div class="col-md-6 col-xs-12">\n                        <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.master_sku}}" readonly="readonly">\n                    </div>\n                </div>\n                <div class="form-group col-md-12">\n                    <label class="control-label col-md-3">ESG SKU</label>\n                    <div class="col-md-6 col-xs-12">\n                        <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.sku}}" readonly="readonly">\n                    </div>\n                </div>\n                <div class="form-group col-md-12">\n                    <label class="control-label col-md-3">Product Name</label>\n                    <div class="col-md-9 col-xs-12">\n                        <input type="text" class="form-control col-md-9 col-xs-12 form_name" value="{{item.prod_name}}" readonly="readonly" style="width:100%">\n                    </div>\n                </div>\n                <div class="form-group col-md-12">\n                    <label class="control-label col-md-3">Sourcing status</label>\n                    <div class="col-md-6 col-xs-12">\n                        <select class="form-control col-md-4 col-xs-12">\n                            <option value="">Readily Available</option>\n                            <option value="">Out Of Stock</option>\n                        </select>\n                        <!-- <input type="text" value="15621-AA-NA" readonly="readonly"> -->\n                    </div>\n                </div>\n                <div class="form-group col-md-12">\n                    <label class="control-label col-md-3">ETRADE QTY</label>\n                    <div class="col-md-6 col-xs-12">\n                        <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.etrade_qty}}">\n                    </div>\n                </div>\n                <div class="form-group col-md-12">\n                    <label class="control-label col-md-3">ES_HK QTY</label>\n                    <div class="col-md-6 col-xs-12">\n                        <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.es_hk_qty}}">\n                    </div>\n                </div>\n                <div class="form-group col-md-12">\n                    <label class="control-label col-md-3">ES_DG QTY</label>\n                    <div class="col-md-6 col-xs-12">\n                        <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.es_dg_qty}}">\n                    </div>\n                </div>\n                <div class="form-group col-md-12">\n                    <label class="control-label col-md-3">Item Cost</label>\n                    <div class="col-md-6 col-xs-12">\n                        <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.item_price}}">\n                    </div>\n                </div>\n                <div class="form-group col-md-12">\n                    <label class="control-label col-md-3">Selling Price</label>\n                    <div class="col-md-6 col-xs-12">\n                        <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.item_price}}">\n                    </div>\n                </div>\n                <div class="form-group col-md-12">\n                    <label class="control-label col-md-3">Profit</label>\n                    <div class="col-md-6 col-xs-12">\n                        <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.profit}}">\n                    </div>\n                </div>\n                <div class="form-group col-md-12">\n                    <label class="control-label col-md-3">Margin</label>\n                    <div class="col-md-6 col-xs-12">\n                        <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.margin}}">\n                    </div>\n                </div>\n                <div class="form-group col-md-12">\n                    <label class="control-label col-md-3">Update On</label>\n                    <div class="control-label col-md-4">{{item.modify_on}}</div>\n                </div>\n                <div class="form-group col-md-12">\n                    <label class="control-label col-md-3">Update By</label>\n                    <div class="control-label col-md-4">{{item.modify_by}}</div>\n                </div>\n        </form></div>\n        <div class="modal-footer">\n            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n            <button type="button" class="btn btn-primary">Save</button>\n        </div>\n    </div>\n</div>\n',e.hot&&!function(){e.hot.accept();var n=t("vue-hot-reload-api");n.install(t("vue"),!0),n.compatible&&(e.hot.data?n.update("_v-d1497310",e.exports,("function"==typeof e.exports?e.exports.options:e.exports).template):n.createRecord("_v-d1497310",e.exports))}()},{vue:5,"vue-hot-reload-api":2}],17:[function(t,e,n){("function"==typeof e.exports?e.exports.options:e.exports).template='\n<div class="page-title">\n    <div class="title_left">\n         <h3>[Accelerator]<small>  Prcing Overview</small></h3>\n    </div>\n</div>\n<div class="clearfix"></div>\n',e.hot&&!function(){e.hot.accept();var n=t("vue-hot-reload-api");n.install(t("vue"),!0),n.compatible&&(e.hot.data?n.update("_v-b9159fe6",e.exports,("function"==typeof e.exports?e.exports.options:e.exports).template):n.createRecord("_v-b9159fe6",e.exports))}()},{vue:5,"vue-hot-reload-api":2}],18:[function(t,e,n){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var i=t("../../vue.config.js");n["default"]={ready:function(){this.fetchMarketplace(),this.fetchBrand(),this.fetchMerchant(),this.fetchCountry(),this.initSearchForm()},data:function(){return{cat_list:{},marketplace_list:{},brand_list:{},brand_manager_list:{},country_list:{},merchant_list:{},api_url:i.api_url,access_token:i.access_token}},methods:{initSearchForm:function(){function t(t,e,i){e.length=1,i&&(i.length=1);for(var o in n[t])e.options[e.options.length]=new Option(n[t][o],o)}function e(t,e){for(var n in e)t.options[t.options.length]=new Option(e[n],n)}var n={0:{775:"Home & Office",776:"XYZ Recategorisation",780:"Cards, Books & Stationery",784:"More Category",798:"Electronics",814:"Health & Beauty",820:"Automotive/ Motorcycle",826:"Travel & Luggage",830:"Sports & Outdoors",836:"Toys, Kids & Babies",844:" Appliances",852:"Stationeries",912:"Complementary Accessories",736:"Electricals",738:"Crafts, Gadgets & Toys",753:"Fashion",758:"Pet Supplies"},736:{787:"Home Automation",791:"Action Cams",794:"Digital Cameras",795:"Lenses",796:"Watches",797:"Digital Cameras",742:"Computing & Phones",745:"Sound & Vision",748:"Small Appliances"},738:{781:"Plush Toys",790:"Gadgets",917:"Sextoys",918:"Artwork",929:"3D Printing Inks",741:"3D Printing",749:"3D Printing Plastics",752:"3D Printing Accessories"},741:{930:"PrintingPen"},742:{923:"Softwares",743:"Computer & Tablet Accessories",744:"Telephones"},745:{786:"Accessories",746:"Headphones and Earphones",747:"Speakers"},749:{750:"ABS Plastic",751:"PLA Plastic"},753:{779:"Bags & Accessories",782:"Unisex",792:"Jewelry",808:"Bags",809:"Shoes",810:"Jewellery &  Accessories ",811:"Clothings",812:"Watches",813:"Sunglasses",928:"Perfume",754:"Women",756:"Men",761:"Baby & Child"},754:{755:"T-Shirts"},756:{757:"T-Shirts"},758:{919:"Birds",926:"Fish & Aquatic Pets",927:"Other Animals",759:"Cats",760:"Dogs"},759:{763:"Cat Accessories",764:"Cat Scratchers",765:"Cat Toys",766:"Collars, Harnesses & Leashes"},760:{768:"Bowls",769:"Carriers, Crates & Kennels",770:"Coats & Clothing",771:"Collars, Harnesses & Leashes",772:"Dog Toys",773:"Food Accessories",774:"Grooming",767:"Beds & Bedding"},761:{878:"Baby & Child"},775:{788:"Kitchen",924:"Home Decoration",925:"Garden Decoration"},776:{777:"XYZ Sub-Categorization"},777:{778:"XYZ Sub-Sub-Categorization"
-},779:{880:"Bags & Accessories"},780:{783:"Cards, Books & Stationary",793:"Prints",916:"Others",762:"Calendars"},784:{785:"Refund Deductibles"},788:{789:"Cutlery"},798:{799:"Digital Cameras",800:"Lenses",801:"Digital Camcorders",802:"Tablets",803:"Computing & Gaming",804:"Apple",805:"Mobile Phones",806:"Audio & Visual",807:"Headphones"},799:{861:"Digital Cameras",915:"Instant Camera",920:"Camera accessories"},800:{863:"Lenses"},801:{860:"Digital Camcorders"},802:{865:"Tablets",914:"Tablets Accessories",922:"Do not use"},803:{859:"Computing & Gaming"},804:{857:"Apple"},805:{864:"Mobile Phones",921:"Mobile Phones Accessories"},806:{858:"Audio & Visual"},807:{862:"Headphones"},808:{879:"Bags"},809:{883:"Shoes"},810:{882:"Jewellery &  Accessories "},811:{881:"Clothings"},812:{885:"Watches"},813:{884:"Sunglasses"},814:{815:"Makeup",816:"Skin Care",817:"Bath, Body & Hair Care",818:"Nails",819:"Others"},815:{887:"Makeup"},816:{890:"Skin Care"},817:{886:"Bath, Body & Hair Care"},818:{888:"Nails"},819:{889:"Others"},820:{821:"Car Care",822:"Tools & Equipment",823:"Performance Parts & Accessories",824:"Wheels & Tires",825:"Others"},821:{873:"Car Care"},822:{876:"Tools & Equipment"},823:{875:"Performance Parts & Accessories"},824:{877:"Wheels & Tires"},825:{874:"Others"},826:{827:"Bags & Backpacks",828:"Luggage",829:"Travel & Luggage"},827:{909:"Bags & Backpacks"},828:{910:"Luggage"},829:{911:"Travel & Luggage"},830:{831:"Shoes & Clothing",832:"Accessories",833:"Sport Watches & Sunglasses",834:"Other Sports Equipment",835:"Helmet & Protection",891:"Sports & Outdoors"},831:{895:"Shoes & Clothing"},832:{892:"Accessories"},833:{896:"Sport Watches & Sunglasses"},834:{894:"Other Sports Equipment"},835:{893:"Helmet & Protection"},836:{837:"Shoes & Clothing",838:"Toys",839:"Bath, Body & Hair Care",840:"Feeding & Nursing",841:"Health & Saftey",842:"Diapers & Potties",843:"Others"},837:{907:"Shoes & Clothing"},838:{908:"Toys"},839:{902:"Bath, Body & Hair Care"},840:{904:"Feeding & Nursing"},841:{905:"Health & Saftey"},842:{903:"Diapers & Potties"},843:{906:"Others"},844:{845:"Health Care Equipment ",846:"Home Appliances ",847:"Kitchen Appliances ",848:"Home Decoration",849:"Kitchen Utensils & Cookware ",850:"Small Appliances ",851:"Others"},845:{866:"Health Care Equipment "},846:{867:"Home Appliances "},847:{869:"Kitchen Appliances"},848:{868:"Home Decoration"},849:{870:"Kitchen Utensils & Cookware"},850:{872:"Small Appliances "},851:{871:"Others"},852:{853:"Books ",854:"Stationeries",855:"Printing",856:"Fine Pens"},853:{898:"Books "},854:{901:"Stationeries"},855:{900:"Printing",931:"PrintingPen"},856:{899:"Fine Pens"},891:{897:"Sports & Outdoors"},912:{913:"Adapters"}},i={0:"Not Accelerator",1:"Accelerator"},o={0:"Inactive",1:"Created",2:"Listed"},s={A:"Readily Available",O:"Temp of Out Stock",C:"Limited Stock",L:"Last Lot",D:"Discontinued"},a={Apple:"Apple",Edward:"Edward",Jim:"Jim",Romuald:"Romuald",Shoaib:"Shoaib",Test:"Test",Tomasz:"Tomasz"};t("0",document.fm.cat_id),$("select[name='cat_id']").on("change",function(){t(this.value,this.form.sub_cat_id,this.form.sub_sub_cat_id)}),$("select[name='sub_cat_id']").on("change",function(){t(this.value,this.form.sub_sub_cat_id)}),e(document.fm.sku_type,i),e(document.fm.sku_status,o),e(document.fm.sourcing_status,s),e(document.fm.brand_manager,a),$("input[name='reset']").on("click",function(){$("select").val("")}),$("input[name='inventory']").keydown(function(t){if(13==t.keyCode)return t.preventDefault(),!1})},PutSelectorContent:function(t,e){for(var n in e)t.options[t.options.length]=new Option(e[n],n)},fetchMarketplace:function(){this.$http({url:this.api_url+"marketplace?access_token="+this.access_token,method:"GET"}).then(function(t){this.$set("marketplace_list",t.data.data)})},fetchBrand:function(){this.$http({url:this.api_url+"brand?access_token="+this.access_token,method:"GET"}).then(function(t){for(var e={},n=0;n<t.data.data.length;n++)""!=t.data.data[n].brand_manager&&(e[t.data.data[n].brand_manager]=t.data.data[n].brand_manager);this.$set("brand_list",t.data.data),this.$set("brand_manager_list",e)})},fetchMerchant:function(){this.$http({url:this.api_url+"merchant?access_token="+this.access_token,method:"GET"}).then(function(t){this.$set("merchant_list",t.data.data)})},fetchCountry:function(){this.$http({url:this.api_url+"country?access_token="+this.access_token,method:"GET"}).then(function(t){this.$set("country_list",t.data.data)})},submitForm:function(){var t=($("form[name='fm']").serialize(),{});this.$http({}).then(function(e){t=[{markerplace_id:"BCLAZHK",master_sku:"24697-MM-NA",sku:"15621-AA-NA",prod_name:"Biloop Cry Translator",sourcing_status:"A",etrade_qty:0,es_hk_qty:0,es_dg_qty:0,item_price:"279.58",profit:"0.00",margin:"0.00",modify_on:"2016-02-18 09:41:11",modify_by:"system"},{markerplace_id:"BCLAZUS",master_sku:"25893-MM-NA",sku:"15630-AA-NA",prod_name:"Gangsta Gold - Single Color PLA Pack (25 strands)",sourcing_status:"A",etrade_qty:0,es_hk_qty:3,es_dg_qty:0,item_price:"10.01",profit:"0.00",margin:"0.00",modify_on:"2016-07-21 04:25:04",modify_by:"system"},{markerplace_id:"BCLAZUS",master_sku:"25894-MM-NA",sku:"15631-AA-NA",prod_name:"Blue Steel - Single Color PLA Pack (25 strands)",sourcing_status:"A",etrade_qty:201,es_hk_qty:2,es_dg_qty:0,item_price:"9.99",profit:"0.00",margin:"0.00",modify_on:"2016-07-19 08:25:03",modify_by:"system"},{markerplace_id:"BCLAZUS",master_sku:"25895-MM-NA",sku:"15632-AA-NA",prod_name:"Basilica White - Single Color PLA Pack (25 strands)",sourcing_status:"A",etrade_qty:310,es_hk_qty:0,es_dg_qty:0,item_price:"9.99",profit:"0.00",margin:"0.00",modify_on:"2016-07-25 04:25:07",modify_by:"system"},{markerplace_id:"BCLAZUS",master_sku:"25896-MM-NA",sku:"15633-AA-NA",prod_name:"Martian Mars Red - Single Color PLA Pack (25 strands)",sourcing_status:"A",etrade_qty:284,es_hk_qty:0,es_dg_qty:0,item_price:"9.99",profit:"0.00",margin:"0.00",modify_on:"2016-07-05 04:25:06",modify_by:"system"},{markerplace_id:"BCLAZUS",master_sku:"25897-MM-NA",sku:"15634-AA-NA",prod_name:"Diamonds &amp; Pearls - Single Color PLA Pack (25 strands)",sourcing_status:"A",etrade_qty:148,es_hk_qty:0,es_dg_qty:0,item_price:"9.99",profit:"0.00",margin:"0.00",modify_on:"2016-07-15 03:25:06",modify_by:"system"}]}).then(function(){this.$dispatch("form-search",t)})}}},e.exports.__esModule&&(e.exports=e.exports["default"]),("function"==typeof e.exports?e.exports.options:e.exports).template='\n<div class="col-md-12 col-sm-12 col-xs-12">\n    <div class="x_panel">\n        <div class="x_title">\n            <h2>Filters <small>[Advanced]</small></h2>\n            <ul class="nav navbar-right panel_toolbox">\n                <li>\n                    <a class="collapse-link"><i class="fa fa-chevron-down"></i></a>\n                </li>\n            </ul>\n            <div class="clearfix"></div>\n        </div>\n        <div class="x_content" id="pjax-container">\n            <form data-pjax="" name="fm" class="form-horizontal form-label-left">\n                <div class="form-group col-md-6">\n                    <label class="control-label col-md-4">Marketplace ID</label>\n                    <div class="col-md-6 col-xs-12">\n                        <select class="form-control" name="markerplace_id">\n                            <option value=""></option>\n                            <option v-for="marketplace in marketplace_list" value="{{marketplace.marketplace_id}}">{{marketplace.marketplace_id}}</option>\n                        </select>\n                    </div>\n                </div>\n                <div class="form-group col-md-6">\n                    <label class="control-label col-md-4">Brand</label>\n                    <div class="col-md-6 col-xs-12">\n                        <select class="form-control" name="brand_id">\n                            <option></option>\n                            <option v-for="brand in brand_list" value="{{brand.brand_id}}">{{brand.brand_name}}</option>\n                        </select>\n                    </div>\n                </div>\n                <div class="form-group col-md-6">\n                    <label class="control-label col-md-4">Country</label>\n                    <div class="col-md-6 col-xs-12">\n                        <select class="form-control" name="country_id">\n                            <option value=""></option>\n                            <option v-for="country in country_list" value="{{country.country_id}}">{{country.country_name}}</option>\n                        </select>\n                    </div>\n                </div>\n                <div class="form-group col-md-6">\n                    <label class="control-label col-md-4">Merchant</label>\n                    <div class="col-md-6 col-xs-12">\n                        <select class="form-control" name="merchant_id">\n                            <option value=""></option>\n                            <option v-for="merchant in merchant_list" value="{{merchant.merchant_id}}">{{merchant.merchant_id}}</option>\n                        </select>\n                    </div>\n                </div>\n                <div class="form-group col-md-6">\n                    <label class="control-label col-md-4">Category</label>\n                    <div class="col-md-6 col-xs-12">\n                        <select class="form-control" name="cat_id">\n                            <option></option>\n                        </select>\n                    </div>\n                </div>\n                <div class="form-group col-md-6">\n                    <label class="control-label col-md-4">SKU Type</label>\n                    <div class="col-md-6 col-xs-12">\n                        <select class="form-control" name="sku_type">\n                            <option value=""></option>\n                        </select>\n                    </div>\n                </div>\n                <div class="form-group col-md-6">\n                    <label class="control-label col-md-4">Sub-Category</label>\n                    <div class="col-md-6 col-xs-12">\n                        <select class="form-control" name="sub_cat_id">\n                            <option></option>\n                        </select>\n                    </div>\n                </div>\n                <div class="form-group col-md-6">\n                    <label class="control-label col-md-4">Sku Status</label>\n                    <div class="col-md-6 col-xs-12">\n                        <select class="form-control" name="sku_status">\n                            <option value=""></option>\n                        </select>\n                    </div>\n                </div>\n                <div class="form-group col-md-6">\n                    <label class="control-label col-md-4">Sub-Sub-Category</label>\n                    <div class="col-md-6 col-xs-12">\n                        <select class="form-control" name="sub_sub_cat_id">\n                            <option></option>\n                        </select>\n                    </div>\n                </div>\n                <div class="form-group col-md-6">\n                    <label class="control-label col-md-4">Sourcing Status</label>\n                    <div class="col-md-6 col-xs-12">\n                        <select class="form-control" name="sourcing_status">\n                            <option value=""></option>\n                        </select>\n                    </div>\n                </div>\n                <div class="form-group col-md-6">\n                    <label class="control-label col-md-4">Brand Manager</label>\n                    <div class="col-md-6 col-xs-12">\n                        <select class="form-control" name="brand_manager">\n                            <option value=""></option>\n                            <option v-for="brand_manager in brand_manager_list" value="{{brand_manager}}">{{brand_manager}}</option>\n                        </select>\n                    </div>\n                </div>\n                <div class="form-group col-md-6">\n                    <label class="control-label col-md-4">Inventory</label>\n                    <div class="col-md-3 col-xs-12">\n                        <select class="form-control" name="warehouse_id">\n                            <option value=""></option>\n                            <option value="">ETRADE QTY</option>\n                            <option value="">ES_HK QTY</option>\n                            <option value="">ES_DGME QTY</option>\n                        </select>\n                    </div>\n                    <div class="col-md-3 col-xs-12">\n                        <input type="text" name="inventory" class="form-control col-md-4 col-xs-12" placeholder=">,<,= ">\n                    </div>\n                </div>\n                <div class="form-group col-md-6">\n                    <label class="control-label col-md-4">SKU List</label>\n                    <div class="col-md-6 col-xs-12">\n                        <textarea name="sku_list" class="form-control" style="height:140px;"></textarea>\n                    </div>\n                </div>\n                <!-- <div class="ln_solid"></div> -->\n                <div class="form-group col-md-12">\n                    <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">\n                        <input type="button" class="btn btn-dark" name="reset" value="Reset">\n                        <input type="button" class="btn btn-success" name="search" value="Search" @click="submitForm()">\n                    </div>\n                </div>\n            </form>\n        </div>\n    </div>\n</div>\n',e.hot&&!function(){e.hot.accept();var n=t("vue-hot-reload-api");n.install(t("vue"),!0),n.compatible&&(e.hot.data?n.update("_v-58341295",e.exports,("function"==typeof e.exports?e.exports.options:e.exports).template):n.createRecord("_v-58341295",e.exports))}()},{"../../vue.config.js":21,vue:5,"vue-hot-reload-api":2}],19:[function(t,e,n){"use strict";function i(t){return t&&t.__esModule?t:{"default":t}}var o=t("vue"),s=i(o),a=t("./App.vue"),r=i(a),l=t("vue-router"),c=i(l),u=t("vue-resource"),h=i(u),d=t("./vue.config"),p=(i(d),t("./routers")),f=i(p);s["default"].use(c["default"]),s["default"].use(h["default"]);var v=new c["default"]({history:!0,root:""});(0,f["default"])(v),v.start(r["default"],"body")},{"./App.vue":7,"./routers":20,"./vue.config":21,vue:5,"vue-resource":3,"vue-router":4}],20:[function(t,e,n){"use strict";Object.defineProperty(n,"__esModule",{value:!0}),n["default"]=function(e){e.map({"/":{name:"dashboard",component:t("./components/Dashboard.vue"),auth:!0},"/price-overview/":{name:"price-overview",component:t("./components/Price.vue"),auth:!0},"/product-overview/":{name:"product-overview",component:t("./components/Product.vue"),auth:!0}}),e.beforeEach(function(t){if(t.to.auth)t.next();else{var e=encodeURIComponent(t.to.path);t.redirect("/?redirect="+e)}})}},{"./components/Dashboard.vue":8,"./components/Price.vue":9,"./components/Product.vue":10}],21:[function(t,e,n){"use strict";Object.defineProperty(n,"__esModule",{value:!0}),n["default"]=function(){};n.api_url="http://admincentre.eservicesgroup.com:7890/api/",n.access_token="WpMpN6GG1gm4lGmq8o8xzy1ZrPc2RkfnuhUZqhFH"},{}]},{},[19]);
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+(function () {
+    try {
+        cachedSetTimeout = setTimeout;
+    } catch (e) {
+        cachedSetTimeout = function () {
+            throw new Error('setTimeout is not defined');
+        }
+    }
+    try {
+        cachedClearTimeout = clearTimeout;
+    } catch (e) {
+        cachedClearTimeout = function () {
+            throw new Error('clearTimeout is not defined');
+        }
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+},{}],2:[function(require,module,exports){
+var Vue // late bind
+var map = Object.create(null)
+var shimmed = false
+var isBrowserify = false
+
+/**
+ * Determine compatibility and apply patch.
+ *
+ * @param {Function} vue
+ * @param {Boolean} browserify
+ */
+
+exports.install = function (vue, browserify) {
+  if (shimmed) return
+  shimmed = true
+
+  Vue = vue
+  isBrowserify = browserify
+
+  exports.compatible = !!Vue.internalDirectives
+  if (!exports.compatible) {
+    console.warn(
+      '[HMR] vue-loader hot reload is only compatible with ' +
+      'Vue.js 1.0.0+.'
+    )
+    return
+  }
+
+  // patch view directive
+  patchView(Vue.internalDirectives.component)
+  console.log('[HMR] Vue component hot reload shim applied.')
+  // shim router-view if present
+  var routerView = Vue.elementDirective('router-view')
+  if (routerView) {
+    patchView(routerView)
+    console.log('[HMR] vue-router <router-view> hot reload shim applied.')
+  }
+}
+
+/**
+ * Shim the view directive (component or router-view).
+ *
+ * @param {Object} View
+ */
+
+function patchView (View) {
+  var unbuild = View.unbuild
+  View.unbuild = function (defer) {
+    if (!this.hotUpdating) {
+      var prevComponent = this.childVM && this.childVM.constructor
+      removeView(prevComponent, this)
+      // defer = true means we are transitioning to a new
+      // Component. Register this new component to the list.
+      if (defer) {
+        addView(this.Component, this)
+      }
+    }
+    // call original
+    return unbuild.call(this, defer)
+  }
+}
+
+/**
+ * Add a component view to a Component's hot list
+ *
+ * @param {Function} Component
+ * @param {Directive} view - view directive instance
+ */
+
+function addView (Component, view) {
+  var id = Component && Component.options.hotID
+  if (id) {
+    if (!map[id]) {
+      map[id] = {
+        Component: Component,
+        views: [],
+        instances: []
+      }
+    }
+    map[id].views.push(view)
+  }
+}
+
+/**
+ * Remove a component view from a Component's hot list
+ *
+ * @param {Function} Component
+ * @param {Directive} view - view directive instance
+ */
+
+function removeView (Component, view) {
+  var id = Component && Component.options.hotID
+  if (id) {
+    map[id].views.$remove(view)
+  }
+}
+
+/**
+ * Create a record for a hot module, which keeps track of its construcotr,
+ * instnaces and views (component directives or router-views).
+ *
+ * @param {String} id
+ * @param {Object} options
+ */
+
+exports.createRecord = function (id, options) {
+  if (typeof options === 'function') {
+    options = options.options
+  }
+  if (typeof options.el !== 'string' && typeof options.data !== 'object') {
+    makeOptionsHot(id, options)
+    map[id] = {
+      Component: null,
+      views: [],
+      instances: []
+    }
+  }
+}
+
+/**
+ * Make a Component options object hot.
+ *
+ * @param {String} id
+ * @param {Object} options
+ */
+
+function makeOptionsHot (id, options) {
+  options.hotID = id
+  injectHook(options, 'created', function () {
+    var record = map[id]
+    if (!record.Component) {
+      record.Component = this.constructor
+    }
+    record.instances.push(this)
+  })
+  injectHook(options, 'beforeDestroy', function () {
+    map[id].instances.$remove(this)
+  })
+}
+
+/**
+ * Inject a hook to a hot reloadable component so that
+ * we can keep track of it.
+ *
+ * @param {Object} options
+ * @param {String} name
+ * @param {Function} hook
+ */
+
+function injectHook (options, name, hook) {
+  var existing = options[name]
+  options[name] = existing
+    ? Array.isArray(existing)
+      ? existing.concat(hook)
+      : [existing, hook]
+    : [hook]
+}
+
+/**
+ * Update a hot component.
+ *
+ * @param {String} id
+ * @param {Object|null} newOptions
+ * @param {String|null} newTemplate
+ */
+
+exports.update = function (id, newOptions, newTemplate) {
+  var record = map[id]
+  // force full-reload if an instance of the component is active but is not
+  // managed by a view
+  if (!record || (record.instances.length && !record.views.length)) {
+    console.log('[HMR] Root or manually-mounted instance modified. Full reload may be required.')
+    if (!isBrowserify) {
+      window.location.reload()
+    } else {
+      // browserify-hmr somehow sends incomplete bundle if we reload here
+      return
+    }
+  }
+  if (!isBrowserify) {
+    // browserify-hmr already logs this
+    console.log('[HMR] Updating component: ' + format(id))
+  }
+  var Component = record.Component
+  // update constructor
+  if (newOptions) {
+    // in case the user exports a constructor
+    Component = record.Component = typeof newOptions === 'function'
+      ? newOptions
+      : Vue.extend(newOptions)
+    makeOptionsHot(id, Component.options)
+  }
+  if (newTemplate) {
+    Component.options.template = newTemplate
+  }
+  // handle recursive lookup
+  if (Component.options.name) {
+    Component.options.components[Component.options.name] = Component
+  }
+  // reset constructor cached linker
+  Component.linker = null
+  // reload all views
+  record.views.forEach(function (view) {
+    updateView(view, Component)
+  })
+  // flush devtools
+  if (window.__VUE_DEVTOOLS_GLOBAL_HOOK__) {
+    window.__VUE_DEVTOOLS_GLOBAL_HOOK__.emit('flush')
+  }
+}
+
+/**
+ * Update a component view instance
+ *
+ * @param {Directive} view
+ * @param {Function} Component
+ */
+
+function updateView (view, Component) {
+  if (!view._bound) {
+    return
+  }
+  view.Component = Component
+  view.hotUpdating = true
+  // disable transitions
+  view.vm._isCompiled = false
+  // save state
+  var state = extractState(view.childVM)
+  // remount, make sure to disable keep-alive
+  var keepAlive = view.keepAlive
+  view.keepAlive = false
+  view.mountComponent()
+  view.keepAlive = keepAlive
+  // restore state
+  restoreState(view.childVM, state, true)
+  // re-eanble transitions
+  view.vm._isCompiled = true
+  view.hotUpdating = false
+}
+
+/**
+ * Extract state from a Vue instance.
+ *
+ * @param {Vue} vm
+ * @return {Object}
+ */
+
+function extractState (vm) {
+  return {
+    cid: vm.constructor.cid,
+    data: vm.$data,
+    children: vm.$children.map(extractState)
+  }
+}
+
+/**
+ * Restore state to a reloaded Vue instance.
+ *
+ * @param {Vue} vm
+ * @param {Object} state
+ */
+
+function restoreState (vm, state, isRoot) {
+  var oldAsyncConfig
+  if (isRoot) {
+    // set Vue into sync mode during state rehydration
+    oldAsyncConfig = Vue.config.async
+    Vue.config.async = false
+  }
+  // actual restore
+  if (isRoot || !vm._props) {
+    vm.$data = state.data
+  } else {
+    Object.keys(state.data).forEach(function (key) {
+      if (!vm._props[key]) {
+        // for non-root, only restore non-props fields
+        vm.$data[key] = state.data[key]
+      }
+    })
+  }
+  // verify child consistency
+  var hasSameChildren = vm.$children.every(function (c, i) {
+    return state.children[i] && state.children[i].cid === c.constructor.cid
+  })
+  if (hasSameChildren) {
+    // rehydrate children
+    vm.$children.forEach(function (c, i) {
+      restoreState(c, state.children[i])
+    })
+  }
+  if (isRoot) {
+    Vue.config.async = oldAsyncConfig
+  }
+}
+
+function format (id) {
+  var match = id.match(/[^\/]+\.vue$/)
+  return match ? match[0] : id
+}
+
+},{}],3:[function(require,module,exports){
+/*!
+ * vue-resource v0.8.0
+ * https://github.com/vuejs/vue-resource
+ * Released under the MIT License.
+ */
+
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  return typeof obj;
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
+};
+
+/**
+ * Promises/A+ polyfill v1.1.4 (https://github.com/bramstein/promis)
+ */
+
+var RESOLVED = 0;
+var REJECTED = 1;
+var PENDING = 2;
+
+function Promise$2(executor) {
+
+    this.state = PENDING;
+    this.value = undefined;
+    this.deferred = [];
+
+    var promise = this;
+
+    try {
+        executor(function (x) {
+            promise.resolve(x);
+        }, function (r) {
+            promise.reject(r);
+        });
+    } catch (e) {
+        promise.reject(e);
+    }
+}
+
+Promise$2.reject = function (r) {
+    return new Promise$2(function (resolve, reject) {
+        reject(r);
+    });
+};
+
+Promise$2.resolve = function (x) {
+    return new Promise$2(function (resolve, reject) {
+        resolve(x);
+    });
+};
+
+Promise$2.all = function all(iterable) {
+    return new Promise$2(function (resolve, reject) {
+        var count = 0,
+            result = [];
+
+        if (iterable.length === 0) {
+            resolve(result);
+        }
+
+        function resolver(i) {
+            return function (x) {
+                result[i] = x;
+                count += 1;
+
+                if (count === iterable.length) {
+                    resolve(result);
+                }
+            };
+        }
+
+        for (var i = 0; i < iterable.length; i += 1) {
+            Promise$2.resolve(iterable[i]).then(resolver(i), reject);
+        }
+    });
+};
+
+Promise$2.race = function race(iterable) {
+    return new Promise$2(function (resolve, reject) {
+        for (var i = 0; i < iterable.length; i += 1) {
+            Promise$2.resolve(iterable[i]).then(resolve, reject);
+        }
+    });
+};
+
+var p$1 = Promise$2.prototype;
+
+p$1.resolve = function resolve(x) {
+    var promise = this;
+
+    if (promise.state === PENDING) {
+        if (x === promise) {
+            throw new TypeError('Promise settled with itself.');
+        }
+
+        var called = false;
+
+        try {
+            var then = x && x['then'];
+
+            if (x !== null && (typeof x === 'undefined' ? 'undefined' : _typeof(x)) === 'object' && typeof then === 'function') {
+                then.call(x, function (x) {
+                    if (!called) {
+                        promise.resolve(x);
+                    }
+                    called = true;
+                }, function (r) {
+                    if (!called) {
+                        promise.reject(r);
+                    }
+                    called = true;
+                });
+                return;
+            }
+        } catch (e) {
+            if (!called) {
+                promise.reject(e);
+            }
+            return;
+        }
+
+        promise.state = RESOLVED;
+        promise.value = x;
+        promise.notify();
+    }
+};
+
+p$1.reject = function reject(reason) {
+    var promise = this;
+
+    if (promise.state === PENDING) {
+        if (reason === promise) {
+            throw new TypeError('Promise settled with itself.');
+        }
+
+        promise.state = REJECTED;
+        promise.value = reason;
+        promise.notify();
+    }
+};
+
+p$1.notify = function notify() {
+    var promise = this;
+
+    nextTick(function () {
+        if (promise.state !== PENDING) {
+            while (promise.deferred.length) {
+                var deferred = promise.deferred.shift(),
+                    onResolved = deferred[0],
+                    onRejected = deferred[1],
+                    resolve = deferred[2],
+                    reject = deferred[3];
+
+                try {
+                    if (promise.state === RESOLVED) {
+                        if (typeof onResolved === 'function') {
+                            resolve(onResolved.call(undefined, promise.value));
+                        } else {
+                            resolve(promise.value);
+                        }
+                    } else if (promise.state === REJECTED) {
+                        if (typeof onRejected === 'function') {
+                            resolve(onRejected.call(undefined, promise.value));
+                        } else {
+                            reject(promise.value);
+                        }
+                    }
+                } catch (e) {
+                    reject(e);
+                }
+            }
+        }
+    });
+};
+
+p$1.then = function then(onResolved, onRejected) {
+    var promise = this;
+
+    return new Promise$2(function (resolve, reject) {
+        promise.deferred.push([onResolved, onRejected, resolve, reject]);
+        promise.notify();
+    });
+};
+
+p$1.catch = function (onRejected) {
+    return this.then(undefined, onRejected);
+};
+
+var PromiseObj = window.Promise || Promise$2;
+
+function Promise$1(executor, context) {
+
+    if (executor instanceof PromiseObj) {
+        this.promise = executor;
+    } else {
+        this.promise = new PromiseObj(executor.bind(context));
+    }
+
+    this.context = context;
+}
+
+Promise$1.all = function (iterable, context) {
+    return new Promise$1(PromiseObj.all(iterable), context);
+};
+
+Promise$1.resolve = function (value, context) {
+    return new Promise$1(PromiseObj.resolve(value), context);
+};
+
+Promise$1.reject = function (reason, context) {
+    return new Promise$1(PromiseObj.reject(reason), context);
+};
+
+Promise$1.race = function (iterable, context) {
+    return new Promise$1(PromiseObj.race(iterable), context);
+};
+
+var p = Promise$1.prototype;
+
+p.bind = function (context) {
+    this.context = context;
+    return this;
+};
+
+p.then = function (fulfilled, rejected) {
+
+    if (fulfilled && fulfilled.bind && this.context) {
+        fulfilled = fulfilled.bind(this.context);
+    }
+
+    if (rejected && rejected.bind && this.context) {
+        rejected = rejected.bind(this.context);
+    }
+
+    this.promise = this.promise.then(fulfilled, rejected);
+
+    return this;
+};
+
+p.catch = function (rejected) {
+
+    if (rejected && rejected.bind && this.context) {
+        rejected = rejected.bind(this.context);
+    }
+
+    this.promise = this.promise.catch(rejected);
+
+    return this;
+};
+
+p.finally = function (callback) {
+
+    return this.then(function (value) {
+        callback.call(this);
+        return value;
+    }, function (reason) {
+        callback.call(this);
+        return PromiseObj.reject(reason);
+    });
+};
+
+p.success = function (callback) {
+
+    warn('The `success` method has been deprecated. Use the `then` method instead.');
+
+    return this.then(function (response) {
+        return callback.call(this, response.data, response.status, response) || response;
+    });
+};
+
+p.error = function (callback) {
+
+    warn('The `error` method has been deprecated. Use the `catch` method instead.');
+
+    return this.catch(function (response) {
+        return callback.call(this, response.data, response.status, response) || response;
+    });
+};
+
+p.always = function (callback) {
+
+    warn('The `always` method has been deprecated. Use the `finally` method instead.');
+
+    var cb = function cb(response) {
+        return callback.call(this, response.data, response.status, response) || response;
+    };
+
+    return this.then(cb, cb);
+};
+
+var debug = false;
+var util = {};
+var array = [];
+function Util (Vue) {
+    util = Vue.util;
+    debug = Vue.config.debug || !Vue.config.silent;
+}
+
+var isArray = Array.isArray;
+
+function warn(msg) {
+    if (typeof console !== 'undefined' && debug) {
+        console.warn('[VueResource warn]: ' + msg);
+    }
+}
+
+function error(msg) {
+    if (typeof console !== 'undefined') {
+        console.error(msg);
+    }
+}
+
+function nextTick(cb, ctx) {
+    return util.nextTick(cb, ctx);
+}
+
+function trim(str) {
+    return str.replace(/^\s*|\s*$/g, '');
+}
+
+function toLower(str) {
+    return str ? str.toLowerCase() : '';
+}
+
+function isString(val) {
+    return typeof val === 'string';
+}
+
+function isFunction(val) {
+    return typeof val === 'function';
+}
+
+function isObject(obj) {
+    return obj !== null && (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) === 'object';
+}
+
+function isPlainObject(obj) {
+    return isObject(obj) && Object.getPrototypeOf(obj) == Object.prototype;
+}
+
+function when(value, fulfilled, rejected) {
+
+    var promise = Promise$1.resolve(value);
+
+    if (arguments.length < 2) {
+        return promise;
+    }
+
+    return promise.then(fulfilled, rejected);
+}
+
+function options(fn, obj, opts) {
+
+    opts = opts || {};
+
+    if (isFunction(opts)) {
+        opts = opts.call(obj);
+    }
+
+    return merge(fn.bind({ $vm: obj, $options: opts }), fn, { $options: opts });
+}
+
+function each(obj, iterator) {
+
+    var i, key;
+
+    if (typeof obj.length == 'number') {
+        for (i = 0; i < obj.length; i++) {
+            iterator.call(obj[i], obj[i], i);
+        }
+    } else if (isObject(obj)) {
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                iterator.call(obj[key], obj[key], key);
+            }
+        }
+    }
+
+    return obj;
+}
+
+function extend(target) {
+
+    var args = array.slice.call(arguments, 1);
+
+    args.forEach(function (arg) {
+        _merge(target, arg);
+    });
+
+    return target;
+}
+
+function merge(target) {
+
+    var args = array.slice.call(arguments, 1);
+
+    args.forEach(function (arg) {
+        _merge(target, arg, true);
+    });
+
+    return target;
+}
+
+function _merge(target, source, deep) {
+    for (var key in source) {
+        if (deep && (isPlainObject(source[key]) || isArray(source[key]))) {
+            if (isPlainObject(source[key]) && !isPlainObject(target[key])) {
+                target[key] = {};
+            }
+            if (isArray(source[key]) && !isArray(target[key])) {
+                target[key] = [];
+            }
+            _merge(target[key], source[key], deep);
+        } else if (source[key] !== undefined) {
+            target[key] = source[key];
+        }
+    }
+}
+
+function root (options, next) {
+
+    var url = next(options);
+
+    if (isString(options.root) && !url.match(/^(https?:)?\//)) {
+        url = options.root + '/' + url;
+    }
+
+    return url;
+}
+
+function query (options, next) {
+
+    var urlParams = Object.keys(Url.options.params),
+        query = {},
+        url = next(options);
+
+    each(options.params, function (value, key) {
+        if (urlParams.indexOf(key) === -1) {
+            query[key] = value;
+        }
+    });
+
+    query = Url.params(query);
+
+    if (query) {
+        url += (url.indexOf('?') == -1 ? '?' : '&') + query;
+    }
+
+    return url;
+}
+
+function legacy (options, next) {
+
+    var variables = [],
+        url = next(options);
+
+    url = url.replace(/(\/?):([a-z]\w*)/gi, function (match, slash, name) {
+
+        warn('The `:' + name + '` parameter syntax has been deprecated. Use the `{' + name + '}` syntax instead.');
+
+        if (options.params[name]) {
+            variables.push(name);
+            return slash + encodeUriSegment(options.params[name]);
+        }
+
+        return '';
+    });
+
+    variables.forEach(function (key) {
+        delete options.params[key];
+    });
+
+    return url;
+}
+
+function encodeUriSegment(value) {
+
+    return encodeUriQuery(value, true).replace(/%26/gi, '&').replace(/%3D/gi, '=').replace(/%2B/gi, '+');
+}
+
+function encodeUriQuery(value, spaces) {
+
+    return encodeURIComponent(value).replace(/%40/gi, '@').replace(/%3A/gi, ':').replace(/%24/g, '$').replace(/%2C/gi, ',').replace(/%20/g, spaces ? '%20' : '+');
+}
+
+/**
+ * URL Template v2.0.6 (https://github.com/bramstein/url-template)
+ */
+
+function expand(url, params, variables) {
+
+    var tmpl = parse(url),
+        expanded = tmpl.expand(params);
+
+    if (variables) {
+        variables.push.apply(variables, tmpl.vars);
+    }
+
+    return expanded;
+}
+
+function parse(template) {
+
+    var operators = ['+', '#', '.', '/', ';', '?', '&'],
+        variables = [];
+
+    return {
+        vars: variables,
+        expand: function expand(context) {
+            return template.replace(/\{([^\{\}]+)\}|([^\{\}]+)/g, function (_, expression, literal) {
+                if (expression) {
+
+                    var operator = null,
+                        values = [];
+
+                    if (operators.indexOf(expression.charAt(0)) !== -1) {
+                        operator = expression.charAt(0);
+                        expression = expression.substr(1);
+                    }
+
+                    expression.split(/,/g).forEach(function (variable) {
+                        var tmp = /([^:\*]*)(?::(\d+)|(\*))?/.exec(variable);
+                        values.push.apply(values, getValues(context, operator, tmp[1], tmp[2] || tmp[3]));
+                        variables.push(tmp[1]);
+                    });
+
+                    if (operator && operator !== '+') {
+
+                        var separator = ',';
+
+                        if (operator === '?') {
+                            separator = '&';
+                        } else if (operator !== '#') {
+                            separator = operator;
+                        }
+
+                        return (values.length !== 0 ? operator : '') + values.join(separator);
+                    } else {
+                        return values.join(',');
+                    }
+                } else {
+                    return encodeReserved(literal);
+                }
+            });
+        }
+    };
+}
+
+function getValues(context, operator, key, modifier) {
+
+    var value = context[key],
+        result = [];
+
+    if (isDefined(value) && value !== '') {
+        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+            value = value.toString();
+
+            if (modifier && modifier !== '*') {
+                value = value.substring(0, parseInt(modifier, 10));
+            }
+
+            result.push(encodeValue(operator, value, isKeyOperator(operator) ? key : null));
+        } else {
+            if (modifier === '*') {
+                if (Array.isArray(value)) {
+                    value.filter(isDefined).forEach(function (value) {
+                        result.push(encodeValue(operator, value, isKeyOperator(operator) ? key : null));
+                    });
+                } else {
+                    Object.keys(value).forEach(function (k) {
+                        if (isDefined(value[k])) {
+                            result.push(encodeValue(operator, value[k], k));
+                        }
+                    });
+                }
+            } else {
+                var tmp = [];
+
+                if (Array.isArray(value)) {
+                    value.filter(isDefined).forEach(function (value) {
+                        tmp.push(encodeValue(operator, value));
+                    });
+                } else {
+                    Object.keys(value).forEach(function (k) {
+                        if (isDefined(value[k])) {
+                            tmp.push(encodeURIComponent(k));
+                            tmp.push(encodeValue(operator, value[k].toString()));
+                        }
+                    });
+                }
+
+                if (isKeyOperator(operator)) {
+                    result.push(encodeURIComponent(key) + '=' + tmp.join(','));
+                } else if (tmp.length !== 0) {
+                    result.push(tmp.join(','));
+                }
+            }
+        }
+    } else {
+        if (operator === ';') {
+            result.push(encodeURIComponent(key));
+        } else if (value === '' && (operator === '&' || operator === '?')) {
+            result.push(encodeURIComponent(key) + '=');
+        } else if (value === '') {
+            result.push('');
+        }
+    }
+
+    return result;
+}
+
+function isDefined(value) {
+    return value !== undefined && value !== null;
+}
+
+function isKeyOperator(operator) {
+    return operator === ';' || operator === '&' || operator === '?';
+}
+
+function encodeValue(operator, value, key) {
+
+    value = operator === '+' || operator === '#' ? encodeReserved(value) : encodeURIComponent(value);
+
+    if (key) {
+        return encodeURIComponent(key) + '=' + value;
+    } else {
+        return value;
+    }
+}
+
+function encodeReserved(str) {
+    return str.split(/(%[0-9A-Fa-f]{2})/g).map(function (part) {
+        if (!/%[0-9A-Fa-f]/.test(part)) {
+            part = encodeURI(part);
+        }
+        return part;
+    }).join('');
+}
+
+function template (options) {
+
+    var variables = [],
+        url = expand(options.url, options.params, variables);
+
+    variables.forEach(function (key) {
+        delete options.params[key];
+    });
+
+    return url;
+}
+
+/**
+ * Service for URL templating.
+ */
+
+var ie = document.documentMode;
+var el = document.createElement('a');
+
+function Url(url, params) {
+
+    var self = this || {},
+        options = url,
+        transform;
+
+    if (isString(url)) {
+        options = { url: url, params: params };
+    }
+
+    options = merge({}, Url.options, self.$options, options);
+
+    Url.transforms.forEach(function (handler) {
+        transform = factory(handler, transform, self.$vm);
+    });
+
+    return transform(options);
+}
+
+/**
+ * Url options.
+ */
+
+Url.options = {
+    url: '',
+    root: null,
+    params: {}
+};
+
+/**
+ * Url transforms.
+ */
+
+Url.transforms = [template, legacy, query, root];
+
+/**
+ * Encodes a Url parameter string.
+ *
+ * @param {Object} obj
+ */
+
+Url.params = function (obj) {
+
+    var params = [],
+        escape = encodeURIComponent;
+
+    params.add = function (key, value) {
+
+        if (isFunction(value)) {
+            value = value();
+        }
+
+        if (value === null) {
+            value = '';
+        }
+
+        this.push(escape(key) + '=' + escape(value));
+    };
+
+    serialize(params, obj);
+
+    return params.join('&').replace(/%20/g, '+');
+};
+
+/**
+ * Parse a URL and return its components.
+ *
+ * @param {String} url
+ */
+
+Url.parse = function (url) {
+
+    if (ie) {
+        el.href = url;
+        url = el.href;
+    }
+
+    el.href = url;
+
+    return {
+        href: el.href,
+        protocol: el.protocol ? el.protocol.replace(/:$/, '') : '',
+        port: el.port,
+        host: el.host,
+        hostname: el.hostname,
+        pathname: el.pathname.charAt(0) === '/' ? el.pathname : '/' + el.pathname,
+        search: el.search ? el.search.replace(/^\?/, '') : '',
+        hash: el.hash ? el.hash.replace(/^#/, '') : ''
+    };
+};
+
+function factory(handler, next, vm) {
+    return function (options) {
+        return handler.call(vm, options, next);
+    };
+}
+
+function serialize(params, obj, scope) {
+
+    var array = isArray(obj),
+        plain = isPlainObject(obj),
+        hash;
+
+    each(obj, function (value, key) {
+
+        hash = isObject(value) || isArray(value);
+
+        if (scope) {
+            key = scope + '[' + (plain || hash ? key : '') + ']';
+        }
+
+        if (!scope && array) {
+            params.add(value.name, value.value);
+        } else if (hash) {
+            serialize(params, value, key);
+        } else {
+            params.add(key, value);
+        }
+    });
+}
+
+function xdrClient (request) {
+    return new Promise$1(function (resolve) {
+
+        var xdr = new XDomainRequest(),
+            response = { request: request },
+            handler;
+
+        request.cancel = function () {
+            xdr.abort();
+        };
+
+        xdr.open(request.method, Url(request), true);
+
+        handler = function handler(event) {
+
+            response.data = xdr.responseText;
+            response.status = xdr.status;
+            response.statusText = xdr.statusText || '';
+
+            resolve(response);
+        };
+
+        xdr.timeout = 0;
+        xdr.onload = handler;
+        xdr.onabort = handler;
+        xdr.onerror = handler;
+        xdr.ontimeout = function () {};
+        xdr.onprogress = function () {};
+
+        xdr.send(request.data);
+    });
+}
+
+var originUrl = Url.parse(location.href);
+var supportCors = 'withCredentials' in new XMLHttpRequest();
+
+function cors (request, next) {
+
+    if (request.crossOrigin === null) {
+        request.crossOrigin = crossOrigin(request);
+    }
+
+    if (request.crossOrigin) {
+
+        if (!supportCors) {
+            request.client = xdrClient;
+        }
+
+        request.emulateHTTP = false;
+    }
+
+    next();
+}
+
+function crossOrigin(request) {
+
+    var requestUrl = Url.parse(Url(request));
+
+    return requestUrl.protocol !== originUrl.protocol || requestUrl.host !== originUrl.host;
+}
+
+function mime (request, next) {
+
+    if (request.emulateJSON && isPlainObject(request.data)) {
+        request.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        request.data = Url.params(request.data);
+    }
+
+    if (isObject(request.data) && /FormData/i.test(request.data.toString())) {
+        delete request.headers['Content-Type'];
+    }
+
+    if (isPlainObject(request.data)) {
+        request.data = JSON.stringify(request.data);
+    }
+
+    next(function (response) {
+
+        try {
+            response.data = JSON.parse(response.data);
+        } catch (e) {}
+    });
+}
+
+function jsonpClient (request) {
+    return new Promise$1(function (resolve) {
+
+        var callback = '_jsonp' + Math.random().toString(36).substr(2),
+            response = { request: request, data: null },
+            handler,
+            script;
+
+        request.params[request.jsonp] = callback;
+        request.cancel = function () {
+            handler({ type: 'cancel' });
+        };
+
+        script = document.createElement('script');
+        script.src = Url(request);
+        script.type = 'text/javascript';
+        script.async = true;
+
+        window[callback] = function (data) {
+            response.data = data;
+        };
+
+        handler = function handler(event) {
+
+            if (event.type === 'load' && response.data !== null) {
+                response.status = 200;
+            } else if (event.type === 'error') {
+                response.status = 404;
+            } else {
+                response.status = 0;
+            }
+
+            resolve(response);
+
+            delete window[callback];
+            document.body.removeChild(script);
+        };
+
+        script.onload = handler;
+        script.onerror = handler;
+
+        document.body.appendChild(script);
+    });
+}
+
+function jsonp (request, next) {
+
+    if (request.method == 'JSONP') {
+        request.client = jsonpClient;
+    }
+
+    next();
+}
+
+function before (request, next) {
+
+    if (isFunction(request.beforeSend)) {
+        request.beforeSend.call(this, request);
+    }
+
+    next();
+}
+
+/**
+ * HTTP method override Interceptor.
+ */
+
+function method (request, next) {
+
+    if (request.emulateHTTP && /^(PUT|PATCH|DELETE)$/i.test(request.method)) {
+        request.headers['X-HTTP-Method-Override'] = request.method;
+        request.method = 'POST';
+    }
+
+    next();
+}
+
+function header (request, next) {
+
+    request.method = request.method.toUpperCase();
+    request.headers = extend({}, Http.headers.common, !request.crossOrigin ? Http.headers.custom : {}, Http.headers[request.method.toLowerCase()], request.headers);
+
+    if (isPlainObject(request.data) && /^(GET|JSONP)$/i.test(request.method)) {
+        extend(request.params, request.data);
+        delete request.data;
+    }
+
+    next();
+}
+
+/**
+ * Timeout Interceptor.
+ */
+
+function timeout (request, next) {
+
+    var timeout;
+
+    if (request.timeout) {
+        timeout = setTimeout(function () {
+            request.cancel();
+        }, request.timeout);
+    }
+
+    next(function (response) {
+
+        clearTimeout(timeout);
+    });
+}
+
+function xhrClient (request) {
+    return new Promise$1(function (resolve) {
+
+        var xhr = new XMLHttpRequest(),
+            response = { request: request },
+            handler;
+
+        request.cancel = function () {
+            xhr.abort();
+        };
+
+        xhr.open(request.method, Url(request), true);
+
+        handler = function handler(event) {
+
+            response.data = 'response' in xhr ? xhr.response : xhr.responseText;
+            response.status = xhr.status === 1223 ? 204 : xhr.status; // IE9 status bug
+            response.statusText = trim(xhr.statusText || '');
+            response.allHeaders = xhr.getAllResponseHeaders();
+
+            resolve(response);
+        };
+
+        xhr.timeout = 0;
+        xhr.onload = handler;
+        xhr.onabort = handler;
+        xhr.onerror = handler;
+        xhr.ontimeout = function () {};
+        xhr.onprogress = function () {};
+
+        if (isPlainObject(request.xhr)) {
+            extend(xhr, request.xhr);
+        }
+
+        if (isPlainObject(request.upload)) {
+            extend(xhr.upload, request.upload);
+        }
+
+        each(request.headers || {}, function (value, header) {
+            xhr.setRequestHeader(header, value);
+        });
+
+        xhr.send(request.data);
+    });
+}
+
+function Client (context) {
+
+    var reqHandlers = [sendRequest],
+        resHandlers = [];
+
+    if (!isObject(context)) {
+        context = null;
+    }
+
+    function Client(request) {
+        return new Promise$1(function (resolve) {
+
+            function exec() {
+                reqHandlers.pop().call(context, request, next);
+            }
+
+            function next(response) {
+                when(response, function (response) {
+
+                    if (isFunction(response)) {
+
+                        resHandlers.unshift(response);
+                    } else if (isObject(response)) {
+
+                        processResponse(response);
+
+                        resHandlers.forEach(function (handler) {
+                            handler.call(context, response);
+                        });
+
+                        resolve(response);
+
+                        return;
+                    }
+
+                    exec();
+                });
+            }
+
+            exec();
+        }, context);
+    }
+
+    Client.use = function (handler) {
+        reqHandlers.push(handler);
+    };
+
+    return Client;
+}
+
+function sendRequest(request, resolve) {
+
+    var client = request.client || xhrClient;
+
+    resolve(client(request));
+}
+
+function processResponse(response) {
+
+    var headers = response.headers || response.allHeaders;
+
+    if (isString(headers)) {
+        headers = parseHeaders(headers);
+    }
+
+    if (isObject(headers)) {
+        response.headers = function (name) {
+            return name ? headers[toLower(name)] : headers;
+        };
+    }
+
+    response.ok = response.status >= 200 && response.status < 300;
+
+    return response;
+}
+
+function parseHeaders(str) {
+
+    var headers = {},
+        value,
+        name,
+        i;
+
+    each(str.split('\n'), function (row) {
+
+        i = row.indexOf(':');
+        name = trim(toLower(row.slice(0, i)));
+        value = trim(row.slice(i + 1));
+
+        if (headers[name]) {
+
+            if (isArray(headers[name])) {
+                headers[name].push(value);
+            } else {
+                headers[name] = [headers[name], value];
+            }
+        } else {
+
+            headers[name] = value;
+        }
+    });
+
+    return headers;
+}
+
+/**
+ * Service for sending network requests.
+ */
+
+var jsonType = { 'Content-Type': 'application/json' };
+
+function Http(url, options) {
+
+    var self = this || {},
+        client = Client(self.$vm),
+        request,
+        promise;
+
+    Http.interceptors.forEach(function (handler) {
+        client.use(handler);
+    });
+
+    options = isObject(url) ? url : extend({ url: url }, options);
+    request = merge({}, Http.options, self.$options, options);
+    promise = client(request).then(function (response) {
+
+        return response.ok ? response : Promise$1.reject(response);
+    }, function (response) {
+
+        if (response instanceof Error) {
+            error(response);
+        }
+
+        return Promise$1.reject(response);
+    });
+
+    if (request.success) {
+        promise.success(request.success);
+    }
+
+    if (request.error) {
+        promise.error(request.error);
+    }
+
+    return promise;
+}
+
+Http.options = {
+    method: 'get',
+    data: '',
+    params: {},
+    headers: {},
+    xhr: null,
+    upload: null,
+    jsonp: 'callback',
+    beforeSend: null,
+    crossOrigin: null,
+    emulateHTTP: false,
+    emulateJSON: false,
+    timeout: 0
+};
+
+Http.headers = {
+    put: jsonType,
+    post: jsonType,
+    patch: jsonType,
+    delete: jsonType,
+    common: { 'Accept': 'application/json, text/plain, */*' },
+    custom: { 'X-Requested-With': 'XMLHttpRequest' }
+};
+
+Http.interceptors = [before, timeout, jsonp, method, mime, header, cors];
+
+['get', 'put', 'post', 'patch', 'delete', 'jsonp'].forEach(function (method) {
+
+    Http[method] = function (url, data, success, options) {
+
+        if (isFunction(data)) {
+            options = success;
+            success = data;
+            data = undefined;
+        }
+
+        if (isObject(success)) {
+            options = success;
+            success = undefined;
+        }
+
+        return this(url, extend({ method: method, data: data, success: success }, options));
+    };
+});
+
+function Resource(url, params, actions, options) {
+
+    var self = this || {},
+        resource = {};
+
+    actions = extend({}, Resource.actions, actions);
+
+    each(actions, function (action, name) {
+
+        action = merge({ url: url, params: params || {} }, options, action);
+
+        resource[name] = function () {
+            return (self.$http || Http)(opts(action, arguments));
+        };
+    });
+
+    return resource;
+}
+
+function opts(action, args) {
+
+    var options = extend({}, action),
+        params = {},
+        data,
+        success,
+        error;
+
+    switch (args.length) {
+
+        case 4:
+
+            error = args[3];
+            success = args[2];
+
+        case 3:
+        case 2:
+
+            if (isFunction(args[1])) {
+
+                if (isFunction(args[0])) {
+
+                    success = args[0];
+                    error = args[1];
+
+                    break;
+                }
+
+                success = args[1];
+                error = args[2];
+            } else {
+
+                params = args[0];
+                data = args[1];
+                success = args[2];
+
+                break;
+            }
+
+        case 1:
+
+            if (isFunction(args[0])) {
+                success = args[0];
+            } else if (/^(POST|PUT|PATCH)$/i.test(options.method)) {
+                data = args[0];
+            } else {
+                params = args[0];
+            }
+
+            break;
+
+        case 0:
+
+            break;
+
+        default:
+
+            throw 'Expected up to 4 arguments [params, data, success, error], got ' + args.length + ' arguments';
+    }
+
+    options.data = data;
+    options.params = extend({}, options.params, params);
+
+    if (success) {
+        options.success = success;
+    }
+
+    if (error) {
+        options.error = error;
+    }
+
+    return options;
+}
+
+Resource.actions = {
+
+    get: { method: 'GET' },
+    save: { method: 'POST' },
+    query: { method: 'GET' },
+    update: { method: 'PUT' },
+    remove: { method: 'DELETE' },
+    delete: { method: 'DELETE' }
+
+};
+
+function plugin(Vue) {
+
+    if (plugin.installed) {
+        return;
+    }
+
+    Util(Vue);
+
+    Vue.url = Url;
+    Vue.http = Http;
+    Vue.resource = Resource;
+    Vue.Promise = Promise$1;
+
+    Object.defineProperties(Vue.prototype, {
+
+        $url: {
+            get: function get() {
+                return options(Vue.url, this, this.$options.url);
+            }
+        },
+
+        $http: {
+            get: function get() {
+                return options(Vue.http, this, this.$options.http);
+            }
+        },
+
+        $resource: {
+            get: function get() {
+                return Vue.resource.bind(this);
+            }
+        },
+
+        $promise: {
+            get: function get() {
+                var _this = this;
+
+                return function (executor) {
+                    return new Vue.Promise(executor, _this);
+                };
+            }
+        }
+
+    });
+}
+
+if (typeof window !== 'undefined' && window.Vue) {
+    window.Vue.use(plugin);
+}
+
+module.exports = plugin;
+},{}],4:[function(require,module,exports){
+/*!
+ * vue-router v0.7.13
+ * (c) 2016 Evan You
+ * Released under the MIT License.
+ */
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  global.VueRouter = factory();
+}(this, function () { 'use strict';
+
+  var babelHelpers = {};
+
+  babelHelpers.classCallCheck = function (instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  };
+  function Target(path, matcher, delegate) {
+    this.path = path;
+    this.matcher = matcher;
+    this.delegate = delegate;
+  }
+
+  Target.prototype = {
+    to: function to(target, callback) {
+      var delegate = this.delegate;
+
+      if (delegate && delegate.willAddRoute) {
+        target = delegate.willAddRoute(this.matcher.target, target);
+      }
+
+      this.matcher.add(this.path, target);
+
+      if (callback) {
+        if (callback.length === 0) {
+          throw new Error("You must have an argument in the function passed to `to`");
+        }
+        this.matcher.addChild(this.path, target, callback, this.delegate);
+      }
+      return this;
+    }
+  };
+
+  function Matcher(target) {
+    this.routes = {};
+    this.children = {};
+    this.target = target;
+  }
+
+  Matcher.prototype = {
+    add: function add(path, handler) {
+      this.routes[path] = handler;
+    },
+
+    addChild: function addChild(path, target, callback, delegate) {
+      var matcher = new Matcher(target);
+      this.children[path] = matcher;
+
+      var match = generateMatch(path, matcher, delegate);
+
+      if (delegate && delegate.contextEntered) {
+        delegate.contextEntered(target, match);
+      }
+
+      callback(match);
+    }
+  };
+
+  function generateMatch(startingPath, matcher, delegate) {
+    return function (path, nestedCallback) {
+      var fullPath = startingPath + path;
+
+      if (nestedCallback) {
+        nestedCallback(generateMatch(fullPath, matcher, delegate));
+      } else {
+        return new Target(startingPath + path, matcher, delegate);
+      }
+    };
+  }
+
+  function addRoute(routeArray, path, handler) {
+    var len = 0;
+    for (var i = 0, l = routeArray.length; i < l; i++) {
+      len += routeArray[i].path.length;
+    }
+
+    path = path.substr(len);
+    var route = { path: path, handler: handler };
+    routeArray.push(route);
+  }
+
+  function eachRoute(baseRoute, matcher, callback, binding) {
+    var routes = matcher.routes;
+
+    for (var path in routes) {
+      if (routes.hasOwnProperty(path)) {
+        var routeArray = baseRoute.slice();
+        addRoute(routeArray, path, routes[path]);
+
+        if (matcher.children[path]) {
+          eachRoute(routeArray, matcher.children[path], callback, binding);
+        } else {
+          callback.call(binding, routeArray);
+        }
+      }
+    }
+  }
+
+  function map (callback, addRouteCallback) {
+    var matcher = new Matcher();
+
+    callback(generateMatch("", matcher, this.delegate));
+
+    eachRoute([], matcher, function (route) {
+      if (addRouteCallback) {
+        addRouteCallback(this, route);
+      } else {
+        this.add(route);
+      }
+    }, this);
+  }
+
+  var specials = ['/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}', '\\'];
+
+  var escapeRegex = new RegExp('(\\' + specials.join('|\\') + ')', 'g');
+
+  var noWarning = false;
+  function warn(msg) {
+    if (!noWarning && typeof console !== 'undefined') {
+      console.error('[vue-router] ' + msg);
+    }
+  }
+
+  function tryDecode(uri, asComponent) {
+    try {
+      return asComponent ? decodeURIComponent(uri) : decodeURI(uri);
+    } catch (e) {
+      warn('malformed URI' + (asComponent ? ' component: ' : ': ') + uri);
+    }
+  }
+
+  function isArray(test) {
+    return Object.prototype.toString.call(test) === "[object Array]";
+  }
+
+  // A Segment represents a segment in the original route description.
+  // Each Segment type provides an `eachChar` and `regex` method.
+  //
+  // The `eachChar` method invokes the callback with one or more character
+  // specifications. A character specification consumes one or more input
+  // characters.
+  //
+  // The `regex` method returns a regex fragment for the segment. If the
+  // segment is a dynamic of star segment, the regex fragment also includes
+  // a capture.
+  //
+  // A character specification contains:
+  //
+  // * `validChars`: a String with a list of all valid characters, or
+  // * `invalidChars`: a String with a list of all invalid characters
+  // * `repeat`: true if the character specification can repeat
+
+  function StaticSegment(string) {
+    this.string = string;
+  }
+  StaticSegment.prototype = {
+    eachChar: function eachChar(callback) {
+      var string = this.string,
+          ch;
+
+      for (var i = 0, l = string.length; i < l; i++) {
+        ch = string.charAt(i);
+        callback({ validChars: ch });
+      }
+    },
+
+    regex: function regex() {
+      return this.string.replace(escapeRegex, '\\$1');
+    },
+
+    generate: function generate() {
+      return this.string;
+    }
+  };
+
+  function DynamicSegment(name) {
+    this.name = name;
+  }
+  DynamicSegment.prototype = {
+    eachChar: function eachChar(callback) {
+      callback({ invalidChars: "/", repeat: true });
+    },
+
+    regex: function regex() {
+      return "([^/]+)";
+    },
+
+    generate: function generate(params) {
+      var val = params[this.name];
+      return val == null ? ":" + this.name : val;
+    }
+  };
+
+  function StarSegment(name) {
+    this.name = name;
+  }
+  StarSegment.prototype = {
+    eachChar: function eachChar(callback) {
+      callback({ invalidChars: "", repeat: true });
+    },
+
+    regex: function regex() {
+      return "(.+)";
+    },
+
+    generate: function generate(params) {
+      var val = params[this.name];
+      return val == null ? ":" + this.name : val;
+    }
+  };
+
+  function EpsilonSegment() {}
+  EpsilonSegment.prototype = {
+    eachChar: function eachChar() {},
+    regex: function regex() {
+      return "";
+    },
+    generate: function generate() {
+      return "";
+    }
+  };
+
+  function parse(route, names, specificity) {
+    // normalize route as not starting with a "/". Recognition will
+    // also normalize.
+    if (route.charAt(0) === "/") {
+      route = route.substr(1);
+    }
+
+    var segments = route.split("/"),
+        results = [];
+
+    // A routes has specificity determined by the order that its different segments
+    // appear in. This system mirrors how the magnitude of numbers written as strings
+    // works.
+    // Consider a number written as: "abc". An example would be "200". Any other number written
+    // "xyz" will be smaller than "abc" so long as `a > z`. For instance, "199" is smaller
+    // then "200", even though "y" and "z" (which are both 9) are larger than "0" (the value
+    // of (`b` and `c`). This is because the leading symbol, "2", is larger than the other
+    // leading symbol, "1".
+    // The rule is that symbols to the left carry more weight than symbols to the right
+    // when a number is written out as a string. In the above strings, the leading digit
+    // represents how many 100's are in the number, and it carries more weight than the middle
+    // number which represents how many 10's are in the number.
+    // This system of number magnitude works well for route specificity, too. A route written as
+    // `a/b/c` will be more specific than `x/y/z` as long as `a` is more specific than
+    // `x`, irrespective of the other parts.
+    // Because of this similarity, we assign each type of segment a number value written as a
+    // string. We can find the specificity of compound routes by concatenating these strings
+    // together, from left to right. After we have looped through all of the segments,
+    // we convert the string to a number.
+    specificity.val = '';
+
+    for (var i = 0, l = segments.length; i < l; i++) {
+      var segment = segments[i],
+          match;
+
+      if (match = segment.match(/^:([^\/]+)$/)) {
+        results.push(new DynamicSegment(match[1]));
+        names.push(match[1]);
+        specificity.val += '3';
+      } else if (match = segment.match(/^\*([^\/]+)$/)) {
+        results.push(new StarSegment(match[1]));
+        specificity.val += '2';
+        names.push(match[1]);
+      } else if (segment === "") {
+        results.push(new EpsilonSegment());
+        specificity.val += '1';
+      } else {
+        results.push(new StaticSegment(segment));
+        specificity.val += '4';
+      }
+    }
+
+    specificity.val = +specificity.val;
+
+    return results;
+  }
+
+  // A State has a character specification and (`charSpec`) and a list of possible
+  // subsequent states (`nextStates`).
+  //
+  // If a State is an accepting state, it will also have several additional
+  // properties:
+  //
+  // * `regex`: A regular expression that is used to extract parameters from paths
+  //   that reached this accepting state.
+  // * `handlers`: Information on how to convert the list of captures into calls
+  //   to registered handlers with the specified parameters
+  // * `types`: How many static, dynamic or star segments in this route. Used to
+  //   decide which route to use if multiple registered routes match a path.
+  //
+  // Currently, State is implemented naively by looping over `nextStates` and
+  // comparing a character specification against a character. A more efficient
+  // implementation would use a hash of keys pointing at one or more next states.
+
+  function State(charSpec) {
+    this.charSpec = charSpec;
+    this.nextStates = [];
+  }
+
+  State.prototype = {
+    get: function get(charSpec) {
+      var nextStates = this.nextStates;
+
+      for (var i = 0, l = nextStates.length; i < l; i++) {
+        var child = nextStates[i];
+
+        var isEqual = child.charSpec.validChars === charSpec.validChars;
+        isEqual = isEqual && child.charSpec.invalidChars === charSpec.invalidChars;
+
+        if (isEqual) {
+          return child;
+        }
+      }
+    },
+
+    put: function put(charSpec) {
+      var state;
+
+      // If the character specification already exists in a child of the current
+      // state, just return that state.
+      if (state = this.get(charSpec)) {
+        return state;
+      }
+
+      // Make a new state for the character spec
+      state = new State(charSpec);
+
+      // Insert the new state as a child of the current state
+      this.nextStates.push(state);
+
+      // If this character specification repeats, insert the new state as a child
+      // of itself. Note that this will not trigger an infinite loop because each
+      // transition during recognition consumes a character.
+      if (charSpec.repeat) {
+        state.nextStates.push(state);
+      }
+
+      // Return the new state
+      return state;
+    },
+
+    // Find a list of child states matching the next character
+    match: function match(ch) {
+      // DEBUG "Processing `" + ch + "`:"
+      var nextStates = this.nextStates,
+          child,
+          charSpec,
+          chars;
+
+      // DEBUG "  " + debugState(this)
+      var returned = [];
+
+      for (var i = 0, l = nextStates.length; i < l; i++) {
+        child = nextStates[i];
+
+        charSpec = child.charSpec;
+
+        if (typeof (chars = charSpec.validChars) !== 'undefined') {
+          if (chars.indexOf(ch) !== -1) {
+            returned.push(child);
+          }
+        } else if (typeof (chars = charSpec.invalidChars) !== 'undefined') {
+          if (chars.indexOf(ch) === -1) {
+            returned.push(child);
+          }
+        }
+      }
+
+      return returned;
+    }
+
+    /** IF DEBUG
+    , debug: function() {
+      var charSpec = this.charSpec,
+          debug = "[",
+          chars = charSpec.validChars || charSpec.invalidChars;
+       if (charSpec.invalidChars) { debug += "^"; }
+      debug += chars;
+      debug += "]";
+       if (charSpec.repeat) { debug += "+"; }
+       return debug;
+    }
+    END IF **/
+  };
+
+  /** IF DEBUG
+  function debug(log) {
+    console.log(log);
+  }
+
+  function debugState(state) {
+    return state.nextStates.map(function(n) {
+      if (n.nextStates.length === 0) { return "( " + n.debug() + " [accepting] )"; }
+      return "( " + n.debug() + " <then> " + n.nextStates.map(function(s) { return s.debug() }).join(" or ") + " )";
+    }).join(", ")
+  }
+  END IF **/
+
+  // Sort the routes by specificity
+  function sortSolutions(states) {
+    return states.sort(function (a, b) {
+      return b.specificity.val - a.specificity.val;
+    });
+  }
+
+  function recognizeChar(states, ch) {
+    var nextStates = [];
+
+    for (var i = 0, l = states.length; i < l; i++) {
+      var state = states[i];
+
+      nextStates = nextStates.concat(state.match(ch));
+    }
+
+    return nextStates;
+  }
+
+  var oCreate = Object.create || function (proto) {
+    function F() {}
+    F.prototype = proto;
+    return new F();
+  };
+
+  function RecognizeResults(queryParams) {
+    this.queryParams = queryParams || {};
+  }
+  RecognizeResults.prototype = oCreate({
+    splice: Array.prototype.splice,
+    slice: Array.prototype.slice,
+    push: Array.prototype.push,
+    length: 0,
+    queryParams: null
+  });
+
+  function findHandler(state, path, queryParams) {
+    var handlers = state.handlers,
+        regex = state.regex;
+    var captures = path.match(regex),
+        currentCapture = 1;
+    var result = new RecognizeResults(queryParams);
+
+    for (var i = 0, l = handlers.length; i < l; i++) {
+      var handler = handlers[i],
+          names = handler.names,
+          params = {};
+
+      for (var j = 0, m = names.length; j < m; j++) {
+        params[names[j]] = captures[currentCapture++];
+      }
+
+      result.push({ handler: handler.handler, params: params, isDynamic: !!names.length });
+    }
+
+    return result;
+  }
+
+  function addSegment(currentState, segment) {
+    segment.eachChar(function (ch) {
+      var state;
+
+      currentState = currentState.put(ch);
+    });
+
+    return currentState;
+  }
+
+  function decodeQueryParamPart(part) {
+    // http://www.w3.org/TR/html401/interact/forms.html#h-17.13.4.1
+    part = part.replace(/\+/gm, '%20');
+    return tryDecode(part, true);
+  }
+
+  // The main interface
+
+  var RouteRecognizer = function RouteRecognizer() {
+    this.rootState = new State();
+    this.names = {};
+  };
+
+  RouteRecognizer.prototype = {
+    add: function add(routes, options) {
+      var currentState = this.rootState,
+          regex = "^",
+          specificity = {},
+          handlers = [],
+          allSegments = [],
+          name;
+
+      var isEmpty = true;
+
+      for (var i = 0, l = routes.length; i < l; i++) {
+        var route = routes[i],
+            names = [];
+
+        var segments = parse(route.path, names, specificity);
+
+        allSegments = allSegments.concat(segments);
+
+        for (var j = 0, m = segments.length; j < m; j++) {
+          var segment = segments[j];
+
+          if (segment instanceof EpsilonSegment) {
+            continue;
+          }
+
+          isEmpty = false;
+
+          // Add a "/" for the new segment
+          currentState = currentState.put({ validChars: "/" });
+          regex += "/";
+
+          // Add a representation of the segment to the NFA and regex
+          currentState = addSegment(currentState, segment);
+          regex += segment.regex();
+        }
+
+        var handler = { handler: route.handler, names: names };
+        handlers.push(handler);
+      }
+
+      if (isEmpty) {
+        currentState = currentState.put({ validChars: "/" });
+        regex += "/";
+      }
+
+      currentState.handlers = handlers;
+      currentState.regex = new RegExp(regex + "$");
+      currentState.specificity = specificity;
+
+      if (name = options && options.as) {
+        this.names[name] = {
+          segments: allSegments,
+          handlers: handlers
+        };
+      }
+    },
+
+    handlersFor: function handlersFor(name) {
+      var route = this.names[name],
+          result = [];
+      if (!route) {
+        throw new Error("There is no route named " + name);
+      }
+
+      for (var i = 0, l = route.handlers.length; i < l; i++) {
+        result.push(route.handlers[i]);
+      }
+
+      return result;
+    },
+
+    hasRoute: function hasRoute(name) {
+      return !!this.names[name];
+    },
+
+    generate: function generate(name, params) {
+      var route = this.names[name],
+          output = "";
+      if (!route) {
+        throw new Error("There is no route named " + name);
+      }
+
+      var segments = route.segments;
+
+      for (var i = 0, l = segments.length; i < l; i++) {
+        var segment = segments[i];
+
+        if (segment instanceof EpsilonSegment) {
+          continue;
+        }
+
+        output += "/";
+        output += segment.generate(params);
+      }
+
+      if (output.charAt(0) !== '/') {
+        output = '/' + output;
+      }
+
+      if (params && params.queryParams) {
+        output += this.generateQueryString(params.queryParams);
+      }
+
+      return output;
+    },
+
+    generateQueryString: function generateQueryString(params) {
+      var pairs = [];
+      var keys = [];
+      for (var key in params) {
+        if (params.hasOwnProperty(key)) {
+          keys.push(key);
+        }
+      }
+      keys.sort();
+      for (var i = 0, len = keys.length; i < len; i++) {
+        key = keys[i];
+        var value = params[key];
+        if (value == null) {
+          continue;
+        }
+        var pair = encodeURIComponent(key);
+        if (isArray(value)) {
+          for (var j = 0, l = value.length; j < l; j++) {
+            var arrayPair = key + '[]' + '=' + encodeURIComponent(value[j]);
+            pairs.push(arrayPair);
+          }
+        } else {
+          pair += "=" + encodeURIComponent(value);
+          pairs.push(pair);
+        }
+      }
+
+      if (pairs.length === 0) {
+        return '';
+      }
+
+      return "?" + pairs.join("&");
+    },
+
+    parseQueryString: function parseQueryString(queryString) {
+      var pairs = queryString.split("&"),
+          queryParams = {};
+      for (var i = 0; i < pairs.length; i++) {
+        var pair = pairs[i].split('='),
+            key = decodeQueryParamPart(pair[0]),
+            keyLength = key.length,
+            isArray = false,
+            value;
+        if (pair.length === 1) {
+          value = 'true';
+        } else {
+          //Handle arrays
+          if (keyLength > 2 && key.slice(keyLength - 2) === '[]') {
+            isArray = true;
+            key = key.slice(0, keyLength - 2);
+            if (!queryParams[key]) {
+              queryParams[key] = [];
+            }
+          }
+          value = pair[1] ? decodeQueryParamPart(pair[1]) : '';
+        }
+        if (isArray) {
+          queryParams[key].push(value);
+        } else {
+          queryParams[key] = value;
+        }
+      }
+      return queryParams;
+    },
+
+    recognize: function recognize(path, silent) {
+      noWarning = silent;
+      var states = [this.rootState],
+          pathLen,
+          i,
+          l,
+          queryStart,
+          queryParams = {},
+          isSlashDropped = false;
+
+      queryStart = path.indexOf('?');
+      if (queryStart !== -1) {
+        var queryString = path.substr(queryStart + 1, path.length);
+        path = path.substr(0, queryStart);
+        if (queryString) {
+          queryParams = this.parseQueryString(queryString);
+        }
+      }
+
+      path = tryDecode(path);
+      if (!path) return;
+
+      // DEBUG GROUP path
+
+      if (path.charAt(0) !== "/") {
+        path = "/" + path;
+      }
+
+      pathLen = path.length;
+      if (pathLen > 1 && path.charAt(pathLen - 1) === "/") {
+        path = path.substr(0, pathLen - 1);
+        isSlashDropped = true;
+      }
+
+      for (i = 0, l = path.length; i < l; i++) {
+        states = recognizeChar(states, path.charAt(i));
+        if (!states.length) {
+          break;
+        }
+      }
+
+      // END DEBUG GROUP
+
+      var solutions = [];
+      for (i = 0, l = states.length; i < l; i++) {
+        if (states[i].handlers) {
+          solutions.push(states[i]);
+        }
+      }
+
+      states = sortSolutions(solutions);
+
+      var state = solutions[0];
+
+      if (state && state.handlers) {
+        // if a trailing slash was dropped and a star segment is the last segment
+        // specified, put the trailing slash back
+        if (isSlashDropped && state.regex.source.slice(-5) === "(.+)$") {
+          path = path + "/";
+        }
+        return findHandler(state, path, queryParams);
+      }
+    }
+  };
+
+  RouteRecognizer.prototype.map = map;
+
+  var genQuery = RouteRecognizer.prototype.generateQueryString;
+
+  // export default for holding the Vue reference
+  var exports$1 = {};
+  /**
+   * Warn stuff.
+   *
+   * @param {String} msg
+   */
+
+  function warn$1(msg) {
+    /* istanbul ignore next */
+    if (typeof console !== 'undefined') {
+      console.error('[vue-router] ' + msg);
+    }
+  }
+
+  /**
+   * Resolve a relative path.
+   *
+   * @param {String} base
+   * @param {String} relative
+   * @param {Boolean} append
+   * @return {String}
+   */
+
+  function resolvePath(base, relative, append) {
+    var query = base.match(/(\?.*)$/);
+    if (query) {
+      query = query[1];
+      base = base.slice(0, -query.length);
+    }
+    // a query!
+    if (relative.charAt(0) === '?') {
+      return base + relative;
+    }
+    var stack = base.split('/');
+    // remove trailing segment if:
+    // - not appending
+    // - appending to trailing slash (last segment is empty)
+    if (!append || !stack[stack.length - 1]) {
+      stack.pop();
+    }
+    // resolve relative path
+    var segments = relative.replace(/^\//, '').split('/');
+    for (var i = 0; i < segments.length; i++) {
+      var segment = segments[i];
+      if (segment === '.') {
+        continue;
+      } else if (segment === '..') {
+        stack.pop();
+      } else {
+        stack.push(segment);
+      }
+    }
+    // ensure leading slash
+    if (stack[0] !== '') {
+      stack.unshift('');
+    }
+    return stack.join('/');
+  }
+
+  /**
+   * Forgiving check for a promise
+   *
+   * @param {Object} p
+   * @return {Boolean}
+   */
+
+  function isPromise(p) {
+    return p && typeof p.then === 'function';
+  }
+
+  /**
+   * Retrive a route config field from a component instance
+   * OR a component contructor.
+   *
+   * @param {Function|Vue} component
+   * @param {String} name
+   * @return {*}
+   */
+
+  function getRouteConfig(component, name) {
+    var options = component && (component.$options || component.options);
+    return options && options.route && options.route[name];
+  }
+
+  /**
+   * Resolve an async component factory. Have to do a dirty
+   * mock here because of Vue core's internal API depends on
+   * an ID check.
+   *
+   * @param {Object} handler
+   * @param {Function} cb
+   */
+
+  var resolver = undefined;
+
+  function resolveAsyncComponent(handler, cb) {
+    if (!resolver) {
+      resolver = {
+        resolve: exports$1.Vue.prototype._resolveComponent,
+        $options: {
+          components: {
+            _: handler.component
+          }
+        }
+      };
+    } else {
+      resolver.$options.components._ = handler.component;
+    }
+    resolver.resolve('_', function (Component) {
+      handler.component = Component;
+      cb(Component);
+    });
+  }
+
+  /**
+   * Map the dynamic segments in a path to params.
+   *
+   * @param {String} path
+   * @param {Object} params
+   * @param {Object} query
+   */
+
+  function mapParams(path, params, query) {
+    if (params === undefined) params = {};
+
+    path = path.replace(/:([^\/]+)/g, function (_, key) {
+      var val = params[key];
+      /* istanbul ignore if */
+      if (!val) {
+        warn$1('param "' + key + '" not found when generating ' + 'path for "' + path + '" with params ' + JSON.stringify(params));
+      }
+      return val || '';
+    });
+    if (query) {
+      path += genQuery(query);
+    }
+    return path;
+  }
+
+  var hashRE = /#.*$/;
+
+  var HTML5History = (function () {
+    function HTML5History(_ref) {
+      var root = _ref.root;
+      var onChange = _ref.onChange;
+      babelHelpers.classCallCheck(this, HTML5History);
+
+      if (root && root !== '/') {
+        // make sure there's the starting slash
+        if (root.charAt(0) !== '/') {
+          root = '/' + root;
+        }
+        // remove trailing slash
+        this.root = root.replace(/\/$/, '');
+        this.rootRE = new RegExp('^\\' + this.root);
+      } else {
+        this.root = null;
+      }
+      this.onChange = onChange;
+      // check base tag
+      var baseEl = document.querySelector('base');
+      this.base = baseEl && baseEl.getAttribute('href');
+    }
+
+    HTML5History.prototype.start = function start() {
+      var _this = this;
+
+      this.listener = function (e) {
+        var url = location.pathname + location.search;
+        if (_this.root) {
+          url = url.replace(_this.rootRE, '');
+        }
+        _this.onChange(url, e && e.state, location.hash);
+      };
+      window.addEventListener('popstate', this.listener);
+      this.listener();
+    };
+
+    HTML5History.prototype.stop = function stop() {
+      window.removeEventListener('popstate', this.listener);
+    };
+
+    HTML5History.prototype.go = function go(path, replace, append) {
+      var url = this.formatPath(path, append);
+      if (replace) {
+        history.replaceState({}, '', url);
+      } else {
+        // record scroll position by replacing current state
+        history.replaceState({
+          pos: {
+            x: window.pageXOffset,
+            y: window.pageYOffset
+          }
+        }, '', location.href);
+        // then push new state
+        history.pushState({}, '', url);
+      }
+      var hashMatch = path.match(hashRE);
+      var hash = hashMatch && hashMatch[0];
+      path = url
+      // strip hash so it doesn't mess up params
+      .replace(hashRE, '')
+      // remove root before matching
+      .replace(this.rootRE, '');
+      this.onChange(path, null, hash);
+    };
+
+    HTML5History.prototype.formatPath = function formatPath(path, append) {
+      return path.charAt(0) === '/'
+      // absolute path
+      ? this.root ? this.root + '/' + path.replace(/^\//, '') : path : resolvePath(this.base || location.pathname, path, append);
+    };
+
+    return HTML5History;
+  })();
+
+  var HashHistory = (function () {
+    function HashHistory(_ref) {
+      var hashbang = _ref.hashbang;
+      var onChange = _ref.onChange;
+      babelHelpers.classCallCheck(this, HashHistory);
+
+      this.hashbang = hashbang;
+      this.onChange = onChange;
+    }
+
+    HashHistory.prototype.start = function start() {
+      var self = this;
+      this.listener = function () {
+        var path = location.hash;
+        var raw = path.replace(/^#!?/, '');
+        // always
+        if (raw.charAt(0) !== '/') {
+          raw = '/' + raw;
+        }
+        var formattedPath = self.formatPath(raw);
+        if (formattedPath !== path) {
+          location.replace(formattedPath);
+          return;
+        }
+        // determine query
+        // note it's possible to have queries in both the actual URL
+        // and the hash fragment itself.
+        var query = location.search && path.indexOf('?') > -1 ? '&' + location.search.slice(1) : location.search;
+        self.onChange(path.replace(/^#!?/, '') + query);
+      };
+      window.addEventListener('hashchange', this.listener);
+      this.listener();
+    };
+
+    HashHistory.prototype.stop = function stop() {
+      window.removeEventListener('hashchange', this.listener);
+    };
+
+    HashHistory.prototype.go = function go(path, replace, append) {
+      path = this.formatPath(path, append);
+      if (replace) {
+        location.replace(path);
+      } else {
+        location.hash = path;
+      }
+    };
+
+    HashHistory.prototype.formatPath = function formatPath(path, append) {
+      var isAbsoloute = path.charAt(0) === '/';
+      var prefix = '#' + (this.hashbang ? '!' : '');
+      return isAbsoloute ? prefix + path : prefix + resolvePath(location.hash.replace(/^#!?/, ''), path, append);
+    };
+
+    return HashHistory;
+  })();
+
+  var AbstractHistory = (function () {
+    function AbstractHistory(_ref) {
+      var onChange = _ref.onChange;
+      babelHelpers.classCallCheck(this, AbstractHistory);
+
+      this.onChange = onChange;
+      this.currentPath = '/';
+    }
+
+    AbstractHistory.prototype.start = function start() {
+      this.onChange('/');
+    };
+
+    AbstractHistory.prototype.stop = function stop() {
+      // noop
+    };
+
+    AbstractHistory.prototype.go = function go(path, replace, append) {
+      path = this.currentPath = this.formatPath(path, append);
+      this.onChange(path);
+    };
+
+    AbstractHistory.prototype.formatPath = function formatPath(path, append) {
+      return path.charAt(0) === '/' ? path : resolvePath(this.currentPath, path, append);
+    };
+
+    return AbstractHistory;
+  })();
+
+  /**
+   * Determine the reusability of an existing router view.
+   *
+   * @param {Directive} view
+   * @param {Object} handler
+   * @param {Transition} transition
+   */
+
+  function canReuse(view, handler, transition) {
+    var component = view.childVM;
+    if (!component || !handler) {
+      return false;
+    }
+    // important: check view.Component here because it may
+    // have been changed in activate hook
+    if (view.Component !== handler.component) {
+      return false;
+    }
+    var canReuseFn = getRouteConfig(component, 'canReuse');
+    return typeof canReuseFn === 'boolean' ? canReuseFn : canReuseFn ? canReuseFn.call(component, {
+      to: transition.to,
+      from: transition.from
+    }) : true; // defaults to true
+  }
+
+  /**
+   * Check if a component can deactivate.
+   *
+   * @param {Directive} view
+   * @param {Transition} transition
+   * @param {Function} next
+   */
+
+  function canDeactivate(view, transition, next) {
+    var fromComponent = view.childVM;
+    var hook = getRouteConfig(fromComponent, 'canDeactivate');
+    if (!hook) {
+      next();
+    } else {
+      transition.callHook(hook, fromComponent, next, {
+        expectBoolean: true
+      });
+    }
+  }
+
+  /**
+   * Check if a component can activate.
+   *
+   * @param {Object} handler
+   * @param {Transition} transition
+   * @param {Function} next
+   */
+
+  function canActivate(handler, transition, next) {
+    resolveAsyncComponent(handler, function (Component) {
+      // have to check due to async-ness
+      if (transition.aborted) {
+        return;
+      }
+      // determine if this component can be activated
+      var hook = getRouteConfig(Component, 'canActivate');
+      if (!hook) {
+        next();
+      } else {
+        transition.callHook(hook, null, next, {
+          expectBoolean: true
+        });
+      }
+    });
+  }
+
+  /**
+   * Call deactivate hooks for existing router-views.
+   *
+   * @param {Directive} view
+   * @param {Transition} transition
+   * @param {Function} next
+   */
+
+  function deactivate(view, transition, next) {
+    var component = view.childVM;
+    var hook = getRouteConfig(component, 'deactivate');
+    if (!hook) {
+      next();
+    } else {
+      transition.callHooks(hook, component, next);
+    }
+  }
+
+  /**
+   * Activate / switch component for a router-view.
+   *
+   * @param {Directive} view
+   * @param {Transition} transition
+   * @param {Number} depth
+   * @param {Function} [cb]
+   */
+
+  function activate(view, transition, depth, cb, reuse) {
+    var handler = transition.activateQueue[depth];
+    if (!handler) {
+      saveChildView(view);
+      if (view._bound) {
+        view.setComponent(null);
+      }
+      cb && cb();
+      return;
+    }
+
+    var Component = view.Component = handler.component;
+    var activateHook = getRouteConfig(Component, 'activate');
+    var dataHook = getRouteConfig(Component, 'data');
+    var waitForData = getRouteConfig(Component, 'waitForData');
+
+    view.depth = depth;
+    view.activated = false;
+
+    var component = undefined;
+    var loading = !!(dataHook && !waitForData);
+
+    // "reuse" is a flag passed down when the parent view is
+    // either reused via keep-alive or as a child of a kept-alive view.
+    // of course we can only reuse if the current kept-alive instance
+    // is of the correct type.
+    reuse = reuse && view.childVM && view.childVM.constructor === Component;
+
+    if (reuse) {
+      // just reuse
+      component = view.childVM;
+      component.$loadingRouteData = loading;
+    } else {
+      saveChildView(view);
+
+      // unbuild current component. this step also destroys
+      // and removes all nested child views.
+      view.unbuild(true);
+
+      // build the new component. this will also create the
+      // direct child view of the current one. it will register
+      // itself as view.childView.
+      component = view.build({
+        _meta: {
+          $loadingRouteData: loading
+        },
+        created: function created() {
+          this._routerView = view;
+        }
+      });
+
+      // handle keep-alive.
+      // when a kept-alive child vm is restored, we need to
+      // add its cached child views into the router's view list,
+      // and also properly update current view's child view.
+      if (view.keepAlive) {
+        component.$loadingRouteData = loading;
+        var cachedChildView = component._keepAliveRouterView;
+        if (cachedChildView) {
+          view.childView = cachedChildView;
+          component._keepAliveRouterView = null;
+        }
+      }
+    }
+
+    // cleanup the component in case the transition is aborted
+    // before the component is ever inserted.
+    var cleanup = function cleanup() {
+      component.$destroy();
+    };
+
+    // actually insert the component and trigger transition
+    var insert = function insert() {
+      if (reuse) {
+        cb && cb();
+        return;
+      }
+      var router = transition.router;
+      if (router._rendered || router._transitionOnLoad) {
+        view.transition(component);
+      } else {
+        // no transition on first render, manual transition
+        /* istanbul ignore if */
+        if (view.setCurrent) {
+          // 0.12 compat
+          view.setCurrent(component);
+        } else {
+          // 1.0
+          view.childVM = component;
+        }
+        component.$before(view.anchor, null, false);
+      }
+      cb && cb();
+    };
+
+    var afterData = function afterData() {
+      // activate the child view
+      if (view.childView) {
+        activate(view.childView, transition, depth + 1, null, reuse || view.keepAlive);
+      }
+      insert();
+    };
+
+    // called after activation hook is resolved
+    var afterActivate = function afterActivate() {
+      view.activated = true;
+      if (dataHook && waitForData) {
+        // wait until data loaded to insert
+        loadData(component, transition, dataHook, afterData, cleanup);
+      } else {
+        // load data and insert at the same time
+        if (dataHook) {
+          loadData(component, transition, dataHook);
+        }
+        afterData();
+      }
+    };
+
+    if (activateHook) {
+      transition.callHooks(activateHook, component, afterActivate, {
+        cleanup: cleanup,
+        postActivate: true
+      });
+    } else {
+      afterActivate();
+    }
+  }
+
+  /**
+   * Reuse a view, just reload data if necessary.
+   *
+   * @param {Directive} view
+   * @param {Transition} transition
+   */
+
+  function reuse(view, transition) {
+    var component = view.childVM;
+    var dataHook = getRouteConfig(component, 'data');
+    if (dataHook) {
+      loadData(component, transition, dataHook);
+    }
+  }
+
+  /**
+   * Asynchronously load and apply data to component.
+   *
+   * @param {Vue} component
+   * @param {Transition} transition
+   * @param {Function} hook
+   * @param {Function} cb
+   * @param {Function} cleanup
+   */
+
+  function loadData(component, transition, hook, cb, cleanup) {
+    component.$loadingRouteData = true;
+    transition.callHooks(hook, component, function () {
+      component.$loadingRouteData = false;
+      component.$emit('route-data-loaded', component);
+      cb && cb();
+    }, {
+      cleanup: cleanup,
+      postActivate: true,
+      processData: function processData(data) {
+        // handle promise sugar syntax
+        var promises = [];
+        if (isPlainObject(data)) {
+          Object.keys(data).forEach(function (key) {
+            var val = data[key];
+            if (isPromise(val)) {
+              promises.push(val.then(function (resolvedVal) {
+                component.$set(key, resolvedVal);
+              }));
+            } else {
+              component.$set(key, val);
+            }
+          });
+        }
+        if (promises.length) {
+          return promises[0].constructor.all(promises);
+        }
+      }
+    });
+  }
+
+  /**
+   * Save the child view for a kept-alive view so that
+   * we can restore it when it is switched back to.
+   *
+   * @param {Directive} view
+   */
+
+  function saveChildView(view) {
+    if (view.keepAlive && view.childVM && view.childView) {
+      view.childVM._keepAliveRouterView = view.childView;
+    }
+    view.childView = null;
+  }
+
+  /**
+   * Check plain object.
+   *
+   * @param {*} val
+   */
+
+  function isPlainObject(val) {
+    return Object.prototype.toString.call(val) === '[object Object]';
+  }
+
+  /**
+   * A RouteTransition object manages the pipeline of a
+   * router-view switching process. This is also the object
+   * passed into user route hooks.
+   *
+   * @param {Router} router
+   * @param {Route} to
+   * @param {Route} from
+   */
+
+  var RouteTransition = (function () {
+    function RouteTransition(router, to, from) {
+      babelHelpers.classCallCheck(this, RouteTransition);
+
+      this.router = router;
+      this.to = to;
+      this.from = from;
+      this.next = null;
+      this.aborted = false;
+      this.done = false;
+    }
+
+    /**
+     * Abort current transition and return to previous location.
+     */
+
+    RouteTransition.prototype.abort = function abort() {
+      if (!this.aborted) {
+        this.aborted = true;
+        // if the root path throws an error during validation
+        // on initial load, it gets caught in an infinite loop.
+        var abortingOnLoad = !this.from.path && this.to.path === '/';
+        if (!abortingOnLoad) {
+          this.router.replace(this.from.path || '/');
+        }
+      }
+    };
+
+    /**
+     * Abort current transition and redirect to a new location.
+     *
+     * @param {String} path
+     */
+
+    RouteTransition.prototype.redirect = function redirect(path) {
+      if (!this.aborted) {
+        this.aborted = true;
+        if (typeof path === 'string') {
+          path = mapParams(path, this.to.params, this.to.query);
+        } else {
+          path.params = path.params || this.to.params;
+          path.query = path.query || this.to.query;
+        }
+        this.router.replace(path);
+      }
+    };
+
+    /**
+     * A router view transition's pipeline can be described as
+     * follows, assuming we are transitioning from an existing
+     * <router-view> chain [Component A, Component B] to a new
+     * chain [Component A, Component C]:
+     *
+     *  A    A
+     *  | => |
+     *  B    C
+     *
+     * 1. Reusablity phase:
+     *   -> canReuse(A, A)
+     *   -> canReuse(B, C)
+     *   -> determine new queues:
+     *      - deactivation: [B]
+     *      - activation: [C]
+     *
+     * 2. Validation phase:
+     *   -> canDeactivate(B)
+     *   -> canActivate(C)
+     *
+     * 3. Activation phase:
+     *   -> deactivate(B)
+     *   -> activate(C)
+     *
+     * Each of these steps can be asynchronous, and any
+     * step can potentially abort the transition.
+     *
+     * @param {Function} cb
+     */
+
+    RouteTransition.prototype.start = function start(cb) {
+      var transition = this;
+
+      // determine the queue of views to deactivate
+      var deactivateQueue = [];
+      var view = this.router._rootView;
+      while (view) {
+        deactivateQueue.unshift(view);
+        view = view.childView;
+      }
+      var reverseDeactivateQueue = deactivateQueue.slice().reverse();
+
+      // determine the queue of route handlers to activate
+      var activateQueue = this.activateQueue = toArray(this.to.matched).map(function (match) {
+        return match.handler;
+      });
+
+      // 1. Reusability phase
+      var i = undefined,
+          reuseQueue = undefined;
+      for (i = 0; i < reverseDeactivateQueue.length; i++) {
+        if (!canReuse(reverseDeactivateQueue[i], activateQueue[i], transition)) {
+          break;
+        }
+      }
+      if (i > 0) {
+        reuseQueue = reverseDeactivateQueue.slice(0, i);
+        deactivateQueue = reverseDeactivateQueue.slice(i).reverse();
+        activateQueue = activateQueue.slice(i);
+      }
+
+      // 2. Validation phase
+      transition.runQueue(deactivateQueue, canDeactivate, function () {
+        transition.runQueue(activateQueue, canActivate, function () {
+          transition.runQueue(deactivateQueue, deactivate, function () {
+            // 3. Activation phase
+
+            // Update router current route
+            transition.router._onTransitionValidated(transition);
+
+            // trigger reuse for all reused views
+            reuseQueue && reuseQueue.forEach(function (view) {
+              return reuse(view, transition);
+            });
+
+            // the root of the chain that needs to be replaced
+            // is the top-most non-reusable view.
+            if (deactivateQueue.length) {
+              var _view = deactivateQueue[deactivateQueue.length - 1];
+              var depth = reuseQueue ? reuseQueue.length : 0;
+              activate(_view, transition, depth, cb);
+            } else {
+              cb();
+            }
+          });
+        });
+      });
+    };
+
+    /**
+     * Asynchronously and sequentially apply a function to a
+     * queue.
+     *
+     * @param {Array} queue
+     * @param {Function} fn
+     * @param {Function} cb
+     */
+
+    RouteTransition.prototype.runQueue = function runQueue(queue, fn, cb) {
+      var transition = this;
+      step(0);
+      function step(index) {
+        if (index >= queue.length) {
+          cb();
+        } else {
+          fn(queue[index], transition, function () {
+            step(index + 1);
+          });
+        }
+      }
+    };
+
+    /**
+     * Call a user provided route transition hook and handle
+     * the response (e.g. if the user returns a promise).
+     *
+     * If the user neither expects an argument nor returns a
+     * promise, the hook is assumed to be synchronous.
+     *
+     * @param {Function} hook
+     * @param {*} [context]
+     * @param {Function} [cb]
+     * @param {Object} [options]
+     *                 - {Boolean} expectBoolean
+     *                 - {Boolean} postActive
+     *                 - {Function} processData
+     *                 - {Function} cleanup
+     */
+
+    RouteTransition.prototype.callHook = function callHook(hook, context, cb) {
+      var _ref = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+
+      var _ref$expectBoolean = _ref.expectBoolean;
+      var expectBoolean = _ref$expectBoolean === undefined ? false : _ref$expectBoolean;
+      var _ref$postActivate = _ref.postActivate;
+      var postActivate = _ref$postActivate === undefined ? false : _ref$postActivate;
+      var processData = _ref.processData;
+      var cleanup = _ref.cleanup;
+
+      var transition = this;
+      var nextCalled = false;
+
+      // abort the transition
+      var abort = function abort() {
+        cleanup && cleanup();
+        transition.abort();
+      };
+
+      // handle errors
+      var onError = function onError(err) {
+        postActivate ? next() : abort();
+        if (err && !transition.router._suppress) {
+          warn$1('Uncaught error during transition: ');
+          throw err instanceof Error ? err : new Error(err);
+        }
+      };
+
+      // since promise swallows errors, we have to
+      // throw it in the next tick...
+      var onPromiseError = function onPromiseError(err) {
+        try {
+          onError(err);
+        } catch (e) {
+          setTimeout(function () {
+            throw e;
+          }, 0);
+        }
+      };
+
+      // advance the transition to the next step
+      var next = function next() {
+        if (nextCalled) {
+          warn$1('transition.next() should be called only once.');
+          return;
+        }
+        nextCalled = true;
+        if (transition.aborted) {
+          cleanup && cleanup();
+          return;
+        }
+        cb && cb();
+      };
+
+      var nextWithBoolean = function nextWithBoolean(res) {
+        if (typeof res === 'boolean') {
+          res ? next() : abort();
+        } else if (isPromise(res)) {
+          res.then(function (ok) {
+            ok ? next() : abort();
+          }, onPromiseError);
+        } else if (!hook.length) {
+          next();
+        }
+      };
+
+      var nextWithData = function nextWithData(data) {
+        var res = undefined;
+        try {
+          res = processData(data);
+        } catch (err) {
+          return onError(err);
+        }
+        if (isPromise(res)) {
+          res.then(next, onPromiseError);
+        } else {
+          next();
+        }
+      };
+
+      // expose a clone of the transition object, so that each
+      // hook gets a clean copy and prevent the user from
+      // messing with the internals.
+      var exposed = {
+        to: transition.to,
+        from: transition.from,
+        abort: abort,
+        next: processData ? nextWithData : next,
+        redirect: function redirect() {
+          transition.redirect.apply(transition, arguments);
+        }
+      };
+
+      // actually call the hook
+      var res = undefined;
+      try {
+        res = hook.call(context, exposed);
+      } catch (err) {
+        return onError(err);
+      }
+
+      if (expectBoolean) {
+        // boolean hooks
+        nextWithBoolean(res);
+      } else if (isPromise(res)) {
+        // promise
+        if (processData) {
+          res.then(nextWithData, onPromiseError);
+        } else {
+          res.then(next, onPromiseError);
+        }
+      } else if (processData && isPlainOjbect(res)) {
+        // data promise sugar
+        nextWithData(res);
+      } else if (!hook.length) {
+        next();
+      }
+    };
+
+    /**
+     * Call a single hook or an array of async hooks in series.
+     *
+     * @param {Array} hooks
+     * @param {*} context
+     * @param {Function} cb
+     * @param {Object} [options]
+     */
+
+    RouteTransition.prototype.callHooks = function callHooks(hooks, context, cb, options) {
+      var _this = this;
+
+      if (Array.isArray(hooks)) {
+        this.runQueue(hooks, function (hook, _, next) {
+          if (!_this.aborted) {
+            _this.callHook(hook, context, next, options);
+          }
+        }, cb);
+      } else {
+        this.callHook(hooks, context, cb, options);
+      }
+    };
+
+    return RouteTransition;
+  })();
+
+  function isPlainOjbect(val) {
+    return Object.prototype.toString.call(val) === '[object Object]';
+  }
+
+  function toArray(val) {
+    return val ? Array.prototype.slice.call(val) : [];
+  }
+
+  var internalKeysRE = /^(component|subRoutes|fullPath)$/;
+
+  /**
+   * Route Context Object
+   *
+   * @param {String} path
+   * @param {Router} router
+   */
+
+  var Route = function Route(path, router) {
+    var _this = this;
+
+    babelHelpers.classCallCheck(this, Route);
+
+    var matched = router._recognizer.recognize(path);
+    if (matched) {
+      // copy all custom fields from route configs
+      [].forEach.call(matched, function (match) {
+        for (var key in match.handler) {
+          if (!internalKeysRE.test(key)) {
+            _this[key] = match.handler[key];
+          }
+        }
+      });
+      // set query and params
+      this.query = matched.queryParams;
+      this.params = [].reduce.call(matched, function (prev, cur) {
+        if (cur.params) {
+          for (var key in cur.params) {
+            prev[key] = cur.params[key];
+          }
+        }
+        return prev;
+      }, {});
+    }
+    // expose path and router
+    this.path = path;
+    // for internal use
+    this.matched = matched || router._notFoundHandler;
+    // internal reference to router
+    Object.defineProperty(this, 'router', {
+      enumerable: false,
+      value: router
+    });
+    // Important: freeze self to prevent observation
+    Object.freeze(this);
+  };
+
+  function applyOverride (Vue) {
+    var _Vue$util = Vue.util;
+    var extend = _Vue$util.extend;
+    var isArray = _Vue$util.isArray;
+    var defineReactive = _Vue$util.defineReactive;
+
+    // override Vue's init and destroy process to keep track of router instances
+    var init = Vue.prototype._init;
+    Vue.prototype._init = function (options) {
+      options = options || {};
+      var root = options._parent || options.parent || this;
+      var router = root.$router;
+      var route = root.$route;
+      if (router) {
+        // expose router
+        this.$router = router;
+        router._children.push(this);
+        /* istanbul ignore if */
+        if (this._defineMeta) {
+          // 0.12
+          this._defineMeta('$route', route);
+        } else {
+          // 1.0
+          defineReactive(this, '$route', route);
+        }
+      }
+      init.call(this, options);
+    };
+
+    var destroy = Vue.prototype._destroy;
+    Vue.prototype._destroy = function () {
+      if (!this._isBeingDestroyed && this.$router) {
+        this.$router._children.$remove(this);
+      }
+      destroy.apply(this, arguments);
+    };
+
+    // 1.0 only: enable route mixins
+    var strats = Vue.config.optionMergeStrategies;
+    var hooksToMergeRE = /^(data|activate|deactivate)$/;
+
+    if (strats) {
+      strats.route = function (parentVal, childVal) {
+        if (!childVal) return parentVal;
+        if (!parentVal) return childVal;
+        var ret = {};
+        extend(ret, parentVal);
+        for (var key in childVal) {
+          var a = ret[key];
+          var b = childVal[key];
+          // for data, activate and deactivate, we need to merge them into
+          // arrays similar to lifecycle hooks.
+          if (a && hooksToMergeRE.test(key)) {
+            ret[key] = (isArray(a) ? a : [a]).concat(b);
+          } else {
+            ret[key] = b;
+          }
+        }
+        return ret;
+      };
+    }
+  }
+
+  function View (Vue) {
+
+    var _ = Vue.util;
+    var componentDef =
+    // 0.12
+    Vue.directive('_component') ||
+    // 1.0
+    Vue.internalDirectives.component;
+    // <router-view> extends the internal component directive
+    var viewDef = _.extend({}, componentDef);
+
+    // with some overrides
+    _.extend(viewDef, {
+
+      _isRouterView: true,
+
+      bind: function bind() {
+        var route = this.vm.$route;
+        /* istanbul ignore if */
+        if (!route) {
+          warn$1('<router-view> can only be used inside a ' + 'router-enabled app.');
+          return;
+        }
+        // force dynamic directive so v-component doesn't
+        // attempt to build right now
+        this._isDynamicLiteral = true;
+        // finally, init by delegating to v-component
+        componentDef.bind.call(this);
+
+        // locate the parent view
+        var parentView = undefined;
+        var parent = this.vm;
+        while (parent) {
+          if (parent._routerView) {
+            parentView = parent._routerView;
+            break;
+          }
+          parent = parent.$parent;
+        }
+        if (parentView) {
+          // register self as a child of the parent view,
+          // instead of activating now. This is so that the
+          // child's activate hook is called after the
+          // parent's has resolved.
+          this.parentView = parentView;
+          parentView.childView = this;
+        } else {
+          // this is the root view!
+          var router = route.router;
+          router._rootView = this;
+        }
+
+        // handle late-rendered view
+        // two possibilities:
+        // 1. root view rendered after transition has been
+        //    validated;
+        // 2. child view rendered after parent view has been
+        //    activated.
+        var transition = route.router._currentTransition;
+        if (!parentView && transition.done || parentView && parentView.activated) {
+          var depth = parentView ? parentView.depth + 1 : 0;
+          activate(this, transition, depth);
+        }
+      },
+
+      unbind: function unbind() {
+        if (this.parentView) {
+          this.parentView.childView = null;
+        }
+        componentDef.unbind.call(this);
+      }
+    });
+
+    Vue.elementDirective('router-view', viewDef);
+  }
+
+  var trailingSlashRE = /\/$/;
+  var regexEscapeRE = /[-.*+?^${}()|[\]\/\\]/g;
+  var queryStringRE = /\?.*$/;
+
+  // install v-link, which provides navigation support for
+  // HTML5 history mode
+  function Link (Vue) {
+    var _Vue$util = Vue.util;
+    var _bind = _Vue$util.bind;
+    var isObject = _Vue$util.isObject;
+    var addClass = _Vue$util.addClass;
+    var removeClass = _Vue$util.removeClass;
+
+    var onPriority = Vue.directive('on').priority;
+    var LINK_UPDATE = '__vue-router-link-update__';
+
+    var activeId = 0;
+
+    Vue.directive('link-active', {
+      priority: 9999,
+      bind: function bind() {
+        var _this = this;
+
+        var id = String(activeId++);
+        // collect v-links contained within this element.
+        // we need do this here before the parent-child relationship
+        // gets messed up by terminal directives (if, for, components)
+        var childLinks = this.el.querySelectorAll('[v-link]');
+        for (var i = 0, l = childLinks.length; i < l; i++) {
+          var link = childLinks[i];
+          var existingId = link.getAttribute(LINK_UPDATE);
+          var value = existingId ? existingId + ',' + id : id;
+          // leave a mark on the link element which can be persisted
+          // through fragment clones.
+          link.setAttribute(LINK_UPDATE, value);
+        }
+        this.vm.$on(LINK_UPDATE, this.cb = function (link, path) {
+          if (link.activeIds.indexOf(id) > -1) {
+            link.updateClasses(path, _this.el);
+          }
+        });
+      },
+      unbind: function unbind() {
+        this.vm.$off(LINK_UPDATE, this.cb);
+      }
+    });
+
+    Vue.directive('link', {
+      priority: onPriority - 2,
+
+      bind: function bind() {
+        var vm = this.vm;
+        /* istanbul ignore if */
+        if (!vm.$route) {
+          warn$1('v-link can only be used inside a router-enabled app.');
+          return;
+        }
+        this.router = vm.$route.router;
+        // update things when the route changes
+        this.unwatch = vm.$watch('$route', _bind(this.onRouteUpdate, this));
+        // check v-link-active ids
+        var activeIds = this.el.getAttribute(LINK_UPDATE);
+        if (activeIds) {
+          this.el.removeAttribute(LINK_UPDATE);
+          this.activeIds = activeIds.split(',');
+        }
+        // no need to handle click if link expects to be opened
+        // in a new window/tab.
+        /* istanbul ignore if */
+        if (this.el.tagName === 'A' && this.el.getAttribute('target') === '_blank') {
+          return;
+        }
+        // handle click
+        this.handler = _bind(this.onClick, this);
+        this.el.addEventListener('click', this.handler);
+      },
+
+      update: function update(target) {
+        this.target = target;
+        if (isObject(target)) {
+          this.append = target.append;
+          this.exact = target.exact;
+          this.prevActiveClass = this.activeClass;
+          this.activeClass = target.activeClass;
+        }
+        this.onRouteUpdate(this.vm.$route);
+      },
+
+      onClick: function onClick(e) {
+        // don't redirect with control keys
+        /* istanbul ignore if */
+        if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+        // don't redirect when preventDefault called
+        /* istanbul ignore if */
+        if (e.defaultPrevented) return;
+        // don't redirect on right click
+        /* istanbul ignore if */
+        if (e.button !== 0) return;
+
+        var target = this.target;
+        if (target) {
+          // v-link with expression, just go
+          e.preventDefault();
+          this.router.go(target);
+        } else {
+          // no expression, delegate for an <a> inside
+          var el = e.target;
+          while (el.tagName !== 'A' && el !== this.el) {
+            el = el.parentNode;
+          }
+          if (el.tagName === 'A' && sameOrigin(el)) {
+            e.preventDefault();
+            var path = el.pathname;
+            if (this.router.history.root) {
+              path = path.replace(this.router.history.rootRE, '');
+            }
+            this.router.go({
+              path: path,
+              replace: target && target.replace,
+              append: target && target.append
+            });
+          }
+        }
+      },
+
+      onRouteUpdate: function onRouteUpdate(route) {
+        // router.stringifyPath is dependent on current route
+        // and needs to be called again whenver route changes.
+        var newPath = this.router.stringifyPath(this.target);
+        if (this.path !== newPath) {
+          this.path = newPath;
+          this.updateActiveMatch();
+          this.updateHref();
+        }
+        if (this.activeIds) {
+          this.vm.$emit(LINK_UPDATE, this, route.path);
+        } else {
+          this.updateClasses(route.path, this.el);
+        }
+      },
+
+      updateActiveMatch: function updateActiveMatch() {
+        this.activeRE = this.path && !this.exact ? new RegExp('^' + this.path.replace(/\/$/, '').replace(queryStringRE, '').replace(regexEscapeRE, '\\$&') + '(\\/|$)') : null;
+      },
+
+      updateHref: function updateHref() {
+        if (this.el.tagName !== 'A') {
+          return;
+        }
+        var path = this.path;
+        var router = this.router;
+        var isAbsolute = path.charAt(0) === '/';
+        // do not format non-hash relative paths
+        var href = path && (router.mode === 'hash' || isAbsolute) ? router.history.formatPath(path, this.append) : path;
+        if (href) {
+          this.el.href = href;
+        } else {
+          this.el.removeAttribute('href');
+        }
+      },
+
+      updateClasses: function updateClasses(path, el) {
+        var activeClass = this.activeClass || this.router._linkActiveClass;
+        // clear old class
+        if (this.prevActiveClass && this.prevActiveClass !== activeClass) {
+          toggleClasses(el, this.prevActiveClass, removeClass);
+        }
+        // remove query string before matching
+        var dest = this.path.replace(queryStringRE, '');
+        path = path.replace(queryStringRE, '');
+        // add new class
+        if (this.exact) {
+          if (dest === path ||
+          // also allow additional trailing slash
+          dest.charAt(dest.length - 1) !== '/' && dest === path.replace(trailingSlashRE, '')) {
+            toggleClasses(el, activeClass, addClass);
+          } else {
+            toggleClasses(el, activeClass, removeClass);
+          }
+        } else {
+          if (this.activeRE && this.activeRE.test(path)) {
+            toggleClasses(el, activeClass, addClass);
+          } else {
+            toggleClasses(el, activeClass, removeClass);
+          }
+        }
+      },
+
+      unbind: function unbind() {
+        this.el.removeEventListener('click', this.handler);
+        this.unwatch && this.unwatch();
+      }
+    });
+
+    function sameOrigin(link) {
+      return link.protocol === location.protocol && link.hostname === location.hostname && link.port === location.port;
+    }
+
+    // this function is copied from v-bind:class implementation until
+    // we properly expose it...
+    function toggleClasses(el, key, fn) {
+      key = key.trim();
+      if (key.indexOf(' ') === -1) {
+        fn(el, key);
+        return;
+      }
+      var keys = key.split(/\s+/);
+      for (var i = 0, l = keys.length; i < l; i++) {
+        fn(el, keys[i]);
+      }
+    }
+  }
+
+  var historyBackends = {
+    abstract: AbstractHistory,
+    hash: HashHistory,
+    html5: HTML5History
+  };
+
+  // late bind during install
+  var Vue = undefined;
+
+  /**
+   * Router constructor
+   *
+   * @param {Object} [options]
+   */
+
+  var Router = (function () {
+    function Router() {
+      var _this = this;
+
+      var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+      var _ref$hashbang = _ref.hashbang;
+      var hashbang = _ref$hashbang === undefined ? true : _ref$hashbang;
+      var _ref$abstract = _ref.abstract;
+      var abstract = _ref$abstract === undefined ? false : _ref$abstract;
+      var _ref$history = _ref.history;
+      var history = _ref$history === undefined ? false : _ref$history;
+      var _ref$saveScrollPosition = _ref.saveScrollPosition;
+      var saveScrollPosition = _ref$saveScrollPosition === undefined ? false : _ref$saveScrollPosition;
+      var _ref$transitionOnLoad = _ref.transitionOnLoad;
+      var transitionOnLoad = _ref$transitionOnLoad === undefined ? false : _ref$transitionOnLoad;
+      var _ref$suppressTransitionError = _ref.suppressTransitionError;
+      var suppressTransitionError = _ref$suppressTransitionError === undefined ? false : _ref$suppressTransitionError;
+      var _ref$root = _ref.root;
+      var root = _ref$root === undefined ? null : _ref$root;
+      var _ref$linkActiveClass = _ref.linkActiveClass;
+      var linkActiveClass = _ref$linkActiveClass === undefined ? 'v-link-active' : _ref$linkActiveClass;
+      babelHelpers.classCallCheck(this, Router);
+
+      /* istanbul ignore if */
+      if (!Router.installed) {
+        throw new Error('Please install the Router with Vue.use() before ' + 'creating an instance.');
+      }
+
+      // Vue instances
+      this.app = null;
+      this._children = [];
+
+      // route recognizer
+      this._recognizer = new RouteRecognizer();
+      this._guardRecognizer = new RouteRecognizer();
+
+      // state
+      this._started = false;
+      this._startCb = null;
+      this._currentRoute = {};
+      this._currentTransition = null;
+      this._previousTransition = null;
+      this._notFoundHandler = null;
+      this._notFoundRedirect = null;
+      this._beforeEachHooks = [];
+      this._afterEachHooks = [];
+
+      // trigger transition on initial render?
+      this._rendered = false;
+      this._transitionOnLoad = transitionOnLoad;
+
+      // history mode
+      this._root = root;
+      this._abstract = abstract;
+      this._hashbang = hashbang;
+
+      // check if HTML5 history is available
+      var hasPushState = typeof window !== 'undefined' && window.history && window.history.pushState;
+      this._history = history && hasPushState;
+      this._historyFallback = history && !hasPushState;
+
+      // create history object
+      var inBrowser = Vue.util.inBrowser;
+      this.mode = !inBrowser || this._abstract ? 'abstract' : this._history ? 'html5' : 'hash';
+
+      var History = historyBackends[this.mode];
+      this.history = new History({
+        root: root,
+        hashbang: this._hashbang,
+        onChange: function onChange(path, state, anchor) {
+          _this._match(path, state, anchor);
+        }
+      });
+
+      // other options
+      this._saveScrollPosition = saveScrollPosition;
+      this._linkActiveClass = linkActiveClass;
+      this._suppress = suppressTransitionError;
+    }
+
+    /**
+     * Allow directly passing components to a route
+     * definition.
+     *
+     * @param {String} path
+     * @param {Object} handler
+     */
+
+    // API ===================================================
+
+    /**
+    * Register a map of top-level paths.
+    *
+    * @param {Object} map
+    */
+
+    Router.prototype.map = function map(_map) {
+      for (var route in _map) {
+        this.on(route, _map[route]);
+      }
+      return this;
+    };
+
+    /**
+     * Register a single root-level path
+     *
+     * @param {String} rootPath
+     * @param {Object} handler
+     *                 - {String} component
+     *                 - {Object} [subRoutes]
+     *                 - {Boolean} [forceRefresh]
+     *                 - {Function} [before]
+     *                 - {Function} [after]
+     */
+
+    Router.prototype.on = function on(rootPath, handler) {
+      if (rootPath === '*') {
+        this._notFound(handler);
+      } else {
+        this._addRoute(rootPath, handler, []);
+      }
+      return this;
+    };
+
+    /**
+     * Set redirects.
+     *
+     * @param {Object} map
+     */
+
+    Router.prototype.redirect = function redirect(map) {
+      for (var path in map) {
+        this._addRedirect(path, map[path]);
+      }
+      return this;
+    };
+
+    /**
+     * Set aliases.
+     *
+     * @param {Object} map
+     */
+
+    Router.prototype.alias = function alias(map) {
+      for (var path in map) {
+        this._addAlias(path, map[path]);
+      }
+      return this;
+    };
+
+    /**
+     * Set global before hook.
+     *
+     * @param {Function} fn
+     */
+
+    Router.prototype.beforeEach = function beforeEach(fn) {
+      this._beforeEachHooks.push(fn);
+      return this;
+    };
+
+    /**
+     * Set global after hook.
+     *
+     * @param {Function} fn
+     */
+
+    Router.prototype.afterEach = function afterEach(fn) {
+      this._afterEachHooks.push(fn);
+      return this;
+    };
+
+    /**
+     * Navigate to a given path.
+     * The path can be an object describing a named path in
+     * the format of { name: '...', params: {}, query: {}}
+     * The path is assumed to be already decoded, and will
+     * be resolved against root (if provided)
+     *
+     * @param {String|Object} path
+     * @param {Boolean} [replace]
+     */
+
+    Router.prototype.go = function go(path) {
+      var replace = false;
+      var append = false;
+      if (Vue.util.isObject(path)) {
+        replace = path.replace;
+        append = path.append;
+      }
+      path = this.stringifyPath(path);
+      if (path) {
+        this.history.go(path, replace, append);
+      }
+    };
+
+    /**
+     * Short hand for replacing current path
+     *
+     * @param {String} path
+     */
+
+    Router.prototype.replace = function replace(path) {
+      if (typeof path === 'string') {
+        path = { path: path };
+      }
+      path.replace = true;
+      this.go(path);
+    };
+
+    /**
+     * Start the router.
+     *
+     * @param {VueConstructor} App
+     * @param {String|Element} container
+     * @param {Function} [cb]
+     */
+
+    Router.prototype.start = function start(App, container, cb) {
+      /* istanbul ignore if */
+      if (this._started) {
+        warn$1('already started.');
+        return;
+      }
+      this._started = true;
+      this._startCb = cb;
+      if (!this.app) {
+        /* istanbul ignore if */
+        if (!App || !container) {
+          throw new Error('Must start vue-router with a component and a ' + 'root container.');
+        }
+        /* istanbul ignore if */
+        if (App instanceof Vue) {
+          throw new Error('Must start vue-router with a component, not a ' + 'Vue instance.');
+        }
+        this._appContainer = container;
+        var Ctor = this._appConstructor = typeof App === 'function' ? App : Vue.extend(App);
+        // give it a name for better debugging
+        Ctor.options.name = Ctor.options.name || 'RouterApp';
+      }
+
+      // handle history fallback in browsers that do not
+      // support HTML5 history API
+      if (this._historyFallback) {
+        var _location = window.location;
+        var _history = new HTML5History({ root: this._root });
+        var path = _history.root ? _location.pathname.replace(_history.rootRE, '') : _location.pathname;
+        if (path && path !== '/') {
+          _location.assign((_history.root || '') + '/' + this.history.formatPath(path) + _location.search);
+          return;
+        }
+      }
+
+      this.history.start();
+    };
+
+    /**
+     * Stop listening to route changes.
+     */
+
+    Router.prototype.stop = function stop() {
+      this.history.stop();
+      this._started = false;
+    };
+
+    /**
+     * Normalize named route object / string paths into
+     * a string.
+     *
+     * @param {Object|String|Number} path
+     * @return {String}
+     */
+
+    Router.prototype.stringifyPath = function stringifyPath(path) {
+      var generatedPath = '';
+      if (path && typeof path === 'object') {
+        if (path.name) {
+          var extend = Vue.util.extend;
+          var currentParams = this._currentTransition && this._currentTransition.to.params;
+          var targetParams = path.params || {};
+          var params = currentParams ? extend(extend({}, currentParams), targetParams) : targetParams;
+          generatedPath = encodeURI(this._recognizer.generate(path.name, params));
+        } else if (path.path) {
+          generatedPath = encodeURI(path.path);
+        }
+        if (path.query) {
+          // note: the generated query string is pre-URL-encoded by the recognizer
+          var query = this._recognizer.generateQueryString(path.query);
+          if (generatedPath.indexOf('?') > -1) {
+            generatedPath += '&' + query.slice(1);
+          } else {
+            generatedPath += query;
+          }
+        }
+      } else {
+        generatedPath = encodeURI(path ? path + '' : '');
+      }
+      return generatedPath;
+    };
+
+    // Internal methods ======================================
+
+    /**
+    * Add a route containing a list of segments to the internal
+    * route recognizer. Will be called recursively to add all
+    * possible sub-routes.
+    *
+    * @param {String} path
+    * @param {Object} handler
+    * @param {Array} segments
+    */
+
+    Router.prototype._addRoute = function _addRoute(path, handler, segments) {
+      guardComponent(path, handler);
+      handler.path = path;
+      handler.fullPath = (segments.reduce(function (path, segment) {
+        return path + segment.path;
+      }, '') + path).replace('//', '/');
+      segments.push({
+        path: path,
+        handler: handler
+      });
+      this._recognizer.add(segments, {
+        as: handler.name
+      });
+      // add sub routes
+      if (handler.subRoutes) {
+        for (var subPath in handler.subRoutes) {
+          // recursively walk all sub routes
+          this._addRoute(subPath, handler.subRoutes[subPath],
+          // pass a copy in recursion to avoid mutating
+          // across branches
+          segments.slice());
+        }
+      }
+    };
+
+    /**
+     * Set the notFound route handler.
+     *
+     * @param {Object} handler
+     */
+
+    Router.prototype._notFound = function _notFound(handler) {
+      guardComponent('*', handler);
+      this._notFoundHandler = [{ handler: handler }];
+    };
+
+    /**
+     * Add a redirect record.
+     *
+     * @param {String} path
+     * @param {String} redirectPath
+     */
+
+    Router.prototype._addRedirect = function _addRedirect(path, redirectPath) {
+      if (path === '*') {
+        this._notFoundRedirect = redirectPath;
+      } else {
+        this._addGuard(path, redirectPath, this.replace);
+      }
+    };
+
+    /**
+     * Add an alias record.
+     *
+     * @param {String} path
+     * @param {String} aliasPath
+     */
+
+    Router.prototype._addAlias = function _addAlias(path, aliasPath) {
+      this._addGuard(path, aliasPath, this._match);
+    };
+
+    /**
+     * Add a path guard.
+     *
+     * @param {String} path
+     * @param {String} mappedPath
+     * @param {Function} handler
+     */
+
+    Router.prototype._addGuard = function _addGuard(path, mappedPath, _handler) {
+      var _this2 = this;
+
+      this._guardRecognizer.add([{
+        path: path,
+        handler: function handler(match, query) {
+          var realPath = mapParams(mappedPath, match.params, query);
+          _handler.call(_this2, realPath);
+        }
+      }]);
+    };
+
+    /**
+     * Check if a path matches any redirect records.
+     *
+     * @param {String} path
+     * @return {Boolean} - if true, will skip normal match.
+     */
+
+    Router.prototype._checkGuard = function _checkGuard(path) {
+      var matched = this._guardRecognizer.recognize(path, true);
+      if (matched) {
+        matched[0].handler(matched[0], matched.queryParams);
+        return true;
+      } else if (this._notFoundRedirect) {
+        matched = this._recognizer.recognize(path);
+        if (!matched) {
+          this.replace(this._notFoundRedirect);
+          return true;
+        }
+      }
+    };
+
+    /**
+     * Match a URL path and set the route context on vm,
+     * triggering view updates.
+     *
+     * @param {String} path
+     * @param {Object} [state]
+     * @param {String} [anchor]
+     */
+
+    Router.prototype._match = function _match(path, state, anchor) {
+      var _this3 = this;
+
+      if (this._checkGuard(path)) {
+        return;
+      }
+
+      var currentRoute = this._currentRoute;
+      var currentTransition = this._currentTransition;
+
+      if (currentTransition) {
+        if (currentTransition.to.path === path) {
+          // do nothing if we have an active transition going to the same path
+          return;
+        } else if (currentRoute.path === path) {
+          // We are going to the same path, but we also have an ongoing but
+          // not-yet-validated transition. Abort that transition and reset to
+          // prev transition.
+          currentTransition.aborted = true;
+          this._currentTransition = this._prevTransition;
+          return;
+        } else {
+          // going to a totally different path. abort ongoing transition.
+          currentTransition.aborted = true;
+        }
+      }
+
+      // construct new route and transition context
+      var route = new Route(path, this);
+      var transition = new RouteTransition(this, route, currentRoute);
+
+      // current transition is updated right now.
+      // however, current route will only be updated after the transition has
+      // been validated.
+      this._prevTransition = currentTransition;
+      this._currentTransition = transition;
+
+      if (!this.app) {
+        (function () {
+          // initial render
+          var router = _this3;
+          _this3.app = new _this3._appConstructor({
+            el: _this3._appContainer,
+            created: function created() {
+              this.$router = router;
+            },
+            _meta: {
+              $route: route
+            }
+          });
+        })();
+      }
+
+      // check global before hook
+      var beforeHooks = this._beforeEachHooks;
+      var startTransition = function startTransition() {
+        transition.start(function () {
+          _this3._postTransition(route, state, anchor);
+        });
+      };
+
+      if (beforeHooks.length) {
+        transition.runQueue(beforeHooks, function (hook, _, next) {
+          if (transition === _this3._currentTransition) {
+            transition.callHook(hook, null, next, {
+              expectBoolean: true
+            });
+          }
+        }, startTransition);
+      } else {
+        startTransition();
+      }
+
+      if (!this._rendered && this._startCb) {
+        this._startCb.call(null);
+      }
+
+      // HACK:
+      // set rendered to true after the transition start, so
+      // that components that are acitvated synchronously know
+      // whether it is the initial render.
+      this._rendered = true;
+    };
+
+    /**
+     * Set current to the new transition.
+     * This is called by the transition object when the
+     * validation of a route has succeeded.
+     *
+     * @param {Transition} transition
+     */
+
+    Router.prototype._onTransitionValidated = function _onTransitionValidated(transition) {
+      // set current route
+      var route = this._currentRoute = transition.to;
+      // update route context for all children
+      if (this.app.$route !== route) {
+        this.app.$route = route;
+        this._children.forEach(function (child) {
+          child.$route = route;
+        });
+      }
+      // call global after hook
+      if (this._afterEachHooks.length) {
+        this._afterEachHooks.forEach(function (hook) {
+          return hook.call(null, {
+            to: transition.to,
+            from: transition.from
+          });
+        });
+      }
+      this._currentTransition.done = true;
+    };
+
+    /**
+     * Handle stuff after the transition.
+     *
+     * @param {Route} route
+     * @param {Object} [state]
+     * @param {String} [anchor]
+     */
+
+    Router.prototype._postTransition = function _postTransition(route, state, anchor) {
+      // handle scroll positions
+      // saved scroll positions take priority
+      // then we check if the path has an anchor
+      var pos = state && state.pos;
+      if (pos && this._saveScrollPosition) {
+        Vue.nextTick(function () {
+          window.scrollTo(pos.x, pos.y);
+        });
+      } else if (anchor) {
+        Vue.nextTick(function () {
+          var el = document.getElementById(anchor.slice(1));
+          if (el) {
+            window.scrollTo(window.scrollX, el.offsetTop);
+          }
+        });
+      }
+    };
+
+    return Router;
+  })();
+
+  function guardComponent(path, handler) {
+    var comp = handler.component;
+    if (Vue.util.isPlainObject(comp)) {
+      comp = handler.component = Vue.extend(comp);
+    }
+    /* istanbul ignore if */
+    if (typeof comp !== 'function') {
+      handler.component = null;
+      warn$1('invalid component for route "' + path + '".');
+    }
+  }
+
+  /* Installation */
+
+  Router.installed = false;
+
+  /**
+   * Installation interface.
+   * Install the necessary directives.
+   */
+
+  Router.install = function (externalVue) {
+    /* istanbul ignore if */
+    if (Router.installed) {
+      warn$1('already installed.');
+      return;
+    }
+    Vue = externalVue;
+    applyOverride(Vue);
+    View(Vue);
+    Link(Vue);
+    exports$1.Vue = Vue;
+    Router.installed = true;
+  };
+
+  // auto install
+  /* istanbul ignore if */
+  if (typeof window !== 'undefined' && window.Vue) {
+    window.Vue.use(Router);
+  }
+
+  return Router;
+
+}));
+},{}],5:[function(require,module,exports){
+(function (process,global){
+/*!
+ * Vue.js v1.0.26
+ * (c) 2016 Evan You
+ * Released under the MIT License.
+ */
+'use strict';
+
+function set(obj, key, val) {
+  if (hasOwn(obj, key)) {
+    obj[key] = val;
+    return;
+  }
+  if (obj._isVue) {
+    set(obj._data, key, val);
+    return;
+  }
+  var ob = obj.__ob__;
+  if (!ob) {
+    obj[key] = val;
+    return;
+  }
+  ob.convert(key, val);
+  ob.dep.notify();
+  if (ob.vms) {
+    var i = ob.vms.length;
+    while (i--) {
+      var vm = ob.vms[i];
+      vm._proxy(key);
+      vm._digest();
+    }
+  }
+  return val;
+}
+
+/**
+ * Delete a property and trigger change if necessary.
+ *
+ * @param {Object} obj
+ * @param {String} key
+ */
+
+function del(obj, key) {
+  if (!hasOwn(obj, key)) {
+    return;
+  }
+  delete obj[key];
+  var ob = obj.__ob__;
+  if (!ob) {
+    if (obj._isVue) {
+      delete obj._data[key];
+      obj._digest();
+    }
+    return;
+  }
+  ob.dep.notify();
+  if (ob.vms) {
+    var i = ob.vms.length;
+    while (i--) {
+      var vm = ob.vms[i];
+      vm._unproxy(key);
+      vm._digest();
+    }
+  }
+}
+
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+/**
+ * Check whether the object has the property.
+ *
+ * @param {Object} obj
+ * @param {String} key
+ * @return {Boolean}
+ */
+
+function hasOwn(obj, key) {
+  return hasOwnProperty.call(obj, key);
+}
+
+/**
+ * Check if an expression is a literal value.
+ *
+ * @param {String} exp
+ * @return {Boolean}
+ */
+
+var literalValueRE = /^\s?(true|false|-?[\d\.]+|'[^']*'|"[^"]*")\s?$/;
+
+function isLiteral(exp) {
+  return literalValueRE.test(exp);
+}
+
+/**
+ * Check if a string starts with $ or _
+ *
+ * @param {String} str
+ * @return {Boolean}
+ */
+
+function isReserved(str) {
+  var c = (str + '').charCodeAt(0);
+  return c === 0x24 || c === 0x5F;
+}
+
+/**
+ * Guard text output, make sure undefined outputs
+ * empty string
+ *
+ * @param {*} value
+ * @return {String}
+ */
+
+function _toString(value) {
+  return value == null ? '' : value.toString();
+}
+
+/**
+ * Check and convert possible numeric strings to numbers
+ * before setting back to data
+ *
+ * @param {*} value
+ * @return {*|Number}
+ */
+
+function toNumber(value) {
+  if (typeof value !== 'string') {
+    return value;
+  } else {
+    var parsed = Number(value);
+    return isNaN(parsed) ? value : parsed;
+  }
+}
+
+/**
+ * Convert string boolean literals into real booleans.
+ *
+ * @param {*} value
+ * @return {*|Boolean}
+ */
+
+function toBoolean(value) {
+  return value === 'true' ? true : value === 'false' ? false : value;
+}
+
+/**
+ * Strip quotes from a string
+ *
+ * @param {String} str
+ * @return {String | false}
+ */
+
+function stripQuotes(str) {
+  var a = str.charCodeAt(0);
+  var b = str.charCodeAt(str.length - 1);
+  return a === b && (a === 0x22 || a === 0x27) ? str.slice(1, -1) : str;
+}
+
+/**
+ * Camelize a hyphen-delmited string.
+ *
+ * @param {String} str
+ * @return {String}
+ */
+
+var camelizeRE = /-(\w)/g;
+
+function camelize(str) {
+  return str.replace(camelizeRE, toUpper);
+}
+
+function toUpper(_, c) {
+  return c ? c.toUpperCase() : '';
+}
+
+/**
+ * Hyphenate a camelCase string.
+ *
+ * @param {String} str
+ * @return {String}
+ */
+
+var hyphenateRE = /([a-z\d])([A-Z])/g;
+
+function hyphenate(str) {
+  return str.replace(hyphenateRE, '$1-$2').toLowerCase();
+}
+
+/**
+ * Converts hyphen/underscore/slash delimitered names into
+ * camelized classNames.
+ *
+ * e.g. my-component => MyComponent
+ *      some_else    => SomeElse
+ *      some/comp    => SomeComp
+ *
+ * @param {String} str
+ * @return {String}
+ */
+
+var classifyRE = /(?:^|[-_\/])(\w)/g;
+
+function classify(str) {
+  return str.replace(classifyRE, toUpper);
+}
+
+/**
+ * Simple bind, faster than native
+ *
+ * @param {Function} fn
+ * @param {Object} ctx
+ * @return {Function}
+ */
+
+function bind(fn, ctx) {
+  return function (a) {
+    var l = arguments.length;
+    return l ? l > 1 ? fn.apply(ctx, arguments) : fn.call(ctx, a) : fn.call(ctx);
+  };
+}
+
+/**
+ * Convert an Array-like object to a real Array.
+ *
+ * @param {Array-like} list
+ * @param {Number} [start] - start index
+ * @return {Array}
+ */
+
+function toArray(list, start) {
+  start = start || 0;
+  var i = list.length - start;
+  var ret = new Array(i);
+  while (i--) {
+    ret[i] = list[i + start];
+  }
+  return ret;
+}
+
+/**
+ * Mix properties into target object.
+ *
+ * @param {Object} to
+ * @param {Object} from
+ */
+
+function extend(to, from) {
+  var keys = Object.keys(from);
+  var i = keys.length;
+  while (i--) {
+    to[keys[i]] = from[keys[i]];
+  }
+  return to;
+}
+
+/**
+ * Quick object check - this is primarily used to tell
+ * Objects from primitive values when we know the value
+ * is a JSON-compliant type.
+ *
+ * @param {*} obj
+ * @return {Boolean}
+ */
+
+function isObject(obj) {
+  return obj !== null && typeof obj === 'object';
+}
+
+/**
+ * Strict object type check. Only returns true
+ * for plain JavaScript objects.
+ *
+ * @param {*} obj
+ * @return {Boolean}
+ */
+
+var toString = Object.prototype.toString;
+var OBJECT_STRING = '[object Object]';
+
+function isPlainObject(obj) {
+  return toString.call(obj) === OBJECT_STRING;
+}
+
+/**
+ * Array type check.
+ *
+ * @param {*} obj
+ * @return {Boolean}
+ */
+
+var isArray = Array.isArray;
+
+/**
+ * Define a property.
+ *
+ * @param {Object} obj
+ * @param {String} key
+ * @param {*} val
+ * @param {Boolean} [enumerable]
+ */
+
+function def(obj, key, val, enumerable) {
+  Object.defineProperty(obj, key, {
+    value: val,
+    enumerable: !!enumerable,
+    writable: true,
+    configurable: true
+  });
+}
+
+/**
+ * Debounce a function so it only gets called after the
+ * input stops arriving after the given wait period.
+ *
+ * @param {Function} func
+ * @param {Number} wait
+ * @return {Function} - the debounced function
+ */
+
+function _debounce(func, wait) {
+  var timeout, args, context, timestamp, result;
+  var later = function later() {
+    var last = Date.now() - timestamp;
+    if (last < wait && last >= 0) {
+      timeout = setTimeout(later, wait - last);
+    } else {
+      timeout = null;
+      result = func.apply(context, args);
+      if (!timeout) context = args = null;
+    }
+  };
+  return function () {
+    context = this;
+    args = arguments;
+    timestamp = Date.now();
+    if (!timeout) {
+      timeout = setTimeout(later, wait);
+    }
+    return result;
+  };
+}
+
+/**
+ * Manual indexOf because it's slightly faster than
+ * native.
+ *
+ * @param {Array} arr
+ * @param {*} obj
+ */
+
+function indexOf(arr, obj) {
+  var i = arr.length;
+  while (i--) {
+    if (arr[i] === obj) return i;
+  }
+  return -1;
+}
+
+/**
+ * Make a cancellable version of an async callback.
+ *
+ * @param {Function} fn
+ * @return {Function}
+ */
+
+function cancellable(fn) {
+  var cb = function cb() {
+    if (!cb.cancelled) {
+      return fn.apply(this, arguments);
+    }
+  };
+  cb.cancel = function () {
+    cb.cancelled = true;
+  };
+  return cb;
+}
+
+/**
+ * Check if two values are loosely equal - that is,
+ * if they are plain objects, do they have the same shape?
+ *
+ * @param {*} a
+ * @param {*} b
+ * @return {Boolean}
+ */
+
+function looseEqual(a, b) {
+  /* eslint-disable eqeqeq */
+  return a == b || (isObject(a) && isObject(b) ? JSON.stringify(a) === JSON.stringify(b) : false);
+  /* eslint-enable eqeqeq */
+}
+
+var hasProto = ('__proto__' in {});
+
+// Browser environment sniffing
+var inBrowser = typeof window !== 'undefined' && Object.prototype.toString.call(window) !== '[object Object]';
+
+// detect devtools
+var devtools = inBrowser && window.__VUE_DEVTOOLS_GLOBAL_HOOK__;
+
+// UA sniffing for working around browser-specific quirks
+var UA = inBrowser && window.navigator.userAgent.toLowerCase();
+var isIE = UA && UA.indexOf('trident') > 0;
+var isIE9 = UA && UA.indexOf('msie 9.0') > 0;
+var isAndroid = UA && UA.indexOf('android') > 0;
+var isIos = UA && /(iphone|ipad|ipod|ios)/i.test(UA);
+var iosVersionMatch = isIos && UA.match(/os ([\d_]+)/);
+var iosVersion = iosVersionMatch && iosVersionMatch[1].split('_');
+
+// detecting iOS UIWebView by indexedDB
+var hasMutationObserverBug = iosVersion && Number(iosVersion[0]) >= 9 && Number(iosVersion[1]) >= 3 && !window.indexedDB;
+
+var transitionProp = undefined;
+var transitionEndEvent = undefined;
+var animationProp = undefined;
+var animationEndEvent = undefined;
+
+// Transition property/event sniffing
+if (inBrowser && !isIE9) {
+  var isWebkitTrans = window.ontransitionend === undefined && window.onwebkittransitionend !== undefined;
+  var isWebkitAnim = window.onanimationend === undefined && window.onwebkitanimationend !== undefined;
+  transitionProp = isWebkitTrans ? 'WebkitTransition' : 'transition';
+  transitionEndEvent = isWebkitTrans ? 'webkitTransitionEnd' : 'transitionend';
+  animationProp = isWebkitAnim ? 'WebkitAnimation' : 'animation';
+  animationEndEvent = isWebkitAnim ? 'webkitAnimationEnd' : 'animationend';
+}
+
+/**
+ * Defer a task to execute it asynchronously. Ideally this
+ * should be executed as a microtask, so we leverage
+ * MutationObserver if it's available, and fallback to
+ * setTimeout(0).
+ *
+ * @param {Function} cb
+ * @param {Object} ctx
+ */
+
+var nextTick = (function () {
+  var callbacks = [];
+  var pending = false;
+  var timerFunc;
+  function nextTickHandler() {
+    pending = false;
+    var copies = callbacks.slice(0);
+    callbacks = [];
+    for (var i = 0; i < copies.length; i++) {
+      copies[i]();
+    }
+  }
+
+  /* istanbul ignore if */
+  if (typeof MutationObserver !== 'undefined' && !hasMutationObserverBug) {
+    var counter = 1;
+    var observer = new MutationObserver(nextTickHandler);
+    var textNode = document.createTextNode(counter);
+    observer.observe(textNode, {
+      characterData: true
+    });
+    timerFunc = function () {
+      counter = (counter + 1) % 2;
+      textNode.data = counter;
+    };
+  } else {
+    // webpack attempts to inject a shim for setImmediate
+    // if it is used as a global, so we have to work around that to
+    // avoid bundling unnecessary code.
+    var context = inBrowser ? window : typeof global !== 'undefined' ? global : {};
+    timerFunc = context.setImmediate || setTimeout;
+  }
+  return function (cb, ctx) {
+    var func = ctx ? function () {
+      cb.call(ctx);
+    } : cb;
+    callbacks.push(func);
+    if (pending) return;
+    pending = true;
+    timerFunc(nextTickHandler, 0);
+  };
+})();
+
+var _Set = undefined;
+/* istanbul ignore if */
+if (typeof Set !== 'undefined' && Set.toString().match(/native code/)) {
+  // use native Set when available.
+  _Set = Set;
+} else {
+  // a non-standard Set polyfill that only works with primitive keys.
+  _Set = function () {
+    this.set = Object.create(null);
+  };
+  _Set.prototype.has = function (key) {
+    return this.set[key] !== undefined;
+  };
+  _Set.prototype.add = function (key) {
+    this.set[key] = 1;
+  };
+  _Set.prototype.clear = function () {
+    this.set = Object.create(null);
+  };
+}
+
+function Cache(limit) {
+  this.size = 0;
+  this.limit = limit;
+  this.head = this.tail = undefined;
+  this._keymap = Object.create(null);
+}
+
+var p = Cache.prototype;
+
+/**
+ * Put <value> into the cache associated with <key>.
+ * Returns the entry which was removed to make room for
+ * the new entry. Otherwise undefined is returned.
+ * (i.e. if there was enough room already).
+ *
+ * @param {String} key
+ * @param {*} value
+ * @return {Entry|undefined}
+ */
+
+p.put = function (key, value) {
+  var removed;
+
+  var entry = this.get(key, true);
+  if (!entry) {
+    if (this.size === this.limit) {
+      removed = this.shift();
+    }
+    entry = {
+      key: key
+    };
+    this._keymap[key] = entry;
+    if (this.tail) {
+      this.tail.newer = entry;
+      entry.older = this.tail;
+    } else {
+      this.head = entry;
+    }
+    this.tail = entry;
+    this.size++;
+  }
+  entry.value = value;
+
+  return removed;
+};
+
+/**
+ * Purge the least recently used (oldest) entry from the
+ * cache. Returns the removed entry or undefined if the
+ * cache was empty.
+ */
+
+p.shift = function () {
+  var entry = this.head;
+  if (entry) {
+    this.head = this.head.newer;
+    this.head.older = undefined;
+    entry.newer = entry.older = undefined;
+    this._keymap[entry.key] = undefined;
+    this.size--;
+  }
+  return entry;
+};
+
+/**
+ * Get and register recent use of <key>. Returns the value
+ * associated with <key> or undefined if not in cache.
+ *
+ * @param {String} key
+ * @param {Boolean} returnEntry
+ * @return {Entry|*}
+ */
+
+p.get = function (key, returnEntry) {
+  var entry = this._keymap[key];
+  if (entry === undefined) return;
+  if (entry === this.tail) {
+    return returnEntry ? entry : entry.value;
+  }
+  // HEAD--------------TAIL
+  //   <.older   .newer>
+  //  <--- add direction --
+  //   A  B  C  <D>  E
+  if (entry.newer) {
+    if (entry === this.head) {
+      this.head = entry.newer;
+    }
+    entry.newer.older = entry.older; // C <-- E.
+  }
+  if (entry.older) {
+    entry.older.newer = entry.newer; // C. --> E
+  }
+  entry.newer = undefined; // D --x
+  entry.older = this.tail; // D. --> E
+  if (this.tail) {
+    this.tail.newer = entry; // E. <-- D
+  }
+  this.tail = entry;
+  return returnEntry ? entry : entry.value;
+};
+
+var cache$1 = new Cache(1000);
+var filterTokenRE = /[^\s'"]+|'[^']*'|"[^"]*"/g;
+var reservedArgRE = /^in$|^-?\d+/;
+
+/**
+ * Parser state
+ */
+
+var str;
+var dir;
+var c;
+var prev;
+var i;
+var l;
+var lastFilterIndex;
+var inSingle;
+var inDouble;
+var curly;
+var square;
+var paren;
+/**
+ * Push a filter to the current directive object
+ */
+
+function pushFilter() {
+  var exp = str.slice(lastFilterIndex, i).trim();
+  var filter;
+  if (exp) {
+    filter = {};
+    var tokens = exp.match(filterTokenRE);
+    filter.name = tokens[0];
+    if (tokens.length > 1) {
+      filter.args = tokens.slice(1).map(processFilterArg);
+    }
+  }
+  if (filter) {
+    (dir.filters = dir.filters || []).push(filter);
+  }
+  lastFilterIndex = i + 1;
+}
+
+/**
+ * Check if an argument is dynamic and strip quotes.
+ *
+ * @param {String} arg
+ * @return {Object}
+ */
+
+function processFilterArg(arg) {
+  if (reservedArgRE.test(arg)) {
+    return {
+      value: toNumber(arg),
+      dynamic: false
+    };
+  } else {
+    var stripped = stripQuotes(arg);
+    var dynamic = stripped === arg;
+    return {
+      value: dynamic ? arg : stripped,
+      dynamic: dynamic
+    };
+  }
+}
+
+/**
+ * Parse a directive value and extract the expression
+ * and its filters into a descriptor.
+ *
+ * Example:
+ *
+ * "a + 1 | uppercase" will yield:
+ * {
+ *   expression: 'a + 1',
+ *   filters: [
+ *     { name: 'uppercase', args: null }
+ *   ]
+ * }
+ *
+ * @param {String} s
+ * @return {Object}
+ */
+
+function parseDirective(s) {
+  var hit = cache$1.get(s);
+  if (hit) {
+    return hit;
+  }
+
+  // reset parser state
+  str = s;
+  inSingle = inDouble = false;
+  curly = square = paren = 0;
+  lastFilterIndex = 0;
+  dir = {};
+
+  for (i = 0, l = str.length; i < l; i++) {
+    prev = c;
+    c = str.charCodeAt(i);
+    if (inSingle) {
+      // check single quote
+      if (c === 0x27 && prev !== 0x5C) inSingle = !inSingle;
+    } else if (inDouble) {
+      // check double quote
+      if (c === 0x22 && prev !== 0x5C) inDouble = !inDouble;
+    } else if (c === 0x7C && // pipe
+    str.charCodeAt(i + 1) !== 0x7C && str.charCodeAt(i - 1) !== 0x7C) {
+      if (dir.expression == null) {
+        // first filter, end of expression
+        lastFilterIndex = i + 1;
+        dir.expression = str.slice(0, i).trim();
+      } else {
+        // already has filter
+        pushFilter();
+      }
+    } else {
+      switch (c) {
+        case 0x22:
+          inDouble = true;break; // "
+        case 0x27:
+          inSingle = true;break; // '
+        case 0x28:
+          paren++;break; // (
+        case 0x29:
+          paren--;break; // )
+        case 0x5B:
+          square++;break; // [
+        case 0x5D:
+          square--;break; // ]
+        case 0x7B:
+          curly++;break; // {
+        case 0x7D:
+          curly--;break; // }
+      }
+    }
+  }
+
+  if (dir.expression == null) {
+    dir.expression = str.slice(0, i).trim();
+  } else if (lastFilterIndex !== 0) {
+    pushFilter();
+  }
+
+  cache$1.put(s, dir);
+  return dir;
+}
+
+var directive = Object.freeze({
+  parseDirective: parseDirective
+});
+
+var regexEscapeRE = /[-.*+?^${}()|[\]\/\\]/g;
+var cache = undefined;
+var tagRE = undefined;
+var htmlRE = undefined;
+/**
+ * Escape a string so it can be used in a RegExp
+ * constructor.
+ *
+ * @param {String} str
+ */
+
+function escapeRegex(str) {
+  return str.replace(regexEscapeRE, '\\$&');
+}
+
+function compileRegex() {
+  var open = escapeRegex(config.delimiters[0]);
+  var close = escapeRegex(config.delimiters[1]);
+  var unsafeOpen = escapeRegex(config.unsafeDelimiters[0]);
+  var unsafeClose = escapeRegex(config.unsafeDelimiters[1]);
+  tagRE = new RegExp(unsafeOpen + '((?:.|\\n)+?)' + unsafeClose + '|' + open + '((?:.|\\n)+?)' + close, 'g');
+  htmlRE = new RegExp('^' + unsafeOpen + '((?:.|\\n)+?)' + unsafeClose + '$');
+  // reset cache
+  cache = new Cache(1000);
+}
+
+/**
+ * Parse a template text string into an array of tokens.
+ *
+ * @param {String} text
+ * @return {Array<Object> | null}
+ *               - {String} type
+ *               - {String} value
+ *               - {Boolean} [html]
+ *               - {Boolean} [oneTime]
+ */
+
+function parseText(text) {
+  if (!cache) {
+    compileRegex();
+  }
+  var hit = cache.get(text);
+  if (hit) {
+    return hit;
+  }
+  if (!tagRE.test(text)) {
+    return null;
+  }
+  var tokens = [];
+  var lastIndex = tagRE.lastIndex = 0;
+  var match, index, html, value, first, oneTime;
+  /* eslint-disable no-cond-assign */
+  while (match = tagRE.exec(text)) {
+    /* eslint-enable no-cond-assign */
+    index = match.index;
+    // push text token
+    if (index > lastIndex) {
+      tokens.push({
+        value: text.slice(lastIndex, index)
+      });
+    }
+    // tag token
+    html = htmlRE.test(match[0]);
+    value = html ? match[1] : match[2];
+    first = value.charCodeAt(0);
+    oneTime = first === 42; // *
+    value = oneTime ? value.slice(1) : value;
+    tokens.push({
+      tag: true,
+      value: value.trim(),
+      html: html,
+      oneTime: oneTime
+    });
+    lastIndex = index + match[0].length;
+  }
+  if (lastIndex < text.length) {
+    tokens.push({
+      value: text.slice(lastIndex)
+    });
+  }
+  cache.put(text, tokens);
+  return tokens;
+}
+
+/**
+ * Format a list of tokens into an expression.
+ * e.g. tokens parsed from 'a {{b}} c' can be serialized
+ * into one single expression as '"a " + b + " c"'.
+ *
+ * @param {Array} tokens
+ * @param {Vue} [vm]
+ * @return {String}
+ */
+
+function tokensToExp(tokens, vm) {
+  if (tokens.length > 1) {
+    return tokens.map(function (token) {
+      return formatToken(token, vm);
+    }).join('+');
+  } else {
+    return formatToken(tokens[0], vm, true);
+  }
+}
+
+/**
+ * Format a single token.
+ *
+ * @param {Object} token
+ * @param {Vue} [vm]
+ * @param {Boolean} [single]
+ * @return {String}
+ */
+
+function formatToken(token, vm, single) {
+  return token.tag ? token.oneTime && vm ? '"' + vm.$eval(token.value) + '"' : inlineFilters(token.value, single) : '"' + token.value + '"';
+}
+
+/**
+ * For an attribute with multiple interpolation tags,
+ * e.g. attr="some-{{thing | filter}}", in order to combine
+ * the whole thing into a single watchable expression, we
+ * have to inline those filters. This function does exactly
+ * that. This is a bit hacky but it avoids heavy changes
+ * to directive parser and watcher mechanism.
+ *
+ * @param {String} exp
+ * @param {Boolean} single
+ * @return {String}
+ */
+
+var filterRE = /[^|]\|[^|]/;
+function inlineFilters(exp, single) {
+  if (!filterRE.test(exp)) {
+    return single ? exp : '(' + exp + ')';
+  } else {
+    var dir = parseDirective(exp);
+    if (!dir.filters) {
+      return '(' + exp + ')';
+    } else {
+      return 'this._applyFilters(' + dir.expression + // value
+      ',null,' + // oldValue (null for read)
+      JSON.stringify(dir.filters) + // filter descriptors
+      ',false)'; // write?
+    }
+  }
+}
+
+var text = Object.freeze({
+  compileRegex: compileRegex,
+  parseText: parseText,
+  tokensToExp: tokensToExp
+});
+
+var delimiters = ['{{', '}}'];
+var unsafeDelimiters = ['{{{', '}}}'];
+
+var config = Object.defineProperties({
+
+  /**
+   * Whether to print debug messages.
+   * Also enables stack trace for warnings.
+   *
+   * @type {Boolean}
+   */
+
+  debug: false,
+
+  /**
+   * Whether to suppress warnings.
+   *
+   * @type {Boolean}
+   */
+
+  silent: false,
+
+  /**
+   * Whether to use async rendering.
+   */
+
+  async: true,
+
+  /**
+   * Whether to warn against errors caught when evaluating
+   * expressions.
+   */
+
+  warnExpressionErrors: true,
+
+  /**
+   * Whether to allow devtools inspection.
+   * Disabled by default in production builds.
+   */
+
+  devtools: process.env.NODE_ENV !== 'production',
+
+  /**
+   * Internal flag to indicate the delimiters have been
+   * changed.
+   *
+   * @type {Boolean}
+   */
+
+  _delimitersChanged: true,
+
+  /**
+   * List of asset types that a component can own.
+   *
+   * @type {Array}
+   */
+
+  _assetTypes: ['component', 'directive', 'elementDirective', 'filter', 'transition', 'partial'],
+
+  /**
+   * prop binding modes
+   */
+
+  _propBindingModes: {
+    ONE_WAY: 0,
+    TWO_WAY: 1,
+    ONE_TIME: 2
+  },
+
+  /**
+   * Max circular updates allowed in a batcher flush cycle.
+   */
+
+  _maxUpdateCount: 100
+
+}, {
+  delimiters: { /**
+                 * Interpolation delimiters. Changing these would trigger
+                 * the text parser to re-compile the regular expressions.
+                 *
+                 * @type {Array<String>}
+                 */
+
+    get: function get() {
+      return delimiters;
+    },
+    set: function set(val) {
+      delimiters = val;
+      compileRegex();
+    },
+    configurable: true,
+    enumerable: true
+  },
+  unsafeDelimiters: {
+    get: function get() {
+      return unsafeDelimiters;
+    },
+    set: function set(val) {
+      unsafeDelimiters = val;
+      compileRegex();
+    },
+    configurable: true,
+    enumerable: true
+  }
+});
+
+var warn = undefined;
+var formatComponentName = undefined;
+
+if (process.env.NODE_ENV !== 'production') {
+  (function () {
+    var hasConsole = typeof console !== 'undefined';
+
+    warn = function (msg, vm) {
+      if (hasConsole && !config.silent) {
+        console.error('[Vue warn]: ' + msg + (vm ? formatComponentName(vm) : ''));
+      }
+    };
+
+    formatComponentName = function (vm) {
+      var name = vm._isVue ? vm.$options.name : vm.name;
+      return name ? ' (found in component: <' + hyphenate(name) + '>)' : '';
+    };
+  })();
+}
+
+/**
+ * Append with transition.
+ *
+ * @param {Element} el
+ * @param {Element} target
+ * @param {Vue} vm
+ * @param {Function} [cb]
+ */
+
+function appendWithTransition(el, target, vm, cb) {
+  applyTransition(el, 1, function () {
+    target.appendChild(el);
+  }, vm, cb);
+}
+
+/**
+ * InsertBefore with transition.
+ *
+ * @param {Element} el
+ * @param {Element} target
+ * @param {Vue} vm
+ * @param {Function} [cb]
+ */
+
+function beforeWithTransition(el, target, vm, cb) {
+  applyTransition(el, 1, function () {
+    before(el, target);
+  }, vm, cb);
+}
+
+/**
+ * Remove with transition.
+ *
+ * @param {Element} el
+ * @param {Vue} vm
+ * @param {Function} [cb]
+ */
+
+function removeWithTransition(el, vm, cb) {
+  applyTransition(el, -1, function () {
+    remove(el);
+  }, vm, cb);
+}
+
+/**
+ * Apply transitions with an operation callback.
+ *
+ * @param {Element} el
+ * @param {Number} direction
+ *                  1: enter
+ *                 -1: leave
+ * @param {Function} op - the actual DOM operation
+ * @param {Vue} vm
+ * @param {Function} [cb]
+ */
+
+function applyTransition(el, direction, op, vm, cb) {
+  var transition = el.__v_trans;
+  if (!transition ||
+  // skip if there are no js hooks and CSS transition is
+  // not supported
+  !transition.hooks && !transitionEndEvent ||
+  // skip transitions for initial compile
+  !vm._isCompiled ||
+  // if the vm is being manipulated by a parent directive
+  // during the parent's compilation phase, skip the
+  // animation.
+  vm.$parent && !vm.$parent._isCompiled) {
+    op();
+    if (cb) cb();
+    return;
+  }
+  var action = direction > 0 ? 'enter' : 'leave';
+  transition[action](op, cb);
+}
+
+var transition = Object.freeze({
+  appendWithTransition: appendWithTransition,
+  beforeWithTransition: beforeWithTransition,
+  removeWithTransition: removeWithTransition,
+  applyTransition: applyTransition
+});
+
+/**
+ * Query an element selector if it's not an element already.
+ *
+ * @param {String|Element} el
+ * @return {Element}
+ */
+
+function query(el) {
+  if (typeof el === 'string') {
+    var selector = el;
+    el = document.querySelector(el);
+    if (!el) {
+      process.env.NODE_ENV !== 'production' && warn('Cannot find element: ' + selector);
+    }
+  }
+  return el;
+}
+
+/**
+ * Check if a node is in the document.
+ * Note: document.documentElement.contains should work here
+ * but always returns false for comment nodes in phantomjs,
+ * making unit tests difficult. This is fixed by doing the
+ * contains() check on the node's parentNode instead of
+ * the node itself.
+ *
+ * @param {Node} node
+ * @return {Boolean}
+ */
+
+function inDoc(node) {
+  if (!node) return false;
+  var doc = node.ownerDocument.documentElement;
+  var parent = node.parentNode;
+  return doc === node || doc === parent || !!(parent && parent.nodeType === 1 && doc.contains(parent));
+}
+
+/**
+ * Get and remove an attribute from a node.
+ *
+ * @param {Node} node
+ * @param {String} _attr
+ */
+
+function getAttr(node, _attr) {
+  var val = node.getAttribute(_attr);
+  if (val !== null) {
+    node.removeAttribute(_attr);
+  }
+  return val;
+}
+
+/**
+ * Get an attribute with colon or v-bind: prefix.
+ *
+ * @param {Node} node
+ * @param {String} name
+ * @return {String|null}
+ */
+
+function getBindAttr(node, name) {
+  var val = getAttr(node, ':' + name);
+  if (val === null) {
+    val = getAttr(node, 'v-bind:' + name);
+  }
+  return val;
+}
+
+/**
+ * Check the presence of a bind attribute.
+ *
+ * @param {Node} node
+ * @param {String} name
+ * @return {Boolean}
+ */
+
+function hasBindAttr(node, name) {
+  return node.hasAttribute(name) || node.hasAttribute(':' + name) || node.hasAttribute('v-bind:' + name);
+}
+
+/**
+ * Insert el before target
+ *
+ * @param {Element} el
+ * @param {Element} target
+ */
+
+function before(el, target) {
+  target.parentNode.insertBefore(el, target);
+}
+
+/**
+ * Insert el after target
+ *
+ * @param {Element} el
+ * @param {Element} target
+ */
+
+function after(el, target) {
+  if (target.nextSibling) {
+    before(el, target.nextSibling);
+  } else {
+    target.parentNode.appendChild(el);
+  }
+}
+
+/**
+ * Remove el from DOM
+ *
+ * @param {Element} el
+ */
+
+function remove(el) {
+  el.parentNode.removeChild(el);
+}
+
+/**
+ * Prepend el to target
+ *
+ * @param {Element} el
+ * @param {Element} target
+ */
+
+function prepend(el, target) {
+  if (target.firstChild) {
+    before(el, target.firstChild);
+  } else {
+    target.appendChild(el);
+  }
+}
+
+/**
+ * Replace target with el
+ *
+ * @param {Element} target
+ * @param {Element} el
+ */
+
+function replace(target, el) {
+  var parent = target.parentNode;
+  if (parent) {
+    parent.replaceChild(el, target);
+  }
+}
+
+/**
+ * Add event listener shorthand.
+ *
+ * @param {Element} el
+ * @param {String} event
+ * @param {Function} cb
+ * @param {Boolean} [useCapture]
+ */
+
+function on(el, event, cb, useCapture) {
+  el.addEventListener(event, cb, useCapture);
+}
+
+/**
+ * Remove event listener shorthand.
+ *
+ * @param {Element} el
+ * @param {String} event
+ * @param {Function} cb
+ */
+
+function off(el, event, cb) {
+  el.removeEventListener(event, cb);
+}
+
+/**
+ * For IE9 compat: when both class and :class are present
+ * getAttribute('class') returns wrong value...
+ *
+ * @param {Element} el
+ * @return {String}
+ */
+
+function getClass(el) {
+  var classname = el.className;
+  if (typeof classname === 'object') {
+    classname = classname.baseVal || '';
+  }
+  return classname;
+}
+
+/**
+ * In IE9, setAttribute('class') will result in empty class
+ * if the element also has the :class attribute; However in
+ * PhantomJS, setting `className` does not work on SVG elements...
+ * So we have to do a conditional check here.
+ *
+ * @param {Element} el
+ * @param {String} cls
+ */
+
+function setClass(el, cls) {
+  /* istanbul ignore if */
+  if (isIE9 && !/svg$/.test(el.namespaceURI)) {
+    el.className = cls;
+  } else {
+    el.setAttribute('class', cls);
+  }
+}
+
+/**
+ * Add class with compatibility for IE & SVG
+ *
+ * @param {Element} el
+ * @param {String} cls
+ */
+
+function addClass(el, cls) {
+  if (el.classList) {
+    el.classList.add(cls);
+  } else {
+    var cur = ' ' + getClass(el) + ' ';
+    if (cur.indexOf(' ' + cls + ' ') < 0) {
+      setClass(el, (cur + cls).trim());
+    }
+  }
+}
+
+/**
+ * Remove class with compatibility for IE & SVG
+ *
+ * @param {Element} el
+ * @param {String} cls
+ */
+
+function removeClass(el, cls) {
+  if (el.classList) {
+    el.classList.remove(cls);
+  } else {
+    var cur = ' ' + getClass(el) + ' ';
+    var tar = ' ' + cls + ' ';
+    while (cur.indexOf(tar) >= 0) {
+      cur = cur.replace(tar, ' ');
+    }
+    setClass(el, cur.trim());
+  }
+  if (!el.className) {
+    el.removeAttribute('class');
+  }
+}
+
+/**
+ * Extract raw content inside an element into a temporary
+ * container div
+ *
+ * @param {Element} el
+ * @param {Boolean} asFragment
+ * @return {Element|DocumentFragment}
+ */
+
+function extractContent(el, asFragment) {
+  var child;
+  var rawContent;
+  /* istanbul ignore if */
+  if (isTemplate(el) && isFragment(el.content)) {
+    el = el.content;
+  }
+  if (el.hasChildNodes()) {
+    trimNode(el);
+    rawContent = asFragment ? document.createDocumentFragment() : document.createElement('div');
+    /* eslint-disable no-cond-assign */
+    while (child = el.firstChild) {
+      /* eslint-enable no-cond-assign */
+      rawContent.appendChild(child);
+    }
+  }
+  return rawContent;
+}
+
+/**
+ * Trim possible empty head/tail text and comment
+ * nodes inside a parent.
+ *
+ * @param {Node} node
+ */
+
+function trimNode(node) {
+  var child;
+  /* eslint-disable no-sequences */
+  while ((child = node.firstChild, isTrimmable(child))) {
+    node.removeChild(child);
+  }
+  while ((child = node.lastChild, isTrimmable(child))) {
+    node.removeChild(child);
+  }
+  /* eslint-enable no-sequences */
+}
+
+function isTrimmable(node) {
+  return node && (node.nodeType === 3 && !node.data.trim() || node.nodeType === 8);
+}
+
+/**
+ * Check if an element is a template tag.
+ * Note if the template appears inside an SVG its tagName
+ * will be in lowercase.
+ *
+ * @param {Element} el
+ */
+
+function isTemplate(el) {
+  return el.tagName && el.tagName.toLowerCase() === 'template';
+}
+
+/**
+ * Create an "anchor" for performing dom insertion/removals.
+ * This is used in a number of scenarios:
+ * - fragment instance
+ * - v-html
+ * - v-if
+ * - v-for
+ * - component
+ *
+ * @param {String} content
+ * @param {Boolean} persist - IE trashes empty textNodes on
+ *                            cloneNode(true), so in certain
+ *                            cases the anchor needs to be
+ *                            non-empty to be persisted in
+ *                            templates.
+ * @return {Comment|Text}
+ */
+
+function createAnchor(content, persist) {
+  var anchor = config.debug ? document.createComment(content) : document.createTextNode(persist ? ' ' : '');
+  anchor.__v_anchor = true;
+  return anchor;
+}
+
+/**
+ * Find a component ref attribute that starts with $.
+ *
+ * @param {Element} node
+ * @return {String|undefined}
+ */
+
+var refRE = /^v-ref:/;
+
+function findRef(node) {
+  if (node.hasAttributes()) {
+    var attrs = node.attributes;
+    for (var i = 0, l = attrs.length; i < l; i++) {
+      var name = attrs[i].name;
+      if (refRE.test(name)) {
+        return camelize(name.replace(refRE, ''));
+      }
+    }
+  }
+}
+
+/**
+ * Map a function to a range of nodes .
+ *
+ * @param {Node} node
+ * @param {Node} end
+ * @param {Function} op
+ */
+
+function mapNodeRange(node, end, op) {
+  var next;
+  while (node !== end) {
+    next = node.nextSibling;
+    op(node);
+    node = next;
+  }
+  op(end);
+}
+
+/**
+ * Remove a range of nodes with transition, store
+ * the nodes in a fragment with correct ordering,
+ * and call callback when done.
+ *
+ * @param {Node} start
+ * @param {Node} end
+ * @param {Vue} vm
+ * @param {DocumentFragment} frag
+ * @param {Function} cb
+ */
+
+function removeNodeRange(start, end, vm, frag, cb) {
+  var done = false;
+  var removed = 0;
+  var nodes = [];
+  mapNodeRange(start, end, function (node) {
+    if (node === end) done = true;
+    nodes.push(node);
+    removeWithTransition(node, vm, onRemoved);
+  });
+  function onRemoved() {
+    removed++;
+    if (done && removed >= nodes.length) {
+      for (var i = 0; i < nodes.length; i++) {
+        frag.appendChild(nodes[i]);
+      }
+      cb && cb();
+    }
+  }
+}
+
+/**
+ * Check if a node is a DocumentFragment.
+ *
+ * @param {Node} node
+ * @return {Boolean}
+ */
+
+function isFragment(node) {
+  return node && node.nodeType === 11;
+}
+
+/**
+ * Get outerHTML of elements, taking care
+ * of SVG elements in IE as well.
+ *
+ * @param {Element} el
+ * @return {String}
+ */
+
+function getOuterHTML(el) {
+  if (el.outerHTML) {
+    return el.outerHTML;
+  } else {
+    var container = document.createElement('div');
+    container.appendChild(el.cloneNode(true));
+    return container.innerHTML;
+  }
+}
+
+var commonTagRE = /^(div|p|span|img|a|b|i|br|ul|ol|li|h1|h2|h3|h4|h5|h6|code|pre|table|th|td|tr|form|label|input|select|option|nav|article|section|header|footer)$/i;
+var reservedTagRE = /^(slot|partial|component)$/i;
+
+var isUnknownElement = undefined;
+if (process.env.NODE_ENV !== 'production') {
+  isUnknownElement = function (el, tag) {
+    if (tag.indexOf('-') > -1) {
+      // http://stackoverflow.com/a/28210364/1070244
+      return el.constructor === window.HTMLUnknownElement || el.constructor === window.HTMLElement;
+    } else {
+      return (/HTMLUnknownElement/.test(el.toString()) &&
+        // Chrome returns unknown for several HTML5 elements.
+        // https://code.google.com/p/chromium/issues/detail?id=540526
+        // Firefox returns unknown for some "Interactive elements."
+        !/^(data|time|rtc|rb|details|dialog|summary)$/.test(tag)
+      );
+    }
+  };
+}
+
+/**
+ * Check if an element is a component, if yes return its
+ * component id.
+ *
+ * @param {Element} el
+ * @param {Object} options
+ * @return {Object|undefined}
+ */
+
+function checkComponentAttr(el, options) {
+  var tag = el.tagName.toLowerCase();
+  var hasAttrs = el.hasAttributes();
+  if (!commonTagRE.test(tag) && !reservedTagRE.test(tag)) {
+    if (resolveAsset(options, 'components', tag)) {
+      return { id: tag };
+    } else {
+      var is = hasAttrs && getIsBinding(el, options);
+      if (is) {
+        return is;
+      } else if (process.env.NODE_ENV !== 'production') {
+        var expectedTag = options._componentNameMap && options._componentNameMap[tag];
+        if (expectedTag) {
+          warn('Unknown custom element: <' + tag + '> - ' + 'did you mean <' + expectedTag + '>? ' + 'HTML is case-insensitive, remember to use kebab-case in templates.');
+        } else if (isUnknownElement(el, tag)) {
+          warn('Unknown custom element: <' + tag + '> - did you ' + 'register the component correctly? For recursive components, ' + 'make sure to provide the "name" option.');
+        }
+      }
+    }
+  } else if (hasAttrs) {
+    return getIsBinding(el, options);
+  }
+}
+
+/**
+ * Get "is" binding from an element.
+ *
+ * @param {Element} el
+ * @param {Object} options
+ * @return {Object|undefined}
+ */
+
+function getIsBinding(el, options) {
+  // dynamic syntax
+  var exp = el.getAttribute('is');
+  if (exp != null) {
+    if (resolveAsset(options, 'components', exp)) {
+      el.removeAttribute('is');
+      return { id: exp };
+    }
+  } else {
+    exp = getBindAttr(el, 'is');
+    if (exp != null) {
+      return { id: exp, dynamic: true };
+    }
+  }
+}
+
+/**
+ * Option overwriting strategies are functions that handle
+ * how to merge a parent option value and a child option
+ * value into the final value.
+ *
+ * All strategy functions follow the same signature:
+ *
+ * @param {*} parentVal
+ * @param {*} childVal
+ * @param {Vue} [vm]
+ */
+
+var strats = config.optionMergeStrategies = Object.create(null);
+
+/**
+ * Helper that recursively merges two data objects together.
+ */
+
+function mergeData(to, from) {
+  var key, toVal, fromVal;
+  for (key in from) {
+    toVal = to[key];
+    fromVal = from[key];
+    if (!hasOwn(to, key)) {
+      set(to, key, fromVal);
+    } else if (isObject(toVal) && isObject(fromVal)) {
+      mergeData(toVal, fromVal);
+    }
+  }
+  return to;
+}
+
+/**
+ * Data
+ */
+
+strats.data = function (parentVal, childVal, vm) {
+  if (!vm) {
+    // in a Vue.extend merge, both should be functions
+    if (!childVal) {
+      return parentVal;
+    }
+    if (typeof childVal !== 'function') {
+      process.env.NODE_ENV !== 'production' && warn('The "data" option should be a function ' + 'that returns a per-instance value in component ' + 'definitions.', vm);
+      return parentVal;
+    }
+    if (!parentVal) {
+      return childVal;
+    }
+    // when parentVal & childVal are both present,
+    // we need to return a function that returns the
+    // merged result of both functions... no need to
+    // check if parentVal is a function here because
+    // it has to be a function to pass previous merges.
+    return function mergedDataFn() {
+      return mergeData(childVal.call(this), parentVal.call(this));
+    };
+  } else if (parentVal || childVal) {
+    return function mergedInstanceDataFn() {
+      // instance merge
+      var instanceData = typeof childVal === 'function' ? childVal.call(vm) : childVal;
+      var defaultData = typeof parentVal === 'function' ? parentVal.call(vm) : undefined;
+      if (instanceData) {
+        return mergeData(instanceData, defaultData);
+      } else {
+        return defaultData;
+      }
+    };
+  }
+};
+
+/**
+ * El
+ */
+
+strats.el = function (parentVal, childVal, vm) {
+  if (!vm && childVal && typeof childVal !== 'function') {
+    process.env.NODE_ENV !== 'production' && warn('The "el" option should be a function ' + 'that returns a per-instance value in component ' + 'definitions.', vm);
+    return;
+  }
+  var ret = childVal || parentVal;
+  // invoke the element factory if this is instance merge
+  return vm && typeof ret === 'function' ? ret.call(vm) : ret;
+};
+
+/**
+ * Hooks and param attributes are merged as arrays.
+ */
+
+strats.init = strats.created = strats.ready = strats.attached = strats.detached = strats.beforeCompile = strats.compiled = strats.beforeDestroy = strats.destroyed = strats.activate = function (parentVal, childVal) {
+  return childVal ? parentVal ? parentVal.concat(childVal) : isArray(childVal) ? childVal : [childVal] : parentVal;
+};
+
+/**
+ * Assets
+ *
+ * When a vm is present (instance creation), we need to do
+ * a three-way merge between constructor options, instance
+ * options and parent options.
+ */
+
+function mergeAssets(parentVal, childVal) {
+  var res = Object.create(parentVal || null);
+  return childVal ? extend(res, guardArrayAssets(childVal)) : res;
+}
+
+config._assetTypes.forEach(function (type) {
+  strats[type + 's'] = mergeAssets;
+});
+
+/**
+ * Events & Watchers.
+ *
+ * Events & watchers hashes should not overwrite one
+ * another, so we merge them as arrays.
+ */
+
+strats.watch = strats.events = function (parentVal, childVal) {
+  if (!childVal) return parentVal;
+  if (!parentVal) return childVal;
+  var ret = {};
+  extend(ret, parentVal);
+  for (var key in childVal) {
+    var parent = ret[key];
+    var child = childVal[key];
+    if (parent && !isArray(parent)) {
+      parent = [parent];
+    }
+    ret[key] = parent ? parent.concat(child) : [child];
+  }
+  return ret;
+};
+
+/**
+ * Other object hashes.
+ */
+
+strats.props = strats.methods = strats.computed = function (parentVal, childVal) {
+  if (!childVal) return parentVal;
+  if (!parentVal) return childVal;
+  var ret = Object.create(null);
+  extend(ret, parentVal);
+  extend(ret, childVal);
+  return ret;
+};
+
+/**
+ * Default strategy.
+ */
+
+var defaultStrat = function defaultStrat(parentVal, childVal) {
+  return childVal === undefined ? parentVal : childVal;
+};
+
+/**
+ * Make sure component options get converted to actual
+ * constructors.
+ *
+ * @param {Object} options
+ */
+
+function guardComponents(options) {
+  if (options.components) {
+    var components = options.components = guardArrayAssets(options.components);
+    var ids = Object.keys(components);
+    var def;
+    if (process.env.NODE_ENV !== 'production') {
+      var map = options._componentNameMap = {};
+    }
+    for (var i = 0, l = ids.length; i < l; i++) {
+      var key = ids[i];
+      if (commonTagRE.test(key) || reservedTagRE.test(key)) {
+        process.env.NODE_ENV !== 'production' && warn('Do not use built-in or reserved HTML elements as component ' + 'id: ' + key);
+        continue;
+      }
+      // record a all lowercase <-> kebab-case mapping for
+      // possible custom element case error warning
+      if (process.env.NODE_ENV !== 'production') {
+        map[key.replace(/-/g, '').toLowerCase()] = hyphenate(key);
+      }
+      def = components[key];
+      if (isPlainObject(def)) {
+        components[key] = Vue.extend(def);
+      }
+    }
+  }
+}
+
+/**
+ * Ensure all props option syntax are normalized into the
+ * Object-based format.
+ *
+ * @param {Object} options
+ */
+
+function guardProps(options) {
+  var props = options.props;
+  var i, val;
+  if (isArray(props)) {
+    options.props = {};
+    i = props.length;
+    while (i--) {
+      val = props[i];
+      if (typeof val === 'string') {
+        options.props[val] = null;
+      } else if (val.name) {
+        options.props[val.name] = val;
+      }
+    }
+  } else if (isPlainObject(props)) {
+    var keys = Object.keys(props);
+    i = keys.length;
+    while (i--) {
+      val = props[keys[i]];
+      if (typeof val === 'function') {
+        props[keys[i]] = { type: val };
+      }
+    }
+  }
+}
+
+/**
+ * Guard an Array-format assets option and converted it
+ * into the key-value Object format.
+ *
+ * @param {Object|Array} assets
+ * @return {Object}
+ */
+
+function guardArrayAssets(assets) {
+  if (isArray(assets)) {
+    var res = {};
+    var i = assets.length;
+    var asset;
+    while (i--) {
+      asset = assets[i];
+      var id = typeof asset === 'function' ? asset.options && asset.options.name || asset.id : asset.name || asset.id;
+      if (!id) {
+        process.env.NODE_ENV !== 'production' && warn('Array-syntax assets must provide a "name" or "id" field.');
+      } else {
+        res[id] = asset;
+      }
+    }
+    return res;
+  }
+  return assets;
+}
+
+/**
+ * Merge two option objects into a new one.
+ * Core utility used in both instantiation and inheritance.
+ *
+ * @param {Object} parent
+ * @param {Object} child
+ * @param {Vue} [vm] - if vm is present, indicates this is
+ *                     an instantiation merge.
+ */
+
+function mergeOptions(parent, child, vm) {
+  guardComponents(child);
+  guardProps(child);
+  if (process.env.NODE_ENV !== 'production') {
+    if (child.propsData && !vm) {
+      warn('propsData can only be used as an instantiation option.');
+    }
+  }
+  var options = {};
+  var key;
+  if (child['extends']) {
+    parent = typeof child['extends'] === 'function' ? mergeOptions(parent, child['extends'].options, vm) : mergeOptions(parent, child['extends'], vm);
+  }
+  if (child.mixins) {
+    for (var i = 0, l = child.mixins.length; i < l; i++) {
+      var mixin = child.mixins[i];
+      var mixinOptions = mixin.prototype instanceof Vue ? mixin.options : mixin;
+      parent = mergeOptions(parent, mixinOptions, vm);
+    }
+  }
+  for (key in parent) {
+    mergeField(key);
+  }
+  for (key in child) {
+    if (!hasOwn(parent, key)) {
+      mergeField(key);
+    }
+  }
+  function mergeField(key) {
+    var strat = strats[key] || defaultStrat;
+    options[key] = strat(parent[key], child[key], vm, key);
+  }
+  return options;
+}
+
+/**
+ * Resolve an asset.
+ * This function is used because child instances need access
+ * to assets defined in its ancestor chain.
+ *
+ * @param {Object} options
+ * @param {String} type
+ * @param {String} id
+ * @param {Boolean} warnMissing
+ * @return {Object|Function}
+ */
+
+function resolveAsset(options, type, id, warnMissing) {
+  /* istanbul ignore if */
+  if (typeof id !== 'string') {
+    return;
+  }
+  var assets = options[type];
+  var camelizedId;
+  var res = assets[id] ||
+  // camelCase ID
+  assets[camelizedId = camelize(id)] ||
+  // Pascal Case ID
+  assets[camelizedId.charAt(0).toUpperCase() + camelizedId.slice(1)];
+  if (process.env.NODE_ENV !== 'production' && warnMissing && !res) {
+    warn('Failed to resolve ' + type.slice(0, -1) + ': ' + id, options);
+  }
+  return res;
+}
+
+var uid$1 = 0;
+
+/**
+ * A dep is an observable that can have multiple
+ * directives subscribing to it.
+ *
+ * @constructor
+ */
+function Dep() {
+  this.id = uid$1++;
+  this.subs = [];
+}
+
+// the current target watcher being evaluated.
+// this is globally unique because there could be only one
+// watcher being evaluated at any time.
+Dep.target = null;
+
+/**
+ * Add a directive subscriber.
+ *
+ * @param {Directive} sub
+ */
+
+Dep.prototype.addSub = function (sub) {
+  this.subs.push(sub);
+};
+
+/**
+ * Remove a directive subscriber.
+ *
+ * @param {Directive} sub
+ */
+
+Dep.prototype.removeSub = function (sub) {
+  this.subs.$remove(sub);
+};
+
+/**
+ * Add self as a dependency to the target watcher.
+ */
+
+Dep.prototype.depend = function () {
+  Dep.target.addDep(this);
+};
+
+/**
+ * Notify all subscribers of a new value.
+ */
+
+Dep.prototype.notify = function () {
+  // stablize the subscriber list first
+  var subs = toArray(this.subs);
+  for (var i = 0, l = subs.length; i < l; i++) {
+    subs[i].update();
+  }
+};
+
+var arrayProto = Array.prototype;
+var arrayMethods = Object.create(arrayProto)
+
+/**
+ * Intercept mutating methods and emit events
+ */
+
+;['push', 'pop', 'shift', 'unshift', 'splice', 'sort', 'reverse'].forEach(function (method) {
+  // cache original method
+  var original = arrayProto[method];
+  def(arrayMethods, method, function mutator() {
+    // avoid leaking arguments:
+    // http://jsperf.com/closure-with-arguments
+    var i = arguments.length;
+    var args = new Array(i);
+    while (i--) {
+      args[i] = arguments[i];
+    }
+    var result = original.apply(this, args);
+    var ob = this.__ob__;
+    var inserted;
+    switch (method) {
+      case 'push':
+        inserted = args;
+        break;
+      case 'unshift':
+        inserted = args;
+        break;
+      case 'splice':
+        inserted = args.slice(2);
+        break;
+    }
+    if (inserted) ob.observeArray(inserted);
+    // notify change
+    ob.dep.notify();
+    return result;
+  });
+});
+
+/**
+ * Swap the element at the given index with a new value
+ * and emits corresponding event.
+ *
+ * @param {Number} index
+ * @param {*} val
+ * @return {*} - replaced element
+ */
+
+def(arrayProto, '$set', function $set(index, val) {
+  if (index >= this.length) {
+    this.length = Number(index) + 1;
+  }
+  return this.splice(index, 1, val)[0];
+});
+
+/**
+ * Convenience method to remove the element at given index or target element reference.
+ *
+ * @param {*} item
+ */
+
+def(arrayProto, '$remove', function $remove(item) {
+  /* istanbul ignore if */
+  if (!this.length) return;
+  var index = indexOf(this, item);
+  if (index > -1) {
+    return this.splice(index, 1);
+  }
+});
+
+var arrayKeys = Object.getOwnPropertyNames(arrayMethods);
+
+/**
+ * By default, when a reactive property is set, the new value is
+ * also converted to become reactive. However in certain cases, e.g.
+ * v-for scope alias and props, we don't want to force conversion
+ * because the value may be a nested value under a frozen data structure.
+ *
+ * So whenever we want to set a reactive property without forcing
+ * conversion on the new value, we wrap that call inside this function.
+ */
+
+var shouldConvert = true;
+
+function withoutConversion(fn) {
+  shouldConvert = false;
+  fn();
+  shouldConvert = true;
+}
+
+/**
+ * Observer class that are attached to each observed
+ * object. Once attached, the observer converts target
+ * object's property keys into getter/setters that
+ * collect dependencies and dispatches updates.
+ *
+ * @param {Array|Object} value
+ * @constructor
+ */
+
+function Observer(value) {
+  this.value = value;
+  this.dep = new Dep();
+  def(value, '__ob__', this);
+  if (isArray(value)) {
+    var augment = hasProto ? protoAugment : copyAugment;
+    augment(value, arrayMethods, arrayKeys);
+    this.observeArray(value);
+  } else {
+    this.walk(value);
+  }
+}
+
+// Instance methods
+
+/**
+ * Walk through each property and convert them into
+ * getter/setters. This method should only be called when
+ * value type is Object.
+ *
+ * @param {Object} obj
+ */
+
+Observer.prototype.walk = function (obj) {
+  var keys = Object.keys(obj);
+  for (var i = 0, l = keys.length; i < l; i++) {
+    this.convert(keys[i], obj[keys[i]]);
+  }
+};
+
+/**
+ * Observe a list of Array items.
+ *
+ * @param {Array} items
+ */
+
+Observer.prototype.observeArray = function (items) {
+  for (var i = 0, l = items.length; i < l; i++) {
+    observe(items[i]);
+  }
+};
+
+/**
+ * Convert a property into getter/setter so we can emit
+ * the events when the property is accessed/changed.
+ *
+ * @param {String} key
+ * @param {*} val
+ */
+
+Observer.prototype.convert = function (key, val) {
+  defineReactive(this.value, key, val);
+};
+
+/**
+ * Add an owner vm, so that when $set/$delete mutations
+ * happen we can notify owner vms to proxy the keys and
+ * digest the watchers. This is only called when the object
+ * is observed as an instance's root $data.
+ *
+ * @param {Vue} vm
+ */
+
+Observer.prototype.addVm = function (vm) {
+  (this.vms || (this.vms = [])).push(vm);
+};
+
+/**
+ * Remove an owner vm. This is called when the object is
+ * swapped out as an instance's $data object.
+ *
+ * @param {Vue} vm
+ */
+
+Observer.prototype.removeVm = function (vm) {
+  this.vms.$remove(vm);
+};
+
+// helpers
+
+/**
+ * Augment an target Object or Array by intercepting
+ * the prototype chain using __proto__
+ *
+ * @param {Object|Array} target
+ * @param {Object} src
+ */
+
+function protoAugment(target, src) {
+  /* eslint-disable no-proto */
+  target.__proto__ = src;
+  /* eslint-enable no-proto */
+}
+
+/**
+ * Augment an target Object or Array by defining
+ * hidden properties.
+ *
+ * @param {Object|Array} target
+ * @param {Object} proto
+ */
+
+function copyAugment(target, src, keys) {
+  for (var i = 0, l = keys.length; i < l; i++) {
+    var key = keys[i];
+    def(target, key, src[key]);
+  }
+}
+
+/**
+ * Attempt to create an observer instance for a value,
+ * returns the new observer if successfully observed,
+ * or the existing observer if the value already has one.
+ *
+ * @param {*} value
+ * @param {Vue} [vm]
+ * @return {Observer|undefined}
+ * @static
+ */
+
+function observe(value, vm) {
+  if (!value || typeof value !== 'object') {
+    return;
+  }
+  var ob;
+  if (hasOwn(value, '__ob__') && value.__ob__ instanceof Observer) {
+    ob = value.__ob__;
+  } else if (shouldConvert && (isArray(value) || isPlainObject(value)) && Object.isExtensible(value) && !value._isVue) {
+    ob = new Observer(value);
+  }
+  if (ob && vm) {
+    ob.addVm(vm);
+  }
+  return ob;
+}
+
+/**
+ * Define a reactive property on an Object.
+ *
+ * @param {Object} obj
+ * @param {String} key
+ * @param {*} val
+ */
+
+function defineReactive(obj, key, val) {
+  var dep = new Dep();
+
+  var property = Object.getOwnPropertyDescriptor(obj, key);
+  if (property && property.configurable === false) {
+    return;
+  }
+
+  // cater for pre-defined getter/setters
+  var getter = property && property.get;
+  var setter = property && property.set;
+
+  var childOb = observe(val);
+  Object.defineProperty(obj, key, {
+    enumerable: true,
+    configurable: true,
+    get: function reactiveGetter() {
+      var value = getter ? getter.call(obj) : val;
+      if (Dep.target) {
+        dep.depend();
+        if (childOb) {
+          childOb.dep.depend();
+        }
+        if (isArray(value)) {
+          for (var e, i = 0, l = value.length; i < l; i++) {
+            e = value[i];
+            e && e.__ob__ && e.__ob__.dep.depend();
+          }
+        }
+      }
+      return value;
+    },
+    set: function reactiveSetter(newVal) {
+      var value = getter ? getter.call(obj) : val;
+      if (newVal === value) {
+        return;
+      }
+      if (setter) {
+        setter.call(obj, newVal);
+      } else {
+        val = newVal;
+      }
+      childOb = observe(newVal);
+      dep.notify();
+    }
+  });
+}
+
+
+
+var util = Object.freeze({
+	defineReactive: defineReactive,
+	set: set,
+	del: del,
+	hasOwn: hasOwn,
+	isLiteral: isLiteral,
+	isReserved: isReserved,
+	_toString: _toString,
+	toNumber: toNumber,
+	toBoolean: toBoolean,
+	stripQuotes: stripQuotes,
+	camelize: camelize,
+	hyphenate: hyphenate,
+	classify: classify,
+	bind: bind,
+	toArray: toArray,
+	extend: extend,
+	isObject: isObject,
+	isPlainObject: isPlainObject,
+	def: def,
+	debounce: _debounce,
+	indexOf: indexOf,
+	cancellable: cancellable,
+	looseEqual: looseEqual,
+	isArray: isArray,
+	hasProto: hasProto,
+	inBrowser: inBrowser,
+	devtools: devtools,
+	isIE: isIE,
+	isIE9: isIE9,
+	isAndroid: isAndroid,
+	isIos: isIos,
+	iosVersionMatch: iosVersionMatch,
+	iosVersion: iosVersion,
+	hasMutationObserverBug: hasMutationObserverBug,
+	get transitionProp () { return transitionProp; },
+	get transitionEndEvent () { return transitionEndEvent; },
+	get animationProp () { return animationProp; },
+	get animationEndEvent () { return animationEndEvent; },
+	nextTick: nextTick,
+	get _Set () { return _Set; },
+	query: query,
+	inDoc: inDoc,
+	getAttr: getAttr,
+	getBindAttr: getBindAttr,
+	hasBindAttr: hasBindAttr,
+	before: before,
+	after: after,
+	remove: remove,
+	prepend: prepend,
+	replace: replace,
+	on: on,
+	off: off,
+	setClass: setClass,
+	addClass: addClass,
+	removeClass: removeClass,
+	extractContent: extractContent,
+	trimNode: trimNode,
+	isTemplate: isTemplate,
+	createAnchor: createAnchor,
+	findRef: findRef,
+	mapNodeRange: mapNodeRange,
+	removeNodeRange: removeNodeRange,
+	isFragment: isFragment,
+	getOuterHTML: getOuterHTML,
+	mergeOptions: mergeOptions,
+	resolveAsset: resolveAsset,
+	checkComponentAttr: checkComponentAttr,
+	commonTagRE: commonTagRE,
+	reservedTagRE: reservedTagRE,
+	get warn () { return warn; }
+});
+
+var uid = 0;
+
+function initMixin (Vue) {
+  /**
+   * The main init sequence. This is called for every
+   * instance, including ones that are created from extended
+   * constructors.
+   *
+   * @param {Object} options - this options object should be
+   *                           the result of merging class
+   *                           options and the options passed
+   *                           in to the constructor.
+   */
+
+  Vue.prototype._init = function (options) {
+    options = options || {};
+
+    this.$el = null;
+    this.$parent = options.parent;
+    this.$root = this.$parent ? this.$parent.$root : this;
+    this.$children = [];
+    this.$refs = {}; // child vm references
+    this.$els = {}; // element references
+    this._watchers = []; // all watchers as an array
+    this._directives = []; // all directives
+
+    // a uid
+    this._uid = uid++;
+
+    // a flag to avoid this being observed
+    this._isVue = true;
+
+    // events bookkeeping
+    this._events = {}; // registered callbacks
+    this._eventsCount = {}; // for $broadcast optimization
+
+    // fragment instance properties
+    this._isFragment = false;
+    this._fragment = // @type {DocumentFragment}
+    this._fragmentStart = // @type {Text|Comment}
+    this._fragmentEnd = null; // @type {Text|Comment}
+
+    // lifecycle state
+    this._isCompiled = this._isDestroyed = this._isReady = this._isAttached = this._isBeingDestroyed = this._vForRemoving = false;
+    this._unlinkFn = null;
+
+    // context:
+    // if this is a transcluded component, context
+    // will be the common parent vm of this instance
+    // and its host.
+    this._context = options._context || this.$parent;
+
+    // scope:
+    // if this is inside an inline v-for, the scope
+    // will be the intermediate scope created for this
+    // repeat fragment. this is used for linking props
+    // and container directives.
+    this._scope = options._scope;
+
+    // fragment:
+    // if this instance is compiled inside a Fragment, it
+    // needs to reigster itself as a child of that fragment
+    // for attach/detach to work properly.
+    this._frag = options._frag;
+    if (this._frag) {
+      this._frag.children.push(this);
+    }
+
+    // push self into parent / transclusion host
+    if (this.$parent) {
+      this.$parent.$children.push(this);
+    }
+
+    // merge options.
+    options = this.$options = mergeOptions(this.constructor.options, options, this);
+
+    // set ref
+    this._updateRef();
+
+    // initialize data as empty object.
+    // it will be filled up in _initData().
+    this._data = {};
+
+    // call init hook
+    this._callHook('init');
+
+    // initialize data observation and scope inheritance.
+    this._initState();
+
+    // setup event system and option events.
+    this._initEvents();
+
+    // call created hook
+    this._callHook('created');
+
+    // if `el` option is passed, start compilation.
+    if (options.el) {
+      this.$mount(options.el);
+    }
+  };
+}
+
+var pathCache = new Cache(1000);
+
+// actions
+var APPEND = 0;
+var PUSH = 1;
+var INC_SUB_PATH_DEPTH = 2;
+var PUSH_SUB_PATH = 3;
+
+// states
+var BEFORE_PATH = 0;
+var IN_PATH = 1;
+var BEFORE_IDENT = 2;
+var IN_IDENT = 3;
+var IN_SUB_PATH = 4;
+var IN_SINGLE_QUOTE = 5;
+var IN_DOUBLE_QUOTE = 6;
+var AFTER_PATH = 7;
+var ERROR = 8;
+
+var pathStateMachine = [];
+
+pathStateMachine[BEFORE_PATH] = {
+  'ws': [BEFORE_PATH],
+  'ident': [IN_IDENT, APPEND],
+  '[': [IN_SUB_PATH],
+  'eof': [AFTER_PATH]
+};
+
+pathStateMachine[IN_PATH] = {
+  'ws': [IN_PATH],
+  '.': [BEFORE_IDENT],
+  '[': [IN_SUB_PATH],
+  'eof': [AFTER_PATH]
+};
+
+pathStateMachine[BEFORE_IDENT] = {
+  'ws': [BEFORE_IDENT],
+  'ident': [IN_IDENT, APPEND]
+};
+
+pathStateMachine[IN_IDENT] = {
+  'ident': [IN_IDENT, APPEND],
+  '0': [IN_IDENT, APPEND],
+  'number': [IN_IDENT, APPEND],
+  'ws': [IN_PATH, PUSH],
+  '.': [BEFORE_IDENT, PUSH],
+  '[': [IN_SUB_PATH, PUSH],
+  'eof': [AFTER_PATH, PUSH]
+};
+
+pathStateMachine[IN_SUB_PATH] = {
+  "'": [IN_SINGLE_QUOTE, APPEND],
+  '"': [IN_DOUBLE_QUOTE, APPEND],
+  '[': [IN_SUB_PATH, INC_SUB_PATH_DEPTH],
+  ']': [IN_PATH, PUSH_SUB_PATH],
+  'eof': ERROR,
+  'else': [IN_SUB_PATH, APPEND]
+};
+
+pathStateMachine[IN_SINGLE_QUOTE] = {
+  "'": [IN_SUB_PATH, APPEND],
+  'eof': ERROR,
+  'else': [IN_SINGLE_QUOTE, APPEND]
+};
+
+pathStateMachine[IN_DOUBLE_QUOTE] = {
+  '"': [IN_SUB_PATH, APPEND],
+  'eof': ERROR,
+  'else': [IN_DOUBLE_QUOTE, APPEND]
+};
+
+/**
+ * Determine the type of a character in a keypath.
+ *
+ * @param {Char} ch
+ * @return {String} type
+ */
+
+function getPathCharType(ch) {
+  if (ch === undefined) {
+    return 'eof';
+  }
+
+  var code = ch.charCodeAt(0);
+
+  switch (code) {
+    case 0x5B: // [
+    case 0x5D: // ]
+    case 0x2E: // .
+    case 0x22: // "
+    case 0x27: // '
+    case 0x30:
+      // 0
+      return ch;
+
+    case 0x5F: // _
+    case 0x24:
+      // $
+      return 'ident';
+
+    case 0x20: // Space
+    case 0x09: // Tab
+    case 0x0A: // Newline
+    case 0x0D: // Return
+    case 0xA0: // No-break space
+    case 0xFEFF: // Byte Order Mark
+    case 0x2028: // Line Separator
+    case 0x2029:
+      // Paragraph Separator
+      return 'ws';
+  }
+
+  // a-z, A-Z
+  if (code >= 0x61 && code <= 0x7A || code >= 0x41 && code <= 0x5A) {
+    return 'ident';
+  }
+
+  // 1-9
+  if (code >= 0x31 && code <= 0x39) {
+    return 'number';
+  }
+
+  return 'else';
+}
+
+/**
+ * Format a subPath, return its plain form if it is
+ * a literal string or number. Otherwise prepend the
+ * dynamic indicator (*).
+ *
+ * @param {String} path
+ * @return {String}
+ */
+
+function formatSubPath(path) {
+  var trimmed = path.trim();
+  // invalid leading 0
+  if (path.charAt(0) === '0' && isNaN(path)) {
+    return false;
+  }
+  return isLiteral(trimmed) ? stripQuotes(trimmed) : '*' + trimmed;
+}
+
+/**
+ * Parse a string path into an array of segments
+ *
+ * @param {String} path
+ * @return {Array|undefined}
+ */
+
+function parse(path) {
+  var keys = [];
+  var index = -1;
+  var mode = BEFORE_PATH;
+  var subPathDepth = 0;
+  var c, newChar, key, type, transition, action, typeMap;
+
+  var actions = [];
+
+  actions[PUSH] = function () {
+    if (key !== undefined) {
+      keys.push(key);
+      key = undefined;
+    }
+  };
+
+  actions[APPEND] = function () {
+    if (key === undefined) {
+      key = newChar;
+    } else {
+      key += newChar;
+    }
+  };
+
+  actions[INC_SUB_PATH_DEPTH] = function () {
+    actions[APPEND]();
+    subPathDepth++;
+  };
+
+  actions[PUSH_SUB_PATH] = function () {
+    if (subPathDepth > 0) {
+      subPathDepth--;
+      mode = IN_SUB_PATH;
+      actions[APPEND]();
+    } else {
+      subPathDepth = 0;
+      key = formatSubPath(key);
+      if (key === false) {
+        return false;
+      } else {
+        actions[PUSH]();
+      }
+    }
+  };
+
+  function maybeUnescapeQuote() {
+    var nextChar = path[index + 1];
+    if (mode === IN_SINGLE_QUOTE && nextChar === "'" || mode === IN_DOUBLE_QUOTE && nextChar === '"') {
+      index++;
+      newChar = '\\' + nextChar;
+      actions[APPEND]();
+      return true;
+    }
+  }
+
+  while (mode != null) {
+    index++;
+    c = path[index];
+
+    if (c === '\\' && maybeUnescapeQuote()) {
+      continue;
+    }
+
+    type = getPathCharType(c);
+    typeMap = pathStateMachine[mode];
+    transition = typeMap[type] || typeMap['else'] || ERROR;
+
+    if (transition === ERROR) {
+      return; // parse error
+    }
+
+    mode = transition[0];
+    action = actions[transition[1]];
+    if (action) {
+      newChar = transition[2];
+      newChar = newChar === undefined ? c : newChar;
+      if (action() === false) {
+        return;
+      }
+    }
+
+    if (mode === AFTER_PATH) {
+      keys.raw = path;
+      return keys;
+    }
+  }
+}
+
+/**
+ * External parse that check for a cache hit first
+ *
+ * @param {String} path
+ * @return {Array|undefined}
+ */
+
+function parsePath(path) {
+  var hit = pathCache.get(path);
+  if (!hit) {
+    hit = parse(path);
+    if (hit) {
+      pathCache.put(path, hit);
+    }
+  }
+  return hit;
+}
+
+/**
+ * Get from an object from a path string
+ *
+ * @param {Object} obj
+ * @param {String} path
+ */
+
+function getPath(obj, path) {
+  return parseExpression(path).get(obj);
+}
+
+/**
+ * Warn against setting non-existent root path on a vm.
+ */
+
+var warnNonExistent;
+if (process.env.NODE_ENV !== 'production') {
+  warnNonExistent = function (path, vm) {
+    warn('You are setting a non-existent path "' + path.raw + '" ' + 'on a vm instance. Consider pre-initializing the property ' + 'with the "data" option for more reliable reactivity ' + 'and better performance.', vm);
+  };
+}
+
+/**
+ * Set on an object from a path
+ *
+ * @param {Object} obj
+ * @param {String | Array} path
+ * @param {*} val
+ */
+
+function setPath(obj, path, val) {
+  var original = obj;
+  if (typeof path === 'string') {
+    path = parse(path);
+  }
+  if (!path || !isObject(obj)) {
+    return false;
+  }
+  var last, key;
+  for (var i = 0, l = path.length; i < l; i++) {
+    last = obj;
+    key = path[i];
+    if (key.charAt(0) === '*') {
+      key = parseExpression(key.slice(1)).get.call(original, original);
+    }
+    if (i < l - 1) {
+      obj = obj[key];
+      if (!isObject(obj)) {
+        obj = {};
+        if (process.env.NODE_ENV !== 'production' && last._isVue) {
+          warnNonExistent(path, last);
+        }
+        set(last, key, obj);
+      }
+    } else {
+      if (isArray(obj)) {
+        obj.$set(key, val);
+      } else if (key in obj) {
+        obj[key] = val;
+      } else {
+        if (process.env.NODE_ENV !== 'production' && obj._isVue) {
+          warnNonExistent(path, obj);
+        }
+        set(obj, key, val);
+      }
+    }
+  }
+  return true;
+}
+
+var path = Object.freeze({
+  parsePath: parsePath,
+  getPath: getPath,
+  setPath: setPath
+});
+
+var expressionCache = new Cache(1000);
+
+var allowedKeywords = 'Math,Date,this,true,false,null,undefined,Infinity,NaN,' + 'isNaN,isFinite,decodeURI,decodeURIComponent,encodeURI,' + 'encodeURIComponent,parseInt,parseFloat';
+var allowedKeywordsRE = new RegExp('^(' + allowedKeywords.replace(/,/g, '\\b|') + '\\b)');
+
+// keywords that don't make sense inside expressions
+var improperKeywords = 'break,case,class,catch,const,continue,debugger,default,' + 'delete,do,else,export,extends,finally,for,function,if,' + 'import,in,instanceof,let,return,super,switch,throw,try,' + 'var,while,with,yield,enum,await,implements,package,' + 'protected,static,interface,private,public';
+var improperKeywordsRE = new RegExp('^(' + improperKeywords.replace(/,/g, '\\b|') + '\\b)');
+
+var wsRE = /\s/g;
+var newlineRE = /\n/g;
+var saveRE = /[\{,]\s*[\w\$_]+\s*:|('(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*"|`(?:[^`\\]|\\.)*\$\{|\}(?:[^`\\]|\\.)*`|`(?:[^`\\]|\\.)*`)|new |typeof |void /g;
+var restoreRE = /"(\d+)"/g;
+var pathTestRE = /^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*|\['.*?'\]|\[".*?"\]|\[\d+\]|\[[A-Za-z_$][\w$]*\])*$/;
+var identRE = /[^\w$\.](?:[A-Za-z_$][\w$]*)/g;
+var literalValueRE$1 = /^(?:true|false|null|undefined|Infinity|NaN)$/;
+
+function noop() {}
+
+/**
+ * Save / Rewrite / Restore
+ *
+ * When rewriting paths found in an expression, it is
+ * possible for the same letter sequences to be found in
+ * strings and Object literal property keys. Therefore we
+ * remove and store these parts in a temporary array, and
+ * restore them after the path rewrite.
+ */
+
+var saved = [];
+
+/**
+ * Save replacer
+ *
+ * The save regex can match two possible cases:
+ * 1. An opening object literal
+ * 2. A string
+ * If matched as a plain string, we need to escape its
+ * newlines, since the string needs to be preserved when
+ * generating the function body.
+ *
+ * @param {String} str
+ * @param {String} isString - str if matched as a string
+ * @return {String} - placeholder with index
+ */
+
+function save(str, isString) {
+  var i = saved.length;
+  saved[i] = isString ? str.replace(newlineRE, '\\n') : str;
+  return '"' + i + '"';
+}
+
+/**
+ * Path rewrite replacer
+ *
+ * @param {String} raw
+ * @return {String}
+ */
+
+function rewrite(raw) {
+  var c = raw.charAt(0);
+  var path = raw.slice(1);
+  if (allowedKeywordsRE.test(path)) {
+    return raw;
+  } else {
+    path = path.indexOf('"') > -1 ? path.replace(restoreRE, restore) : path;
+    return c + 'scope.' + path;
+  }
+}
+
+/**
+ * Restore replacer
+ *
+ * @param {String} str
+ * @param {String} i - matched save index
+ * @return {String}
+ */
+
+function restore(str, i) {
+  return saved[i];
+}
+
+/**
+ * Rewrite an expression, prefixing all path accessors with
+ * `scope.` and generate getter/setter functions.
+ *
+ * @param {String} exp
+ * @return {Function}
+ */
+
+function compileGetter(exp) {
+  if (improperKeywordsRE.test(exp)) {
+    process.env.NODE_ENV !== 'production' && warn('Avoid using reserved keywords in expression: ' + exp);
+  }
+  // reset state
+  saved.length = 0;
+  // save strings and object literal keys
+  var body = exp.replace(saveRE, save).replace(wsRE, '');
+  // rewrite all paths
+  // pad 1 space here because the regex matches 1 extra char
+  body = (' ' + body).replace(identRE, rewrite).replace(restoreRE, restore);
+  return makeGetterFn(body);
+}
+
+/**
+ * Build a getter function. Requires eval.
+ *
+ * We isolate the try/catch so it doesn't affect the
+ * optimization of the parse function when it is not called.
+ *
+ * @param {String} body
+ * @return {Function|undefined}
+ */
+
+function makeGetterFn(body) {
+  try {
+    /* eslint-disable no-new-func */
+    return new Function('scope', 'return ' + body + ';');
+    /* eslint-enable no-new-func */
+  } catch (e) {
+    if (process.env.NODE_ENV !== 'production') {
+      /* istanbul ignore if */
+      if (e.toString().match(/unsafe-eval|CSP/)) {
+        warn('It seems you are using the default build of Vue.js in an environment ' + 'with Content Security Policy that prohibits unsafe-eval. ' + 'Use the CSP-compliant build instead: ' + 'http://vuejs.org/guide/installation.html#CSP-compliant-build');
+      } else {
+        warn('Invalid expression. ' + 'Generated function body: ' + body);
+      }
+    }
+    return noop;
+  }
+}
+
+/**
+ * Compile a setter function for the expression.
+ *
+ * @param {String} exp
+ * @return {Function|undefined}
+ */
+
+function compileSetter(exp) {
+  var path = parsePath(exp);
+  if (path) {
+    return function (scope, val) {
+      setPath(scope, path, val);
+    };
+  } else {
+    process.env.NODE_ENV !== 'production' && warn('Invalid setter expression: ' + exp);
+  }
+}
+
+/**
+ * Parse an expression into re-written getter/setters.
+ *
+ * @param {String} exp
+ * @param {Boolean} needSet
+ * @return {Function}
+ */
+
+function parseExpression(exp, needSet) {
+  exp = exp.trim();
+  // try cache
+  var hit = expressionCache.get(exp);
+  if (hit) {
+    if (needSet && !hit.set) {
+      hit.set = compileSetter(hit.exp);
+    }
+    return hit;
+  }
+  var res = { exp: exp };
+  res.get = isSimplePath(exp) && exp.indexOf('[') < 0
+  // optimized super simple getter
+  ? makeGetterFn('scope.' + exp)
+  // dynamic getter
+  : compileGetter(exp);
+  if (needSet) {
+    res.set = compileSetter(exp);
+  }
+  expressionCache.put(exp, res);
+  return res;
+}
+
+/**
+ * Check if an expression is a simple path.
+ *
+ * @param {String} exp
+ * @return {Boolean}
+ */
+
+function isSimplePath(exp) {
+  return pathTestRE.test(exp) &&
+  // don't treat literal values as paths
+  !literalValueRE$1.test(exp) &&
+  // Math constants e.g. Math.PI, Math.E etc.
+  exp.slice(0, 5) !== 'Math.';
+}
+
+var expression = Object.freeze({
+  parseExpression: parseExpression,
+  isSimplePath: isSimplePath
+});
+
+// we have two separate queues: one for directive updates
+// and one for user watcher registered via $watch().
+// we want to guarantee directive updates to be called
+// before user watchers so that when user watchers are
+// triggered, the DOM would have already been in updated
+// state.
+
+var queue = [];
+var userQueue = [];
+var has = {};
+var circular = {};
+var waiting = false;
+
+/**
+ * Reset the batcher's state.
+ */
+
+function resetBatcherState() {
+  queue.length = 0;
+  userQueue.length = 0;
+  has = {};
+  circular = {};
+  waiting = false;
+}
+
+/**
+ * Flush both queues and run the watchers.
+ */
+
+function flushBatcherQueue() {
+  var _again = true;
+
+  _function: while (_again) {
+    _again = false;
+
+    runBatcherQueue(queue);
+    runBatcherQueue(userQueue);
+    // user watchers triggered more watchers,
+    // keep flushing until it depletes
+    if (queue.length) {
+      _again = true;
+      continue _function;
+    }
+    // dev tool hook
+    /* istanbul ignore if */
+    if (devtools && config.devtools) {
+      devtools.emit('flush');
+    }
+    resetBatcherState();
+  }
+}
+
+/**
+ * Run the watchers in a single queue.
+ *
+ * @param {Array} queue
+ */
+
+function runBatcherQueue(queue) {
+  // do not cache length because more watchers might be pushed
+  // as we run existing watchers
+  for (var i = 0; i < queue.length; i++) {
+    var watcher = queue[i];
+    var id = watcher.id;
+    has[id] = null;
+    watcher.run();
+    // in dev build, check and stop circular updates.
+    if (process.env.NODE_ENV !== 'production' && has[id] != null) {
+      circular[id] = (circular[id] || 0) + 1;
+      if (circular[id] > config._maxUpdateCount) {
+        warn('You may have an infinite update loop for watcher ' + 'with expression "' + watcher.expression + '"', watcher.vm);
+        break;
+      }
+    }
+  }
+  queue.length = 0;
+}
+
+/**
+ * Push a watcher into the watcher queue.
+ * Jobs with duplicate IDs will be skipped unless it's
+ * pushed when the queue is being flushed.
+ *
+ * @param {Watcher} watcher
+ *   properties:
+ *   - {Number} id
+ *   - {Function} run
+ */
+
+function pushWatcher(watcher) {
+  var id = watcher.id;
+  if (has[id] == null) {
+    // push watcher into appropriate queue
+    var q = watcher.user ? userQueue : queue;
+    has[id] = q.length;
+    q.push(watcher);
+    // queue the flush
+    if (!waiting) {
+      waiting = true;
+      nextTick(flushBatcherQueue);
+    }
+  }
+}
+
+var uid$2 = 0;
+
+/**
+ * A watcher parses an expression, collects dependencies,
+ * and fires callback when the expression value changes.
+ * This is used for both the $watch() api and directives.
+ *
+ * @param {Vue} vm
+ * @param {String|Function} expOrFn
+ * @param {Function} cb
+ * @param {Object} options
+ *                 - {Array} filters
+ *                 - {Boolean} twoWay
+ *                 - {Boolean} deep
+ *                 - {Boolean} user
+ *                 - {Boolean} sync
+ *                 - {Boolean} lazy
+ *                 - {Function} [preProcess]
+ *                 - {Function} [postProcess]
+ * @constructor
+ */
+function Watcher(vm, expOrFn, cb, options) {
+  // mix in options
+  if (options) {
+    extend(this, options);
+  }
+  var isFn = typeof expOrFn === 'function';
+  this.vm = vm;
+  vm._watchers.push(this);
+  this.expression = expOrFn;
+  this.cb = cb;
+  this.id = ++uid$2; // uid for batching
+  this.active = true;
+  this.dirty = this.lazy; // for lazy watchers
+  this.deps = [];
+  this.newDeps = [];
+  this.depIds = new _Set();
+  this.newDepIds = new _Set();
+  this.prevError = null; // for async error stacks
+  // parse expression for getter/setter
+  if (isFn) {
+    this.getter = expOrFn;
+    this.setter = undefined;
+  } else {
+    var res = parseExpression(expOrFn, this.twoWay);
+    this.getter = res.get;
+    this.setter = res.set;
+  }
+  this.value = this.lazy ? undefined : this.get();
+  // state for avoiding false triggers for deep and Array
+  // watchers during vm._digest()
+  this.queued = this.shallow = false;
+}
+
+/**
+ * Evaluate the getter, and re-collect dependencies.
+ */
+
+Watcher.prototype.get = function () {
+  this.beforeGet();
+  var scope = this.scope || this.vm;
+  var value;
+  try {
+    value = this.getter.call(scope, scope);
+  } catch (e) {
+    if (process.env.NODE_ENV !== 'production' && config.warnExpressionErrors) {
+      warn('Error when evaluating expression ' + '"' + this.expression + '": ' + e.toString(), this.vm);
+    }
+  }
+  // "touch" every property so they are all tracked as
+  // dependencies for deep watching
+  if (this.deep) {
+    traverse(value);
+  }
+  if (this.preProcess) {
+    value = this.preProcess(value);
+  }
+  if (this.filters) {
+    value = scope._applyFilters(value, null, this.filters, false);
+  }
+  if (this.postProcess) {
+    value = this.postProcess(value);
+  }
+  this.afterGet();
+  return value;
+};
+
+/**
+ * Set the corresponding value with the setter.
+ *
+ * @param {*} value
+ */
+
+Watcher.prototype.set = function (value) {
+  var scope = this.scope || this.vm;
+  if (this.filters) {
+    value = scope._applyFilters(value, this.value, this.filters, true);
+  }
+  try {
+    this.setter.call(scope, scope, value);
+  } catch (e) {
+    if (process.env.NODE_ENV !== 'production' && config.warnExpressionErrors) {
+      warn('Error when evaluating setter ' + '"' + this.expression + '": ' + e.toString(), this.vm);
+    }
+  }
+  // two-way sync for v-for alias
+  var forContext = scope.$forContext;
+  if (forContext && forContext.alias === this.expression) {
+    if (forContext.filters) {
+      process.env.NODE_ENV !== 'production' && warn('It seems you are using two-way binding on ' + 'a v-for alias (' + this.expression + '), and the ' + 'v-for has filters. This will not work properly. ' + 'Either remove the filters or use an array of ' + 'objects and bind to object properties instead.', this.vm);
+      return;
+    }
+    forContext._withLock(function () {
+      if (scope.$key) {
+        // original is an object
+        forContext.rawValue[scope.$key] = value;
+      } else {
+        forContext.rawValue.$set(scope.$index, value);
+      }
+    });
+  }
+};
+
+/**
+ * Prepare for dependency collection.
+ */
+
+Watcher.prototype.beforeGet = function () {
+  Dep.target = this;
+};
+
+/**
+ * Add a dependency to this directive.
+ *
+ * @param {Dep} dep
+ */
+
+Watcher.prototype.addDep = function (dep) {
+  var id = dep.id;
+  if (!this.newDepIds.has(id)) {
+    this.newDepIds.add(id);
+    this.newDeps.push(dep);
+    if (!this.depIds.has(id)) {
+      dep.addSub(this);
+    }
+  }
+};
+
+/**
+ * Clean up for dependency collection.
+ */
+
+Watcher.prototype.afterGet = function () {
+  Dep.target = null;
+  var i = this.deps.length;
+  while (i--) {
+    var dep = this.deps[i];
+    if (!this.newDepIds.has(dep.id)) {
+      dep.removeSub(this);
+    }
+  }
+  var tmp = this.depIds;
+  this.depIds = this.newDepIds;
+  this.newDepIds = tmp;
+  this.newDepIds.clear();
+  tmp = this.deps;
+  this.deps = this.newDeps;
+  this.newDeps = tmp;
+  this.newDeps.length = 0;
+};
+
+/**
+ * Subscriber interface.
+ * Will be called when a dependency changes.
+ *
+ * @param {Boolean} shallow
+ */
+
+Watcher.prototype.update = function (shallow) {
+  if (this.lazy) {
+    this.dirty = true;
+  } else if (this.sync || !config.async) {
+    this.run();
+  } else {
+    // if queued, only overwrite shallow with non-shallow,
+    // but not the other way around.
+    this.shallow = this.queued ? shallow ? this.shallow : false : !!shallow;
+    this.queued = true;
+    // record before-push error stack in debug mode
+    /* istanbul ignore if */
+    if (process.env.NODE_ENV !== 'production' && config.debug) {
+      this.prevError = new Error('[vue] async stack trace');
+    }
+    pushWatcher(this);
+  }
+};
+
+/**
+ * Batcher job interface.
+ * Will be called by the batcher.
+ */
+
+Watcher.prototype.run = function () {
+  if (this.active) {
+    var value = this.get();
+    if (value !== this.value ||
+    // Deep watchers and watchers on Object/Arrays should fire even
+    // when the value is the same, because the value may
+    // have mutated; but only do so if this is a
+    // non-shallow update (caused by a vm digest).
+    (isObject(value) || this.deep) && !this.shallow) {
+      // set new value
+      var oldValue = this.value;
+      this.value = value;
+      // in debug + async mode, when a watcher callbacks
+      // throws, we also throw the saved before-push error
+      // so the full cross-tick stack trace is available.
+      var prevError = this.prevError;
+      /* istanbul ignore if */
+      if (process.env.NODE_ENV !== 'production' && config.debug && prevError) {
+        this.prevError = null;
+        try {
+          this.cb.call(this.vm, value, oldValue);
+        } catch (e) {
+          nextTick(function () {
+            throw prevError;
+          }, 0);
+          throw e;
+        }
+      } else {
+        this.cb.call(this.vm, value, oldValue);
+      }
+    }
+    this.queued = this.shallow = false;
+  }
+};
+
+/**
+ * Evaluate the value of the watcher.
+ * This only gets called for lazy watchers.
+ */
+
+Watcher.prototype.evaluate = function () {
+  // avoid overwriting another watcher that is being
+  // collected.
+  var current = Dep.target;
+  this.value = this.get();
+  this.dirty = false;
+  Dep.target = current;
+};
+
+/**
+ * Depend on all deps collected by this watcher.
+ */
+
+Watcher.prototype.depend = function () {
+  var i = this.deps.length;
+  while (i--) {
+    this.deps[i].depend();
+  }
+};
+
+/**
+ * Remove self from all dependencies' subcriber list.
+ */
+
+Watcher.prototype.teardown = function () {
+  if (this.active) {
+    // remove self from vm's watcher list
+    // this is a somewhat expensive operation so we skip it
+    // if the vm is being destroyed or is performing a v-for
+    // re-render (the watcher list is then filtered by v-for).
+    if (!this.vm._isBeingDestroyed && !this.vm._vForRemoving) {
+      this.vm._watchers.$remove(this);
+    }
+    var i = this.deps.length;
+    while (i--) {
+      this.deps[i].removeSub(this);
+    }
+    this.active = false;
+    this.vm = this.cb = this.value = null;
+  }
+};
+
+/**
+ * Recrusively traverse an object to evoke all converted
+ * getters, so that every nested property inside the object
+ * is collected as a "deep" dependency.
+ *
+ * @param {*} val
+ */
+
+var seenObjects = new _Set();
+function traverse(val, seen) {
+  var i = undefined,
+      keys = undefined;
+  if (!seen) {
+    seen = seenObjects;
+    seen.clear();
+  }
+  var isA = isArray(val);
+  var isO = isObject(val);
+  if ((isA || isO) && Object.isExtensible(val)) {
+    if (val.__ob__) {
+      var depId = val.__ob__.dep.id;
+      if (seen.has(depId)) {
+        return;
+      } else {
+        seen.add(depId);
+      }
+    }
+    if (isA) {
+      i = val.length;
+      while (i--) traverse(val[i], seen);
+    } else if (isO) {
+      keys = Object.keys(val);
+      i = keys.length;
+      while (i--) traverse(val[keys[i]], seen);
+    }
+  }
+}
+
+var text$1 = {
+
+  bind: function bind() {
+    this.attr = this.el.nodeType === 3 ? 'data' : 'textContent';
+  },
+
+  update: function update(value) {
+    this.el[this.attr] = _toString(value);
+  }
+};
+
+var templateCache = new Cache(1000);
+var idSelectorCache = new Cache(1000);
+
+var map = {
+  efault: [0, '', ''],
+  legend: [1, '<fieldset>', '</fieldset>'],
+  tr: [2, '<table><tbody>', '</tbody></table>'],
+  col: [2, '<table><tbody></tbody><colgroup>', '</colgroup></table>']
+};
+
+map.td = map.th = [3, '<table><tbody><tr>', '</tr></tbody></table>'];
+
+map.option = map.optgroup = [1, '<select multiple="multiple">', '</select>'];
+
+map.thead = map.tbody = map.colgroup = map.caption = map.tfoot = [1, '<table>', '</table>'];
+
+map.g = map.defs = map.symbol = map.use = map.image = map.text = map.circle = map.ellipse = map.line = map.path = map.polygon = map.polyline = map.rect = [1, '<svg ' + 'xmlns="http://www.w3.org/2000/svg" ' + 'xmlns:xlink="http://www.w3.org/1999/xlink" ' + 'xmlns:ev="http://www.w3.org/2001/xml-events"' + 'version="1.1">', '</svg>'];
+
+/**
+ * Check if a node is a supported template node with a
+ * DocumentFragment content.
+ *
+ * @param {Node} node
+ * @return {Boolean}
+ */
+
+function isRealTemplate(node) {
+  return isTemplate(node) && isFragment(node.content);
+}
+
+var tagRE$1 = /<([\w:-]+)/;
+var entityRE = /&#?\w+?;/;
+var commentRE = /<!--/;
+
+/**
+ * Convert a string template to a DocumentFragment.
+ * Determines correct wrapping by tag types. Wrapping
+ * strategy found in jQuery & component/domify.
+ *
+ * @param {String} templateString
+ * @param {Boolean} raw
+ * @return {DocumentFragment}
+ */
+
+function stringToFragment(templateString, raw) {
+  // try a cache hit first
+  var cacheKey = raw ? templateString : templateString.trim();
+  var hit = templateCache.get(cacheKey);
+  if (hit) {
+    return hit;
+  }
+
+  var frag = document.createDocumentFragment();
+  var tagMatch = templateString.match(tagRE$1);
+  var entityMatch = entityRE.test(templateString);
+  var commentMatch = commentRE.test(templateString);
+
+  if (!tagMatch && !entityMatch && !commentMatch) {
+    // text only, return a single text node.
+    frag.appendChild(document.createTextNode(templateString));
+  } else {
+    var tag = tagMatch && tagMatch[1];
+    var wrap = map[tag] || map.efault;
+    var depth = wrap[0];
+    var prefix = wrap[1];
+    var suffix = wrap[2];
+    var node = document.createElement('div');
+
+    node.innerHTML = prefix + templateString + suffix;
+    while (depth--) {
+      node = node.lastChild;
+    }
+
+    var child;
+    /* eslint-disable no-cond-assign */
+    while (child = node.firstChild) {
+      /* eslint-enable no-cond-assign */
+      frag.appendChild(child);
+    }
+  }
+  if (!raw) {
+    trimNode(frag);
+  }
+  templateCache.put(cacheKey, frag);
+  return frag;
+}
+
+/**
+ * Convert a template node to a DocumentFragment.
+ *
+ * @param {Node} node
+ * @return {DocumentFragment}
+ */
+
+function nodeToFragment(node) {
+  // if its a template tag and the browser supports it,
+  // its content is already a document fragment. However, iOS Safari has
+  // bug when using directly cloned template content with touch
+  // events and can cause crashes when the nodes are removed from DOM, so we
+  // have to treat template elements as string templates. (#2805)
+  /* istanbul ignore if */
+  if (isRealTemplate(node)) {
+    return stringToFragment(node.innerHTML);
+  }
+  // script template
+  if (node.tagName === 'SCRIPT') {
+    return stringToFragment(node.textContent);
+  }
+  // normal node, clone it to avoid mutating the original
+  var clonedNode = cloneNode(node);
+  var frag = document.createDocumentFragment();
+  var child;
+  /* eslint-disable no-cond-assign */
+  while (child = clonedNode.firstChild) {
+    /* eslint-enable no-cond-assign */
+    frag.appendChild(child);
+  }
+  trimNode(frag);
+  return frag;
+}
+
+// Test for the presence of the Safari template cloning bug
+// https://bugs.webkit.org/showug.cgi?id=137755
+var hasBrokenTemplate = (function () {
+  /* istanbul ignore else */
+  if (inBrowser) {
+    var a = document.createElement('div');
+    a.innerHTML = '<template>1</template>';
+    return !a.cloneNode(true).firstChild.innerHTML;
+  } else {
+    return false;
+  }
+})();
+
+// Test for IE10/11 textarea placeholder clone bug
+var hasTextareaCloneBug = (function () {
+  /* istanbul ignore else */
+  if (inBrowser) {
+    var t = document.createElement('textarea');
+    t.placeholder = 't';
+    return t.cloneNode(true).value === 't';
+  } else {
+    return false;
+  }
+})();
+
+/**
+ * 1. Deal with Safari cloning nested <template> bug by
+ *    manually cloning all template instances.
+ * 2. Deal with IE10/11 textarea placeholder bug by setting
+ *    the correct value after cloning.
+ *
+ * @param {Element|DocumentFragment} node
+ * @return {Element|DocumentFragment}
+ */
+
+function cloneNode(node) {
+  /* istanbul ignore if */
+  if (!node.querySelectorAll) {
+    return node.cloneNode();
+  }
+  var res = node.cloneNode(true);
+  var i, original, cloned;
+  /* istanbul ignore if */
+  if (hasBrokenTemplate) {
+    var tempClone = res;
+    if (isRealTemplate(node)) {
+      node = node.content;
+      tempClone = res.content;
+    }
+    original = node.querySelectorAll('template');
+    if (original.length) {
+      cloned = tempClone.querySelectorAll('template');
+      i = cloned.length;
+      while (i--) {
+        cloned[i].parentNode.replaceChild(cloneNode(original[i]), cloned[i]);
+      }
+    }
+  }
+  /* istanbul ignore if */
+  if (hasTextareaCloneBug) {
+    if (node.tagName === 'TEXTAREA') {
+      res.value = node.value;
+    } else {
+      original = node.querySelectorAll('textarea');
+      if (original.length) {
+        cloned = res.querySelectorAll('textarea');
+        i = cloned.length;
+        while (i--) {
+          cloned[i].value = original[i].value;
+        }
+      }
+    }
+  }
+  return res;
+}
+
+/**
+ * Process the template option and normalizes it into a
+ * a DocumentFragment that can be used as a partial or a
+ * instance template.
+ *
+ * @param {*} template
+ *        Possible values include:
+ *        - DocumentFragment object
+ *        - Node object of type Template
+ *        - id selector: '#some-template-id'
+ *        - template string: '<div><span>{{msg}}</span></div>'
+ * @param {Boolean} shouldClone
+ * @param {Boolean} raw
+ *        inline HTML interpolation. Do not check for id
+ *        selector and keep whitespace in the string.
+ * @return {DocumentFragment|undefined}
+ */
+
+function parseTemplate(template, shouldClone, raw) {
+  var node, frag;
+
+  // if the template is already a document fragment,
+  // do nothing
+  if (isFragment(template)) {
+    trimNode(template);
+    return shouldClone ? cloneNode(template) : template;
+  }
+
+  if (typeof template === 'string') {
+    // id selector
+    if (!raw && template.charAt(0) === '#') {
+      // id selector can be cached too
+      frag = idSelectorCache.get(template);
+      if (!frag) {
+        node = document.getElementById(template.slice(1));
+        if (node) {
+          frag = nodeToFragment(node);
+          // save selector to cache
+          idSelectorCache.put(template, frag);
+        }
+      }
+    } else {
+      // normal string template
+      frag = stringToFragment(template, raw);
+    }
+  } else if (template.nodeType) {
+    // a direct node
+    frag = nodeToFragment(template);
+  }
+
+  return frag && shouldClone ? cloneNode(frag) : frag;
+}
+
+var template = Object.freeze({
+  cloneNode: cloneNode,
+  parseTemplate: parseTemplate
+});
+
+var html = {
+
+  bind: function bind() {
+    // a comment node means this is a binding for
+    // {{{ inline unescaped html }}}
+    if (this.el.nodeType === 8) {
+      // hold nodes
+      this.nodes = [];
+      // replace the placeholder with proper anchor
+      this.anchor = createAnchor('v-html');
+      replace(this.el, this.anchor);
+    }
+  },
+
+  update: function update(value) {
+    value = _toString(value);
+    if (this.nodes) {
+      this.swap(value);
+    } else {
+      this.el.innerHTML = value;
+    }
+  },
+
+  swap: function swap(value) {
+    // remove old nodes
+    var i = this.nodes.length;
+    while (i--) {
+      remove(this.nodes[i]);
+    }
+    // convert new value to a fragment
+    // do not attempt to retrieve from id selector
+    var frag = parseTemplate(value, true, true);
+    // save a reference to these nodes so we can remove later
+    this.nodes = toArray(frag.childNodes);
+    before(frag, this.anchor);
+  }
+};
+
+/**
+ * Abstraction for a partially-compiled fragment.
+ * Can optionally compile content with a child scope.
+ *
+ * @param {Function} linker
+ * @param {Vue} vm
+ * @param {DocumentFragment} frag
+ * @param {Vue} [host]
+ * @param {Object} [scope]
+ * @param {Fragment} [parentFrag]
+ */
+function Fragment(linker, vm, frag, host, scope, parentFrag) {
+  this.children = [];
+  this.childFrags = [];
+  this.vm = vm;
+  this.scope = scope;
+  this.inserted = false;
+  this.parentFrag = parentFrag;
+  if (parentFrag) {
+    parentFrag.childFrags.push(this);
+  }
+  this.unlink = linker(vm, frag, host, scope, this);
+  var single = this.single = frag.childNodes.length === 1 &&
+  // do not go single mode if the only node is an anchor
+  !frag.childNodes[0].__v_anchor;
+  if (single) {
+    this.node = frag.childNodes[0];
+    this.before = singleBefore;
+    this.remove = singleRemove;
+  } else {
+    this.node = createAnchor('fragment-start');
+    this.end = createAnchor('fragment-end');
+    this.frag = frag;
+    prepend(this.node, frag);
+    frag.appendChild(this.end);
+    this.before = multiBefore;
+    this.remove = multiRemove;
+  }
+  this.node.__v_frag = this;
+}
+
+/**
+ * Call attach/detach for all components contained within
+ * this fragment. Also do so recursively for all child
+ * fragments.
+ *
+ * @param {Function} hook
+ */
+
+Fragment.prototype.callHook = function (hook) {
+  var i, l;
+  for (i = 0, l = this.childFrags.length; i < l; i++) {
+    this.childFrags[i].callHook(hook);
+  }
+  for (i = 0, l = this.children.length; i < l; i++) {
+    hook(this.children[i]);
+  }
+};
+
+/**
+ * Insert fragment before target, single node version
+ *
+ * @param {Node} target
+ * @param {Boolean} withTransition
+ */
+
+function singleBefore(target, withTransition) {
+  this.inserted = true;
+  var method = withTransition !== false ? beforeWithTransition : before;
+  method(this.node, target, this.vm);
+  if (inDoc(this.node)) {
+    this.callHook(attach);
+  }
+}
+
+/**
+ * Remove fragment, single node version
+ */
+
+function singleRemove() {
+  this.inserted = false;
+  var shouldCallRemove = inDoc(this.node);
+  var self = this;
+  this.beforeRemove();
+  removeWithTransition(this.node, this.vm, function () {
+    if (shouldCallRemove) {
+      self.callHook(detach);
+    }
+    self.destroy();
+  });
+}
+
+/**
+ * Insert fragment before target, multi-nodes version
+ *
+ * @param {Node} target
+ * @param {Boolean} withTransition
+ */
+
+function multiBefore(target, withTransition) {
+  this.inserted = true;
+  var vm = this.vm;
+  var method = withTransition !== false ? beforeWithTransition : before;
+  mapNodeRange(this.node, this.end, function (node) {
+    method(node, target, vm);
+  });
+  if (inDoc(this.node)) {
+    this.callHook(attach);
+  }
+}
+
+/**
+ * Remove fragment, multi-nodes version
+ */
+
+function multiRemove() {
+  this.inserted = false;
+  var self = this;
+  var shouldCallRemove = inDoc(this.node);
+  this.beforeRemove();
+  removeNodeRange(this.node, this.end, this.vm, this.frag, function () {
+    if (shouldCallRemove) {
+      self.callHook(detach);
+    }
+    self.destroy();
+  });
+}
+
+/**
+ * Prepare the fragment for removal.
+ */
+
+Fragment.prototype.beforeRemove = function () {
+  var i, l;
+  for (i = 0, l = this.childFrags.length; i < l; i++) {
+    // call the same method recursively on child
+    // fragments, depth-first
+    this.childFrags[i].beforeRemove(false);
+  }
+  for (i = 0, l = this.children.length; i < l; i++) {
+    // Call destroy for all contained instances,
+    // with remove:false and defer:true.
+    // Defer is necessary because we need to
+    // keep the children to call detach hooks
+    // on them.
+    this.children[i].$destroy(false, true);
+  }
+  var dirs = this.unlink.dirs;
+  for (i = 0, l = dirs.length; i < l; i++) {
+    // disable the watchers on all the directives
+    // so that the rendered content stays the same
+    // during removal.
+    dirs[i]._watcher && dirs[i]._watcher.teardown();
+  }
+};
+
+/**
+ * Destroy the fragment.
+ */
+
+Fragment.prototype.destroy = function () {
+  if (this.parentFrag) {
+    this.parentFrag.childFrags.$remove(this);
+  }
+  this.node.__v_frag = null;
+  this.unlink();
+};
+
+/**
+ * Call attach hook for a Vue instance.
+ *
+ * @param {Vue} child
+ */
+
+function attach(child) {
+  if (!child._isAttached && inDoc(child.$el)) {
+    child._callHook('attached');
+  }
+}
+
+/**
+ * Call detach hook for a Vue instance.
+ *
+ * @param {Vue} child
+ */
+
+function detach(child) {
+  if (child._isAttached && !inDoc(child.$el)) {
+    child._callHook('detached');
+  }
+}
+
+var linkerCache = new Cache(5000);
+
+/**
+ * A factory that can be used to create instances of a
+ * fragment. Caches the compiled linker if possible.
+ *
+ * @param {Vue} vm
+ * @param {Element|String} el
+ */
+function FragmentFactory(vm, el) {
+  this.vm = vm;
+  var template;
+  var isString = typeof el === 'string';
+  if (isString || isTemplate(el) && !el.hasAttribute('v-if')) {
+    template = parseTemplate(el, true);
+  } else {
+    template = document.createDocumentFragment();
+    template.appendChild(el);
+  }
+  this.template = template;
+  // linker can be cached, but only for components
+  var linker;
+  var cid = vm.constructor.cid;
+  if (cid > 0) {
+    var cacheId = cid + (isString ? el : getOuterHTML(el));
+    linker = linkerCache.get(cacheId);
+    if (!linker) {
+      linker = compile(template, vm.$options, true);
+      linkerCache.put(cacheId, linker);
+    }
+  } else {
+    linker = compile(template, vm.$options, true);
+  }
+  this.linker = linker;
+}
+
+/**
+ * Create a fragment instance with given host and scope.
+ *
+ * @param {Vue} host
+ * @param {Object} scope
+ * @param {Fragment} parentFrag
+ */
+
+FragmentFactory.prototype.create = function (host, scope, parentFrag) {
+  var frag = cloneNode(this.template);
+  return new Fragment(this.linker, this.vm, frag, host, scope, parentFrag);
+};
+
+var ON = 700;
+var MODEL = 800;
+var BIND = 850;
+var TRANSITION = 1100;
+var EL = 1500;
+var COMPONENT = 1500;
+var PARTIAL = 1750;
+var IF = 2100;
+var FOR = 2200;
+var SLOT = 2300;
+
+var uid$3 = 0;
+
+var vFor = {
+
+  priority: FOR,
+  terminal: true,
+
+  params: ['track-by', 'stagger', 'enter-stagger', 'leave-stagger'],
+
+  bind: function bind() {
+    // support "item in/of items" syntax
+    var inMatch = this.expression.match(/(.*) (?:in|of) (.*)/);
+    if (inMatch) {
+      var itMatch = inMatch[1].match(/\((.*),(.*)\)/);
+      if (itMatch) {
+        this.iterator = itMatch[1].trim();
+        this.alias = itMatch[2].trim();
+      } else {
+        this.alias = inMatch[1].trim();
+      }
+      this.expression = inMatch[2];
+    }
+
+    if (!this.alias) {
+      process.env.NODE_ENV !== 'production' && warn('Invalid v-for expression "' + this.descriptor.raw + '": ' + 'alias is required.', this.vm);
+      return;
+    }
+
+    // uid as a cache identifier
+    this.id = '__v-for__' + ++uid$3;
+
+    // check if this is an option list,
+    // so that we know if we need to update the <select>'s
+    // v-model when the option list has changed.
+    // because v-model has a lower priority than v-for,
+    // the v-model is not bound here yet, so we have to
+    // retrive it in the actual updateModel() function.
+    var tag = this.el.tagName;
+    this.isOption = (tag === 'OPTION' || tag === 'OPTGROUP') && this.el.parentNode.tagName === 'SELECT';
+
+    // setup anchor nodes
+    this.start = createAnchor('v-for-start');
+    this.end = createAnchor('v-for-end');
+    replace(this.el, this.end);
+    before(this.start, this.end);
+
+    // cache
+    this.cache = Object.create(null);
+
+    // fragment factory
+    this.factory = new FragmentFactory(this.vm, this.el);
+  },
+
+  update: function update(data) {
+    this.diff(data);
+    this.updateRef();
+    this.updateModel();
+  },
+
+  /**
+   * Diff, based on new data and old data, determine the
+   * minimum amount of DOM manipulations needed to make the
+   * DOM reflect the new data Array.
+   *
+   * The algorithm diffs the new data Array by storing a
+   * hidden reference to an owner vm instance on previously
+   * seen data. This allows us to achieve O(n) which is
+   * better than a levenshtein distance based algorithm,
+   * which is O(m * n).
+   *
+   * @param {Array} data
+   */
+
+  diff: function diff(data) {
+    // check if the Array was converted from an Object
+    var item = data[0];
+    var convertedFromObject = this.fromObject = isObject(item) && hasOwn(item, '$key') && hasOwn(item, '$value');
+
+    var trackByKey = this.params.trackBy;
+    var oldFrags = this.frags;
+    var frags = this.frags = new Array(data.length);
+    var alias = this.alias;
+    var iterator = this.iterator;
+    var start = this.start;
+    var end = this.end;
+    var inDocument = inDoc(start);
+    var init = !oldFrags;
+    var i, l, frag, key, value, primitive;
+
+    // First pass, go through the new Array and fill up
+    // the new frags array. If a piece of data has a cached
+    // instance for it, we reuse it. Otherwise build a new
+    // instance.
+    for (i = 0, l = data.length; i < l; i++) {
+      item = data[i];
+      key = convertedFromObject ? item.$key : null;
+      value = convertedFromObject ? item.$value : item;
+      primitive = !isObject(value);
+      frag = !init && this.getCachedFrag(value, i, key);
+      if (frag) {
+        // reusable fragment
+        frag.reused = true;
+        // update $index
+        frag.scope.$index = i;
+        // update $key
+        if (key) {
+          frag.scope.$key = key;
+        }
+        // update iterator
+        if (iterator) {
+          frag.scope[iterator] = key !== null ? key : i;
+        }
+        // update data for track-by, object repeat &
+        // primitive values.
+        if (trackByKey || convertedFromObject || primitive) {
+          withoutConversion(function () {
+            frag.scope[alias] = value;
+          });
+        }
+      } else {
+        // new isntance
+        frag = this.create(value, alias, i, key);
+        frag.fresh = !init;
+      }
+      frags[i] = frag;
+      if (init) {
+        frag.before(end);
+      }
+    }
+
+    // we're done for the initial render.
+    if (init) {
+      return;
+    }
+
+    // Second pass, go through the old fragments and
+    // destroy those who are not reused (and remove them
+    // from cache)
+    var removalIndex = 0;
+    var totalRemoved = oldFrags.length - frags.length;
+    // when removing a large number of fragments, watcher removal
+    // turns out to be a perf bottleneck, so we batch the watcher
+    // removals into a single filter call!
+    this.vm._vForRemoving = true;
+    for (i = 0, l = oldFrags.length; i < l; i++) {
+      frag = oldFrags[i];
+      if (!frag.reused) {
+        this.deleteCachedFrag(frag);
+        this.remove(frag, removalIndex++, totalRemoved, inDocument);
+      }
+    }
+    this.vm._vForRemoving = false;
+    if (removalIndex) {
+      this.vm._watchers = this.vm._watchers.filter(function (w) {
+        return w.active;
+      });
+    }
+
+    // Final pass, move/insert new fragments into the
+    // right place.
+    var targetPrev, prevEl, currentPrev;
+    var insertionIndex = 0;
+    for (i = 0, l = frags.length; i < l; i++) {
+      frag = frags[i];
+      // this is the frag that we should be after
+      targetPrev = frags[i - 1];
+      prevEl = targetPrev ? targetPrev.staggerCb ? targetPrev.staggerAnchor : targetPrev.end || targetPrev.node : start;
+      if (frag.reused && !frag.staggerCb) {
+        currentPrev = findPrevFrag(frag, start, this.id);
+        if (currentPrev !== targetPrev && (!currentPrev ||
+        // optimization for moving a single item.
+        // thanks to suggestions by @livoras in #1807
+        findPrevFrag(currentPrev, start, this.id) !== targetPrev)) {
+          this.move(frag, prevEl);
+        }
+      } else {
+        // new instance, or still in stagger.
+        // insert with updated stagger index.
+        this.insert(frag, insertionIndex++, prevEl, inDocument);
+      }
+      frag.reused = frag.fresh = false;
+    }
+  },
+
+  /**
+   * Create a new fragment instance.
+   *
+   * @param {*} value
+   * @param {String} alias
+   * @param {Number} index
+   * @param {String} [key]
+   * @return {Fragment}
+   */
+
+  create: function create(value, alias, index, key) {
+    var host = this._host;
+    // create iteration scope
+    var parentScope = this._scope || this.vm;
+    var scope = Object.create(parentScope);
+    // ref holder for the scope
+    scope.$refs = Object.create(parentScope.$refs);
+    scope.$els = Object.create(parentScope.$els);
+    // make sure point $parent to parent scope
+    scope.$parent = parentScope;
+    // for two-way binding on alias
+    scope.$forContext = this;
+    // define scope properties
+    // important: define the scope alias without forced conversion
+    // so that frozen data structures remain non-reactive.
+    withoutConversion(function () {
+      defineReactive(scope, alias, value);
+    });
+    defineReactive(scope, '$index', index);
+    if (key) {
+      defineReactive(scope, '$key', key);
+    } else if (scope.$key) {
+      // avoid accidental fallback
+      def(scope, '$key', null);
+    }
+    if (this.iterator) {
+      defineReactive(scope, this.iterator, key !== null ? key : index);
+    }
+    var frag = this.factory.create(host, scope, this._frag);
+    frag.forId = this.id;
+    this.cacheFrag(value, frag, index, key);
+    return frag;
+  },
+
+  /**
+   * Update the v-ref on owner vm.
+   */
+
+  updateRef: function updateRef() {
+    var ref = this.descriptor.ref;
+    if (!ref) return;
+    var hash = (this._scope || this.vm).$refs;
+    var refs;
+    if (!this.fromObject) {
+      refs = this.frags.map(findVmFromFrag);
+    } else {
+      refs = {};
+      this.frags.forEach(function (frag) {
+        refs[frag.scope.$key] = findVmFromFrag(frag);
+      });
+    }
+    hash[ref] = refs;
+  },
+
+  /**
+   * For option lists, update the containing v-model on
+   * parent <select>.
+   */
+
+  updateModel: function updateModel() {
+    if (this.isOption) {
+      var parent = this.start.parentNode;
+      var model = parent && parent.__v_model;
+      if (model) {
+        model.forceUpdate();
+      }
+    }
+  },
+
+  /**
+   * Insert a fragment. Handles staggering.
+   *
+   * @param {Fragment} frag
+   * @param {Number} index
+   * @param {Node} prevEl
+   * @param {Boolean} inDocument
+   */
+
+  insert: function insert(frag, index, prevEl, inDocument) {
+    if (frag.staggerCb) {
+      frag.staggerCb.cancel();
+      frag.staggerCb = null;
+    }
+    var staggerAmount = this.getStagger(frag, index, null, 'enter');
+    if (inDocument && staggerAmount) {
+      // create an anchor and insert it synchronously,
+      // so that we can resolve the correct order without
+      // worrying about some elements not inserted yet
+      var anchor = frag.staggerAnchor;
+      if (!anchor) {
+        anchor = frag.staggerAnchor = createAnchor('stagger-anchor');
+        anchor.__v_frag = frag;
+      }
+      after(anchor, prevEl);
+      var op = frag.staggerCb = cancellable(function () {
+        frag.staggerCb = null;
+        frag.before(anchor);
+        remove(anchor);
+      });
+      setTimeout(op, staggerAmount);
+    } else {
+      var target = prevEl.nextSibling;
+      /* istanbul ignore if */
+      if (!target) {
+        // reset end anchor position in case the position was messed up
+        // by an external drag-n-drop library.
+        after(this.end, prevEl);
+        target = this.end;
+      }
+      frag.before(target);
+    }
+  },
+
+  /**
+   * Remove a fragment. Handles staggering.
+   *
+   * @param {Fragment} frag
+   * @param {Number} index
+   * @param {Number} total
+   * @param {Boolean} inDocument
+   */
+
+  remove: function remove(frag, index, total, inDocument) {
+    if (frag.staggerCb) {
+      frag.staggerCb.cancel();
+      frag.staggerCb = null;
+      // it's not possible for the same frag to be removed
+      // twice, so if we have a pending stagger callback,
+      // it means this frag is queued for enter but removed
+      // before its transition started. Since it is already
+      // destroyed, we can just leave it in detached state.
+      return;
+    }
+    var staggerAmount = this.getStagger(frag, index, total, 'leave');
+    if (inDocument && staggerAmount) {
+      var op = frag.staggerCb = cancellable(function () {
+        frag.staggerCb = null;
+        frag.remove();
+      });
+      setTimeout(op, staggerAmount);
+    } else {
+      frag.remove();
+    }
+  },
+
+  /**
+   * Move a fragment to a new position.
+   * Force no transition.
+   *
+   * @param {Fragment} frag
+   * @param {Node} prevEl
+   */
+
+  move: function move(frag, prevEl) {
+    // fix a common issue with Sortable:
+    // if prevEl doesn't have nextSibling, this means it's
+    // been dragged after the end anchor. Just re-position
+    // the end anchor to the end of the container.
+    /* istanbul ignore if */
+    if (!prevEl.nextSibling) {
+      this.end.parentNode.appendChild(this.end);
+    }
+    frag.before(prevEl.nextSibling, false);
+  },
+
+  /**
+   * Cache a fragment using track-by or the object key.
+   *
+   * @param {*} value
+   * @param {Fragment} frag
+   * @param {Number} index
+   * @param {String} [key]
+   */
+
+  cacheFrag: function cacheFrag(value, frag, index, key) {
+    var trackByKey = this.params.trackBy;
+    var cache = this.cache;
+    var primitive = !isObject(value);
+    var id;
+    if (key || trackByKey || primitive) {
+      id = getTrackByKey(index, key, value, trackByKey);
+      if (!cache[id]) {
+        cache[id] = frag;
+      } else if (trackByKey !== '$index') {
+        process.env.NODE_ENV !== 'production' && this.warnDuplicate(value);
+      }
+    } else {
+      id = this.id;
+      if (hasOwn(value, id)) {
+        if (value[id] === null) {
+          value[id] = frag;
+        } else {
+          process.env.NODE_ENV !== 'production' && this.warnDuplicate(value);
+        }
+      } else if (Object.isExtensible(value)) {
+        def(value, id, frag);
+      } else if (process.env.NODE_ENV !== 'production') {
+        warn('Frozen v-for objects cannot be automatically tracked, make sure to ' + 'provide a track-by key.');
+      }
+    }
+    frag.raw = value;
+  },
+
+  /**
+   * Get a cached fragment from the value/index/key
+   *
+   * @param {*} value
+   * @param {Number} index
+   * @param {String} key
+   * @return {Fragment}
+   */
+
+  getCachedFrag: function getCachedFrag(value, index, key) {
+    var trackByKey = this.params.trackBy;
+    var primitive = !isObject(value);
+    var frag;
+    if (key || trackByKey || primitive) {
+      var id = getTrackByKey(index, key, value, trackByKey);
+      frag = this.cache[id];
+    } else {
+      frag = value[this.id];
+    }
+    if (frag && (frag.reused || frag.fresh)) {
+      process.env.NODE_ENV !== 'production' && this.warnDuplicate(value);
+    }
+    return frag;
+  },
+
+  /**
+   * Delete a fragment from cache.
+   *
+   * @param {Fragment} frag
+   */
+
+  deleteCachedFrag: function deleteCachedFrag(frag) {
+    var value = frag.raw;
+    var trackByKey = this.params.trackBy;
+    var scope = frag.scope;
+    var index = scope.$index;
+    // fix #948: avoid accidentally fall through to
+    // a parent repeater which happens to have $key.
+    var key = hasOwn(scope, '$key') && scope.$key;
+    var primitive = !isObject(value);
+    if (trackByKey || key || primitive) {
+      var id = getTrackByKey(index, key, value, trackByKey);
+      this.cache[id] = null;
+    } else {
+      value[this.id] = null;
+      frag.raw = null;
+    }
+  },
+
+  /**
+   * Get the stagger amount for an insertion/removal.
+   *
+   * @param {Fragment} frag
+   * @param {Number} index
+   * @param {Number} total
+   * @param {String} type
+   */
+
+  getStagger: function getStagger(frag, index, total, type) {
+    type = type + 'Stagger';
+    var trans = frag.node.__v_trans;
+    var hooks = trans && trans.hooks;
+    var hook = hooks && (hooks[type] || hooks.stagger);
+    return hook ? hook.call(frag, index, total) : index * parseInt(this.params[type] || this.params.stagger, 10);
+  },
+
+  /**
+   * Pre-process the value before piping it through the
+   * filters. This is passed to and called by the watcher.
+   */
+
+  _preProcess: function _preProcess(value) {
+    // regardless of type, store the un-filtered raw value.
+    this.rawValue = value;
+    return value;
+  },
+
+  /**
+   * Post-process the value after it has been piped through
+   * the filters. This is passed to and called by the watcher.
+   *
+   * It is necessary for this to be called during the
+   * watcher's dependency collection phase because we want
+   * the v-for to update when the source Object is mutated.
+   */
+
+  _postProcess: function _postProcess(value) {
+    if (isArray(value)) {
+      return value;
+    } else if (isPlainObject(value)) {
+      // convert plain object to array.
+      var keys = Object.keys(value);
+      var i = keys.length;
+      var res = new Array(i);
+      var key;
+      while (i--) {
+        key = keys[i];
+        res[i] = {
+          $key: key,
+          $value: value[key]
+        };
+      }
+      return res;
+    } else {
+      if (typeof value === 'number' && !isNaN(value)) {
+        value = range(value);
+      }
+      return value || [];
+    }
+  },
+
+  unbind: function unbind() {
+    if (this.descriptor.ref) {
+      (this._scope || this.vm).$refs[this.descriptor.ref] = null;
+    }
+    if (this.frags) {
+      var i = this.frags.length;
+      var frag;
+      while (i--) {
+        frag = this.frags[i];
+        this.deleteCachedFrag(frag);
+        frag.destroy();
+      }
+    }
+  }
+};
+
+/**
+ * Helper to find the previous element that is a fragment
+ * anchor. This is necessary because a destroyed frag's
+ * element could still be lingering in the DOM before its
+ * leaving transition finishes, but its inserted flag
+ * should have been set to false so we can skip them.
+ *
+ * If this is a block repeat, we want to make sure we only
+ * return frag that is bound to this v-for. (see #929)
+ *
+ * @param {Fragment} frag
+ * @param {Comment|Text} anchor
+ * @param {String} id
+ * @return {Fragment}
+ */
+
+function findPrevFrag(frag, anchor, id) {
+  var el = frag.node.previousSibling;
+  /* istanbul ignore if */
+  if (!el) return;
+  frag = el.__v_frag;
+  while ((!frag || frag.forId !== id || !frag.inserted) && el !== anchor) {
+    el = el.previousSibling;
+    /* istanbul ignore if */
+    if (!el) return;
+    frag = el.__v_frag;
+  }
+  return frag;
+}
+
+/**
+ * Find a vm from a fragment.
+ *
+ * @param {Fragment} frag
+ * @return {Vue|undefined}
+ */
+
+function findVmFromFrag(frag) {
+  var node = frag.node;
+  // handle multi-node frag
+  if (frag.end) {
+    while (!node.__vue__ && node !== frag.end && node.nextSibling) {
+      node = node.nextSibling;
+    }
+  }
+  return node.__vue__;
+}
+
+/**
+ * Create a range array from given number.
+ *
+ * @param {Number} n
+ * @return {Array}
+ */
+
+function range(n) {
+  var i = -1;
+  var ret = new Array(Math.floor(n));
+  while (++i < n) {
+    ret[i] = i;
+  }
+  return ret;
+}
+
+/**
+ * Get the track by key for an item.
+ *
+ * @param {Number} index
+ * @param {String} key
+ * @param {*} value
+ * @param {String} [trackByKey]
+ */
+
+function getTrackByKey(index, key, value, trackByKey) {
+  return trackByKey ? trackByKey === '$index' ? index : trackByKey.charAt(0).match(/\w/) ? getPath(value, trackByKey) : value[trackByKey] : key || value;
+}
+
+if (process.env.NODE_ENV !== 'production') {
+  vFor.warnDuplicate = function (value) {
+    warn('Duplicate value found in v-for="' + this.descriptor.raw + '": ' + JSON.stringify(value) + '. Use track-by="$index" if ' + 'you are expecting duplicate values.', this.vm);
+  };
+}
+
+var vIf = {
+
+  priority: IF,
+  terminal: true,
+
+  bind: function bind() {
+    var el = this.el;
+    if (!el.__vue__) {
+      // check else block
+      var next = el.nextElementSibling;
+      if (next && getAttr(next, 'v-else') !== null) {
+        remove(next);
+        this.elseEl = next;
+      }
+      // check main block
+      this.anchor = createAnchor('v-if');
+      replace(el, this.anchor);
+    } else {
+      process.env.NODE_ENV !== 'production' && warn('v-if="' + this.expression + '" cannot be ' + 'used on an instance root element.', this.vm);
+      this.invalid = true;
+    }
+  },
+
+  update: function update(value) {
+    if (this.invalid) return;
+    if (value) {
+      if (!this.frag) {
+        this.insert();
+      }
+    } else {
+      this.remove();
+    }
+  },
+
+  insert: function insert() {
+    if (this.elseFrag) {
+      this.elseFrag.remove();
+      this.elseFrag = null;
+    }
+    // lazy init factory
+    if (!this.factory) {
+      this.factory = new FragmentFactory(this.vm, this.el);
+    }
+    this.frag = this.factory.create(this._host, this._scope, this._frag);
+    this.frag.before(this.anchor);
+  },
+
+  remove: function remove() {
+    if (this.frag) {
+      this.frag.remove();
+      this.frag = null;
+    }
+    if (this.elseEl && !this.elseFrag) {
+      if (!this.elseFactory) {
+        this.elseFactory = new FragmentFactory(this.elseEl._context || this.vm, this.elseEl);
+      }
+      this.elseFrag = this.elseFactory.create(this._host, this._scope, this._frag);
+      this.elseFrag.before(this.anchor);
+    }
+  },
+
+  unbind: function unbind() {
+    if (this.frag) {
+      this.frag.destroy();
+    }
+    if (this.elseFrag) {
+      this.elseFrag.destroy();
+    }
+  }
+};
+
+var show = {
+
+  bind: function bind() {
+    // check else block
+    var next = this.el.nextElementSibling;
+    if (next && getAttr(next, 'v-else') !== null) {
+      this.elseEl = next;
+    }
+  },
+
+  update: function update(value) {
+    this.apply(this.el, value);
+    if (this.elseEl) {
+      this.apply(this.elseEl, !value);
+    }
+  },
+
+  apply: function apply(el, value) {
+    if (inDoc(el)) {
+      applyTransition(el, value ? 1 : -1, toggle, this.vm);
+    } else {
+      toggle();
+    }
+    function toggle() {
+      el.style.display = value ? '' : 'none';
+    }
+  }
+};
+
+var text$2 = {
+
+  bind: function bind() {
+    var self = this;
+    var el = this.el;
+    var isRange = el.type === 'range';
+    var lazy = this.params.lazy;
+    var number = this.params.number;
+    var debounce = this.params.debounce;
+
+    // handle composition events.
+    //   http://blog.evanyou.me/2014/01/03/composition-event/
+    // skip this for Android because it handles composition
+    // events quite differently. Android doesn't trigger
+    // composition events for language input methods e.g.
+    // Chinese, but instead triggers them for spelling
+    // suggestions... (see Discussion/#162)
+    var composing = false;
+    if (!isAndroid && !isRange) {
+      this.on('compositionstart', function () {
+        composing = true;
+      });
+      this.on('compositionend', function () {
+        composing = false;
+        // in IE11 the "compositionend" event fires AFTER
+        // the "input" event, so the input handler is blocked
+        // at the end... have to call it here.
+        //
+        // #1327: in lazy mode this is unecessary.
+        if (!lazy) {
+          self.listener();
+        }
+      });
+    }
+
+    // prevent messing with the input when user is typing,
+    // and force update on blur.
+    this.focused = false;
+    if (!isRange && !lazy) {
+      this.on('focus', function () {
+        self.focused = true;
+      });
+      this.on('blur', function () {
+        self.focused = false;
+        // do not sync value after fragment removal (#2017)
+        if (!self._frag || self._frag.inserted) {
+          self.rawListener();
+        }
+      });
+    }
+
+    // Now attach the main listener
+    this.listener = this.rawListener = function () {
+      if (composing || !self._bound) {
+        return;
+      }
+      var val = number || isRange ? toNumber(el.value) : el.value;
+      self.set(val);
+      // force update on next tick to avoid lock & same value
+      // also only update when user is not typing
+      nextTick(function () {
+        if (self._bound && !self.focused) {
+          self.update(self._watcher.value);
+        }
+      });
+    };
+
+    // apply debounce
+    if (debounce) {
+      this.listener = _debounce(this.listener, debounce);
+    }
+
+    // Support jQuery events, since jQuery.trigger() doesn't
+    // trigger native events in some cases and some plugins
+    // rely on $.trigger()
+    //
+    // We want to make sure if a listener is attached using
+    // jQuery, it is also removed with jQuery, that's why
+    // we do the check for each directive instance and
+    // store that check result on itself. This also allows
+    // easier test coverage control by unsetting the global
+    // jQuery variable in tests.
+    this.hasjQuery = typeof jQuery === 'function';
+    if (this.hasjQuery) {
+      var method = jQuery.fn.on ? 'on' : 'bind';
+      jQuery(el)[method]('change', this.rawListener);
+      if (!lazy) {
+        jQuery(el)[method]('input', this.listener);
+      }
+    } else {
+      this.on('change', this.rawListener);
+      if (!lazy) {
+        this.on('input', this.listener);
+      }
+    }
+
+    // IE9 doesn't fire input event on backspace/del/cut
+    if (!lazy && isIE9) {
+      this.on('cut', function () {
+        nextTick(self.listener);
+      });
+      this.on('keyup', function (e) {
+        if (e.keyCode === 46 || e.keyCode === 8) {
+          self.listener();
+        }
+      });
+    }
+
+    // set initial value if present
+    if (el.hasAttribute('value') || el.tagName === 'TEXTAREA' && el.value.trim()) {
+      this.afterBind = this.listener;
+    }
+  },
+
+  update: function update(value) {
+    // #3029 only update when the value changes. This prevent
+    // browsers from overwriting values like selectionStart
+    value = _toString(value);
+    if (value !== this.el.value) this.el.value = value;
+  },
+
+  unbind: function unbind() {
+    var el = this.el;
+    if (this.hasjQuery) {
+      var method = jQuery.fn.off ? 'off' : 'unbind';
+      jQuery(el)[method]('change', this.listener);
+      jQuery(el)[method]('input', this.listener);
+    }
+  }
+};
+
+var radio = {
+
+  bind: function bind() {
+    var self = this;
+    var el = this.el;
+
+    this.getValue = function () {
+      // value overwrite via v-bind:value
+      if (el.hasOwnProperty('_value')) {
+        return el._value;
+      }
+      var val = el.value;
+      if (self.params.number) {
+        val = toNumber(val);
+      }
+      return val;
+    };
+
+    this.listener = function () {
+      self.set(self.getValue());
+    };
+    this.on('change', this.listener);
+
+    if (el.hasAttribute('checked')) {
+      this.afterBind = this.listener;
+    }
+  },
+
+  update: function update(value) {
+    this.el.checked = looseEqual(value, this.getValue());
+  }
+};
+
+var select = {
+
+  bind: function bind() {
+    var _this = this;
+
+    var self = this;
+    var el = this.el;
+
+    // method to force update DOM using latest value.
+    this.forceUpdate = function () {
+      if (self._watcher) {
+        self.update(self._watcher.get());
+      }
+    };
+
+    // check if this is a multiple select
+    var multiple = this.multiple = el.hasAttribute('multiple');
+
+    // attach listener
+    this.listener = function () {
+      var value = getValue(el, multiple);
+      value = self.params.number ? isArray(value) ? value.map(toNumber) : toNumber(value) : value;
+      self.set(value);
+    };
+    this.on('change', this.listener);
+
+    // if has initial value, set afterBind
+    var initValue = getValue(el, multiple, true);
+    if (multiple && initValue.length || !multiple && initValue !== null) {
+      this.afterBind = this.listener;
+    }
+
+    // All major browsers except Firefox resets
+    // selectedIndex with value -1 to 0 when the element
+    // is appended to a new parent, therefore we have to
+    // force a DOM update whenever that happens...
+    this.vm.$on('hook:attached', function () {
+      nextTick(_this.forceUpdate);
+    });
+    if (!inDoc(el)) {
+      nextTick(this.forceUpdate);
+    }
+  },
+
+  update: function update(value) {
+    var el = this.el;
+    el.selectedIndex = -1;
+    var multi = this.multiple && isArray(value);
+    var options = el.options;
+    var i = options.length;
+    var op, val;
+    while (i--) {
+      op = options[i];
+      val = op.hasOwnProperty('_value') ? op._value : op.value;
+      /* eslint-disable eqeqeq */
+      op.selected = multi ? indexOf$1(value, val) > -1 : looseEqual(value, val);
+      /* eslint-enable eqeqeq */
+    }
+  },
+
+  unbind: function unbind() {
+    /* istanbul ignore next */
+    this.vm.$off('hook:attached', this.forceUpdate);
+  }
+};
+
+/**
+ * Get select value
+ *
+ * @param {SelectElement} el
+ * @param {Boolean} multi
+ * @param {Boolean} init
+ * @return {Array|*}
+ */
+
+function getValue(el, multi, init) {
+  var res = multi ? [] : null;
+  var op, val, selected;
+  for (var i = 0, l = el.options.length; i < l; i++) {
+    op = el.options[i];
+    selected = init ? op.hasAttribute('selected') : op.selected;
+    if (selected) {
+      val = op.hasOwnProperty('_value') ? op._value : op.value;
+      if (multi) {
+        res.push(val);
+      } else {
+        return val;
+      }
+    }
+  }
+  return res;
+}
+
+/**
+ * Native Array.indexOf uses strict equal, but in this
+ * case we need to match string/numbers with custom equal.
+ *
+ * @param {Array} arr
+ * @param {*} val
+ */
+
+function indexOf$1(arr, val) {
+  var i = arr.length;
+  while (i--) {
+    if (looseEqual(arr[i], val)) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+var checkbox = {
+
+  bind: function bind() {
+    var self = this;
+    var el = this.el;
+
+    this.getValue = function () {
+      return el.hasOwnProperty('_value') ? el._value : self.params.number ? toNumber(el.value) : el.value;
+    };
+
+    function getBooleanValue() {
+      var val = el.checked;
+      if (val && el.hasOwnProperty('_trueValue')) {
+        return el._trueValue;
+      }
+      if (!val && el.hasOwnProperty('_falseValue')) {
+        return el._falseValue;
+      }
+      return val;
+    }
+
+    this.listener = function () {
+      var model = self._watcher.value;
+      if (isArray(model)) {
+        var val = self.getValue();
+        if (el.checked) {
+          if (indexOf(model, val) < 0) {
+            model.push(val);
+          }
+        } else {
+          model.$remove(val);
+        }
+      } else {
+        self.set(getBooleanValue());
+      }
+    };
+
+    this.on('change', this.listener);
+    if (el.hasAttribute('checked')) {
+      this.afterBind = this.listener;
+    }
+  },
+
+  update: function update(value) {
+    var el = this.el;
+    if (isArray(value)) {
+      el.checked = indexOf(value, this.getValue()) > -1;
+    } else {
+      if (el.hasOwnProperty('_trueValue')) {
+        el.checked = looseEqual(value, el._trueValue);
+      } else {
+        el.checked = !!value;
+      }
+    }
+  }
+};
+
+var handlers = {
+  text: text$2,
+  radio: radio,
+  select: select,
+  checkbox: checkbox
+};
+
+var model = {
+
+  priority: MODEL,
+  twoWay: true,
+  handlers: handlers,
+  params: ['lazy', 'number', 'debounce'],
+
+  /**
+   * Possible elements:
+   *   <select>
+   *   <textarea>
+   *   <input type="*">
+   *     - text
+   *     - checkbox
+   *     - radio
+   *     - number
+   */
+
+  bind: function bind() {
+    // friendly warning...
+    this.checkFilters();
+    if (this.hasRead && !this.hasWrite) {
+      process.env.NODE_ENV !== 'production' && warn('It seems you are using a read-only filter with ' + 'v-model="' + this.descriptor.raw + '". ' + 'You might want to use a two-way filter to ensure correct behavior.', this.vm);
+    }
+    var el = this.el;
+    var tag = el.tagName;
+    var handler;
+    if (tag === 'INPUT') {
+      handler = handlers[el.type] || handlers.text;
+    } else if (tag === 'SELECT') {
+      handler = handlers.select;
+    } else if (tag === 'TEXTAREA') {
+      handler = handlers.text;
+    } else {
+      process.env.NODE_ENV !== 'production' && warn('v-model does not support element type: ' + tag, this.vm);
+      return;
+    }
+    el.__v_model = this;
+    handler.bind.call(this);
+    this.update = handler.update;
+    this._unbind = handler.unbind;
+  },
+
+  /**
+   * Check read/write filter stats.
+   */
+
+  checkFilters: function checkFilters() {
+    var filters = this.filters;
+    if (!filters) return;
+    var i = filters.length;
+    while (i--) {
+      var filter = resolveAsset(this.vm.$options, 'filters', filters[i].name);
+      if (typeof filter === 'function' || filter.read) {
+        this.hasRead = true;
+      }
+      if (filter.write) {
+        this.hasWrite = true;
+      }
+    }
+  },
+
+  unbind: function unbind() {
+    this.el.__v_model = null;
+    this._unbind && this._unbind();
+  }
+};
+
+// keyCode aliases
+var keyCodes = {
+  esc: 27,
+  tab: 9,
+  enter: 13,
+  space: 32,
+  'delete': [8, 46],
+  up: 38,
+  left: 37,
+  right: 39,
+  down: 40
+};
+
+function keyFilter(handler, keys) {
+  var codes = keys.map(function (key) {
+    var charCode = key.charCodeAt(0);
+    if (charCode > 47 && charCode < 58) {
+      return parseInt(key, 10);
+    }
+    if (key.length === 1) {
+      charCode = key.toUpperCase().charCodeAt(0);
+      if (charCode > 64 && charCode < 91) {
+        return charCode;
+      }
+    }
+    return keyCodes[key];
+  });
+  codes = [].concat.apply([], codes);
+  return function keyHandler(e) {
+    if (codes.indexOf(e.keyCode) > -1) {
+      return handler.call(this, e);
+    }
+  };
+}
+
+function stopFilter(handler) {
+  return function stopHandler(e) {
+    e.stopPropagation();
+    return handler.call(this, e);
+  };
+}
+
+function preventFilter(handler) {
+  return function preventHandler(e) {
+    e.preventDefault();
+    return handler.call(this, e);
+  };
+}
+
+function selfFilter(handler) {
+  return function selfHandler(e) {
+    if (e.target === e.currentTarget) {
+      return handler.call(this, e);
+    }
+  };
+}
+
+var on$1 = {
+
+  priority: ON,
+  acceptStatement: true,
+  keyCodes: keyCodes,
+
+  bind: function bind() {
+    // deal with iframes
+    if (this.el.tagName === 'IFRAME' && this.arg !== 'load') {
+      var self = this;
+      this.iframeBind = function () {
+        on(self.el.contentWindow, self.arg, self.handler, self.modifiers.capture);
+      };
+      this.on('load', this.iframeBind);
+    }
+  },
+
+  update: function update(handler) {
+    // stub a noop for v-on with no value,
+    // e.g. @mousedown.prevent
+    if (!this.descriptor.raw) {
+      handler = function () {};
+    }
+
+    if (typeof handler !== 'function') {
+      process.env.NODE_ENV !== 'production' && warn('v-on:' + this.arg + '="' + this.expression + '" expects a function value, ' + 'got ' + handler, this.vm);
+      return;
+    }
+
+    // apply modifiers
+    if (this.modifiers.stop) {
+      handler = stopFilter(handler);
+    }
+    if (this.modifiers.prevent) {
+      handler = preventFilter(handler);
+    }
+    if (this.modifiers.self) {
+      handler = selfFilter(handler);
+    }
+    // key filter
+    var keys = Object.keys(this.modifiers).filter(function (key) {
+      return key !== 'stop' && key !== 'prevent' && key !== 'self' && key !== 'capture';
+    });
+    if (keys.length) {
+      handler = keyFilter(handler, keys);
+    }
+
+    this.reset();
+    this.handler = handler;
+
+    if (this.iframeBind) {
+      this.iframeBind();
+    } else {
+      on(this.el, this.arg, this.handler, this.modifiers.capture);
+    }
+  },
+
+  reset: function reset() {
+    var el = this.iframeBind ? this.el.contentWindow : this.el;
+    if (this.handler) {
+      off(el, this.arg, this.handler);
+    }
+  },
+
+  unbind: function unbind() {
+    this.reset();
+  }
+};
+
+var prefixes = ['-webkit-', '-moz-', '-ms-'];
+var camelPrefixes = ['Webkit', 'Moz', 'ms'];
+var importantRE = /!important;?$/;
+var propCache = Object.create(null);
+
+var testEl = null;
+
+var style = {
+
+  deep: true,
+
+  update: function update(value) {
+    if (typeof value === 'string') {
+      this.el.style.cssText = value;
+    } else if (isArray(value)) {
+      this.handleObject(value.reduce(extend, {}));
+    } else {
+      this.handleObject(value || {});
+    }
+  },
+
+  handleObject: function handleObject(value) {
+    // cache object styles so that only changed props
+    // are actually updated.
+    var cache = this.cache || (this.cache = {});
+    var name, val;
+    for (name in cache) {
+      if (!(name in value)) {
+        this.handleSingle(name, null);
+        delete cache[name];
+      }
+    }
+    for (name in value) {
+      val = value[name];
+      if (val !== cache[name]) {
+        cache[name] = val;
+        this.handleSingle(name, val);
+      }
+    }
+  },
+
+  handleSingle: function handleSingle(prop, value) {
+    prop = normalize(prop);
+    if (!prop) return; // unsupported prop
+    // cast possible numbers/booleans into strings
+    if (value != null) value += '';
+    if (value) {
+      var isImportant = importantRE.test(value) ? 'important' : '';
+      if (isImportant) {
+        /* istanbul ignore if */
+        if (process.env.NODE_ENV !== 'production') {
+          warn('It\'s probably a bad idea to use !important with inline rules. ' + 'This feature will be deprecated in a future version of Vue.');
+        }
+        value = value.replace(importantRE, '').trim();
+        this.el.style.setProperty(prop.kebab, value, isImportant);
+      } else {
+        this.el.style[prop.camel] = value;
+      }
+    } else {
+      this.el.style[prop.camel] = '';
+    }
+  }
+
+};
+
+/**
+ * Normalize a CSS property name.
+ * - cache result
+ * - auto prefix
+ * - camelCase -> dash-case
+ *
+ * @param {String} prop
+ * @return {String}
+ */
+
+function normalize(prop) {
+  if (propCache[prop]) {
+    return propCache[prop];
+  }
+  var res = prefix(prop);
+  propCache[prop] = propCache[res] = res;
+  return res;
+}
+
+/**
+ * Auto detect the appropriate prefix for a CSS property.
+ * https://gist.github.com/paulirish/523692
+ *
+ * @param {String} prop
+ * @return {String}
+ */
+
+function prefix(prop) {
+  prop = hyphenate(prop);
+  var camel = camelize(prop);
+  var upper = camel.charAt(0).toUpperCase() + camel.slice(1);
+  if (!testEl) {
+    testEl = document.createElement('div');
+  }
+  var i = prefixes.length;
+  var prefixed;
+  if (camel !== 'filter' && camel in testEl.style) {
+    return {
+      kebab: prop,
+      camel: camel
+    };
+  }
+  while (i--) {
+    prefixed = camelPrefixes[i] + upper;
+    if (prefixed in testEl.style) {
+      return {
+        kebab: prefixes[i] + prop,
+        camel: prefixed
+      };
+    }
+  }
+}
+
+// xlink
+var xlinkNS = 'http://www.w3.org/1999/xlink';
+var xlinkRE = /^xlink:/;
+
+// check for attributes that prohibit interpolations
+var disallowedInterpAttrRE = /^v-|^:|^@|^(?:is|transition|transition-mode|debounce|track-by|stagger|enter-stagger|leave-stagger)$/;
+// these attributes should also set their corresponding properties
+// because they only affect the initial state of the element
+var attrWithPropsRE = /^(?:value|checked|selected|muted)$/;
+// these attributes expect enumrated values of "true" or "false"
+// but are not boolean attributes
+var enumeratedAttrRE = /^(?:draggable|contenteditable|spellcheck)$/;
+
+// these attributes should set a hidden property for
+// binding v-model to object values
+var modelProps = {
+  value: '_value',
+  'true-value': '_trueValue',
+  'false-value': '_falseValue'
+};
+
+var bind$1 = {
+
+  priority: BIND,
+
+  bind: function bind() {
+    var attr = this.arg;
+    var tag = this.el.tagName;
+    // should be deep watch on object mode
+    if (!attr) {
+      this.deep = true;
+    }
+    // handle interpolation bindings
+    var descriptor = this.descriptor;
+    var tokens = descriptor.interp;
+    if (tokens) {
+      // handle interpolations with one-time tokens
+      if (descriptor.hasOneTime) {
+        this.expression = tokensToExp(tokens, this._scope || this.vm);
+      }
+
+      // only allow binding on native attributes
+      if (disallowedInterpAttrRE.test(attr) || attr === 'name' && (tag === 'PARTIAL' || tag === 'SLOT')) {
+        process.env.NODE_ENV !== 'production' && warn(attr + '="' + descriptor.raw + '": ' + 'attribute interpolation is not allowed in Vue.js ' + 'directives and special attributes.', this.vm);
+        this.el.removeAttribute(attr);
+        this.invalid = true;
+      }
+
+      /* istanbul ignore if */
+      if (process.env.NODE_ENV !== 'production') {
+        var raw = attr + '="' + descriptor.raw + '": ';
+        // warn src
+        if (attr === 'src') {
+          warn(raw + 'interpolation in "src" attribute will cause ' + 'a 404 request. Use v-bind:src instead.', this.vm);
+        }
+
+        // warn style
+        if (attr === 'style') {
+          warn(raw + 'interpolation in "style" attribute will cause ' + 'the attribute to be discarded in Internet Explorer. ' + 'Use v-bind:style instead.', this.vm);
+        }
+      }
+    }
+  },
+
+  update: function update(value) {
+    if (this.invalid) {
+      return;
+    }
+    var attr = this.arg;
+    if (this.arg) {
+      this.handleSingle(attr, value);
+    } else {
+      this.handleObject(value || {});
+    }
+  },
+
+  // share object handler with v-bind:class
+  handleObject: style.handleObject,
+
+  handleSingle: function handleSingle(attr, value) {
+    var el = this.el;
+    var interp = this.descriptor.interp;
+    if (this.modifiers.camel) {
+      attr = camelize(attr);
+    }
+    if (!interp && attrWithPropsRE.test(attr) && attr in el) {
+      var attrValue = attr === 'value' ? value == null // IE9 will set input.value to "null" for null...
+      ? '' : value : value;
+
+      if (el[attr] !== attrValue) {
+        el[attr] = attrValue;
+      }
+    }
+    // set model props
+    var modelProp = modelProps[attr];
+    if (!interp && modelProp) {
+      el[modelProp] = value;
+      // update v-model if present
+      var model = el.__v_model;
+      if (model) {
+        model.listener();
+      }
+    }
+    // do not set value attribute for textarea
+    if (attr === 'value' && el.tagName === 'TEXTAREA') {
+      el.removeAttribute(attr);
+      return;
+    }
+    // update attribute
+    if (enumeratedAttrRE.test(attr)) {
+      el.setAttribute(attr, value ? 'true' : 'false');
+    } else if (value != null && value !== false) {
+      if (attr === 'class') {
+        // handle edge case #1960:
+        // class interpolation should not overwrite Vue transition class
+        if (el.__v_trans) {
+          value += ' ' + el.__v_trans.id + '-transition';
+        }
+        setClass(el, value);
+      } else if (xlinkRE.test(attr)) {
+        el.setAttributeNS(xlinkNS, attr, value === true ? '' : value);
+      } else {
+        el.setAttribute(attr, value === true ? '' : value);
+      }
+    } else {
+      el.removeAttribute(attr);
+    }
+  }
+};
+
+var el = {
+
+  priority: EL,
+
+  bind: function bind() {
+    /* istanbul ignore if */
+    if (!this.arg) {
+      return;
+    }
+    var id = this.id = camelize(this.arg);
+    var refs = (this._scope || this.vm).$els;
+    if (hasOwn(refs, id)) {
+      refs[id] = this.el;
+    } else {
+      defineReactive(refs, id, this.el);
+    }
+  },
+
+  unbind: function unbind() {
+    var refs = (this._scope || this.vm).$els;
+    if (refs[this.id] === this.el) {
+      refs[this.id] = null;
+    }
+  }
+};
+
+var ref = {
+  bind: function bind() {
+    process.env.NODE_ENV !== 'production' && warn('v-ref:' + this.arg + ' must be used on a child ' + 'component. Found on <' + this.el.tagName.toLowerCase() + '>.', this.vm);
+  }
+};
+
+var cloak = {
+  bind: function bind() {
+    var el = this.el;
+    this.vm.$once('pre-hook:compiled', function () {
+      el.removeAttribute('v-cloak');
+    });
+  }
+};
+
+// must export plain object
+var directives = {
+  text: text$1,
+  html: html,
+  'for': vFor,
+  'if': vIf,
+  show: show,
+  model: model,
+  on: on$1,
+  bind: bind$1,
+  el: el,
+  ref: ref,
+  cloak: cloak
+};
+
+var vClass = {
+
+  deep: true,
+
+  update: function update(value) {
+    if (!value) {
+      this.cleanup();
+    } else if (typeof value === 'string') {
+      this.setClass(value.trim().split(/\s+/));
+    } else {
+      this.setClass(normalize$1(value));
+    }
+  },
+
+  setClass: function setClass(value) {
+    this.cleanup(value);
+    for (var i = 0, l = value.length; i < l; i++) {
+      var val = value[i];
+      if (val) {
+        apply(this.el, val, addClass);
+      }
+    }
+    this.prevKeys = value;
+  },
+
+  cleanup: function cleanup(value) {
+    var prevKeys = this.prevKeys;
+    if (!prevKeys) return;
+    var i = prevKeys.length;
+    while (i--) {
+      var key = prevKeys[i];
+      if (!value || value.indexOf(key) < 0) {
+        apply(this.el, key, removeClass);
+      }
+    }
+  }
+};
+
+/**
+ * Normalize objects and arrays (potentially containing objects)
+ * into array of strings.
+ *
+ * @param {Object|Array<String|Object>} value
+ * @return {Array<String>}
+ */
+
+function normalize$1(value) {
+  var res = [];
+  if (isArray(value)) {
+    for (var i = 0, l = value.length; i < l; i++) {
+      var _key = value[i];
+      if (_key) {
+        if (typeof _key === 'string') {
+          res.push(_key);
+        } else {
+          for (var k in _key) {
+            if (_key[k]) res.push(k);
+          }
+        }
+      }
+    }
+  } else if (isObject(value)) {
+    for (var key in value) {
+      if (value[key]) res.push(key);
+    }
+  }
+  return res;
+}
+
+/**
+ * Add or remove a class/classes on an element
+ *
+ * @param {Element} el
+ * @param {String} key The class name. This may or may not
+ *                     contain a space character, in such a
+ *                     case we'll deal with multiple class
+ *                     names at once.
+ * @param {Function} fn
+ */
+
+function apply(el, key, fn) {
+  key = key.trim();
+  if (key.indexOf(' ') === -1) {
+    fn(el, key);
+    return;
+  }
+  // The key contains one or more space characters.
+  // Since a class name doesn't accept such characters, we
+  // treat it as multiple classes.
+  var keys = key.split(/\s+/);
+  for (var i = 0, l = keys.length; i < l; i++) {
+    fn(el, keys[i]);
+  }
+}
+
+var component = {
+
+  priority: COMPONENT,
+
+  params: ['keep-alive', 'transition-mode', 'inline-template'],
+
+  /**
+   * Setup. Two possible usages:
+   *
+   * - static:
+   *   <comp> or <div v-component="comp">
+   *
+   * - dynamic:
+   *   <component :is="view">
+   */
+
+  bind: function bind() {
+    if (!this.el.__vue__) {
+      // keep-alive cache
+      this.keepAlive = this.params.keepAlive;
+      if (this.keepAlive) {
+        this.cache = {};
+      }
+      // check inline-template
+      if (this.params.inlineTemplate) {
+        // extract inline template as a DocumentFragment
+        this.inlineTemplate = extractContent(this.el, true);
+      }
+      // component resolution related state
+      this.pendingComponentCb = this.Component = null;
+      // transition related state
+      this.pendingRemovals = 0;
+      this.pendingRemovalCb = null;
+      // create a ref anchor
+      this.anchor = createAnchor('v-component');
+      replace(this.el, this.anchor);
+      // remove is attribute.
+      // this is removed during compilation, but because compilation is
+      // cached, when the component is used elsewhere this attribute
+      // will remain at link time.
+      this.el.removeAttribute('is');
+      this.el.removeAttribute(':is');
+      // remove ref, same as above
+      if (this.descriptor.ref) {
+        this.el.removeAttribute('v-ref:' + hyphenate(this.descriptor.ref));
+      }
+      // if static, build right now.
+      if (this.literal) {
+        this.setComponent(this.expression);
+      }
+    } else {
+      process.env.NODE_ENV !== 'production' && warn('cannot mount component "' + this.expression + '" ' + 'on already mounted element: ' + this.el);
+    }
+  },
+
+  /**
+   * Public update, called by the watcher in the dynamic
+   * literal scenario, e.g. <component :is="view">
+   */
+
+  update: function update(value) {
+    if (!this.literal) {
+      this.setComponent(value);
+    }
+  },
+
+  /**
+   * Switch dynamic components. May resolve the component
+   * asynchronously, and perform transition based on
+   * specified transition mode. Accepts a few additional
+   * arguments specifically for vue-router.
+   *
+   * The callback is called when the full transition is
+   * finished.
+   *
+   * @param {String} value
+   * @param {Function} [cb]
+   */
+
+  setComponent: function setComponent(value, cb) {
+    this.invalidatePending();
+    if (!value) {
+      // just remove current
+      this.unbuild(true);
+      this.remove(this.childVM, cb);
+      this.childVM = null;
+    } else {
+      var self = this;
+      this.resolveComponent(value, function () {
+        self.mountComponent(cb);
+      });
+    }
+  },
+
+  /**
+   * Resolve the component constructor to use when creating
+   * the child vm.
+   *
+   * @param {String|Function} value
+   * @param {Function} cb
+   */
+
+  resolveComponent: function resolveComponent(value, cb) {
+    var self = this;
+    this.pendingComponentCb = cancellable(function (Component) {
+      self.ComponentName = Component.options.name || (typeof value === 'string' ? value : null);
+      self.Component = Component;
+      cb();
+    });
+    this.vm._resolveComponent(value, this.pendingComponentCb);
+  },
+
+  /**
+   * Create a new instance using the current constructor and
+   * replace the existing instance. This method doesn't care
+   * whether the new component and the old one are actually
+   * the same.
+   *
+   * @param {Function} [cb]
+   */
+
+  mountComponent: function mountComponent(cb) {
+    // actual mount
+    this.unbuild(true);
+    var self = this;
+    var activateHooks = this.Component.options.activate;
+    var cached = this.getCached();
+    var newComponent = this.build();
+    if (activateHooks && !cached) {
+      this.waitingFor = newComponent;
+      callActivateHooks(activateHooks, newComponent, function () {
+        if (self.waitingFor !== newComponent) {
+          return;
+        }
+        self.waitingFor = null;
+        self.transition(newComponent, cb);
+      });
+    } else {
+      // update ref for kept-alive component
+      if (cached) {
+        newComponent._updateRef();
+      }
+      this.transition(newComponent, cb);
+    }
+  },
+
+  /**
+   * When the component changes or unbinds before an async
+   * constructor is resolved, we need to invalidate its
+   * pending callback.
+   */
+
+  invalidatePending: function invalidatePending() {
+    if (this.pendingComponentCb) {
+      this.pendingComponentCb.cancel();
+      this.pendingComponentCb = null;
+    }
+  },
+
+  /**
+   * Instantiate/insert a new child vm.
+   * If keep alive and has cached instance, insert that
+   * instance; otherwise build a new one and cache it.
+   *
+   * @param {Object} [extraOptions]
+   * @return {Vue} - the created instance
+   */
+
+  build: function build(extraOptions) {
+    var cached = this.getCached();
+    if (cached) {
+      return cached;
+    }
+    if (this.Component) {
+      // default options
+      var options = {
+        name: this.ComponentName,
+        el: cloneNode(this.el),
+        template: this.inlineTemplate,
+        // make sure to add the child with correct parent
+        // if this is a transcluded component, its parent
+        // should be the transclusion host.
+        parent: this._host || this.vm,
+        // if no inline-template, then the compiled
+        // linker can be cached for better performance.
+        _linkerCachable: !this.inlineTemplate,
+        _ref: this.descriptor.ref,
+        _asComponent: true,
+        _isRouterView: this._isRouterView,
+        // if this is a transcluded component, context
+        // will be the common parent vm of this instance
+        // and its host.
+        _context: this.vm,
+        // if this is inside an inline v-for, the scope
+        // will be the intermediate scope created for this
+        // repeat fragment. this is used for linking props
+        // and container directives.
+        _scope: this._scope,
+        // pass in the owner fragment of this component.
+        // this is necessary so that the fragment can keep
+        // track of its contained components in order to
+        // call attach/detach hooks for them.
+        _frag: this._frag
+      };
+      // extra options
+      // in 1.0.0 this is used by vue-router only
+      /* istanbul ignore if */
+      if (extraOptions) {
+        extend(options, extraOptions);
+      }
+      var child = new this.Component(options);
+      if (this.keepAlive) {
+        this.cache[this.Component.cid] = child;
+      }
+      /* istanbul ignore if */
+      if (process.env.NODE_ENV !== 'production' && this.el.hasAttribute('transition') && child._isFragment) {
+        warn('Transitions will not work on a fragment instance. ' + 'Template: ' + child.$options.template, child);
+      }
+      return child;
+    }
+  },
+
+  /**
+   * Try to get a cached instance of the current component.
+   *
+   * @return {Vue|undefined}
+   */
+
+  getCached: function getCached() {
+    return this.keepAlive && this.cache[this.Component.cid];
+  },
+
+  /**
+   * Teardown the current child, but defers cleanup so
+   * that we can separate the destroy and removal steps.
+   *
+   * @param {Boolean} defer
+   */
+
+  unbuild: function unbuild(defer) {
+    if (this.waitingFor) {
+      if (!this.keepAlive) {
+        this.waitingFor.$destroy();
+      }
+      this.waitingFor = null;
+    }
+    var child = this.childVM;
+    if (!child || this.keepAlive) {
+      if (child) {
+        // remove ref
+        child._inactive = true;
+        child._updateRef(true);
+      }
+      return;
+    }
+    // the sole purpose of `deferCleanup` is so that we can
+    // "deactivate" the vm right now and perform DOM removal
+    // later.
+    child.$destroy(false, defer);
+  },
+
+  /**
+   * Remove current destroyed child and manually do
+   * the cleanup after removal.
+   *
+   * @param {Function} cb
+   */
+
+  remove: function remove(child, cb) {
+    var keepAlive = this.keepAlive;
+    if (child) {
+      // we may have a component switch when a previous
+      // component is still being transitioned out.
+      // we want to trigger only one lastest insertion cb
+      // when the existing transition finishes. (#1119)
+      this.pendingRemovals++;
+      this.pendingRemovalCb = cb;
+      var self = this;
+      child.$remove(function () {
+        self.pendingRemovals--;
+        if (!keepAlive) child._cleanup();
+        if (!self.pendingRemovals && self.pendingRemovalCb) {
+          self.pendingRemovalCb();
+          self.pendingRemovalCb = null;
+        }
+      });
+    } else if (cb) {
+      cb();
+    }
+  },
+
+  /**
+   * Actually swap the components, depending on the
+   * transition mode. Defaults to simultaneous.
+   *
+   * @param {Vue} target
+   * @param {Function} [cb]
+   */
+
+  transition: function transition(target, cb) {
+    var self = this;
+    var current = this.childVM;
+    // for devtool inspection
+    if (current) current._inactive = true;
+    target._inactive = false;
+    this.childVM = target;
+    switch (self.params.transitionMode) {
+      case 'in-out':
+        target.$before(self.anchor, function () {
+          self.remove(current, cb);
+        });
+        break;
+      case 'out-in':
+        self.remove(current, function () {
+          target.$before(self.anchor, cb);
+        });
+        break;
+      default:
+        self.remove(current);
+        target.$before(self.anchor, cb);
+    }
+  },
+
+  /**
+   * Unbind.
+   */
+
+  unbind: function unbind() {
+    this.invalidatePending();
+    // Do not defer cleanup when unbinding
+    this.unbuild();
+    // destroy all keep-alive cached instances
+    if (this.cache) {
+      for (var key in this.cache) {
+        this.cache[key].$destroy();
+      }
+      this.cache = null;
+    }
+  }
+};
+
+/**
+ * Call activate hooks in order (asynchronous)
+ *
+ * @param {Array} hooks
+ * @param {Vue} vm
+ * @param {Function} cb
+ */
+
+function callActivateHooks(hooks, vm, cb) {
+  var total = hooks.length;
+  var called = 0;
+  hooks[0].call(vm, next);
+  function next() {
+    if (++called >= total) {
+      cb();
+    } else {
+      hooks[called].call(vm, next);
+    }
+  }
+}
+
+var propBindingModes = config._propBindingModes;
+var empty = {};
+
+// regexes
+var identRE$1 = /^[$_a-zA-Z]+[\w$]*$/;
+var settablePathRE = /^[A-Za-z_$][\w$]*(\.[A-Za-z_$][\w$]*|\[[^\[\]]+\])*$/;
+
+/**
+ * Compile props on a root element and return
+ * a props link function.
+ *
+ * @param {Element|DocumentFragment} el
+ * @param {Array} propOptions
+ * @param {Vue} vm
+ * @return {Function} propsLinkFn
+ */
+
+function compileProps(el, propOptions, vm) {
+  var props = [];
+  var names = Object.keys(propOptions);
+  var i = names.length;
+  var options, name, attr, value, path, parsed, prop;
+  while (i--) {
+    name = names[i];
+    options = propOptions[name] || empty;
+
+    if (process.env.NODE_ENV !== 'production' && name === '$data') {
+      warn('Do not use $data as prop.', vm);
+      continue;
+    }
+
+    // props could contain dashes, which will be
+    // interpreted as minus calculations by the parser
+    // so we need to camelize the path here
+    path = camelize(name);
+    if (!identRE$1.test(path)) {
+      process.env.NODE_ENV !== 'production' && warn('Invalid prop key: "' + name + '". Prop keys ' + 'must be valid identifiers.', vm);
+      continue;
+    }
+
+    prop = {
+      name: name,
+      path: path,
+      options: options,
+      mode: propBindingModes.ONE_WAY,
+      raw: null
+    };
+
+    attr = hyphenate(name);
+    // first check dynamic version
+    if ((value = getBindAttr(el, attr)) === null) {
+      if ((value = getBindAttr(el, attr + '.sync')) !== null) {
+        prop.mode = propBindingModes.TWO_WAY;
+      } else if ((value = getBindAttr(el, attr + '.once')) !== null) {
+        prop.mode = propBindingModes.ONE_TIME;
+      }
+    }
+    if (value !== null) {
+      // has dynamic binding!
+      prop.raw = value;
+      parsed = parseDirective(value);
+      value = parsed.expression;
+      prop.filters = parsed.filters;
+      // check binding type
+      if (isLiteral(value) && !parsed.filters) {
+        // for expressions containing literal numbers and
+        // booleans, there's no need to setup a prop binding,
+        // so we can optimize them as a one-time set.
+        prop.optimizedLiteral = true;
+      } else {
+        prop.dynamic = true;
+        // check non-settable path for two-way bindings
+        if (process.env.NODE_ENV !== 'production' && prop.mode === propBindingModes.TWO_WAY && !settablePathRE.test(value)) {
+          prop.mode = propBindingModes.ONE_WAY;
+          warn('Cannot bind two-way prop with non-settable ' + 'parent path: ' + value, vm);
+        }
+      }
+      prop.parentPath = value;
+
+      // warn required two-way
+      if (process.env.NODE_ENV !== 'production' && options.twoWay && prop.mode !== propBindingModes.TWO_WAY) {
+        warn('Prop "' + name + '" expects a two-way binding type.', vm);
+      }
+    } else if ((value = getAttr(el, attr)) !== null) {
+      // has literal binding!
+      prop.raw = value;
+    } else if (process.env.NODE_ENV !== 'production') {
+      // check possible camelCase prop usage
+      var lowerCaseName = path.toLowerCase();
+      value = /[A-Z\-]/.test(name) && (el.getAttribute(lowerCaseName) || el.getAttribute(':' + lowerCaseName) || el.getAttribute('v-bind:' + lowerCaseName) || el.getAttribute(':' + lowerCaseName + '.once') || el.getAttribute('v-bind:' + lowerCaseName + '.once') || el.getAttribute(':' + lowerCaseName + '.sync') || el.getAttribute('v-bind:' + lowerCaseName + '.sync'));
+      if (value) {
+        warn('Possible usage error for prop `' + lowerCaseName + '` - ' + 'did you mean `' + attr + '`? HTML is case-insensitive, remember to use ' + 'kebab-case for props in templates.', vm);
+      } else if (options.required) {
+        // warn missing required
+        warn('Missing required prop: ' + name, vm);
+      }
+    }
+    // push prop
+    props.push(prop);
+  }
+  return makePropsLinkFn(props);
+}
+
+/**
+ * Build a function that applies props to a vm.
+ *
+ * @param {Array} props
+ * @return {Function} propsLinkFn
+ */
+
+function makePropsLinkFn(props) {
+  return function propsLinkFn(vm, scope) {
+    // store resolved props info
+    vm._props = {};
+    var inlineProps = vm.$options.propsData;
+    var i = props.length;
+    var prop, path, options, value, raw;
+    while (i--) {
+      prop = props[i];
+      raw = prop.raw;
+      path = prop.path;
+      options = prop.options;
+      vm._props[path] = prop;
+      if (inlineProps && hasOwn(inlineProps, path)) {
+        initProp(vm, prop, inlineProps[path]);
+      }if (raw === null) {
+        // initialize absent prop
+        initProp(vm, prop, undefined);
+      } else if (prop.dynamic) {
+        // dynamic prop
+        if (prop.mode === propBindingModes.ONE_TIME) {
+          // one time binding
+          value = (scope || vm._context || vm).$get(prop.parentPath);
+          initProp(vm, prop, value);
+        } else {
+          if (vm._context) {
+            // dynamic binding
+            vm._bindDir({
+              name: 'prop',
+              def: propDef,
+              prop: prop
+            }, null, null, scope); // el, host, scope
+          } else {
+              // root instance
+              initProp(vm, prop, vm.$get(prop.parentPath));
+            }
+        }
+      } else if (prop.optimizedLiteral) {
+        // optimized literal, cast it and just set once
+        var stripped = stripQuotes(raw);
+        value = stripped === raw ? toBoolean(toNumber(raw)) : stripped;
+        initProp(vm, prop, value);
+      } else {
+        // string literal, but we need to cater for
+        // Boolean props with no value, or with same
+        // literal value (e.g. disabled="disabled")
+        // see https://github.com/vuejs/vue-loader/issues/182
+        value = options.type === Boolean && (raw === '' || raw === hyphenate(prop.name)) ? true : raw;
+        initProp(vm, prop, value);
+      }
+    }
+  };
+}
+
+/**
+ * Process a prop with a rawValue, applying necessary coersions,
+ * default values & assertions and call the given callback with
+ * processed value.
+ *
+ * @param {Vue} vm
+ * @param {Object} prop
+ * @param {*} rawValue
+ * @param {Function} fn
+ */
+
+function processPropValue(vm, prop, rawValue, fn) {
+  var isSimple = prop.dynamic && isSimplePath(prop.parentPath);
+  var value = rawValue;
+  if (value === undefined) {
+    value = getPropDefaultValue(vm, prop);
+  }
+  value = coerceProp(prop, value, vm);
+  var coerced = value !== rawValue;
+  if (!assertProp(prop, value, vm)) {
+    value = undefined;
+  }
+  if (isSimple && !coerced) {
+    withoutConversion(function () {
+      fn(value);
+    });
+  } else {
+    fn(value);
+  }
+}
+
+/**
+ * Set a prop's initial value on a vm and its data object.
+ *
+ * @param {Vue} vm
+ * @param {Object} prop
+ * @param {*} value
+ */
+
+function initProp(vm, prop, value) {
+  processPropValue(vm, prop, value, function (value) {
+    defineReactive(vm, prop.path, value);
+  });
+}
+
+/**
+ * Update a prop's value on a vm.
+ *
+ * @param {Vue} vm
+ * @param {Object} prop
+ * @param {*} value
+ */
+
+function updateProp(vm, prop, value) {
+  processPropValue(vm, prop, value, function (value) {
+    vm[prop.path] = value;
+  });
+}
+
+/**
+ * Get the default value of a prop.
+ *
+ * @param {Vue} vm
+ * @param {Object} prop
+ * @return {*}
+ */
+
+function getPropDefaultValue(vm, prop) {
+  // no default, return undefined
+  var options = prop.options;
+  if (!hasOwn(options, 'default')) {
+    // absent boolean value defaults to false
+    return options.type === Boolean ? false : undefined;
+  }
+  var def = options['default'];
+  // warn against non-factory defaults for Object & Array
+  if (isObject(def)) {
+    process.env.NODE_ENV !== 'production' && warn('Invalid default value for prop "' + prop.name + '": ' + 'Props with type Object/Array must use a factory function ' + 'to return the default value.', vm);
+  }
+  // call factory function for non-Function types
+  return typeof def === 'function' && options.type !== Function ? def.call(vm) : def;
+}
+
+/**
+ * Assert whether a prop is valid.
+ *
+ * @param {Object} prop
+ * @param {*} value
+ * @param {Vue} vm
+ */
+
+function assertProp(prop, value, vm) {
+  if (!prop.options.required && ( // non-required
+  prop.raw === null || // abscent
+  value == null) // null or undefined
+  ) {
+      return true;
+    }
+  var options = prop.options;
+  var type = options.type;
+  var valid = !type;
+  var expectedTypes = [];
+  if (type) {
+    if (!isArray(type)) {
+      type = [type];
+    }
+    for (var i = 0; i < type.length && !valid; i++) {
+      var assertedType = assertType(value, type[i]);
+      expectedTypes.push(assertedType.expectedType);
+      valid = assertedType.valid;
+    }
+  }
+  if (!valid) {
+    if (process.env.NODE_ENV !== 'production') {
+      warn('Invalid prop: type check failed for prop "' + prop.name + '".' + ' Expected ' + expectedTypes.map(formatType).join(', ') + ', got ' + formatValue(value) + '.', vm);
+    }
+    return false;
+  }
+  var validator = options.validator;
+  if (validator) {
+    if (!validator(value)) {
+      process.env.NODE_ENV !== 'production' && warn('Invalid prop: custom validator check failed for prop "' + prop.name + '".', vm);
+      return false;
+    }
+  }
+  return true;
+}
+
+/**
+ * Force parsing value with coerce option.
+ *
+ * @param {*} value
+ * @param {Object} options
+ * @return {*}
+ */
+
+function coerceProp(prop, value, vm) {
+  var coerce = prop.options.coerce;
+  if (!coerce) {
+    return value;
+  }
+  if (typeof coerce === 'function') {
+    return coerce(value);
+  } else {
+    process.env.NODE_ENV !== 'production' && warn('Invalid coerce for prop "' + prop.name + '": expected function, got ' + typeof coerce + '.', vm);
+    return value;
+  }
+}
+
+/**
+ * Assert the type of a value
+ *
+ * @param {*} value
+ * @param {Function} type
+ * @return {Object}
+ */
+
+function assertType(value, type) {
+  var valid;
+  var expectedType;
+  if (type === String) {
+    expectedType = 'string';
+    valid = typeof value === expectedType;
+  } else if (type === Number) {
+    expectedType = 'number';
+    valid = typeof value === expectedType;
+  } else if (type === Boolean) {
+    expectedType = 'boolean';
+    valid = typeof value === expectedType;
+  } else if (type === Function) {
+    expectedType = 'function';
+    valid = typeof value === expectedType;
+  } else if (type === Object) {
+    expectedType = 'object';
+    valid = isPlainObject(value);
+  } else if (type === Array) {
+    expectedType = 'array';
+    valid = isArray(value);
+  } else {
+    valid = value instanceof type;
+  }
+  return {
+    valid: valid,
+    expectedType: expectedType
+  };
+}
+
+/**
+ * Format type for output
+ *
+ * @param {String} type
+ * @return {String}
+ */
+
+function formatType(type) {
+  return type ? type.charAt(0).toUpperCase() + type.slice(1) : 'custom type';
+}
+
+/**
+ * Format value
+ *
+ * @param {*} value
+ * @return {String}
+ */
+
+function formatValue(val) {
+  return Object.prototype.toString.call(val).slice(8, -1);
+}
+
+var bindingModes = config._propBindingModes;
+
+var propDef = {
+
+  bind: function bind() {
+    var child = this.vm;
+    var parent = child._context;
+    // passed in from compiler directly
+    var prop = this.descriptor.prop;
+    var childKey = prop.path;
+    var parentKey = prop.parentPath;
+    var twoWay = prop.mode === bindingModes.TWO_WAY;
+
+    var parentWatcher = this.parentWatcher = new Watcher(parent, parentKey, function (val) {
+      updateProp(child, prop, val);
+    }, {
+      twoWay: twoWay,
+      filters: prop.filters,
+      // important: props need to be observed on the
+      // v-for scope if present
+      scope: this._scope
+    });
+
+    // set the child initial value.
+    initProp(child, prop, parentWatcher.value);
+
+    // setup two-way binding
+    if (twoWay) {
+      // important: defer the child watcher creation until
+      // the created hook (after data observation)
+      var self = this;
+      child.$once('pre-hook:created', function () {
+        self.childWatcher = new Watcher(child, childKey, function (val) {
+          parentWatcher.set(val);
+        }, {
+          // ensure sync upward before parent sync down.
+          // this is necessary in cases e.g. the child
+          // mutates a prop array, then replaces it. (#1683)
+          sync: true
+        });
+      });
+    }
+  },
+
+  unbind: function unbind() {
+    this.parentWatcher.teardown();
+    if (this.childWatcher) {
+      this.childWatcher.teardown();
+    }
+  }
+};
+
+var queue$1 = [];
+var queued = false;
+
+/**
+ * Push a job into the queue.
+ *
+ * @param {Function} job
+ */
+
+function pushJob(job) {
+  queue$1.push(job);
+  if (!queued) {
+    queued = true;
+    nextTick(flush);
+  }
+}
+
+/**
+ * Flush the queue, and do one forced reflow before
+ * triggering transitions.
+ */
+
+function flush() {
+  // Force layout
+  var f = document.documentElement.offsetHeight;
+  for (var i = 0; i < queue$1.length; i++) {
+    queue$1[i]();
+  }
+  queue$1 = [];
+  queued = false;
+  // dummy return, so js linters don't complain about
+  // unused variable f
+  return f;
+}
+
+var TYPE_TRANSITION = 'transition';
+var TYPE_ANIMATION = 'animation';
+var transDurationProp = transitionProp + 'Duration';
+var animDurationProp = animationProp + 'Duration';
+
+/**
+ * If a just-entered element is applied the
+ * leave class while its enter transition hasn't started yet,
+ * and the transitioned property has the same value for both
+ * enter/leave, then the leave transition will be skipped and
+ * the transitionend event never fires. This function ensures
+ * its callback to be called after a transition has started
+ * by waiting for double raf.
+ *
+ * It falls back to setTimeout on devices that support CSS
+ * transitions but not raf (e.g. Android 4.2 browser) - since
+ * these environments are usually slow, we are giving it a
+ * relatively large timeout.
+ */
+
+var raf = inBrowser && window.requestAnimationFrame;
+var waitForTransitionStart = raf
+/* istanbul ignore next */
+? function (fn) {
+  raf(function () {
+    raf(fn);
+  });
+} : function (fn) {
+  setTimeout(fn, 50);
+};
+
+/**
+ * A Transition object that encapsulates the state and logic
+ * of the transition.
+ *
+ * @param {Element} el
+ * @param {String} id
+ * @param {Object} hooks
+ * @param {Vue} vm
+ */
+function Transition(el, id, hooks, vm) {
+  this.id = id;
+  this.el = el;
+  this.enterClass = hooks && hooks.enterClass || id + '-enter';
+  this.leaveClass = hooks && hooks.leaveClass || id + '-leave';
+  this.hooks = hooks;
+  this.vm = vm;
+  // async state
+  this.pendingCssEvent = this.pendingCssCb = this.cancel = this.pendingJsCb = this.op = this.cb = null;
+  this.justEntered = false;
+  this.entered = this.left = false;
+  this.typeCache = {};
+  // check css transition type
+  this.type = hooks && hooks.type;
+  /* istanbul ignore if */
+  if (process.env.NODE_ENV !== 'production') {
+    if (this.type && this.type !== TYPE_TRANSITION && this.type !== TYPE_ANIMATION) {
+      warn('invalid CSS transition type for transition="' + this.id + '": ' + this.type, vm);
+    }
+  }
+  // bind
+  var self = this;['enterNextTick', 'enterDone', 'leaveNextTick', 'leaveDone'].forEach(function (m) {
+    self[m] = bind(self[m], self);
+  });
+}
+
+var p$1 = Transition.prototype;
+
+/**
+ * Start an entering transition.
+ *
+ * 1. enter transition triggered
+ * 2. call beforeEnter hook
+ * 3. add enter class
+ * 4. insert/show element
+ * 5. call enter hook (with possible explicit js callback)
+ * 6. reflow
+ * 7. based on transition type:
+ *    - transition:
+ *        remove class now, wait for transitionend,
+ *        then done if there's no explicit js callback.
+ *    - animation:
+ *        wait for animationend, remove class,
+ *        then done if there's no explicit js callback.
+ *    - no css transition:
+ *        done now if there's no explicit js callback.
+ * 8. wait for either done or js callback, then call
+ *    afterEnter hook.
+ *
+ * @param {Function} op - insert/show the element
+ * @param {Function} [cb]
+ */
+
+p$1.enter = function (op, cb) {
+  this.cancelPending();
+  this.callHook('beforeEnter');
+  this.cb = cb;
+  addClass(this.el, this.enterClass);
+  op();
+  this.entered = false;
+  this.callHookWithCb('enter');
+  if (this.entered) {
+    return; // user called done synchronously.
+  }
+  this.cancel = this.hooks && this.hooks.enterCancelled;
+  pushJob(this.enterNextTick);
+};
+
+/**
+ * The "nextTick" phase of an entering transition, which is
+ * to be pushed into a queue and executed after a reflow so
+ * that removing the class can trigger a CSS transition.
+ */
+
+p$1.enterNextTick = function () {
+  var _this = this;
+
+  // prevent transition skipping
+  this.justEntered = true;
+  waitForTransitionStart(function () {
+    _this.justEntered = false;
+  });
+  var enterDone = this.enterDone;
+  var type = this.getCssTransitionType(this.enterClass);
+  if (!this.pendingJsCb) {
+    if (type === TYPE_TRANSITION) {
+      // trigger transition by removing enter class now
+      removeClass(this.el, this.enterClass);
+      this.setupCssCb(transitionEndEvent, enterDone);
+    } else if (type === TYPE_ANIMATION) {
+      this.setupCssCb(animationEndEvent, enterDone);
+    } else {
+      enterDone();
+    }
+  } else if (type === TYPE_TRANSITION) {
+    removeClass(this.el, this.enterClass);
+  }
+};
+
+/**
+ * The "cleanup" phase of an entering transition.
+ */
+
+p$1.enterDone = function () {
+  this.entered = true;
+  this.cancel = this.pendingJsCb = null;
+  removeClass(this.el, this.enterClass);
+  this.callHook('afterEnter');
+  if (this.cb) this.cb();
+};
+
+/**
+ * Start a leaving transition.
+ *
+ * 1. leave transition triggered.
+ * 2. call beforeLeave hook
+ * 3. add leave class (trigger css transition)
+ * 4. call leave hook (with possible explicit js callback)
+ * 5. reflow if no explicit js callback is provided
+ * 6. based on transition type:
+ *    - transition or animation:
+ *        wait for end event, remove class, then done if
+ *        there's no explicit js callback.
+ *    - no css transition:
+ *        done if there's no explicit js callback.
+ * 7. wait for either done or js callback, then call
+ *    afterLeave hook.
+ *
+ * @param {Function} op - remove/hide the element
+ * @param {Function} [cb]
+ */
+
+p$1.leave = function (op, cb) {
+  this.cancelPending();
+  this.callHook('beforeLeave');
+  this.op = op;
+  this.cb = cb;
+  addClass(this.el, this.leaveClass);
+  this.left = false;
+  this.callHookWithCb('leave');
+  if (this.left) {
+    return; // user called done synchronously.
+  }
+  this.cancel = this.hooks && this.hooks.leaveCancelled;
+  // only need to handle leaveDone if
+  // 1. the transition is already done (synchronously called
+  //    by the user, which causes this.op set to null)
+  // 2. there's no explicit js callback
+  if (this.op && !this.pendingJsCb) {
+    // if a CSS transition leaves immediately after enter,
+    // the transitionend event never fires. therefore we
+    // detect such cases and end the leave immediately.
+    if (this.justEntered) {
+      this.leaveDone();
+    } else {
+      pushJob(this.leaveNextTick);
+    }
+  }
+};
+
+/**
+ * The "nextTick" phase of a leaving transition.
+ */
+
+p$1.leaveNextTick = function () {
+  var type = this.getCssTransitionType(this.leaveClass);
+  if (type) {
+    var event = type === TYPE_TRANSITION ? transitionEndEvent : animationEndEvent;
+    this.setupCssCb(event, this.leaveDone);
+  } else {
+    this.leaveDone();
+  }
+};
+
+/**
+ * The "cleanup" phase of a leaving transition.
+ */
+
+p$1.leaveDone = function () {
+  this.left = true;
+  this.cancel = this.pendingJsCb = null;
+  this.op();
+  removeClass(this.el, this.leaveClass);
+  this.callHook('afterLeave');
+  if (this.cb) this.cb();
+  this.op = null;
+};
+
+/**
+ * Cancel any pending callbacks from a previously running
+ * but not finished transition.
+ */
+
+p$1.cancelPending = function () {
+  this.op = this.cb = null;
+  var hasPending = false;
+  if (this.pendingCssCb) {
+    hasPending = true;
+    off(this.el, this.pendingCssEvent, this.pendingCssCb);
+    this.pendingCssEvent = this.pendingCssCb = null;
+  }
+  if (this.pendingJsCb) {
+    hasPending = true;
+    this.pendingJsCb.cancel();
+    this.pendingJsCb = null;
+  }
+  if (hasPending) {
+    removeClass(this.el, this.enterClass);
+    removeClass(this.el, this.leaveClass);
+  }
+  if (this.cancel) {
+    this.cancel.call(this.vm, this.el);
+    this.cancel = null;
+  }
+};
+
+/**
+ * Call a user-provided synchronous hook function.
+ *
+ * @param {String} type
+ */
+
+p$1.callHook = function (type) {
+  if (this.hooks && this.hooks[type]) {
+    this.hooks[type].call(this.vm, this.el);
+  }
+};
+
+/**
+ * Call a user-provided, potentially-async hook function.
+ * We check for the length of arguments to see if the hook
+ * expects a `done` callback. If true, the transition's end
+ * will be determined by when the user calls that callback;
+ * otherwise, the end is determined by the CSS transition or
+ * animation.
+ *
+ * @param {String} type
+ */
+
+p$1.callHookWithCb = function (type) {
+  var hook = this.hooks && this.hooks[type];
+  if (hook) {
+    if (hook.length > 1) {
+      this.pendingJsCb = cancellable(this[type + 'Done']);
+    }
+    hook.call(this.vm, this.el, this.pendingJsCb);
+  }
+};
+
+/**
+ * Get an element's transition type based on the
+ * calculated styles.
+ *
+ * @param {String} className
+ * @return {Number}
+ */
+
+p$1.getCssTransitionType = function (className) {
+  /* istanbul ignore if */
+  if (!transitionEndEvent ||
+  // skip CSS transitions if page is not visible -
+  // this solves the issue of transitionend events not
+  // firing until the page is visible again.
+  // pageVisibility API is supported in IE10+, same as
+  // CSS transitions.
+  document.hidden ||
+  // explicit js-only transition
+  this.hooks && this.hooks.css === false ||
+  // element is hidden
+  isHidden(this.el)) {
+    return;
+  }
+  var type = this.type || this.typeCache[className];
+  if (type) return type;
+  var inlineStyles = this.el.style;
+  var computedStyles = window.getComputedStyle(this.el);
+  var transDuration = inlineStyles[transDurationProp] || computedStyles[transDurationProp];
+  if (transDuration && transDuration !== '0s') {
+    type = TYPE_TRANSITION;
+  } else {
+    var animDuration = inlineStyles[animDurationProp] || computedStyles[animDurationProp];
+    if (animDuration && animDuration !== '0s') {
+      type = TYPE_ANIMATION;
+    }
+  }
+  if (type) {
+    this.typeCache[className] = type;
+  }
+  return type;
+};
+
+/**
+ * Setup a CSS transitionend/animationend callback.
+ *
+ * @param {String} event
+ * @param {Function} cb
+ */
+
+p$1.setupCssCb = function (event, cb) {
+  this.pendingCssEvent = event;
+  var self = this;
+  var el = this.el;
+  var onEnd = this.pendingCssCb = function (e) {
+    if (e.target === el) {
+      off(el, event, onEnd);
+      self.pendingCssEvent = self.pendingCssCb = null;
+      if (!self.pendingJsCb && cb) {
+        cb();
+      }
+    }
+  };
+  on(el, event, onEnd);
+};
+
+/**
+ * Check if an element is hidden - in that case we can just
+ * skip the transition alltogether.
+ *
+ * @param {Element} el
+ * @return {Boolean}
+ */
+
+function isHidden(el) {
+  if (/svg$/.test(el.namespaceURI)) {
+    // SVG elements do not have offset(Width|Height)
+    // so we need to check the client rect
+    var rect = el.getBoundingClientRect();
+    return !(rect.width || rect.height);
+  } else {
+    return !(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+  }
+}
+
+var transition$1 = {
+
+  priority: TRANSITION,
+
+  update: function update(id, oldId) {
+    var el = this.el;
+    // resolve on owner vm
+    var hooks = resolveAsset(this.vm.$options, 'transitions', id);
+    id = id || 'v';
+    oldId = oldId || 'v';
+    el.__v_trans = new Transition(el, id, hooks, this.vm);
+    removeClass(el, oldId + '-transition');
+    addClass(el, id + '-transition');
+  }
+};
+
+var internalDirectives = {
+  style: style,
+  'class': vClass,
+  component: component,
+  prop: propDef,
+  transition: transition$1
+};
+
+// special binding prefixes
+var bindRE = /^v-bind:|^:/;
+var onRE = /^v-on:|^@/;
+var dirAttrRE = /^v-([^:]+)(?:$|:(.*)$)/;
+var modifierRE = /\.[^\.]+/g;
+var transitionRE = /^(v-bind:|:)?transition$/;
+
+// default directive priority
+var DEFAULT_PRIORITY = 1000;
+var DEFAULT_TERMINAL_PRIORITY = 2000;
+
+/**
+ * Compile a template and return a reusable composite link
+ * function, which recursively contains more link functions
+ * inside. This top level compile function would normally
+ * be called on instance root nodes, but can also be used
+ * for partial compilation if the partial argument is true.
+ *
+ * The returned composite link function, when called, will
+ * return an unlink function that tearsdown all directives
+ * created during the linking phase.
+ *
+ * @param {Element|DocumentFragment} el
+ * @param {Object} options
+ * @param {Boolean} partial
+ * @return {Function}
+ */
+
+function compile(el, options, partial) {
+  // link function for the node itself.
+  var nodeLinkFn = partial || !options._asComponent ? compileNode(el, options) : null;
+  // link function for the childNodes
+  var childLinkFn = !(nodeLinkFn && nodeLinkFn.terminal) && !isScript(el) && el.hasChildNodes() ? compileNodeList(el.childNodes, options) : null;
+
+  /**
+   * A composite linker function to be called on a already
+   * compiled piece of DOM, which instantiates all directive
+   * instances.
+   *
+   * @param {Vue} vm
+   * @param {Element|DocumentFragment} el
+   * @param {Vue} [host] - host vm of transcluded content
+   * @param {Object} [scope] - v-for scope
+   * @param {Fragment} [frag] - link context fragment
+   * @return {Function|undefined}
+   */
+
+  return function compositeLinkFn(vm, el, host, scope, frag) {
+    // cache childNodes before linking parent, fix #657
+    var childNodes = toArray(el.childNodes);
+    // link
+    var dirs = linkAndCapture(function compositeLinkCapturer() {
+      if (nodeLinkFn) nodeLinkFn(vm, el, host, scope, frag);
+      if (childLinkFn) childLinkFn(vm, childNodes, host, scope, frag);
+    }, vm);
+    return makeUnlinkFn(vm, dirs);
+  };
+}
+
+/**
+ * Apply a linker to a vm/element pair and capture the
+ * directives created during the process.
+ *
+ * @param {Function} linker
+ * @param {Vue} vm
+ */
+
+function linkAndCapture(linker, vm) {
+  /* istanbul ignore if */
+  if (process.env.NODE_ENV === 'production') {
+    // reset directives before every capture in production
+    // mode, so that when unlinking we don't need to splice
+    // them out (which turns out to be a perf hit).
+    // they are kept in development mode because they are
+    // useful for Vue's own tests.
+    vm._directives = [];
+  }
+  var originalDirCount = vm._directives.length;
+  linker();
+  var dirs = vm._directives.slice(originalDirCount);
+  dirs.sort(directiveComparator);
+  for (var i = 0, l = dirs.length; i < l; i++) {
+    dirs[i]._bind();
+  }
+  return dirs;
+}
+
+/**
+ * Directive priority sort comparator
+ *
+ * @param {Object} a
+ * @param {Object} b
+ */
+
+function directiveComparator(a, b) {
+  a = a.descriptor.def.priority || DEFAULT_PRIORITY;
+  b = b.descriptor.def.priority || DEFAULT_PRIORITY;
+  return a > b ? -1 : a === b ? 0 : 1;
+}
+
+/**
+ * Linker functions return an unlink function that
+ * tearsdown all directives instances generated during
+ * the process.
+ *
+ * We create unlink functions with only the necessary
+ * information to avoid retaining additional closures.
+ *
+ * @param {Vue} vm
+ * @param {Array} dirs
+ * @param {Vue} [context]
+ * @param {Array} [contextDirs]
+ * @return {Function}
+ */
+
+function makeUnlinkFn(vm, dirs, context, contextDirs) {
+  function unlink(destroying) {
+    teardownDirs(vm, dirs, destroying);
+    if (context && contextDirs) {
+      teardownDirs(context, contextDirs);
+    }
+  }
+  // expose linked directives
+  unlink.dirs = dirs;
+  return unlink;
+}
+
+/**
+ * Teardown partial linked directives.
+ *
+ * @param {Vue} vm
+ * @param {Array} dirs
+ * @param {Boolean} destroying
+ */
+
+function teardownDirs(vm, dirs, destroying) {
+  var i = dirs.length;
+  while (i--) {
+    dirs[i]._teardown();
+    if (process.env.NODE_ENV !== 'production' && !destroying) {
+      vm._directives.$remove(dirs[i]);
+    }
+  }
+}
+
+/**
+ * Compile link props on an instance.
+ *
+ * @param {Vue} vm
+ * @param {Element} el
+ * @param {Object} props
+ * @param {Object} [scope]
+ * @return {Function}
+ */
+
+function compileAndLinkProps(vm, el, props, scope) {
+  var propsLinkFn = compileProps(el, props, vm);
+  var propDirs = linkAndCapture(function () {
+    propsLinkFn(vm, scope);
+  }, vm);
+  return makeUnlinkFn(vm, propDirs);
+}
+
+/**
+ * Compile the root element of an instance.
+ *
+ * 1. attrs on context container (context scope)
+ * 2. attrs on the component template root node, if
+ *    replace:true (child scope)
+ *
+ * If this is a fragment instance, we only need to compile 1.
+ *
+ * @param {Element} el
+ * @param {Object} options
+ * @param {Object} contextOptions
+ * @return {Function}
+ */
+
+function compileRoot(el, options, contextOptions) {
+  var containerAttrs = options._containerAttrs;
+  var replacerAttrs = options._replacerAttrs;
+  var contextLinkFn, replacerLinkFn;
+
+  // only need to compile other attributes for
+  // non-fragment instances
+  if (el.nodeType !== 11) {
+    // for components, container and replacer need to be
+    // compiled separately and linked in different scopes.
+    if (options._asComponent) {
+      // 2. container attributes
+      if (containerAttrs && contextOptions) {
+        contextLinkFn = compileDirectives(containerAttrs, contextOptions);
+      }
+      if (replacerAttrs) {
+        // 3. replacer attributes
+        replacerLinkFn = compileDirectives(replacerAttrs, options);
+      }
+    } else {
+      // non-component, just compile as a normal element.
+      replacerLinkFn = compileDirectives(el.attributes, options);
+    }
+  } else if (process.env.NODE_ENV !== 'production' && containerAttrs) {
+    // warn container directives for fragment instances
+    var names = containerAttrs.filter(function (attr) {
+      // allow vue-loader/vueify scoped css attributes
+      return attr.name.indexOf('_v-') < 0 &&
+      // allow event listeners
+      !onRE.test(attr.name) &&
+      // allow slots
+      attr.name !== 'slot';
+    }).map(function (attr) {
+      return '"' + attr.name + '"';
+    });
+    if (names.length) {
+      var plural = names.length > 1;
+      warn('Attribute' + (plural ? 's ' : ' ') + names.join(', ') + (plural ? ' are' : ' is') + ' ignored on component ' + '<' + options.el.tagName.toLowerCase() + '> because ' + 'the component is a fragment instance: ' + 'http://vuejs.org/guide/components.html#Fragment-Instance');
+    }
+  }
+
+  options._containerAttrs = options._replacerAttrs = null;
+  return function rootLinkFn(vm, el, scope) {
+    // link context scope dirs
+    var context = vm._context;
+    var contextDirs;
+    if (context && contextLinkFn) {
+      contextDirs = linkAndCapture(function () {
+        contextLinkFn(context, el, null, scope);
+      }, context);
+    }
+
+    // link self
+    var selfDirs = linkAndCapture(function () {
+      if (replacerLinkFn) replacerLinkFn(vm, el);
+    }, vm);
+
+    // return the unlink function that tearsdown context
+    // container directives.
+    return makeUnlinkFn(vm, selfDirs, context, contextDirs);
+  };
+}
+
+/**
+ * Compile a node and return a nodeLinkFn based on the
+ * node type.
+ *
+ * @param {Node} node
+ * @param {Object} options
+ * @return {Function|null}
+ */
+
+function compileNode(node, options) {
+  var type = node.nodeType;
+  if (type === 1 && !isScript(node)) {
+    return compileElement(node, options);
+  } else if (type === 3 && node.data.trim()) {
+    return compileTextNode(node, options);
+  } else {
+    return null;
+  }
+}
+
+/**
+ * Compile an element and return a nodeLinkFn.
+ *
+ * @param {Element} el
+ * @param {Object} options
+ * @return {Function|null}
+ */
+
+function compileElement(el, options) {
+  // preprocess textareas.
+  // textarea treats its text content as the initial value.
+  // just bind it as an attr directive for value.
+  if (el.tagName === 'TEXTAREA') {
+    var tokens = parseText(el.value);
+    if (tokens) {
+      el.setAttribute(':value', tokensToExp(tokens));
+      el.value = '';
+    }
+  }
+  var linkFn;
+  var hasAttrs = el.hasAttributes();
+  var attrs = hasAttrs && toArray(el.attributes);
+  // check terminal directives (for & if)
+  if (hasAttrs) {
+    linkFn = checkTerminalDirectives(el, attrs, options);
+  }
+  // check element directives
+  if (!linkFn) {
+    linkFn = checkElementDirectives(el, options);
+  }
+  // check component
+  if (!linkFn) {
+    linkFn = checkComponent(el, options);
+  }
+  // normal directives
+  if (!linkFn && hasAttrs) {
+    linkFn = compileDirectives(attrs, options);
+  }
+  return linkFn;
+}
+
+/**
+ * Compile a textNode and return a nodeLinkFn.
+ *
+ * @param {TextNode} node
+ * @param {Object} options
+ * @return {Function|null} textNodeLinkFn
+ */
+
+function compileTextNode(node, options) {
+  // skip marked text nodes
+  if (node._skip) {
+    return removeText;
+  }
+
+  var tokens = parseText(node.wholeText);
+  if (!tokens) {
+    return null;
+  }
+
+  // mark adjacent text nodes as skipped,
+  // because we are using node.wholeText to compile
+  // all adjacent text nodes together. This fixes
+  // issues in IE where sometimes it splits up a single
+  // text node into multiple ones.
+  var next = node.nextSibling;
+  while (next && next.nodeType === 3) {
+    next._skip = true;
+    next = next.nextSibling;
+  }
+
+  var frag = document.createDocumentFragment();
+  var el, token;
+  for (var i = 0, l = tokens.length; i < l; i++) {
+    token = tokens[i];
+    el = token.tag ? processTextToken(token, options) : document.createTextNode(token.value);
+    frag.appendChild(el);
+  }
+  return makeTextNodeLinkFn(tokens, frag, options);
+}
+
+/**
+ * Linker for an skipped text node.
+ *
+ * @param {Vue} vm
+ * @param {Text} node
+ */
+
+function removeText(vm, node) {
+  remove(node);
+}
+
+/**
+ * Process a single text token.
+ *
+ * @param {Object} token
+ * @param {Object} options
+ * @return {Node}
+ */
+
+function processTextToken(token, options) {
+  var el;
+  if (token.oneTime) {
+    el = document.createTextNode(token.value);
+  } else {
+    if (token.html) {
+      el = document.createComment('v-html');
+      setTokenType('html');
+    } else {
+      // IE will clean up empty textNodes during
+      // frag.cloneNode(true), so we have to give it
+      // something here...
+      el = document.createTextNode(' ');
+      setTokenType('text');
+    }
+  }
+  function setTokenType(type) {
+    if (token.descriptor) return;
+    var parsed = parseDirective(token.value);
+    token.descriptor = {
+      name: type,
+      def: directives[type],
+      expression: parsed.expression,
+      filters: parsed.filters
+    };
+  }
+  return el;
+}
+
+/**
+ * Build a function that processes a textNode.
+ *
+ * @param {Array<Object>} tokens
+ * @param {DocumentFragment} frag
+ */
+
+function makeTextNodeLinkFn(tokens, frag) {
+  return function textNodeLinkFn(vm, el, host, scope) {
+    var fragClone = frag.cloneNode(true);
+    var childNodes = toArray(fragClone.childNodes);
+    var token, value, node;
+    for (var i = 0, l = tokens.length; i < l; i++) {
+      token = tokens[i];
+      value = token.value;
+      if (token.tag) {
+        node = childNodes[i];
+        if (token.oneTime) {
+          value = (scope || vm).$eval(value);
+          if (token.html) {
+            replace(node, parseTemplate(value, true));
+          } else {
+            node.data = _toString(value);
+          }
+        } else {
+          vm._bindDir(token.descriptor, node, host, scope);
+        }
+      }
+    }
+    replace(el, fragClone);
+  };
+}
+
+/**
+ * Compile a node list and return a childLinkFn.
+ *
+ * @param {NodeList} nodeList
+ * @param {Object} options
+ * @return {Function|undefined}
+ */
+
+function compileNodeList(nodeList, options) {
+  var linkFns = [];
+  var nodeLinkFn, childLinkFn, node;
+  for (var i = 0, l = nodeList.length; i < l; i++) {
+    node = nodeList[i];
+    nodeLinkFn = compileNode(node, options);
+    childLinkFn = !(nodeLinkFn && nodeLinkFn.terminal) && node.tagName !== 'SCRIPT' && node.hasChildNodes() ? compileNodeList(node.childNodes, options) : null;
+    linkFns.push(nodeLinkFn, childLinkFn);
+  }
+  return linkFns.length ? makeChildLinkFn(linkFns) : null;
+}
+
+/**
+ * Make a child link function for a node's childNodes.
+ *
+ * @param {Array<Function>} linkFns
+ * @return {Function} childLinkFn
+ */
+
+function makeChildLinkFn(linkFns) {
+  return function childLinkFn(vm, nodes, host, scope, frag) {
+    var node, nodeLinkFn, childrenLinkFn;
+    for (var i = 0, n = 0, l = linkFns.length; i < l; n++) {
+      node = nodes[n];
+      nodeLinkFn = linkFns[i++];
+      childrenLinkFn = linkFns[i++];
+      // cache childNodes before linking parent, fix #657
+      var childNodes = toArray(node.childNodes);
+      if (nodeLinkFn) {
+        nodeLinkFn(vm, node, host, scope, frag);
+      }
+      if (childrenLinkFn) {
+        childrenLinkFn(vm, childNodes, host, scope, frag);
+      }
+    }
+  };
+}
+
+/**
+ * Check for element directives (custom elements that should
+ * be resovled as terminal directives).
+ *
+ * @param {Element} el
+ * @param {Object} options
+ */
+
+function checkElementDirectives(el, options) {
+  var tag = el.tagName.toLowerCase();
+  if (commonTagRE.test(tag)) {
+    return;
+  }
+  var def = resolveAsset(options, 'elementDirectives', tag);
+  if (def) {
+    return makeTerminalNodeLinkFn(el, tag, '', options, def);
+  }
+}
+
+/**
+ * Check if an element is a component. If yes, return
+ * a component link function.
+ *
+ * @param {Element} el
+ * @param {Object} options
+ * @return {Function|undefined}
+ */
+
+function checkComponent(el, options) {
+  var component = checkComponentAttr(el, options);
+  if (component) {
+    var ref = findRef(el);
+    var descriptor = {
+      name: 'component',
+      ref: ref,
+      expression: component.id,
+      def: internalDirectives.component,
+      modifiers: {
+        literal: !component.dynamic
+      }
+    };
+    var componentLinkFn = function componentLinkFn(vm, el, host, scope, frag) {
+      if (ref) {
+        defineReactive((scope || vm).$refs, ref, null);
+      }
+      vm._bindDir(descriptor, el, host, scope, frag);
+    };
+    componentLinkFn.terminal = true;
+    return componentLinkFn;
+  }
+}
+
+/**
+ * Check an element for terminal directives in fixed order.
+ * If it finds one, return a terminal link function.
+ *
+ * @param {Element} el
+ * @param {Array} attrs
+ * @param {Object} options
+ * @return {Function} terminalLinkFn
+ */
+
+function checkTerminalDirectives(el, attrs, options) {
+  // skip v-pre
+  if (getAttr(el, 'v-pre') !== null) {
+    return skip;
+  }
+  // skip v-else block, but only if following v-if
+  if (el.hasAttribute('v-else')) {
+    var prev = el.previousElementSibling;
+    if (prev && prev.hasAttribute('v-if')) {
+      return skip;
+    }
+  }
+
+  var attr, name, value, modifiers, matched, dirName, rawName, arg, def, termDef;
+  for (var i = 0, j = attrs.length; i < j; i++) {
+    attr = attrs[i];
+    name = attr.name.replace(modifierRE, '');
+    if (matched = name.match(dirAttrRE)) {
+      def = resolveAsset(options, 'directives', matched[1]);
+      if (def && def.terminal) {
+        if (!termDef || (def.priority || DEFAULT_TERMINAL_PRIORITY) > termDef.priority) {
+          termDef = def;
+          rawName = attr.name;
+          modifiers = parseModifiers(attr.name);
+          value = attr.value;
+          dirName = matched[1];
+          arg = matched[2];
+        }
+      }
+    }
+  }
+
+  if (termDef) {
+    return makeTerminalNodeLinkFn(el, dirName, value, options, termDef, rawName, arg, modifiers);
+  }
+}
+
+function skip() {}
+skip.terminal = true;
+
+/**
+ * Build a node link function for a terminal directive.
+ * A terminal link function terminates the current
+ * compilation recursion and handles compilation of the
+ * subtree in the directive.
+ *
+ * @param {Element} el
+ * @param {String} dirName
+ * @param {String} value
+ * @param {Object} options
+ * @param {Object} def
+ * @param {String} [rawName]
+ * @param {String} [arg]
+ * @param {Object} [modifiers]
+ * @return {Function} terminalLinkFn
+ */
+
+function makeTerminalNodeLinkFn(el, dirName, value, options, def, rawName, arg, modifiers) {
+  var parsed = parseDirective(value);
+  var descriptor = {
+    name: dirName,
+    arg: arg,
+    expression: parsed.expression,
+    filters: parsed.filters,
+    raw: value,
+    attr: rawName,
+    modifiers: modifiers,
+    def: def
+  };
+  // check ref for v-for and router-view
+  if (dirName === 'for' || dirName === 'router-view') {
+    descriptor.ref = findRef(el);
+  }
+  var fn = function terminalNodeLinkFn(vm, el, host, scope, frag) {
+    if (descriptor.ref) {
+      defineReactive((scope || vm).$refs, descriptor.ref, null);
+    }
+    vm._bindDir(descriptor, el, host, scope, frag);
+  };
+  fn.terminal = true;
+  return fn;
+}
+
+/**
+ * Compile the directives on an element and return a linker.
+ *
+ * @param {Array|NamedNodeMap} attrs
+ * @param {Object} options
+ * @return {Function}
+ */
+
+function compileDirectives(attrs, options) {
+  var i = attrs.length;
+  var dirs = [];
+  var attr, name, value, rawName, rawValue, dirName, arg, modifiers, dirDef, tokens, matched;
+  while (i--) {
+    attr = attrs[i];
+    name = rawName = attr.name;
+    value = rawValue = attr.value;
+    tokens = parseText(value);
+    // reset arg
+    arg = null;
+    // check modifiers
+    modifiers = parseModifiers(name);
+    name = name.replace(modifierRE, '');
+
+    // attribute interpolations
+    if (tokens) {
+      value = tokensToExp(tokens);
+      arg = name;
+      pushDir('bind', directives.bind, tokens);
+      // warn against mixing mustaches with v-bind
+      if (process.env.NODE_ENV !== 'production') {
+        if (name === 'class' && Array.prototype.some.call(attrs, function (attr) {
+          return attr.name === ':class' || attr.name === 'v-bind:class';
+        })) {
+          warn('class="' + rawValue + '": Do not mix mustache interpolation ' + 'and v-bind for "class" on the same element. Use one or the other.', options);
+        }
+      }
+    } else
+
+      // special attribute: transition
+      if (transitionRE.test(name)) {
+        modifiers.literal = !bindRE.test(name);
+        pushDir('transition', internalDirectives.transition);
+      } else
+
+        // event handlers
+        if (onRE.test(name)) {
+          arg = name.replace(onRE, '');
+          pushDir('on', directives.on);
+        } else
+
+          // attribute bindings
+          if (bindRE.test(name)) {
+            dirName = name.replace(bindRE, '');
+            if (dirName === 'style' || dirName === 'class') {
+              pushDir(dirName, internalDirectives[dirName]);
+            } else {
+              arg = dirName;
+              pushDir('bind', directives.bind);
+            }
+          } else
+
+            // normal directives
+            if (matched = name.match(dirAttrRE)) {
+              dirName = matched[1];
+              arg = matched[2];
+
+              // skip v-else (when used with v-show)
+              if (dirName === 'else') {
+                continue;
+              }
+
+              dirDef = resolveAsset(options, 'directives', dirName, true);
+              if (dirDef) {
+                pushDir(dirName, dirDef);
+              }
+            }
+  }
+
+  /**
+   * Push a directive.
+   *
+   * @param {String} dirName
+   * @param {Object|Function} def
+   * @param {Array} [interpTokens]
+   */
+
+  function pushDir(dirName, def, interpTokens) {
+    var hasOneTimeToken = interpTokens && hasOneTime(interpTokens);
+    var parsed = !hasOneTimeToken && parseDirective(value);
+    dirs.push({
+      name: dirName,
+      attr: rawName,
+      raw: rawValue,
+      def: def,
+      arg: arg,
+      modifiers: modifiers,
+      // conversion from interpolation strings with one-time token
+      // to expression is differed until directive bind time so that we
+      // have access to the actual vm context for one-time bindings.
+      expression: parsed && parsed.expression,
+      filters: parsed && parsed.filters,
+      interp: interpTokens,
+      hasOneTime: hasOneTimeToken
+    });
+  }
+
+  if (dirs.length) {
+    return makeNodeLinkFn(dirs);
+  }
+}
+
+/**
+ * Parse modifiers from directive attribute name.
+ *
+ * @param {String} name
+ * @return {Object}
+ */
+
+function parseModifiers(name) {
+  var res = Object.create(null);
+  var match = name.match(modifierRE);
+  if (match) {
+    var i = match.length;
+    while (i--) {
+      res[match[i].slice(1)] = true;
+    }
+  }
+  return res;
+}
+
+/**
+ * Build a link function for all directives on a single node.
+ *
+ * @param {Array} directives
+ * @return {Function} directivesLinkFn
+ */
+
+function makeNodeLinkFn(directives) {
+  return function nodeLinkFn(vm, el, host, scope, frag) {
+    // reverse apply because it's sorted low to high
+    var i = directives.length;
+    while (i--) {
+      vm._bindDir(directives[i], el, host, scope, frag);
+    }
+  };
+}
+
+/**
+ * Check if an interpolation string contains one-time tokens.
+ *
+ * @param {Array} tokens
+ * @return {Boolean}
+ */
+
+function hasOneTime(tokens) {
+  var i = tokens.length;
+  while (i--) {
+    if (tokens[i].oneTime) return true;
+  }
+}
+
+function isScript(el) {
+  return el.tagName === 'SCRIPT' && (!el.hasAttribute('type') || el.getAttribute('type') === 'text/javascript');
+}
+
+var specialCharRE = /[^\w\-:\.]/;
+
+/**
+ * Process an element or a DocumentFragment based on a
+ * instance option object. This allows us to transclude
+ * a template node/fragment before the instance is created,
+ * so the processed fragment can then be cloned and reused
+ * in v-for.
+ *
+ * @param {Element} el
+ * @param {Object} options
+ * @return {Element|DocumentFragment}
+ */
+
+function transclude(el, options) {
+  // extract container attributes to pass them down
+  // to compiler, because they need to be compiled in
+  // parent scope. we are mutating the options object here
+  // assuming the same object will be used for compile
+  // right after this.
+  if (options) {
+    options._containerAttrs = extractAttrs(el);
+  }
+  // for template tags, what we want is its content as
+  // a documentFragment (for fragment instances)
+  if (isTemplate(el)) {
+    el = parseTemplate(el);
+  }
+  if (options) {
+    if (options._asComponent && !options.template) {
+      options.template = '<slot></slot>';
+    }
+    if (options.template) {
+      options._content = extractContent(el);
+      el = transcludeTemplate(el, options);
+    }
+  }
+  if (isFragment(el)) {
+    // anchors for fragment instance
+    // passing in `persist: true` to avoid them being
+    // discarded by IE during template cloning
+    prepend(createAnchor('v-start', true), el);
+    el.appendChild(createAnchor('v-end', true));
+  }
+  return el;
+}
+
+/**
+ * Process the template option.
+ * If the replace option is true this will swap the $el.
+ *
+ * @param {Element} el
+ * @param {Object} options
+ * @return {Element|DocumentFragment}
+ */
+
+function transcludeTemplate(el, options) {
+  var template = options.template;
+  var frag = parseTemplate(template, true);
+  if (frag) {
+    var replacer = frag.firstChild;
+    var tag = replacer.tagName && replacer.tagName.toLowerCase();
+    if (options.replace) {
+      /* istanbul ignore if */
+      if (el === document.body) {
+        process.env.NODE_ENV !== 'production' && warn('You are mounting an instance with a template to ' + '<body>. This will replace <body> entirely. You ' + 'should probably use `replace: false` here.');
+      }
+      // there are many cases where the instance must
+      // become a fragment instance: basically anything that
+      // can create more than 1 root nodes.
+      if (
+      // multi-children template
+      frag.childNodes.length > 1 ||
+      // non-element template
+      replacer.nodeType !== 1 ||
+      // single nested component
+      tag === 'component' || resolveAsset(options, 'components', tag) || hasBindAttr(replacer, 'is') ||
+      // element directive
+      resolveAsset(options, 'elementDirectives', tag) ||
+      // for block
+      replacer.hasAttribute('v-for') ||
+      // if block
+      replacer.hasAttribute('v-if')) {
+        return frag;
+      } else {
+        options._replacerAttrs = extractAttrs(replacer);
+        mergeAttrs(el, replacer);
+        return replacer;
+      }
+    } else {
+      el.appendChild(frag);
+      return el;
+    }
+  } else {
+    process.env.NODE_ENV !== 'production' && warn('Invalid template option: ' + template);
+  }
+}
+
+/**
+ * Helper to extract a component container's attributes
+ * into a plain object array.
+ *
+ * @param {Element} el
+ * @return {Array}
+ */
+
+function extractAttrs(el) {
+  if (el.nodeType === 1 && el.hasAttributes()) {
+    return toArray(el.attributes);
+  }
+}
+
+/**
+ * Merge the attributes of two elements, and make sure
+ * the class names are merged properly.
+ *
+ * @param {Element} from
+ * @param {Element} to
+ */
+
+function mergeAttrs(from, to) {
+  var attrs = from.attributes;
+  var i = attrs.length;
+  var name, value;
+  while (i--) {
+    name = attrs[i].name;
+    value = attrs[i].value;
+    if (!to.hasAttribute(name) && !specialCharRE.test(name)) {
+      to.setAttribute(name, value);
+    } else if (name === 'class' && !parseText(value) && (value = value.trim())) {
+      value.split(/\s+/).forEach(function (cls) {
+        addClass(to, cls);
+      });
+    }
+  }
+}
+
+/**
+ * Scan and determine slot content distribution.
+ * We do this during transclusion instead at compile time so that
+ * the distribution is decoupled from the compilation order of
+ * the slots.
+ *
+ * @param {Element|DocumentFragment} template
+ * @param {Element} content
+ * @param {Vue} vm
+ */
+
+function resolveSlots(vm, content) {
+  if (!content) {
+    return;
+  }
+  var contents = vm._slotContents = Object.create(null);
+  var el, name;
+  for (var i = 0, l = content.children.length; i < l; i++) {
+    el = content.children[i];
+    /* eslint-disable no-cond-assign */
+    if (name = el.getAttribute('slot')) {
+      (contents[name] || (contents[name] = [])).push(el);
+    }
+    /* eslint-enable no-cond-assign */
+    if (process.env.NODE_ENV !== 'production' && getBindAttr(el, 'slot')) {
+      warn('The "slot" attribute must be static.', vm.$parent);
+    }
+  }
+  for (name in contents) {
+    contents[name] = extractFragment(contents[name], content);
+  }
+  if (content.hasChildNodes()) {
+    var nodes = content.childNodes;
+    if (nodes.length === 1 && nodes[0].nodeType === 3 && !nodes[0].data.trim()) {
+      return;
+    }
+    contents['default'] = extractFragment(content.childNodes, content);
+  }
+}
+
+/**
+ * Extract qualified content nodes from a node list.
+ *
+ * @param {NodeList} nodes
+ * @return {DocumentFragment}
+ */
+
+function extractFragment(nodes, parent) {
+  var frag = document.createDocumentFragment();
+  nodes = toArray(nodes);
+  for (var i = 0, l = nodes.length; i < l; i++) {
+    var node = nodes[i];
+    if (isTemplate(node) && !node.hasAttribute('v-if') && !node.hasAttribute('v-for')) {
+      parent.removeChild(node);
+      node = parseTemplate(node, true);
+    }
+    frag.appendChild(node);
+  }
+  return frag;
+}
+
+
+
+var compiler = Object.freeze({
+	compile: compile,
+	compileAndLinkProps: compileAndLinkProps,
+	compileRoot: compileRoot,
+	transclude: transclude,
+	resolveSlots: resolveSlots
+});
+
+function stateMixin (Vue) {
+  /**
+   * Accessor for `$data` property, since setting $data
+   * requires observing the new object and updating
+   * proxied properties.
+   */
+
+  Object.defineProperty(Vue.prototype, '$data', {
+    get: function get() {
+      return this._data;
+    },
+    set: function set(newData) {
+      if (newData !== this._data) {
+        this._setData(newData);
+      }
+    }
+  });
+
+  /**
+   * Setup the scope of an instance, which contains:
+   * - observed data
+   * - computed properties
+   * - user methods
+   * - meta properties
+   */
+
+  Vue.prototype._initState = function () {
+    this._initProps();
+    this._initMeta();
+    this._initMethods();
+    this._initData();
+    this._initComputed();
+  };
+
+  /**
+   * Initialize props.
+   */
+
+  Vue.prototype._initProps = function () {
+    var options = this.$options;
+    var el = options.el;
+    var props = options.props;
+    if (props && !el) {
+      process.env.NODE_ENV !== 'production' && warn('Props will not be compiled if no `el` option is ' + 'provided at instantiation.', this);
+    }
+    // make sure to convert string selectors into element now
+    el = options.el = query(el);
+    this._propsUnlinkFn = el && el.nodeType === 1 && props
+    // props must be linked in proper scope if inside v-for
+    ? compileAndLinkProps(this, el, props, this._scope) : null;
+  };
+
+  /**
+   * Initialize the data.
+   */
+
+  Vue.prototype._initData = function () {
+    var dataFn = this.$options.data;
+    var data = this._data = dataFn ? dataFn() : {};
+    if (!isPlainObject(data)) {
+      data = {};
+      process.env.NODE_ENV !== 'production' && warn('data functions should return an object.', this);
+    }
+    var props = this._props;
+    // proxy data on instance
+    var keys = Object.keys(data);
+    var i, key;
+    i = keys.length;
+    while (i--) {
+      key = keys[i];
+      // there are two scenarios where we can proxy a data key:
+      // 1. it's not already defined as a prop
+      // 2. it's provided via a instantiation option AND there are no
+      //    template prop present
+      if (!props || !hasOwn(props, key)) {
+        this._proxy(key);
+      } else if (process.env.NODE_ENV !== 'production') {
+        warn('Data field "' + key + '" is already defined ' + 'as a prop. To provide default value for a prop, use the "default" ' + 'prop option; if you want to pass prop values to an instantiation ' + 'call, use the "propsData" option.', this);
+      }
+    }
+    // observe data
+    observe(data, this);
+  };
+
+  /**
+   * Swap the instance's $data. Called in $data's setter.
+   *
+   * @param {Object} newData
+   */
+
+  Vue.prototype._setData = function (newData) {
+    newData = newData || {};
+    var oldData = this._data;
+    this._data = newData;
+    var keys, key, i;
+    // unproxy keys not present in new data
+    keys = Object.keys(oldData);
+    i = keys.length;
+    while (i--) {
+      key = keys[i];
+      if (!(key in newData)) {
+        this._unproxy(key);
+      }
+    }
+    // proxy keys not already proxied,
+    // and trigger change for changed values
+    keys = Object.keys(newData);
+    i = keys.length;
+    while (i--) {
+      key = keys[i];
+      if (!hasOwn(this, key)) {
+        // new property
+        this._proxy(key);
+      }
+    }
+    oldData.__ob__.removeVm(this);
+    observe(newData, this);
+    this._digest();
+  };
+
+  /**
+   * Proxy a property, so that
+   * vm.prop === vm._data.prop
+   *
+   * @param {String} key
+   */
+
+  Vue.prototype._proxy = function (key) {
+    if (!isReserved(key)) {
+      // need to store ref to self here
+      // because these getter/setters might
+      // be called by child scopes via
+      // prototype inheritance.
+      var self = this;
+      Object.defineProperty(self, key, {
+        configurable: true,
+        enumerable: true,
+        get: function proxyGetter() {
+          return self._data[key];
+        },
+        set: function proxySetter(val) {
+          self._data[key] = val;
+        }
+      });
+    }
+  };
+
+  /**
+   * Unproxy a property.
+   *
+   * @param {String} key
+   */
+
+  Vue.prototype._unproxy = function (key) {
+    if (!isReserved(key)) {
+      delete this[key];
+    }
+  };
+
+  /**
+   * Force update on every watcher in scope.
+   */
+
+  Vue.prototype._digest = function () {
+    for (var i = 0, l = this._watchers.length; i < l; i++) {
+      this._watchers[i].update(true); // shallow updates
+    }
+  };
+
+  /**
+   * Setup computed properties. They are essentially
+   * special getter/setters
+   */
+
+  function noop() {}
+  Vue.prototype._initComputed = function () {
+    var computed = this.$options.computed;
+    if (computed) {
+      for (var key in computed) {
+        var userDef = computed[key];
+        var def = {
+          enumerable: true,
+          configurable: true
+        };
+        if (typeof userDef === 'function') {
+          def.get = makeComputedGetter(userDef, this);
+          def.set = noop;
+        } else {
+          def.get = userDef.get ? userDef.cache !== false ? makeComputedGetter(userDef.get, this) : bind(userDef.get, this) : noop;
+          def.set = userDef.set ? bind(userDef.set, this) : noop;
+        }
+        Object.defineProperty(this, key, def);
+      }
+    }
+  };
+
+  function makeComputedGetter(getter, owner) {
+    var watcher = new Watcher(owner, getter, null, {
+      lazy: true
+    });
+    return function computedGetter() {
+      if (watcher.dirty) {
+        watcher.evaluate();
+      }
+      if (Dep.target) {
+        watcher.depend();
+      }
+      return watcher.value;
+    };
+  }
+
+  /**
+   * Setup instance methods. Methods must be bound to the
+   * instance since they might be passed down as a prop to
+   * child components.
+   */
+
+  Vue.prototype._initMethods = function () {
+    var methods = this.$options.methods;
+    if (methods) {
+      for (var key in methods) {
+        this[key] = bind(methods[key], this);
+      }
+    }
+  };
+
+  /**
+   * Initialize meta information like $index, $key & $value.
+   */
+
+  Vue.prototype._initMeta = function () {
+    var metas = this.$options._meta;
+    if (metas) {
+      for (var key in metas) {
+        defineReactive(this, key, metas[key]);
+      }
+    }
+  };
+}
+
+var eventRE = /^v-on:|^@/;
+
+function eventsMixin (Vue) {
+  /**
+   * Setup the instance's option events & watchers.
+   * If the value is a string, we pull it from the
+   * instance's methods by name.
+   */
+
+  Vue.prototype._initEvents = function () {
+    var options = this.$options;
+    if (options._asComponent) {
+      registerComponentEvents(this, options.el);
+    }
+    registerCallbacks(this, '$on', options.events);
+    registerCallbacks(this, '$watch', options.watch);
+  };
+
+  /**
+   * Register v-on events on a child component
+   *
+   * @param {Vue} vm
+   * @param {Element} el
+   */
+
+  function registerComponentEvents(vm, el) {
+    var attrs = el.attributes;
+    var name, value, handler;
+    for (var i = 0, l = attrs.length; i < l; i++) {
+      name = attrs[i].name;
+      if (eventRE.test(name)) {
+        name = name.replace(eventRE, '');
+        // force the expression into a statement so that
+        // it always dynamically resolves the method to call (#2670)
+        // kinda ugly hack, but does the job.
+        value = attrs[i].value;
+        if (isSimplePath(value)) {
+          value += '.apply(this, $arguments)';
+        }
+        handler = (vm._scope || vm._context).$eval(value, true);
+        handler._fromParent = true;
+        vm.$on(name.replace(eventRE), handler);
+      }
+    }
+  }
+
+  /**
+   * Register callbacks for option events and watchers.
+   *
+   * @param {Vue} vm
+   * @param {String} action
+   * @param {Object} hash
+   */
+
+  function registerCallbacks(vm, action, hash) {
+    if (!hash) return;
+    var handlers, key, i, j;
+    for (key in hash) {
+      handlers = hash[key];
+      if (isArray(handlers)) {
+        for (i = 0, j = handlers.length; i < j; i++) {
+          register(vm, action, key, handlers[i]);
+        }
+      } else {
+        register(vm, action, key, handlers);
+      }
+    }
+  }
+
+  /**
+   * Helper to register an event/watch callback.
+   *
+   * @param {Vue} vm
+   * @param {String} action
+   * @param {String} key
+   * @param {Function|String|Object} handler
+   * @param {Object} [options]
+   */
+
+  function register(vm, action, key, handler, options) {
+    var type = typeof handler;
+    if (type === 'function') {
+      vm[action](key, handler, options);
+    } else if (type === 'string') {
+      var methods = vm.$options.methods;
+      var method = methods && methods[handler];
+      if (method) {
+        vm[action](key, method, options);
+      } else {
+        process.env.NODE_ENV !== 'production' && warn('Unknown method: "' + handler + '" when ' + 'registering callback for ' + action + ': "' + key + '".', vm);
+      }
+    } else if (handler && type === 'object') {
+      register(vm, action, key, handler.handler, handler);
+    }
+  }
+
+  /**
+   * Setup recursive attached/detached calls
+   */
+
+  Vue.prototype._initDOMHooks = function () {
+    this.$on('hook:attached', onAttached);
+    this.$on('hook:detached', onDetached);
+  };
+
+  /**
+   * Callback to recursively call attached hook on children
+   */
+
+  function onAttached() {
+    if (!this._isAttached) {
+      this._isAttached = true;
+      this.$children.forEach(callAttach);
+    }
+  }
+
+  /**
+   * Iterator to call attached hook
+   *
+   * @param {Vue} child
+   */
+
+  function callAttach(child) {
+    if (!child._isAttached && inDoc(child.$el)) {
+      child._callHook('attached');
+    }
+  }
+
+  /**
+   * Callback to recursively call detached hook on children
+   */
+
+  function onDetached() {
+    if (this._isAttached) {
+      this._isAttached = false;
+      this.$children.forEach(callDetach);
+    }
+  }
+
+  /**
+   * Iterator to call detached hook
+   *
+   * @param {Vue} child
+   */
+
+  function callDetach(child) {
+    if (child._isAttached && !inDoc(child.$el)) {
+      child._callHook('detached');
+    }
+  }
+
+  /**
+   * Trigger all handlers for a hook
+   *
+   * @param {String} hook
+   */
+
+  Vue.prototype._callHook = function (hook) {
+    this.$emit('pre-hook:' + hook);
+    var handlers = this.$options[hook];
+    if (handlers) {
+      for (var i = 0, j = handlers.length; i < j; i++) {
+        handlers[i].call(this);
+      }
+    }
+    this.$emit('hook:' + hook);
+  };
+}
+
+function noop$1() {}
+
+/**
+ * A directive links a DOM element with a piece of data,
+ * which is the result of evaluating an expression.
+ * It registers a watcher with the expression and calls
+ * the DOM update function when a change is triggered.
+ *
+ * @param {Object} descriptor
+ *                 - {String} name
+ *                 - {Object} def
+ *                 - {String} expression
+ *                 - {Array<Object>} [filters]
+ *                 - {Object} [modifiers]
+ *                 - {Boolean} literal
+ *                 - {String} attr
+ *                 - {String} arg
+ *                 - {String} raw
+ *                 - {String} [ref]
+ *                 - {Array<Object>} [interp]
+ *                 - {Boolean} [hasOneTime]
+ * @param {Vue} vm
+ * @param {Node} el
+ * @param {Vue} [host] - transclusion host component
+ * @param {Object} [scope] - v-for scope
+ * @param {Fragment} [frag] - owner fragment
+ * @constructor
+ */
+function Directive(descriptor, vm, el, host, scope, frag) {
+  this.vm = vm;
+  this.el = el;
+  // copy descriptor properties
+  this.descriptor = descriptor;
+  this.name = descriptor.name;
+  this.expression = descriptor.expression;
+  this.arg = descriptor.arg;
+  this.modifiers = descriptor.modifiers;
+  this.filters = descriptor.filters;
+  this.literal = this.modifiers && this.modifiers.literal;
+  // private
+  this._locked = false;
+  this._bound = false;
+  this._listeners = null;
+  // link context
+  this._host = host;
+  this._scope = scope;
+  this._frag = frag;
+  // store directives on node in dev mode
+  if (process.env.NODE_ENV !== 'production' && this.el) {
+    this.el._vue_directives = this.el._vue_directives || [];
+    this.el._vue_directives.push(this);
+  }
+}
+
+/**
+ * Initialize the directive, mixin definition properties,
+ * setup the watcher, call definition bind() and update()
+ * if present.
+ */
+
+Directive.prototype._bind = function () {
+  var name = this.name;
+  var descriptor = this.descriptor;
+
+  // remove attribute
+  if ((name !== 'cloak' || this.vm._isCompiled) && this.el && this.el.removeAttribute) {
+    var attr = descriptor.attr || 'v-' + name;
+    this.el.removeAttribute(attr);
+  }
+
+  // copy def properties
+  var def = descriptor.def;
+  if (typeof def === 'function') {
+    this.update = def;
+  } else {
+    extend(this, def);
+  }
+
+  // setup directive params
+  this._setupParams();
+
+  // initial bind
+  if (this.bind) {
+    this.bind();
+  }
+  this._bound = true;
+
+  if (this.literal) {
+    this.update && this.update(descriptor.raw);
+  } else if ((this.expression || this.modifiers) && (this.update || this.twoWay) && !this._checkStatement()) {
+    // wrapped updater for context
+    var dir = this;
+    if (this.update) {
+      this._update = function (val, oldVal) {
+        if (!dir._locked) {
+          dir.update(val, oldVal);
+        }
+      };
+    } else {
+      this._update = noop$1;
+    }
+    var preProcess = this._preProcess ? bind(this._preProcess, this) : null;
+    var postProcess = this._postProcess ? bind(this._postProcess, this) : null;
+    var watcher = this._watcher = new Watcher(this.vm, this.expression, this._update, // callback
+    {
+      filters: this.filters,
+      twoWay: this.twoWay,
+      deep: this.deep,
+      preProcess: preProcess,
+      postProcess: postProcess,
+      scope: this._scope
+    });
+    // v-model with inital inline value need to sync back to
+    // model instead of update to DOM on init. They would
+    // set the afterBind hook to indicate that.
+    if (this.afterBind) {
+      this.afterBind();
+    } else if (this.update) {
+      this.update(watcher.value);
+    }
+  }
+};
+
+/**
+ * Setup all param attributes, e.g. track-by,
+ * transition-mode, etc...
+ */
+
+Directive.prototype._setupParams = function () {
+  if (!this.params) {
+    return;
+  }
+  var params = this.params;
+  // swap the params array with a fresh object.
+  this.params = Object.create(null);
+  var i = params.length;
+  var key, val, mappedKey;
+  while (i--) {
+    key = hyphenate(params[i]);
+    mappedKey = camelize(key);
+    val = getBindAttr(this.el, key);
+    if (val != null) {
+      // dynamic
+      this._setupParamWatcher(mappedKey, val);
+    } else {
+      // static
+      val = getAttr(this.el, key);
+      if (val != null) {
+        this.params[mappedKey] = val === '' ? true : val;
+      }
+    }
+  }
+};
+
+/**
+ * Setup a watcher for a dynamic param.
+ *
+ * @param {String} key
+ * @param {String} expression
+ */
+
+Directive.prototype._setupParamWatcher = function (key, expression) {
+  var self = this;
+  var called = false;
+  var unwatch = (this._scope || this.vm).$watch(expression, function (val, oldVal) {
+    self.params[key] = val;
+    // since we are in immediate mode,
+    // only call the param change callbacks if this is not the first update.
+    if (called) {
+      var cb = self.paramWatchers && self.paramWatchers[key];
+      if (cb) {
+        cb.call(self, val, oldVal);
+      }
+    } else {
+      called = true;
+    }
+  }, {
+    immediate: true,
+    user: false
+  });(this._paramUnwatchFns || (this._paramUnwatchFns = [])).push(unwatch);
+};
+
+/**
+ * Check if the directive is a function caller
+ * and if the expression is a callable one. If both true,
+ * we wrap up the expression and use it as the event
+ * handler.
+ *
+ * e.g. on-click="a++"
+ *
+ * @return {Boolean}
+ */
+
+Directive.prototype._checkStatement = function () {
+  var expression = this.expression;
+  if (expression && this.acceptStatement && !isSimplePath(expression)) {
+    var fn = parseExpression(expression).get;
+    var scope = this._scope || this.vm;
+    var handler = function handler(e) {
+      scope.$event = e;
+      fn.call(scope, scope);
+      scope.$event = null;
+    };
+    if (this.filters) {
+      handler = scope._applyFilters(handler, null, this.filters);
+    }
+    this.update(handler);
+    return true;
+  }
+};
+
+/**
+ * Set the corresponding value with the setter.
+ * This should only be used in two-way directives
+ * e.g. v-model.
+ *
+ * @param {*} value
+ * @public
+ */
+
+Directive.prototype.set = function (value) {
+  /* istanbul ignore else */
+  if (this.twoWay) {
+    this._withLock(function () {
+      this._watcher.set(value);
+    });
+  } else if (process.env.NODE_ENV !== 'production') {
+    warn('Directive.set() can only be used inside twoWay' + 'directives.');
+  }
+};
+
+/**
+ * Execute a function while preventing that function from
+ * triggering updates on this directive instance.
+ *
+ * @param {Function} fn
+ */
+
+Directive.prototype._withLock = function (fn) {
+  var self = this;
+  self._locked = true;
+  fn.call(self);
+  nextTick(function () {
+    self._locked = false;
+  });
+};
+
+/**
+ * Convenience method that attaches a DOM event listener
+ * to the directive element and autometically tears it down
+ * during unbind.
+ *
+ * @param {String} event
+ * @param {Function} handler
+ * @param {Boolean} [useCapture]
+ */
+
+Directive.prototype.on = function (event, handler, useCapture) {
+  on(this.el, event, handler, useCapture);(this._listeners || (this._listeners = [])).push([event, handler]);
+};
+
+/**
+ * Teardown the watcher and call unbind.
+ */
+
+Directive.prototype._teardown = function () {
+  if (this._bound) {
+    this._bound = false;
+    if (this.unbind) {
+      this.unbind();
+    }
+    if (this._watcher) {
+      this._watcher.teardown();
+    }
+    var listeners = this._listeners;
+    var i;
+    if (listeners) {
+      i = listeners.length;
+      while (i--) {
+        off(this.el, listeners[i][0], listeners[i][1]);
+      }
+    }
+    var unwatchFns = this._paramUnwatchFns;
+    if (unwatchFns) {
+      i = unwatchFns.length;
+      while (i--) {
+        unwatchFns[i]();
+      }
+    }
+    if (process.env.NODE_ENV !== 'production' && this.el) {
+      this.el._vue_directives.$remove(this);
+    }
+    this.vm = this.el = this._watcher = this._listeners = null;
+  }
+};
+
+function lifecycleMixin (Vue) {
+  /**
+   * Update v-ref for component.
+   *
+   * @param {Boolean} remove
+   */
+
+  Vue.prototype._updateRef = function (remove) {
+    var ref = this.$options._ref;
+    if (ref) {
+      var refs = (this._scope || this._context).$refs;
+      if (remove) {
+        if (refs[ref] === this) {
+          refs[ref] = null;
+        }
+      } else {
+        refs[ref] = this;
+      }
+    }
+  };
+
+  /**
+   * Transclude, compile and link element.
+   *
+   * If a pre-compiled linker is available, that means the
+   * passed in element will be pre-transcluded and compiled
+   * as well - all we need to do is to call the linker.
+   *
+   * Otherwise we need to call transclude/compile/link here.
+   *
+   * @param {Element} el
+   */
+
+  Vue.prototype._compile = function (el) {
+    var options = this.$options;
+
+    // transclude and init element
+    // transclude can potentially replace original
+    // so we need to keep reference; this step also injects
+    // the template and caches the original attributes
+    // on the container node and replacer node.
+    var original = el;
+    el = transclude(el, options);
+    this._initElement(el);
+
+    // handle v-pre on root node (#2026)
+    if (el.nodeType === 1 && getAttr(el, 'v-pre') !== null) {
+      return;
+    }
+
+    // root is always compiled per-instance, because
+    // container attrs and props can be different every time.
+    var contextOptions = this._context && this._context.$options;
+    var rootLinker = compileRoot(el, options, contextOptions);
+
+    // resolve slot distribution
+    resolveSlots(this, options._content);
+
+    // compile and link the rest
+    var contentLinkFn;
+    var ctor = this.constructor;
+    // component compilation can be cached
+    // as long as it's not using inline-template
+    if (options._linkerCachable) {
+      contentLinkFn = ctor.linker;
+      if (!contentLinkFn) {
+        contentLinkFn = ctor.linker = compile(el, options);
+      }
+    }
+
+    // link phase
+    // make sure to link root with prop scope!
+    var rootUnlinkFn = rootLinker(this, el, this._scope);
+    var contentUnlinkFn = contentLinkFn ? contentLinkFn(this, el) : compile(el, options)(this, el);
+
+    // register composite unlink function
+    // to be called during instance destruction
+    this._unlinkFn = function () {
+      rootUnlinkFn();
+      // passing destroying: true to avoid searching and
+      // splicing the directives
+      contentUnlinkFn(true);
+    };
+
+    // finally replace original
+    if (options.replace) {
+      replace(original, el);
+    }
+
+    this._isCompiled = true;
+    this._callHook('compiled');
+  };
+
+  /**
+   * Initialize instance element. Called in the public
+   * $mount() method.
+   *
+   * @param {Element} el
+   */
+
+  Vue.prototype._initElement = function (el) {
+    if (isFragment(el)) {
+      this._isFragment = true;
+      this.$el = this._fragmentStart = el.firstChild;
+      this._fragmentEnd = el.lastChild;
+      // set persisted text anchors to empty
+      if (this._fragmentStart.nodeType === 3) {
+        this._fragmentStart.data = this._fragmentEnd.data = '';
+      }
+      this._fragment = el;
+    } else {
+      this.$el = el;
+    }
+    this.$el.__vue__ = this;
+    this._callHook('beforeCompile');
+  };
+
+  /**
+   * Create and bind a directive to an element.
+   *
+   * @param {Object} descriptor - parsed directive descriptor
+   * @param {Node} node   - target node
+   * @param {Vue} [host] - transclusion host component
+   * @param {Object} [scope] - v-for scope
+   * @param {Fragment} [frag] - owner fragment
+   */
+
+  Vue.prototype._bindDir = function (descriptor, node, host, scope, frag) {
+    this._directives.push(new Directive(descriptor, this, node, host, scope, frag));
+  };
+
+  /**
+   * Teardown an instance, unobserves the data, unbind all the
+   * directives, turn off all the event listeners, etc.
+   *
+   * @param {Boolean} remove - whether to remove the DOM node.
+   * @param {Boolean} deferCleanup - if true, defer cleanup to
+   *                                 be called later
+   */
+
+  Vue.prototype._destroy = function (remove, deferCleanup) {
+    if (this._isBeingDestroyed) {
+      if (!deferCleanup) {
+        this._cleanup();
+      }
+      return;
+    }
+
+    var destroyReady;
+    var pendingRemoval;
+
+    var self = this;
+    // Cleanup should be called either synchronously or asynchronoysly as
+    // callback of this.$remove(), or if remove and deferCleanup are false.
+    // In any case it should be called after all other removing, unbinding and
+    // turning of is done
+    var cleanupIfPossible = function cleanupIfPossible() {
+      if (destroyReady && !pendingRemoval && !deferCleanup) {
+        self._cleanup();
+      }
+    };
+
+    // remove DOM element
+    if (remove && this.$el) {
+      pendingRemoval = true;
+      this.$remove(function () {
+        pendingRemoval = false;
+        cleanupIfPossible();
+      });
+    }
+
+    this._callHook('beforeDestroy');
+    this._isBeingDestroyed = true;
+    var i;
+    // remove self from parent. only necessary
+    // if parent is not being destroyed as well.
+    var parent = this.$parent;
+    if (parent && !parent._isBeingDestroyed) {
+      parent.$children.$remove(this);
+      // unregister ref (remove: true)
+      this._updateRef(true);
+    }
+    // destroy all children.
+    i = this.$children.length;
+    while (i--) {
+      this.$children[i].$destroy();
+    }
+    // teardown props
+    if (this._propsUnlinkFn) {
+      this._propsUnlinkFn();
+    }
+    // teardown all directives. this also tearsdown all
+    // directive-owned watchers.
+    if (this._unlinkFn) {
+      this._unlinkFn();
+    }
+    i = this._watchers.length;
+    while (i--) {
+      this._watchers[i].teardown();
+    }
+    // remove reference to self on $el
+    if (this.$el) {
+      this.$el.__vue__ = null;
+    }
+
+    destroyReady = true;
+    cleanupIfPossible();
+  };
+
+  /**
+   * Clean up to ensure garbage collection.
+   * This is called after the leave transition if there
+   * is any.
+   */
+
+  Vue.prototype._cleanup = function () {
+    if (this._isDestroyed) {
+      return;
+    }
+    // remove self from owner fragment
+    // do it in cleanup so that we can call $destroy with
+    // defer right when a fragment is about to be removed.
+    if (this._frag) {
+      this._frag.children.$remove(this);
+    }
+    // remove reference from data ob
+    // frozen object may not have observer.
+    if (this._data && this._data.__ob__) {
+      this._data.__ob__.removeVm(this);
+    }
+    // Clean up references to private properties and other
+    // instances. preserve reference to _data so that proxy
+    // accessors still work. The only potential side effect
+    // here is that mutating the instance after it's destroyed
+    // may affect the state of other components that are still
+    // observing the same object, but that seems to be a
+    // reasonable responsibility for the user rather than
+    // always throwing an error on them.
+    this.$el = this.$parent = this.$root = this.$children = this._watchers = this._context = this._scope = this._directives = null;
+    // call the last hook...
+    this._isDestroyed = true;
+    this._callHook('destroyed');
+    // turn off all instance listeners.
+    this.$off();
+  };
+}
+
+function miscMixin (Vue) {
+  /**
+   * Apply a list of filter (descriptors) to a value.
+   * Using plain for loops here because this will be called in
+   * the getter of any watcher with filters so it is very
+   * performance sensitive.
+   *
+   * @param {*} value
+   * @param {*} [oldValue]
+   * @param {Array} filters
+   * @param {Boolean} write
+   * @return {*}
+   */
+
+  Vue.prototype._applyFilters = function (value, oldValue, filters, write) {
+    var filter, fn, args, arg, offset, i, l, j, k;
+    for (i = 0, l = filters.length; i < l; i++) {
+      filter = filters[write ? l - i - 1 : i];
+      fn = resolveAsset(this.$options, 'filters', filter.name, true);
+      if (!fn) continue;
+      fn = write ? fn.write : fn.read || fn;
+      if (typeof fn !== 'function') continue;
+      args = write ? [value, oldValue] : [value];
+      offset = write ? 2 : 1;
+      if (filter.args) {
+        for (j = 0, k = filter.args.length; j < k; j++) {
+          arg = filter.args[j];
+          args[j + offset] = arg.dynamic ? this.$get(arg.value) : arg.value;
+        }
+      }
+      value = fn.apply(this, args);
+    }
+    return value;
+  };
+
+  /**
+   * Resolve a component, depending on whether the component
+   * is defined normally or using an async factory function.
+   * Resolves synchronously if already resolved, otherwise
+   * resolves asynchronously and caches the resolved
+   * constructor on the factory.
+   *
+   * @param {String|Function} value
+   * @param {Function} cb
+   */
+
+  Vue.prototype._resolveComponent = function (value, cb) {
+    var factory;
+    if (typeof value === 'function') {
+      factory = value;
+    } else {
+      factory = resolveAsset(this.$options, 'components', value, true);
+    }
+    /* istanbul ignore if */
+    if (!factory) {
+      return;
+    }
+    // async component factory
+    if (!factory.options) {
+      if (factory.resolved) {
+        // cached
+        cb(factory.resolved);
+      } else if (factory.requested) {
+        // pool callbacks
+        factory.pendingCallbacks.push(cb);
+      } else {
+        factory.requested = true;
+        var cbs = factory.pendingCallbacks = [cb];
+        factory.call(this, function resolve(res) {
+          if (isPlainObject(res)) {
+            res = Vue.extend(res);
+          }
+          // cache resolved
+          factory.resolved = res;
+          // invoke callbacks
+          for (var i = 0, l = cbs.length; i < l; i++) {
+            cbs[i](res);
+          }
+        }, function reject(reason) {
+          process.env.NODE_ENV !== 'production' && warn('Failed to resolve async component' + (typeof value === 'string' ? ': ' + value : '') + '. ' + (reason ? '\nReason: ' + reason : ''));
+        });
+      }
+    } else {
+      // normal component
+      cb(factory);
+    }
+  };
+}
+
+var filterRE$1 = /[^|]\|[^|]/;
+
+function dataAPI (Vue) {
+  /**
+   * Get the value from an expression on this vm.
+   *
+   * @param {String} exp
+   * @param {Boolean} [asStatement]
+   * @return {*}
+   */
+
+  Vue.prototype.$get = function (exp, asStatement) {
+    var res = parseExpression(exp);
+    if (res) {
+      if (asStatement) {
+        var self = this;
+        return function statementHandler() {
+          self.$arguments = toArray(arguments);
+          var result = res.get.call(self, self);
+          self.$arguments = null;
+          return result;
+        };
+      } else {
+        try {
+          return res.get.call(this, this);
+        } catch (e) {}
+      }
+    }
+  };
+
+  /**
+   * Set the value from an expression on this vm.
+   * The expression must be a valid left-hand
+   * expression in an assignment.
+   *
+   * @param {String} exp
+   * @param {*} val
+   */
+
+  Vue.prototype.$set = function (exp, val) {
+    var res = parseExpression(exp, true);
+    if (res && res.set) {
+      res.set.call(this, this, val);
+    }
+  };
+
+  /**
+   * Delete a property on the VM
+   *
+   * @param {String} key
+   */
+
+  Vue.prototype.$delete = function (key) {
+    del(this._data, key);
+  };
+
+  /**
+   * Watch an expression, trigger callback when its
+   * value changes.
+   *
+   * @param {String|Function} expOrFn
+   * @param {Function} cb
+   * @param {Object} [options]
+   *                 - {Boolean} deep
+   *                 - {Boolean} immediate
+   * @return {Function} - unwatchFn
+   */
+
+  Vue.prototype.$watch = function (expOrFn, cb, options) {
+    var vm = this;
+    var parsed;
+    if (typeof expOrFn === 'string') {
+      parsed = parseDirective(expOrFn);
+      expOrFn = parsed.expression;
+    }
+    var watcher = new Watcher(vm, expOrFn, cb, {
+      deep: options && options.deep,
+      sync: options && options.sync,
+      filters: parsed && parsed.filters,
+      user: !options || options.user !== false
+    });
+    if (options && options.immediate) {
+      cb.call(vm, watcher.value);
+    }
+    return function unwatchFn() {
+      watcher.teardown();
+    };
+  };
+
+  /**
+   * Evaluate a text directive, including filters.
+   *
+   * @param {String} text
+   * @param {Boolean} [asStatement]
+   * @return {String}
+   */
+
+  Vue.prototype.$eval = function (text, asStatement) {
+    // check for filters.
+    if (filterRE$1.test(text)) {
+      var dir = parseDirective(text);
+      // the filter regex check might give false positive
+      // for pipes inside strings, so it's possible that
+      // we don't get any filters here
+      var val = this.$get(dir.expression, asStatement);
+      return dir.filters ? this._applyFilters(val, null, dir.filters) : val;
+    } else {
+      // no filter
+      return this.$get(text, asStatement);
+    }
+  };
+
+  /**
+   * Interpolate a piece of template text.
+   *
+   * @param {String} text
+   * @return {String}
+   */
+
+  Vue.prototype.$interpolate = function (text) {
+    var tokens = parseText(text);
+    var vm = this;
+    if (tokens) {
+      if (tokens.length === 1) {
+        return vm.$eval(tokens[0].value) + '';
+      } else {
+        return tokens.map(function (token) {
+          return token.tag ? vm.$eval(token.value) : token.value;
+        }).join('');
+      }
+    } else {
+      return text;
+    }
+  };
+
+  /**
+   * Log instance data as a plain JS object
+   * so that it is easier to inspect in console.
+   * This method assumes console is available.
+   *
+   * @param {String} [path]
+   */
+
+  Vue.prototype.$log = function (path) {
+    var data = path ? getPath(this._data, path) : this._data;
+    if (data) {
+      data = clean(data);
+    }
+    // include computed fields
+    if (!path) {
+      var key;
+      for (key in this.$options.computed) {
+        data[key] = clean(this[key]);
+      }
+      if (this._props) {
+        for (key in this._props) {
+          data[key] = clean(this[key]);
+        }
+      }
+    }
+    console.log(data);
+  };
+
+  /**
+   * "clean" a getter/setter converted object into a plain
+   * object copy.
+   *
+   * @param {Object} - obj
+   * @return {Object}
+   */
+
+  function clean(obj) {
+    return JSON.parse(JSON.stringify(obj));
+  }
+}
+
+function domAPI (Vue) {
+  /**
+   * Convenience on-instance nextTick. The callback is
+   * auto-bound to the instance, and this avoids component
+   * modules having to rely on the global Vue.
+   *
+   * @param {Function} fn
+   */
+
+  Vue.prototype.$nextTick = function (fn) {
+    nextTick(fn, this);
+  };
+
+  /**
+   * Append instance to target
+   *
+   * @param {Node} target
+   * @param {Function} [cb]
+   * @param {Boolean} [withTransition] - defaults to true
+   */
+
+  Vue.prototype.$appendTo = function (target, cb, withTransition) {
+    return insert(this, target, cb, withTransition, append, appendWithTransition);
+  };
+
+  /**
+   * Prepend instance to target
+   *
+   * @param {Node} target
+   * @param {Function} [cb]
+   * @param {Boolean} [withTransition] - defaults to true
+   */
+
+  Vue.prototype.$prependTo = function (target, cb, withTransition) {
+    target = query(target);
+    if (target.hasChildNodes()) {
+      this.$before(target.firstChild, cb, withTransition);
+    } else {
+      this.$appendTo(target, cb, withTransition);
+    }
+    return this;
+  };
+
+  /**
+   * Insert instance before target
+   *
+   * @param {Node} target
+   * @param {Function} [cb]
+   * @param {Boolean} [withTransition] - defaults to true
+   */
+
+  Vue.prototype.$before = function (target, cb, withTransition) {
+    return insert(this, target, cb, withTransition, beforeWithCb, beforeWithTransition);
+  };
+
+  /**
+   * Insert instance after target
+   *
+   * @param {Node} target
+   * @param {Function} [cb]
+   * @param {Boolean} [withTransition] - defaults to true
+   */
+
+  Vue.prototype.$after = function (target, cb, withTransition) {
+    target = query(target);
+    if (target.nextSibling) {
+      this.$before(target.nextSibling, cb, withTransition);
+    } else {
+      this.$appendTo(target.parentNode, cb, withTransition);
+    }
+    return this;
+  };
+
+  /**
+   * Remove instance from DOM
+   *
+   * @param {Function} [cb]
+   * @param {Boolean} [withTransition] - defaults to true
+   */
+
+  Vue.prototype.$remove = function (cb, withTransition) {
+    if (!this.$el.parentNode) {
+      return cb && cb();
+    }
+    var inDocument = this._isAttached && inDoc(this.$el);
+    // if we are not in document, no need to check
+    // for transitions
+    if (!inDocument) withTransition = false;
+    var self = this;
+    var realCb = function realCb() {
+      if (inDocument) self._callHook('detached');
+      if (cb) cb();
+    };
+    if (this._isFragment) {
+      removeNodeRange(this._fragmentStart, this._fragmentEnd, this, this._fragment, realCb);
+    } else {
+      var op = withTransition === false ? removeWithCb : removeWithTransition;
+      op(this.$el, this, realCb);
+    }
+    return this;
+  };
+
+  /**
+   * Shared DOM insertion function.
+   *
+   * @param {Vue} vm
+   * @param {Element} target
+   * @param {Function} [cb]
+   * @param {Boolean} [withTransition]
+   * @param {Function} op1 - op for non-transition insert
+   * @param {Function} op2 - op for transition insert
+   * @return vm
+   */
+
+  function insert(vm, target, cb, withTransition, op1, op2) {
+    target = query(target);
+    var targetIsDetached = !inDoc(target);
+    var op = withTransition === false || targetIsDetached ? op1 : op2;
+    var shouldCallHook = !targetIsDetached && !vm._isAttached && !inDoc(vm.$el);
+    if (vm._isFragment) {
+      mapNodeRange(vm._fragmentStart, vm._fragmentEnd, function (node) {
+        op(node, target, vm);
+      });
+      cb && cb();
+    } else {
+      op(vm.$el, target, vm, cb);
+    }
+    if (shouldCallHook) {
+      vm._callHook('attached');
+    }
+    return vm;
+  }
+
+  /**
+   * Check for selectors
+   *
+   * @param {String|Element} el
+   */
+
+  function query(el) {
+    return typeof el === 'string' ? document.querySelector(el) : el;
+  }
+
+  /**
+   * Append operation that takes a callback.
+   *
+   * @param {Node} el
+   * @param {Node} target
+   * @param {Vue} vm - unused
+   * @param {Function} [cb]
+   */
+
+  function append(el, target, vm, cb) {
+    target.appendChild(el);
+    if (cb) cb();
+  }
+
+  /**
+   * InsertBefore operation that takes a callback.
+   *
+   * @param {Node} el
+   * @param {Node} target
+   * @param {Vue} vm - unused
+   * @param {Function} [cb]
+   */
+
+  function beforeWithCb(el, target, vm, cb) {
+    before(el, target);
+    if (cb) cb();
+  }
+
+  /**
+   * Remove operation that takes a callback.
+   *
+   * @param {Node} el
+   * @param {Vue} vm - unused
+   * @param {Function} [cb]
+   */
+
+  function removeWithCb(el, vm, cb) {
+    remove(el);
+    if (cb) cb();
+  }
+}
+
+function eventsAPI (Vue) {
+  /**
+   * Listen on the given `event` with `fn`.
+   *
+   * @param {String} event
+   * @param {Function} fn
+   */
+
+  Vue.prototype.$on = function (event, fn) {
+    (this._events[event] || (this._events[event] = [])).push(fn);
+    modifyListenerCount(this, event, 1);
+    return this;
+  };
+
+  /**
+   * Adds an `event` listener that will be invoked a single
+   * time then automatically removed.
+   *
+   * @param {String} event
+   * @param {Function} fn
+   */
+
+  Vue.prototype.$once = function (event, fn) {
+    var self = this;
+    function on() {
+      self.$off(event, on);
+      fn.apply(this, arguments);
+    }
+    on.fn = fn;
+    this.$on(event, on);
+    return this;
+  };
+
+  /**
+   * Remove the given callback for `event` or all
+   * registered callbacks.
+   *
+   * @param {String} event
+   * @param {Function} fn
+   */
+
+  Vue.prototype.$off = function (event, fn) {
+    var cbs;
+    // all
+    if (!arguments.length) {
+      if (this.$parent) {
+        for (event in this._events) {
+          cbs = this._events[event];
+          if (cbs) {
+            modifyListenerCount(this, event, -cbs.length);
+          }
+        }
+      }
+      this._events = {};
+      return this;
+    }
+    // specific event
+    cbs = this._events[event];
+    if (!cbs) {
+      return this;
+    }
+    if (arguments.length === 1) {
+      modifyListenerCount(this, event, -cbs.length);
+      this._events[event] = null;
+      return this;
+    }
+    // specific handler
+    var cb;
+    var i = cbs.length;
+    while (i--) {
+      cb = cbs[i];
+      if (cb === fn || cb.fn === fn) {
+        modifyListenerCount(this, event, -1);
+        cbs.splice(i, 1);
+        break;
+      }
+    }
+    return this;
+  };
+
+  /**
+   * Trigger an event on self.
+   *
+   * @param {String|Object} event
+   * @return {Boolean} shouldPropagate
+   */
+
+  Vue.prototype.$emit = function (event) {
+    var isSource = typeof event === 'string';
+    event = isSource ? event : event.name;
+    var cbs = this._events[event];
+    var shouldPropagate = isSource || !cbs;
+    if (cbs) {
+      cbs = cbs.length > 1 ? toArray(cbs) : cbs;
+      // this is a somewhat hacky solution to the question raised
+      // in #2102: for an inline component listener like <comp @test="doThis">,
+      // the propagation handling is somewhat broken. Therefore we
+      // need to treat these inline callbacks differently.
+      var hasParentCbs = isSource && cbs.some(function (cb) {
+        return cb._fromParent;
+      });
+      if (hasParentCbs) {
+        shouldPropagate = false;
+      }
+      var args = toArray(arguments, 1);
+      for (var i = 0, l = cbs.length; i < l; i++) {
+        var cb = cbs[i];
+        var res = cb.apply(this, args);
+        if (res === true && (!hasParentCbs || cb._fromParent)) {
+          shouldPropagate = true;
+        }
+      }
+    }
+    return shouldPropagate;
+  };
+
+  /**
+   * Recursively broadcast an event to all children instances.
+   *
+   * @param {String|Object} event
+   * @param {...*} additional arguments
+   */
+
+  Vue.prototype.$broadcast = function (event) {
+    var isSource = typeof event === 'string';
+    event = isSource ? event : event.name;
+    // if no child has registered for this event,
+    // then there's no need to broadcast.
+    if (!this._eventsCount[event]) return;
+    var children = this.$children;
+    var args = toArray(arguments);
+    if (isSource) {
+      // use object event to indicate non-source emit
+      // on children
+      args[0] = { name: event, source: this };
+    }
+    for (var i = 0, l = children.length; i < l; i++) {
+      var child = children[i];
+      var shouldPropagate = child.$emit.apply(child, args);
+      if (shouldPropagate) {
+        child.$broadcast.apply(child, args);
+      }
+    }
+    return this;
+  };
+
+  /**
+   * Recursively propagate an event up the parent chain.
+   *
+   * @param {String} event
+   * @param {...*} additional arguments
+   */
+
+  Vue.prototype.$dispatch = function (event) {
+    var shouldPropagate = this.$emit.apply(this, arguments);
+    if (!shouldPropagate) return;
+    var parent = this.$parent;
+    var args = toArray(arguments);
+    // use object event to indicate non-source emit
+    // on parents
+    args[0] = { name: event, source: this };
+    while (parent) {
+      shouldPropagate = parent.$emit.apply(parent, args);
+      parent = shouldPropagate ? parent.$parent : null;
+    }
+    return this;
+  };
+
+  /**
+   * Modify the listener counts on all parents.
+   * This bookkeeping allows $broadcast to return early when
+   * no child has listened to a certain event.
+   *
+   * @param {Vue} vm
+   * @param {String} event
+   * @param {Number} count
+   */
+
+  var hookRE = /^hook:/;
+  function modifyListenerCount(vm, event, count) {
+    var parent = vm.$parent;
+    // hooks do not get broadcasted so no need
+    // to do bookkeeping for them
+    if (!parent || !count || hookRE.test(event)) return;
+    while (parent) {
+      parent._eventsCount[event] = (parent._eventsCount[event] || 0) + count;
+      parent = parent.$parent;
+    }
+  }
+}
+
+function lifecycleAPI (Vue) {
+  /**
+   * Set instance target element and kick off the compilation
+   * process. The passed in `el` can be a selector string, an
+   * existing Element, or a DocumentFragment (for block
+   * instances).
+   *
+   * @param {Element|DocumentFragment|string} el
+   * @public
+   */
+
+  Vue.prototype.$mount = function (el) {
+    if (this._isCompiled) {
+      process.env.NODE_ENV !== 'production' && warn('$mount() should be called only once.', this);
+      return;
+    }
+    el = query(el);
+    if (!el) {
+      el = document.createElement('div');
+    }
+    this._compile(el);
+    this._initDOMHooks();
+    if (inDoc(this.$el)) {
+      this._callHook('attached');
+      ready.call(this);
+    } else {
+      this.$once('hook:attached', ready);
+    }
+    return this;
+  };
+
+  /**
+   * Mark an instance as ready.
+   */
+
+  function ready() {
+    this._isAttached = true;
+    this._isReady = true;
+    this._callHook('ready');
+  }
+
+  /**
+   * Teardown the instance, simply delegate to the internal
+   * _destroy.
+   *
+   * @param {Boolean} remove
+   * @param {Boolean} deferCleanup
+   */
+
+  Vue.prototype.$destroy = function (remove, deferCleanup) {
+    this._destroy(remove, deferCleanup);
+  };
+
+  /**
+   * Partially compile a piece of DOM and return a
+   * decompile function.
+   *
+   * @param {Element|DocumentFragment} el
+   * @param {Vue} [host]
+   * @param {Object} [scope]
+   * @param {Fragment} [frag]
+   * @return {Function}
+   */
+
+  Vue.prototype.$compile = function (el, host, scope, frag) {
+    return compile(el, this.$options, true)(this, el, host, scope, frag);
+  };
+}
+
+/**
+ * The exposed Vue constructor.
+ *
+ * API conventions:
+ * - public API methods/properties are prefixed with `$`
+ * - internal methods/properties are prefixed with `_`
+ * - non-prefixed properties are assumed to be proxied user
+ *   data.
+ *
+ * @constructor
+ * @param {Object} [options]
+ * @public
+ */
+
+function Vue(options) {
+  this._init(options);
+}
+
+// install internals
+initMixin(Vue);
+stateMixin(Vue);
+eventsMixin(Vue);
+lifecycleMixin(Vue);
+miscMixin(Vue);
+
+// install instance APIs
+dataAPI(Vue);
+domAPI(Vue);
+eventsAPI(Vue);
+lifecycleAPI(Vue);
+
+var slot = {
+
+  priority: SLOT,
+  params: ['name'],
+
+  bind: function bind() {
+    // this was resolved during component transclusion
+    var name = this.params.name || 'default';
+    var content = this.vm._slotContents && this.vm._slotContents[name];
+    if (!content || !content.hasChildNodes()) {
+      this.fallback();
+    } else {
+      this.compile(content.cloneNode(true), this.vm._context, this.vm);
+    }
+  },
+
+  compile: function compile(content, context, host) {
+    if (content && context) {
+      if (this.el.hasChildNodes() && content.childNodes.length === 1 && content.childNodes[0].nodeType === 1 && content.childNodes[0].hasAttribute('v-if')) {
+        // if the inserted slot has v-if
+        // inject fallback content as the v-else
+        var elseBlock = document.createElement('template');
+        elseBlock.setAttribute('v-else', '');
+        elseBlock.innerHTML = this.el.innerHTML;
+        // the else block should be compiled in child scope
+        elseBlock._context = this.vm;
+        content.appendChild(elseBlock);
+      }
+      var scope = host ? host._scope : this._scope;
+      this.unlink = context.$compile(content, host, scope, this._frag);
+    }
+    if (content) {
+      replace(this.el, content);
+    } else {
+      remove(this.el);
+    }
+  },
+
+  fallback: function fallback() {
+    this.compile(extractContent(this.el, true), this.vm);
+  },
+
+  unbind: function unbind() {
+    if (this.unlink) {
+      this.unlink();
+    }
+  }
+};
+
+var partial = {
+
+  priority: PARTIAL,
+
+  params: ['name'],
+
+  // watch changes to name for dynamic partials
+  paramWatchers: {
+    name: function name(value) {
+      vIf.remove.call(this);
+      if (value) {
+        this.insert(value);
+      }
+    }
+  },
+
+  bind: function bind() {
+    this.anchor = createAnchor('v-partial');
+    replace(this.el, this.anchor);
+    this.insert(this.params.name);
+  },
+
+  insert: function insert(id) {
+    var partial = resolveAsset(this.vm.$options, 'partials', id, true);
+    if (partial) {
+      this.factory = new FragmentFactory(this.vm, partial);
+      vIf.insert.call(this);
+    }
+  },
+
+  unbind: function unbind() {
+    if (this.frag) {
+      this.frag.destroy();
+    }
+  }
+};
+
+var elementDirectives = {
+  slot: slot,
+  partial: partial
+};
+
+var convertArray = vFor._postProcess;
+
+/**
+ * Limit filter for arrays
+ *
+ * @param {Number} n
+ * @param {Number} offset (Decimal expected)
+ */
+
+function limitBy(arr, n, offset) {
+  offset = offset ? parseInt(offset, 10) : 0;
+  n = toNumber(n);
+  return typeof n === 'number' ? arr.slice(offset, offset + n) : arr;
+}
+
+/**
+ * Filter filter for arrays
+ *
+ * @param {String} search
+ * @param {String} [delimiter]
+ * @param {String} ...dataKeys
+ */
+
+function filterBy(arr, search, delimiter) {
+  arr = convertArray(arr);
+  if (search == null) {
+    return arr;
+  }
+  if (typeof search === 'function') {
+    return arr.filter(search);
+  }
+  // cast to lowercase string
+  search = ('' + search).toLowerCase();
+  // allow optional `in` delimiter
+  // because why not
+  var n = delimiter === 'in' ? 3 : 2;
+  // extract and flatten keys
+  var keys = Array.prototype.concat.apply([], toArray(arguments, n));
+  var res = [];
+  var item, key, val, j;
+  for (var i = 0, l = arr.length; i < l; i++) {
+    item = arr[i];
+    val = item && item.$value || item;
+    j = keys.length;
+    if (j) {
+      while (j--) {
+        key = keys[j];
+        if (key === '$key' && contains(item.$key, search) || contains(getPath(val, key), search)) {
+          res.push(item);
+          break;
+        }
+      }
+    } else if (contains(item, search)) {
+      res.push(item);
+    }
+  }
+  return res;
+}
+
+/**
+ * Filter filter for arrays
+ *
+ * @param {String|Array<String>|Function} ...sortKeys
+ * @param {Number} [order]
+ */
+
+function orderBy(arr) {
+  var comparator = null;
+  var sortKeys = undefined;
+  arr = convertArray(arr);
+
+  // determine order (last argument)
+  var args = toArray(arguments, 1);
+  var order = args[args.length - 1];
+  if (typeof order === 'number') {
+    order = order < 0 ? -1 : 1;
+    args = args.length > 1 ? args.slice(0, -1) : args;
+  } else {
+    order = 1;
+  }
+
+  // determine sortKeys & comparator
+  var firstArg = args[0];
+  if (!firstArg) {
+    return arr;
+  } else if (typeof firstArg === 'function') {
+    // custom comparator
+    comparator = function (a, b) {
+      return firstArg(a, b) * order;
+    };
+  } else {
+    // string keys. flatten first
+    sortKeys = Array.prototype.concat.apply([], args);
+    comparator = function (a, b, i) {
+      i = i || 0;
+      return i >= sortKeys.length - 1 ? baseCompare(a, b, i) : baseCompare(a, b, i) || comparator(a, b, i + 1);
+    };
+  }
+
+  function baseCompare(a, b, sortKeyIndex) {
+    var sortKey = sortKeys[sortKeyIndex];
+    if (sortKey) {
+      if (sortKey !== '$key') {
+        if (isObject(a) && '$value' in a) a = a.$value;
+        if (isObject(b) && '$value' in b) b = b.$value;
+      }
+      a = isObject(a) ? getPath(a, sortKey) : a;
+      b = isObject(b) ? getPath(b, sortKey) : b;
+    }
+    return a === b ? 0 : a > b ? order : -order;
+  }
+
+  // sort on a copy to avoid mutating original array
+  return arr.slice().sort(comparator);
+}
+
+/**
+ * String contain helper
+ *
+ * @param {*} val
+ * @param {String} search
+ */
+
+function contains(val, search) {
+  var i;
+  if (isPlainObject(val)) {
+    var keys = Object.keys(val);
+    i = keys.length;
+    while (i--) {
+      if (contains(val[keys[i]], search)) {
+        return true;
+      }
+    }
+  } else if (isArray(val)) {
+    i = val.length;
+    while (i--) {
+      if (contains(val[i], search)) {
+        return true;
+      }
+    }
+  } else if (val != null) {
+    return val.toString().toLowerCase().indexOf(search) > -1;
+  }
+}
+
+var digitsRE = /(\d{3})(?=\d)/g;
+
+// asset collections must be a plain object.
+var filters = {
+
+  orderBy: orderBy,
+  filterBy: filterBy,
+  limitBy: limitBy,
+
+  /**
+   * Stringify value.
+   *
+   * @param {Number} indent
+   */
+
+  json: {
+    read: function read(value, indent) {
+      return typeof value === 'string' ? value : JSON.stringify(value, null, arguments.length > 1 ? indent : 2);
+    },
+    write: function write(value) {
+      try {
+        return JSON.parse(value);
+      } catch (e) {
+        return value;
+      }
+    }
+  },
+
+  /**
+   * 'abc' => 'Abc'
+   */
+
+  capitalize: function capitalize(value) {
+    if (!value && value !== 0) return '';
+    value = value.toString();
+    return value.charAt(0).toUpperCase() + value.slice(1);
+  },
+
+  /**
+   * 'abc' => 'ABC'
+   */
+
+  uppercase: function uppercase(value) {
+    return value || value === 0 ? value.toString().toUpperCase() : '';
+  },
+
+  /**
+   * 'AbC' => 'abc'
+   */
+
+  lowercase: function lowercase(value) {
+    return value || value === 0 ? value.toString().toLowerCase() : '';
+  },
+
+  /**
+   * 12345 => $12,345.00
+   *
+   * @param {String} sign
+   * @param {Number} decimals Decimal places
+   */
+
+  currency: function currency(value, _currency, decimals) {
+    value = parseFloat(value);
+    if (!isFinite(value) || !value && value !== 0) return '';
+    _currency = _currency != null ? _currency : '$';
+    decimals = decimals != null ? decimals : 2;
+    var stringified = Math.abs(value).toFixed(decimals);
+    var _int = decimals ? stringified.slice(0, -1 - decimals) : stringified;
+    var i = _int.length % 3;
+    var head = i > 0 ? _int.slice(0, i) + (_int.length > 3 ? ',' : '') : '';
+    var _float = decimals ? stringified.slice(-1 - decimals) : '';
+    var sign = value < 0 ? '-' : '';
+    return sign + _currency + head + _int.slice(i).replace(digitsRE, '$1,') + _float;
+  },
+
+  /**
+   * 'item' => 'items'
+   *
+   * @params
+   *  an array of strings corresponding to
+   *  the single, double, triple ... forms of the word to
+   *  be pluralized. When the number to be pluralized
+   *  exceeds the length of the args, it will use the last
+   *  entry in the array.
+   *
+   *  e.g. ['single', 'double', 'triple', 'multiple']
+   */
+
+  pluralize: function pluralize(value) {
+    var args = toArray(arguments, 1);
+    var length = args.length;
+    if (length > 1) {
+      var index = value % 10 - 1;
+      return index in args ? args[index] : args[length - 1];
+    } else {
+      return args[0] + (value === 1 ? '' : 's');
+    }
+  },
+
+  /**
+   * Debounce a handler function.
+   *
+   * @param {Function} handler
+   * @param {Number} delay = 300
+   * @return {Function}
+   */
+
+  debounce: function debounce(handler, delay) {
+    if (!handler) return;
+    if (!delay) {
+      delay = 300;
+    }
+    return _debounce(handler, delay);
+  }
+};
+
+function installGlobalAPI (Vue) {
+  /**
+   * Vue and every constructor that extends Vue has an
+   * associated options object, which can be accessed during
+   * compilation steps as `this.constructor.options`.
+   *
+   * These can be seen as the default options of every
+   * Vue instance.
+   */
+
+  Vue.options = {
+    directives: directives,
+    elementDirectives: elementDirectives,
+    filters: filters,
+    transitions: {},
+    components: {},
+    partials: {},
+    replace: true
+  };
+
+  /**
+   * Expose useful internals
+   */
+
+  Vue.util = util;
+  Vue.config = config;
+  Vue.set = set;
+  Vue['delete'] = del;
+  Vue.nextTick = nextTick;
+
+  /**
+   * The following are exposed for advanced usage / plugins
+   */
+
+  Vue.compiler = compiler;
+  Vue.FragmentFactory = FragmentFactory;
+  Vue.internalDirectives = internalDirectives;
+  Vue.parsers = {
+    path: path,
+    text: text,
+    template: template,
+    directive: directive,
+    expression: expression
+  };
+
+  /**
+   * Each instance constructor, including Vue, has a unique
+   * cid. This enables us to create wrapped "child
+   * constructors" for prototypal inheritance and cache them.
+   */
+
+  Vue.cid = 0;
+  var cid = 1;
+
+  /**
+   * Class inheritance
+   *
+   * @param {Object} extendOptions
+   */
+
+  Vue.extend = function (extendOptions) {
+    extendOptions = extendOptions || {};
+    var Super = this;
+    var isFirstExtend = Super.cid === 0;
+    if (isFirstExtend && extendOptions._Ctor) {
+      return extendOptions._Ctor;
+    }
+    var name = extendOptions.name || Super.options.name;
+    if (process.env.NODE_ENV !== 'production') {
+      if (!/^[a-zA-Z][\w-]*$/.test(name)) {
+        warn('Invalid component name: "' + name + '". Component names ' + 'can only contain alphanumeric characaters and the hyphen.');
+        name = null;
+      }
+    }
+    var Sub = createClass(name || 'VueComponent');
+    Sub.prototype = Object.create(Super.prototype);
+    Sub.prototype.constructor = Sub;
+    Sub.cid = cid++;
+    Sub.options = mergeOptions(Super.options, extendOptions);
+    Sub['super'] = Super;
+    // allow further extension
+    Sub.extend = Super.extend;
+    // create asset registers, so extended classes
+    // can have their private assets too.
+    config._assetTypes.forEach(function (type) {
+      Sub[type] = Super[type];
+    });
+    // enable recursive self-lookup
+    if (name) {
+      Sub.options.components[name] = Sub;
+    }
+    // cache constructor
+    if (isFirstExtend) {
+      extendOptions._Ctor = Sub;
+    }
+    return Sub;
+  };
+
+  /**
+   * A function that returns a sub-class constructor with the
+   * given name. This gives us much nicer output when
+   * logging instances in the console.
+   *
+   * @param {String} name
+   * @return {Function}
+   */
+
+  function createClass(name) {
+    /* eslint-disable no-new-func */
+    return new Function('return function ' + classify(name) + ' (options) { this._init(options) }')();
+    /* eslint-enable no-new-func */
+  }
+
+  /**
+   * Plugin system
+   *
+   * @param {Object} plugin
+   */
+
+  Vue.use = function (plugin) {
+    /* istanbul ignore if */
+    if (plugin.installed) {
+      return;
+    }
+    // additional parameters
+    var args = toArray(arguments, 1);
+    args.unshift(this);
+    if (typeof plugin.install === 'function') {
+      plugin.install.apply(plugin, args);
+    } else {
+      plugin.apply(null, args);
+    }
+    plugin.installed = true;
+    return this;
+  };
+
+  /**
+   * Apply a global mixin by merging it into the default
+   * options.
+   */
+
+  Vue.mixin = function (mixin) {
+    Vue.options = mergeOptions(Vue.options, mixin);
+  };
+
+  /**
+   * Create asset registration methods with the following
+   * signature:
+   *
+   * @param {String} id
+   * @param {*} definition
+   */
+
+  config._assetTypes.forEach(function (type) {
+    Vue[type] = function (id, definition) {
+      if (!definition) {
+        return this.options[type + 's'][id];
+      } else {
+        /* istanbul ignore if */
+        if (process.env.NODE_ENV !== 'production') {
+          if (type === 'component' && (commonTagRE.test(id) || reservedTagRE.test(id))) {
+            warn('Do not use built-in or reserved HTML elements as component ' + 'id: ' + id);
+          }
+        }
+        if (type === 'component' && isPlainObject(definition)) {
+          if (!definition.name) {
+            definition.name = id;
+          }
+          definition = Vue.extend(definition);
+        }
+        this.options[type + 's'][id] = definition;
+        return definition;
+      }
+    };
+  });
+
+  // expose internal transition API
+  extend(Vue.transition, transition);
+}
+
+installGlobalAPI(Vue);
+
+Vue.version = '1.0.26';
+
+// devtools global hook
+/* istanbul ignore next */
+setTimeout(function () {
+  if (config.devtools) {
+    if (devtools) {
+      devtools.emit('init', Vue);
+    } else if (process.env.NODE_ENV !== 'production' && inBrowser && /Chrome\/\d+/.test(window.navigator.userAgent)) {
+      console.log('Download the Vue Devtools for a better development experience:\n' + 'https://github.com/vuejs/vue-devtools');
+    }
+  }
+}, 0);
+
+module.exports = Vue;
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"_process":1}],6:[function(require,module,exports){
+var inserted = exports.cache = {}
+
+exports.insert = function (css) {
+  if (inserted[css]) return
+  inserted[css] = true
+
+  var elem = document.createElement('style')
+  elem.setAttribute('type', 'text/css')
+
+  if ('textContent' in elem) {
+    elem.textContent = css
+  } else {
+    elem.styleSheet.cssText = css
+  }
+
+  document.getElementsByTagName('head')[0].appendChild(elem)
+  return elem
+}
+
+},{}],7:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _Navbar = require('./components/layouts/Navbar.vue');
+
+var _Navbar2 = _interopRequireDefault(_Navbar);
+
+var _Sidebar = require('./components/layouts/Sidebar.vue');
+
+var _Sidebar2 = _interopRequireDefault(_Sidebar);
+
+var _Footbar = require('./components/layouts/Footbar.vue');
+
+var _Footbar2 = _interopRequireDefault(_Footbar);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  components: {
+    Navbar: _Navbar2.default,
+    Sidebar: _Sidebar2.default,
+    Footbar: _Footbar2.default
+  },
+  replace: false
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"container body\">\n    <div id=\"app\">\n        <div class=\"main_container\">\n            <sidebar></sidebar>\n            <navbar></navbar>\n            <!-- Main content -->\n            <div class=\"right_col\" role=\"main\">\n                <section class=\"content\">\n                    <!-- Your Page Content Here -->\n                    <!-- route outlet -->\n                    <router-view></router-view>\n                </section>\n            </div>\n            <!-- /.content -->\n            <footbar></footbar>\n        </div>\n    </div>\n</div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-0ce8031a", module.exports)
+  } else {
+    hotAPI.update("_v-0ce8031a", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"./components/layouts/Footbar.vue":11,"./components/layouts/Navbar.vue":12,"./components/layouts/Sidebar.vue":13,"vue":5,"vue-hot-reload-api":2}],8:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n   <div class=\"\">\n       <div class=\"row top_tiles\">\n           <div class=\"animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12\">\n               <div class=\"tile-stats\">\n                   <div class=\"icon\"><i class=\"fa fa-caret-square-o-right\"></i>\n                   </div>\n                   <div class=\"count\">179</div>\n                    <h3>New Sign ups</h3>\n                   <p>Lorem ipsum psdea itgum rixt.</p>\n               </div>\n           </div>\n           <div class=\"animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12\">\n               <div class=\"tile-stats\">\n                   <div class=\"icon\"><i class=\"fa fa-comments-o\"></i>\n                   </div>\n                   <div class=\"count\">179</div>\n                    <h3>New Sign ups</h3>\n                   <p>Lorem ipsum psdea itgum rixt.</p>\n               </div>\n           </div>\n           <div class=\"animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12\">\n               <div class=\"tile-stats\">\n                   <div class=\"icon\"><i class=\"fa fa-sort-amount-desc\"></i>\n                   </div>\n                   <div class=\"count\">179</div>\n                    <h3>New Sign ups</h3>\n\n                   <p>Lorem ipsum psdea itgum rixt.</p>\n               </div>\n           </div>\n           <div class=\"animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12\">\n               <div class=\"tile-stats\">\n                   <div class=\"icon\"><i class=\"fa fa-check-square-o\"></i>\n                   </div>\n                   <div class=\"count\">179</div>\n                    <h3>New Sign ups</h3>\n\n                   <p>Lorem ipsum psdea itgum rixt.</p>\n               </div>\n           </div>\n       </div>\n       <div class=\"row\">\n           <div class=\"col-md-12\">\n               <div class=\"x_panel\">\n                   <div class=\"x_title\">\n                        <h2>Transaction Summary <small>Weekly progress</small></h2>\n\n                       <div class=\"filter\">\n                           <div id=\"reportrange\" class=\"pull-right\" style=\"background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc\"> <i class=\"glyphicon glyphicon-calendar fa fa-calendar\"></i>\n<span>December 30, 2014 - January 28, 2015</span>  <b class=\"caret\"></b>\n\n                           </div>\n                       </div>\n                       <div class=\"clearfix\"></div>\n                   </div>\n                   <div class=\"x_content\">\n                       <div class=\"col-md-9 col-sm-12 col-xs-12\">\n                           <div class=\"demo-container\" style=\"height:280px\">\n                               <div id=\"placeholder33x\" class=\"demo-placeholder\"></div>\n                           </div>\n                           <div class=\"tiles\">\n                               <div class=\"col-md-4 tile\"> <span>Total Sessions</span>\n\n                                    <h2>231,809</h2>\n<span class=\"sparkline11 graph\" style=\"height: 160px;\">\n                                 <canvas width=\"200\" height=\"60\" style=\"display: inline-block; vertical-align: top; width: 94px; height: 30px;\"></canvas>\n                             </span>\n\n                               </div>\n                               <div class=\"col-md-4 tile\"> <span>Total Revenue</span>\n\n                                    <h2>$231,809</h2>\n<span class=\"sparkline22 graph\" style=\"height: 160px;\">\n                                 <canvas width=\"200\" height=\"60\" style=\"display: inline-block; vertical-align: top; width: 94px; height: 30px;\"></canvas>\n                             </span>\n\n                               </div>\n                               <div class=\"col-md-4 tile\"> <span>Total Sessions</span>\n\n                                    <h2>231,809</h2>\n<span class=\"sparkline11 graph\" style=\"height: 160px;\">\n                                 <canvas width=\"200\" height=\"60\" style=\"display: inline-block; vertical-align: top; width: 94px; height: 30px;\"></canvas>\n                             </span>\n\n                               </div>\n                           </div>\n                       </div>\n                       <div class=\"col-md-3 col-sm-12 col-xs-12\">\n                           <div>\n                               <div class=\"x_title\">\n                                    <h2>Top Profiles</h2>\n\n                                   <ul class=\"nav navbar-right panel_toolbox\">\n                                       <li><a class=\"collapse-link\"><i class=\"fa fa-chevron-up\"></i></a>\n\n                                       </li>\n                                       <li class=\"dropdown\"> <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\"><i class=\"fa fa-wrench\"></i></a>\n\n                                           <ul class=\"dropdown-menu\" role=\"menu\">\n                                               <li><a href=\"#\">Settings 1</a>\n\n                                               </li>\n                                               <li><a href=\"#\">Settings 2</a>\n\n                                               </li>\n                                           </ul>\n                                       </li>\n                                       <li><a class=\"close-link\"><i class=\"fa fa-close\"></i></a>\n\n                                       </li>\n                                   </ul>\n                                   <div class=\"clearfix\"></div>\n                               </div>\n                               <ul class=\"list-unstyled top_profiles scroll-view\">\n                                   <li class=\"media event\">\n                                       <a class=\"pull-left border-aero profile_thumb\"> <i class=\"fa fa-user aero\"></i>\n\n                                       </a>\n                                       <div class=\"media-body\"> <a class=\"title\" href=\"#\">Ms. Mary Jane</a>\n\n                                           <p><strong>$2300. </strong> Agent Avarage Sales</p>\n                                           <p> <small>12 Sales Today</small>\n\n                                           </p>\n                                       </div>\n                                   </li>\n                                   <li class=\"media event\">\n                                       <a class=\"pull-left border-green profile_thumb\"> <i class=\"fa fa-user green\"></i>\n\n                                       </a>\n                                       <div class=\"media-body\"> <a class=\"title\" href=\"#\">Ms. Mary Jane</a>\n\n                                           <p><strong>$2300. </strong> Agent Avarage Sales</p>\n                                           <p> <small>12 Sales Today</small>\n\n                                           </p>\n                                       </div>\n                                   </li>\n                                   <li class=\"media event\">\n                                       <a class=\"pull-left border-blue profile_thumb\"> <i class=\"fa fa-user blue\"></i>\n\n                                       </a>\n                                       <div class=\"media-body\"> <a class=\"title\" href=\"#\">Ms. Mary Jane</a>\n\n                                           <p><strong>$2300. </strong> Agent Avarage Sales</p>\n                                           <p> <small>12 Sales Today</small>\n\n                                           </p>\n                                       </div>\n                                   </li>\n                                   <li class=\"media event\">\n                                       <a class=\"pull-left border-aero profile_thumb\"> <i class=\"fa fa-user aero\"></i>\n\n                                       </a>\n                                       <div class=\"media-body\"> <a class=\"title\" href=\"#\">Ms. Mary Jane</a>\n\n                                           <p><strong>$2300. </strong> Agent Avarage Sales</p>\n                                           <p> <small>12 Sales Today</small>\n\n                                           </p>\n                                       </div>\n                                   </li>\n                                   <li class=\"media event\">\n                                       <a class=\"pull-left border-green profile_thumb\"> <i class=\"fa fa-user green\"></i>\n\n                                       </a>\n                                       <div class=\"media-body\"> <a class=\"title\" href=\"#\">Ms. Mary Jane</a>\n\n                                           <p><strong>$2300. </strong> Agent Avarage Sales</p>\n                                           <p> <small>12 Sales Today</small>\n\n                                           </p>\n                                       </div>\n                                   </li>\n                               </ul>\n                           </div>\n                       </div>\n                   </div>\n               </div>\n           </div>\n       </div>\n       <div class=\"row\">\n           <div class=\"col-md-12\">\n               <div class=\"x_panel\">\n                   <div class=\"x_title\">\n                        <h2>Weekly Summary <small>Activity shares</small></h2>\n\n                       <ul class=\"nav navbar-right panel_toolbox\">\n                           <li><a class=\"collapse-link\"><i class=\"fa fa-chevron-up\"></i></a>\n\n                           </li>\n                           <li class=\"dropdown\"> <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\"><i class=\"fa fa-wrench\"></i></a>\n\n                               <ul class=\"dropdown-menu\" role=\"menu\">\n                                   <li><a href=\"#\">Settings 1</a>\n\n                                   </li>\n                                   <li><a href=\"#\">Settings 2</a>\n\n                                   </li>\n                               </ul>\n                           </li>\n                           <li><a class=\"close-link\"><i class=\"fa fa-close\"></i></a>\n\n                           </li>\n                       </ul>\n                       <div class=\"clearfix\"></div>\n                   </div>\n                   <div class=\"x_content\">\n                       <div class=\"row\" style=\"border-bottom: 1px solid #E0E0E0; padding-bottom: 5px; margin-bottom: 5px;\">\n                           <div class=\"col-md-7\" style=\"overflow:hidden;\"> <span class=\"sparkline_one\" style=\"height: 160px; padding: 10px 25px;\">\n                             <canvas width=\"200\" height=\"60\" style=\"display: inline-block; vertical-align: top; width: 94px; height: 30px;\"></canvas>\n                         </span>\n\n                                <h4 style=\"margin:18px\">Weekly sales progress</h4>\n\n                           </div>\n                           <div class=\"col-md-5\">\n                               <div class=\"row\" style=\"text-align: center;\">\n                                   <div class=\"col-md-4\">\n                                       <canvas id=\"canvas1i\" height=\"110\" width=\"110\" style=\"margin: 5px 10px 10px 0\"></canvas>\n                                        <h4 style=\"margin:0\">Bounce Rates</h4>\n\n                                   </div>\n                                   <div class=\"col-md-4\">\n                                       <canvas id=\"canvas1i2\" height=\"110\" width=\"110\" style=\"margin: 5px 10px 10px 0\"></canvas>\n                                        <h4 style=\"margin:0\">New Traffic</h4>\n\n                                   </div>\n                                   <div class=\"col-md-4\">\n                                       <canvas id=\"canvas1i3\" height=\"110\" width=\"110\" style=\"margin: 5px 10px 10px 0\"></canvas>\n                                        <h4 style=\"margin:0\">Device Share</h4>\n\n                                   </div>\n                               </div>\n                           </div>\n                       </div>\n                   </div>\n               </div>\n           </div>\n       </div>\n       <div class=\"row\">\n           <div class=\"col-md-4\">\n               <div class=\"x_panel\">\n                   <div class=\"x_title\">\n                        <h2>Top Profiles <small>Sessions</small></h2>\n\n                       <ul class=\"nav navbar-right panel_toolbox\">\n                           <li><a class=\"collapse-link\"><i class=\"fa fa-chevron-up\"></i></a>\n\n                           </li>\n                           <li class=\"dropdown\"> <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\"><i class=\"fa fa-wrench\"></i></a>\n\n                               <ul class=\"dropdown-menu\" role=\"menu\">\n                                   <li><a href=\"#\">Settings 1</a>\n\n                                   </li>\n                                   <li><a href=\"#\">Settings 2</a>\n\n                                   </li>\n                               </ul>\n                           </li>\n                           <li><a class=\"close-link\"><i class=\"fa fa-close\"></i></a>\n\n                           </li>\n                       </ul>\n                       <div class=\"clearfix\"></div>\n                   </div>\n                   <div class=\"x_content\">\n                       <article class=\"media event\">\n                           <a class=\"pull-left date\">\n                               <p class=\"month\">April</p>\n                               <p class=\"day\">23</p>\n                           </a>\n                           <div class=\"media-body\"> <a class=\"title\" href=\"#\">Item One Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class=\"media event\">\n                           <a class=\"pull-left date\">\n                               <p class=\"month\">April</p>\n                               <p class=\"day\">23</p>\n                           </a>\n                           <div class=\"media-body\"> <a class=\"title\" href=\"#\">Item Two Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class=\"media event\">\n                           <a class=\"pull-left date\">\n                               <p class=\"month\">April</p>\n                               <p class=\"day\">23</p>\n                           </a>\n                           <div class=\"media-body\"> <a class=\"title\" href=\"#\">Item Two Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class=\"media event\">\n                           <a class=\"pull-left date\">\n                               <p class=\"month\">April</p>\n                               <p class=\"day\">23</p>\n                           </a>\n                           <div class=\"media-body\"> <a class=\"title\" href=\"#\">Item Two Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class=\"media event\">\n                           <a class=\"pull-left date\">\n                               <p class=\"month\">April</p>\n                               <p class=\"day\">23</p>\n                           </a>\n                           <div class=\"media-body\"> <a class=\"title\" href=\"#\">Item Three Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                   </div>\n               </div>\n           </div>\n           <div class=\"col-md-4\">\n               <div class=\"x_panel\">\n                   <div class=\"x_title\">\n                        <h2>Top Profiles <small>Sessions</small></h2>\n\n                       <ul class=\"nav navbar-right panel_toolbox\">\n                           <li><a class=\"collapse-link\"><i class=\"fa fa-chevron-up\"></i></a>\n\n                           </li>\n                           <li class=\"dropdown\"> <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\"><i class=\"fa fa-wrench\"></i></a>\n\n                               <ul class=\"dropdown-menu\" role=\"menu\">\n                                   <li><a href=\"#\">Settings 1</a>\n\n                                   </li>\n                                   <li><a href=\"#\">Settings 2</a>\n\n                                   </li>\n                               </ul>\n                           </li>\n                           <li><a class=\"close-link\"><i class=\"fa fa-close\"></i></a>\n\n                           </li>\n                       </ul>\n                       <div class=\"clearfix\"></div>\n                   </div>\n                   <div class=\"x_content\">\n                       <article class=\"media event\">\n                           <a class=\"pull-left date\">\n                               <p class=\"month\">April</p>\n                               <p class=\"day\">23</p>\n                           </a>\n                           <div class=\"media-body\"> <a class=\"title\" href=\"#\">Item One Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class=\"media event\">\n                           <a class=\"pull-left date\">\n                               <p class=\"month\">April</p>\n                               <p class=\"day\">23</p>\n                           </a>\n                           <div class=\"media-body\"> <a class=\"title\" href=\"#\">Item Two Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class=\"media event\">\n                           <a class=\"pull-left date\">\n                               <p class=\"month\">April</p>\n                               <p class=\"day\">23</p>\n                           </a>\n                           <div class=\"media-body\"> <a class=\"title\" href=\"#\">Item Two Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class=\"media event\">\n                           <a class=\"pull-left date\">\n                               <p class=\"month\">April</p>\n                               <p class=\"day\">23</p>\n                           </a>\n                           <div class=\"media-body\"> <a class=\"title\" href=\"#\">Item Two Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class=\"media event\">\n                           <a class=\"pull-left date\">\n                               <p class=\"month\">April</p>\n                               <p class=\"day\">23</p>\n                           </a>\n                           <div class=\"media-body\"> <a class=\"title\" href=\"#\">Item Three Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                   </div>\n               </div>\n           </div>\n           <div class=\"col-md-4\">\n               <div class=\"x_panel\">\n                   <div class=\"x_title\">\n                        <h2>Top Profiles <small>Sessions</small></h2>\n\n                       <ul class=\"nav navbar-right panel_toolbox\">\n                           <li><a class=\"collapse-link\"><i class=\"fa fa-chevron-up\"></i></a>\n\n                           </li>\n                           <li class=\"dropdown\"> <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\"><i class=\"fa fa-wrench\"></i></a>\n\n                               <ul class=\"dropdown-menu\" role=\"menu\">\n                                   <li><a href=\"#\">Settings 1</a>\n\n                                   </li>\n                                   <li><a href=\"#\">Settings 2</a>\n\n                                   </li>\n                               </ul>\n                           </li>\n                           <li><a class=\"close-link\"><i class=\"fa fa-close\"></i></a>\n\n                           </li>\n                       </ul>\n                       <div class=\"clearfix\"></div>\n                   </div>\n                   <div class=\"x_content\">\n                       <article class=\"media event\">\n                           <a class=\"pull-left date\">\n                               <p class=\"month\">April</p>\n                               <p class=\"day\">23</p>\n                           </a>\n                           <div class=\"media-body\"> <a class=\"title\" href=\"#\">Item One Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class=\"media event\">\n                           <a class=\"pull-left date\">\n                               <p class=\"month\">April</p>\n                               <p class=\"day\">23</p>\n                           </a>\n                           <div class=\"media-body\"> <a class=\"title\" href=\"#\">Item Two Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class=\"media event\">\n                           <a class=\"pull-left date\">\n                               <p class=\"month\">April</p>\n                               <p class=\"day\">23</p>\n                           </a>\n                           <div class=\"media-body\"> <a class=\"title\" href=\"#\">Item Two Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class=\"media event\">\n                           <a class=\"pull-left date\">\n                               <p class=\"month\">April</p>\n                               <p class=\"day\">23</p>\n                           </a>\n                           <div class=\"media-body\"> <a class=\"title\" href=\"#\">Item Two Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                       <article class=\"media event\">\n                           <a class=\"pull-left date\">\n                               <p class=\"month\">April</p>\n                               <p class=\"day\">23</p>\n                           </a>\n                           <div class=\"media-body\"> <a class=\"title\" href=\"#\">Item Three Title</a>\n\n                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n                           </div>\n                       </article>\n                   </div>\n               </div>\n           </div>\n       </div>\n   </div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-a8c9521c", module.exports)
+  } else {
+    hotAPI.update("_v-a8c9521c", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":5,"vue-hot-reload-api":2}],9:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _PriceHead = require('./price/PriceHead.vue');
+
+var _PriceHead2 = _interopRequireDefault(_PriceHead);
+
+var _Datatable = require('./price/Datatable.vue');
+
+var _Datatable2 = _interopRequireDefault(_Datatable);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  components: {
+    Pricehead: _PriceHead2.default,
+    Datatable: _Datatable2.default
+  }
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<pricehead></pricehead>\n<div class=\"row\">\n    <datatable></datatable>\n</div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-37988e27", module.exports)
+  } else {
+    hotAPI.update("_v-37988e27", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"./price/Datatable.vue":15,"./price/PriceHead.vue":17,"vue":5,"vue-hot-reload-api":2}],10:[function(require,module,exports){
+var __vueify_insert__ = require("vueify/lib/insert-css")
+var __vueify_style__ = __vueify_insert__.insert("\nbody {\n\tposition: relative;\n}\nul.nav-pills {\n\ttop: 135px;\n\tposition: fixed;\n}\n#myScrollspy ul {\n\twidth: 180px;\n}\n.nav-stacked > li > a {\n\tborder: 1px solid #e5e5e5;\n\tdisplay: block;\n\tmargin: 0 0 -3px;\n\tpadding: 8px 14px;\n}\n.nav-pills > li > a {\n\tborder-radius: 0px;\n}\n#section1 {color: #fff; background-color: #1E88E5;}\n#section2 {color: #fff; background-color: #673ab7;}\n#section3 {color: #fff; background-color: #ff9800;}\n#section41 {color: #fff; background-color: #00bcd4;}\n#section42 {color: #fff; background-color: #009688;}\n \n@media screen and (min-width: 900px) {\n\n}\n")
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _BasicInfo = require('./product/BasicInfo.vue');
+
+var _BasicInfo2 = _interopRequireDefault(_BasicInfo);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+	ready: function ready() {
+		$("body").scrollspy({ target: '#myScrollspy', offset: 30 });
+	},
+
+	components: {
+		BasicInfo: _BasicInfo2.default
+	}
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <div class=\"page-title\">\n        <div class=\"title_left\">\n            <h3>[Accelerator]<small> Product Overview</small></h3>\n        </div>\n    </div>\n    <div class=\"clearfix\"></div>\n    <div>\n\t\t<div class=\"container\">\n\t\t  <div class=\"row\">\n\t\t    <nav class=\"hidden-xs col-sm-3 col-md-3 col-lg-2\" id=\"myScrollspy\">\n\t\t      <ul class=\"nav nav-pills nav-stacked\">\n\t\t        <li class=\"active\"><a href=\"#basicInfo\">Basic Product Info</a></li>\n\t\t        <li><a href=\"#section2\">Product Image</a></li>\n\t\t        <li><a href=\"#section3\">Section 3</a></li>\n\t\t        <li class=\"dropdown\">\n\t\t          <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">Section 4 <span class=\"caret\"></span></a>\n\t\t          <ul class=\"dropdown-menu\">\n\t\t            <li><a href=\"#section41\">Section 4-1</a></li>\n\t\t            <li><a href=\"#section42\">Section 4-2</a></li>                     \n\t\t          </ul>\n\t\t        </li>\n\t\t      </ul>\n\t\t    </nav>\n\t\t    <div class=\"col-sm-9 col-xs-9 col-md-9 col-lg-10\">\n\t\t    <basic-info></basic-info>\n\t\t      <div id=\"section2\"> \n\t\t        <h1>Section 2</h1>\n\t\t        <p>Try to scroll this section and look at the navigation list while scrolling!</p>\n\t\t      </div>         \n\t\t      <div id=\"section3\">         \n\t\t        <h1>Section 3</h1>\n\t\t        <p>Try to scroll this section and look at the navigation list while scrolling!</p>\n\t\t      </div>\n\t\t      <div id=\"section41\">         \n\t\t        <h1>Section 4-1</h1>\n\t\t        <p>Try to scroll this section and look at the navigation list while scrolling!</p>\n\t\t      </div>      \n\t\t      <div id=\"section42\">         \n\t\t        <h1>Section 4-2</h1>\n\t\t        <p>Try to scroll this section and look at the navigation list while scrolling!</p>\n\t\t      </div>\n\t\t    </div>\n\t\t  </div>\n\t\t</div>\n\t</div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.dispose(function () {
+    __vueify_insert__.cache["\nbody {\n\tposition: relative;\n}\nul.nav-pills {\n\ttop: 135px;\n\tposition: fixed;\n}\n#myScrollspy ul {\n\twidth: 180px;\n}\n.nav-stacked > li > a {\n\tborder: 1px solid #e5e5e5;\n\tdisplay: block;\n\tmargin: 0 0 -3px;\n\tpadding: 8px 14px;\n}\n.nav-pills > li > a {\n\tborder-radius: 0px;\n}\n#section1 {color: #fff; background-color: #1E88E5;}\n#section2 {color: #fff; background-color: #673ab7;}\n#section3 {color: #fff; background-color: #ff9800;}\n#section41 {color: #fff; background-color: #00bcd4;}\n#section42 {color: #fff; background-color: #009688;}\n \n@media screen and (min-width: 900px) {\n\n}\n"] = false
+    document.head.removeChild(__vueify_style__)
+  })
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-3dc1cd4d", module.exports)
+  } else {
+    hotAPI.update("_v-3dc1cd4d", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"./product/BasicInfo.vue":18,"vue":5,"vue-hot-reload-api":2,"vueify/lib/insert-css":6}],11:[function(require,module,exports){
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<!-- footer content -->\n<footer>\n    <div class=\"pull-right\">Accelerator - Product Prcing Overview  <a href=\"#\"> [Eservicesgroup.com]</a></div>\n  <div class=\"clearfix\"></div>\n</footer>\n<!-- /footer content -->\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-4fc4fc86", module.exports)
+  } else {
+    hotAPI.update("_v-4fc4fc86", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":5,"vue-hot-reload-api":2}],12:[function(require,module,exports){
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"top_nav\">\n    <div class=\"nav_menu\">\n        <nav class=\"\" role=\"navigation\">\n            <div class=\"nav toggle\">\n                <a id=\"menu_toggle\"><i class=\"fa fa-bars\"></i></a>\n            </div>\n            <ul class=\"nav navbar-nav navbar-right\">\n                <li class=\"\">\n                    <a href=\"javascript:;\" class=\"user-profile dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\">\n                        <img src=\"images/img.jpg\" alt=\"\">John Doe <span class=\" fa fa-angle-down\"></span>\n                    </a>\n                    <ul class=\"dropdown-menu dropdown-usermenu pull-right\">\n                        <li><a href=\"javascript:;\"> Profile</a>\n                        </li>\n                        <li>\n                            <a href=\"javascript:;\">\n                                <span class=\"badge bg-red pull-right\">50%</span>\n                                <span>Settings</span>\n                            </a>\n                        </li>\n                        <li><a href=\"javascript:;\">Help</a>\n                        </li>\n                        <li><a href=\"login.html\"><i class=\"fa fa-sign-out pull-right\"></i> Log Out</a>\n                        </li>\n                    </ul>\n                </li>\n                <li role=\"presentation\" class=\"dropdown\">\n                    <a href=\"javascript:;\" class=\"dropdown-toggle info-number\" data-toggle=\"dropdown\" aria-expanded=\"false\">    <i class=\"fa fa-envelope-o\"></i>\n                        <span class=\"badge bg-green\">6</span>\n                    </a>\n                    <ul id=\"menu1\" class=\"dropdown-menu list-unstyled msg_list\" role=\"menu\">\n                        <li>\n                            <a>\n                                <span class=\"image\"><img src=\"images/img.jpg\" alt=\"Profile Image\"></span>\n                                <span>\n                                    <span>John Smith</span>\n                                    <span class=\"time\">3 mins ago</span>\n                                </span>\n                                <span class=\"message\">Film festivals used to be do-or-die moments for movie makers. They were where...</span>\n                            </a>\n                        </li>\n                        <li>\n                            <a>\n                                <span class=\"image\"><img src=\"images/img.jpg\" alt=\"Profile Image\"></span>\n                                <span>\n                                    <span>John Smith</span>\n                                    <span class=\"time\">3 mins ago</span>\n                                </span>\n                                <span class=\"message\">Film festivals used to be do-or-die moments for movie makers. They were where...</span>\n                            </a>\n                        </li>\n                        <li>\n                            <a>\n                                <span class=\"image\"><img src=\"images/img.jpg\" alt=\"Profile Image\"></span>\n                                <span>\n                                    <span>John Smith</span>\n                                    <span class=\"time\">3 mins ago</span>\n                                </span>\n                                <span class=\"message\">Film festivals used to be do-or-die moments for movie makers. They were where...</span>\n                            </a>\n                        </li>\n                        <li>\n                            <a>\n                                <span class=\"image\"><img src=\"images/img.jpg\" alt=\"Profile Image\"></span>\n                                <span>\n                                    <span>John Smith</span>\n                                    <span class=\"time\">3 mins ago</span>\n                                </span>\n                                <span class=\"message\">Film festivals used to be do-or-die moments for movie makers. They were where...</span>\n                            </a>\n                        </li>\n                        <li>\n                            <div class=\"text-center\">\n                                <a>\n                                    <strong>See All Alerts</strong>\n                                    <i class=\"fa fa-angle-right\"></i>\n                                </a>\n                            </div>\n                        </li>\n                    </ul>\n                </li>\n            </ul>\n        </nav>\n    </div>\n</div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-66b95430", module.exports)
+  } else {
+    hotAPI.update("_v-66b95430", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":5,"vue-hot-reload-api":2}],13:[function(require,module,exports){
+'use strict';
+
+// Sidebar
+$(document).ready(function () {
+    var CURRENT_URL = window.location.href.split('?')[0];
+    // TODO: This is some kind of easy fix, maybe we can improve this
+    var setContentHeight = function setContentHeight() {
+        // reset height
+        $('.right_col').css('min-height', $(window).height());
+
+        var bodyHeight = $('body').outerHeight(),
+            footerHeight = $('body').hasClass('footer_fixed') ? 0 : $('footer').height(),
+            leftColHeight = $('.left_col').eq(1).height() + $('.sidebar-footer').height(),
+            contentHeight = bodyHeight < leftColHeight ? leftColHeight : bodyHeight;
+
+        // normalize content
+        contentHeight -= $('.nav_menu').height() + footerHeight;
+
+        // $('.right_col').css('min-height', contentHeight);
+    };
+
+    $('#sidebar-menu').find('a').on('click', function (ev) {
+        var $li = $(this).parent();
+
+        if ($li.is('.active')) {
+            $li.removeClass('active active-sm');
+            $('ul:first', $li).slideUp(function () {
+                setContentHeight();
+            });
+        } else {
+            // prevent closing menu if we are on child menu
+            if (!$li.parent().is('.child_menu')) {
+                $('#sidebar-menu').find('li').removeClass('active active-sm');
+                $('#sidebar-menu').find('li ul').slideUp();
+            }
+
+            $li.addClass('active');
+
+            $('ul:first', $li).slideDown(function () {
+                setContentHeight();
+            });
+        }
+    });
+
+    // toggle small or large menu
+    $('#menu_toggle').on('click', function () {
+        if ($('body').hasClass('nav-md')) {
+            $('#sidebar-menu').find('li.active ul').hide();
+            $('#sidebar-menu').find('li.active').addClass('active-sm').removeClass('active');
+        } else {
+            $('#sidebar-menu').find('li.active-sm ul').show();
+            $('#sidebar-menu').find('li.active-sm').addClass('active').removeClass('active-sm');
+        }
+
+        $('body').toggleClass('nav-md nav-sm');
+
+        setContentHeight();
+    });
+
+    // check active menu
+    // $('#sidebar-menu').find('a[href="' + CURRENT_URL + '"]').parent('li').addClass('current-page');
+
+    // $('#sidebar-menu').find('a').filter(function () {
+    //     return this.href == CURRENT_URL;
+    // }).parent('li').addClass('current-page').parents('ul').slideDown(function() {
+    //     setContentHeight();
+    // }).parent().addClass('active');
+
+    // recompute content when resizing
+    $(window).smartresize(function () {
+        setContentHeight();
+    });
+
+    setContentHeight();
+
+    // fixed sidebar
+    if ($.fn.mCustomScrollbar) {
+        $('.menu_fixed').mCustomScrollbar({
+            autoHideScrollbar: true,
+            theme: 'minimal',
+            mouseWheel: { preventDefault: true }
+        });
+    }
+});
+// /Sidebar
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"col-md-3 left_col\">\n  <div class=\"left_col scroll-view\">\n    <div class=\"navbar nav_title\" style=\"border: 0;\">\n      <a href=\"index.html\" class=\"site_title\"><i class=\"fa fa-paw\"></i> <span>[Accelerator]</span></a>\n    </div>\n    <div class=\"clearfix\"></div>\n\n    <!-- menu profile quick info -->\n    <div class=\"profile\">\n      <div class=\"profile_pic\">\n        <img src=\"images/img.jpg\" alt=\"...\" class=\"img-circle profile_img\">\n      </div>\n      <div class=\"profile_info\">\n        <span>Welcome,</span>\n        <h2>John Doe</h2>\n      </div>\n    </div>\n    <!-- /menu profile quick info -->\n    <!-- sidebar menu -->\n    <div id=\"sidebar-menu\" class=\"main_menu_side hidden-print main_menu\">\n      <div class=\"menu_section\">\n        <h3>General</h3>\n        <ul class=\"nav side-menu\">\n          <li><a><i class=\"fa fa-home\"></i> Home <span class=\"fa fa-chevron-down\"></span></a>\n            <ul class=\"nav child_menu\">\n              <li><a href=\"/\">Dashboard</a></li>\n              <li><a href=\"price-overview\">Price Overview</a></li>\n              <li><a href=\"product-overview\">Product Overview</a></li>\n            </ul>\n          </li>\n          <li><a><i class=\"fa fa-edit\"></i> Forms <span class=\"fa fa-chevron-down\"></span></a>\n            <ul class=\"nav child_menu\">\n              <li><a href=\"form.html\">General Form</a></li>\n              <li><a href=\"form_advanced.html\">Advanced Components</a></li>\n              <li><a href=\"form_validation.html\">Form Validation</a></li>\n              <li><a href=\"form_wizards.html\">Form Wizard</a></li>\n              <li><a href=\"form_upload.html\">Form Upload</a></li>\n              <li><a href=\"form_buttons.html\">Form Buttons</a></li>\n            </ul>\n          </li>\n          <li><a><i class=\"fa fa-desktop\"></i> UI Elements <span class=\"fa fa-chevron-down\"></span></a>\n            <ul class=\"nav child_menu\">\n              <li><a href=\"general_elements.html\">General Elements</a></li>\n              <li><a href=\"media_gallery.html\">Media Gallery</a></li>\n              <li><a href=\"typography.html\">Typography</a></li>\n              <li><a href=\"icons.html\">Icons</a></li>\n              <li><a href=\"glyphicons.html\">Glyphicons</a></li>\n              <li><a href=\"widgets.html\">Widgets</a></li>\n              <li><a href=\"invoice.html\">Invoice</a></li>\n              <li><a href=\"inbox.html\">Inbox</a></li>\n              <li><a href=\"calendar.html\">Calendar</a></li>\n            </ul>\n          </li>\n          <li><a><i class=\"fa fa-table\"></i> Tables <span class=\"fa fa-chevron-down\"></span></a>\n            <ul class=\"nav child_menu\">\n              <li><a href=\"tables.html\">Tables</a></li>\n              <li><a href=\"tables_dynamic.html\">Table Dynamic</a></li>\n            </ul>\n          </li>\n          <li><a><i class=\"fa fa-bar-chart-o\"></i> Data Presentation <span class=\"fa fa-chevron-down\"></span></a>\n            <ul class=\"nav child_menu\">\n              <li><a href=\"chartjs.html\">Chart JS</a></li>\n              <li><a href=\"chartjs2.html\">Chart JS2</a></li>\n              <li><a href=\"morisjs.html\">Moris JS</a></li>\n              <li><a href=\"echarts.html\">ECharts</a></li>\n              <li><a href=\"other_charts.html\">Other Charts</a></li>\n            </ul>\n          </li>\n          <li><a><i class=\"fa fa-clone\"></i>Layouts <span class=\"fa fa-chevron-down\"></span></a>\n            <ul class=\"nav child_menu\">\n              <li><a href=\"fixed_sidebar.html\">Fixed Sidebar</a></li>\n              <li><a href=\"fixed_footer.html\">Fixed Footer</a></li>\n            </ul>\n          </li>\n        </ul>\n      </div>\n      <div class=\"menu_section\">\n        <h3>Live On</h3>\n        <ul class=\"nav side-menu\">\n          <li><a><i class=\"fa fa-bug\"></i> Additional Pages <span class=\"fa fa-chevron-down\"></span></a>\n            <ul class=\"nav child_menu\">\n              <li><a href=\"e_commerce.html\">E-commerce</a></li>\n              <li><a href=\"projects.html\">Projects</a></li>\n              <li><a href=\"project_detail.html\">Project Detail</a></li>\n              <li><a href=\"contacts.html\">Contacts</a></li>\n              <li><a href=\"profile.html\">Profile</a></li>\n            </ul>\n          </li>\n          <li><a><i class=\"fa fa-windows\"></i> Extras <span class=\"fa fa-chevron-down\"></span></a>\n            <ul class=\"nav child_menu\">\n              <li><a href=\"page_403.html\">403 Error</a></li>\n              <li><a href=\"page_404.html\">404 Error</a></li>\n              <li><a href=\"page_500.html\">500 Error</a></li>\n              <li><a href=\"plain_page.html\">Plain Page</a></li>\n              <li><a href=\"login.html\">Login Page</a></li>\n              <li><a href=\"pricing_tables.html\">Pricing Tables</a></li>\n            </ul>\n          </li>\n          <li><a><i class=\"fa fa-sitemap\"></i> Multilevel Menu <span class=\"fa fa-chevron-down\"></span></a>\n            <ul class=\"nav child_menu\">\n                <li><a href=\"#level1_1\">Level One</a>\n                </li><li><a>Level One<span class=\"fa fa-chevron-down\"></span></a>\n                  <ul class=\"nav child_menu\">\n                    <li class=\"sub_menu\"><a href=\"level2.html\">Level Two</a>\n                    </li>\n                    <li><a href=\"#level2_1\">Level Two</a>\n                    </li>\n                    <li><a href=\"#level2_2\">Level Two</a>\n                    </li>\n                  </ul>\n                </li>\n                <li><a href=\"#level1_2\">Level One</a>\n                </li>\n            </ul>\n          </li>\n          <li><a href=\"javascript:void(0)\"><i class=\"fa fa-laptop\"></i> Landing Page <span class=\"label label-success pull-right\">Coming Soon</span></a></li>\n        </ul>\n      </div>\n\n    </div>\n    <!-- /sidebar menu -->\n    <!-- /menu footer buttons -->\n    <div class=\"sidebar-footer hidden-small\">\n      <a data-toggle=\"tooltip\" data-placement=\"top\" title=\"Settings\">\n        <span class=\"glyphicon glyphicon-cog\" aria-hidden=\"true\"></span>\n      </a>\n      <a data-toggle=\"tooltip\" data-placement=\"top\" title=\"FullScreen\">\n        <span class=\"glyphicon glyphicon-fullscreen\" aria-hidden=\"true\"></span>\n      </a>\n      <a data-toggle=\"tooltip\" data-placement=\"top\" title=\"Lock\">\n        <span class=\"glyphicon glyphicon-eye-close\" aria-hidden=\"true\"></span>\n      </a>\n      <a data-toggle=\"tooltip\" data-placement=\"top\" title=\"Logout\">\n        <span class=\"glyphicon glyphicon-off\" aria-hidden=\"true\"></span>\n      </a>\n    </div>\n    <!-- /menu footer buttons -->\n  </div>\n</div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-38df88b4", module.exports)
+  } else {
+    hotAPI.update("_v-38df88b4", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":5,"vue-hot-reload-api":2}],14:[function(require,module,exports){
+'use strict';
+
+$('a.toggle-vis').on('click', function (e) {
+    e.preventDefault();
+    // Get the column API object
+    var column = table.column($(this).attr('data-column'));
+    // Toggle the visibility
+    column.visible(!column.visible());
+    if (!column.visible()) {
+        $(this).removeClass("btn-success").addClass('btn-danger');
+    } else {
+        $(this).removeClass("btn-danger").addClass('btn-success');
+    }
+});
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"modal-dialog modal-lg\">\n    <div class=\"modal-content\">\n        <div class=\"modal-header\">\n            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                <span aria-hidden=\"true\">×</span>\n            </button>\n             <h4 class=\"modal-title\" id=\"myModalLabel2\">Show OR Hide columns: </h4>\n        </div>\n        <div class=\"modal-body\">\n            <div class=\"x_panel\">\n                <div class=\"x_title\">\n                     <h2><small>\"Green\" for Show, \"Red\" for \"Hide\"</small></h2>\n                    <div class=\"clearfix\"></div>\n                </div>\n                <div class=\"x_content\">\n                    <div class=\"x_title\">\n                          <a class=\"toggle-vis btn btn-success\" data-column=\"0\">Checkbox</a>\n                        - <a class=\"toggle-vis btn btn-success\" data-column=\"1\">Marketplace ID</a>\n                        - <a class=\"toggle-vis btn btn-success\" data-column=\"2\">ESG Master SKU</a>\n                        - <a class=\"toggle-vis btn btn-success\" data-column=\"3\">ESG SKU</a>\n                        - <a class=\"toggle-vis btn btn-success\" data-column=\"4\">Product Name</a>\n                        - <a class=\"toggle-vis btn btn-success\" data-column=\"5\">Sourcing status</a>\n                        - <a class=\"toggle-vis btn btn-success\" data-column=\"6\">ETRADE QTY</a>\n                        - <a class=\"toggle-vis btn btn-success\" data-column=\"7\">ES_HK QTY</a>\n                        - <a class=\"toggle-vis btn btn-success\" data-column=\"8\">ES_DG QTY</a>\n                        - <a class=\"toggle-vis btn btn-success\" data-column=\"9\">Listing QTY</a>\n                        - <a class=\"toggle-vis btn btn-success\" data-column=\"10\">Item Cost</a>\n                        - <a class=\"toggle-vis btn btn-success\" data-column=\"11\">Selling Price</a>\n                        - <a class=\"toggle-vis btn btn-success\" data-column=\"12\">Profit</a>\n                        - <a class=\"toggle-vis btn btn-success\" data-column=\"13\">Margin</a>\n                        <!-- - <a class=\"toggle-vis btn btn-success\" data-column=\"14\">Detail</a> -->\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div class=\"modal-footer\">\n            <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n        </div>\n    </div>\n</div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-d63fd814", module.exports)
+  } else {
+    hotAPI.update("_v-d63fd814", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":5,"vue-hot-reload-api":2}],15:[function(require,module,exports){
+var __vueify_insert__ = require("vueify/lib/insert-css")
+var __vueify_style__ = __vueify_insert__.insert("\n\n")
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _OverviewModal = require('./OverviewModal.vue');
+
+var _OverviewModal2 = _interopRequireDefault(_OverviewModal);
+
+var _CustomHeader = require('./CustomHeader.vue');
+
+var _CustomHeader2 = _interopRequireDefault(_CustomHeader);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+    components: {
+        Overviewmodal: _OverviewModal2.default,
+        Customheader: _CustomHeader2.default
+    },
+    /* for test
+    // ready () {
+    //     this.fetchPrice()
+    // },
+    */
+    ready: function ready() {
+        this.initDatatable();
+    },
+    data: function data() {
+        // return {
+        //     items: {}
+        // }
+        return {
+            items: [{
+                markerplace_id: 'BCLAZHK',
+                master_sku: '24697-MM-NA',
+                sku: '15621-AA-NA',
+                prod_name: 'Biloop Cry Translator',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '279.58',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-02-18 09:41:11',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25893-MM-NA',
+                sku: '15630-AA-NA',
+                prod_name: 'Gangsta Gold - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 3,
+                es_dg_qty: 0,
+                item_price: '10.01',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-21 04:25:04',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25894-MM-NA',
+                sku: '15631-AA-NA',
+                prod_name: 'Blue Steel - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 201,
+                es_hk_qty: 2,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-19 08:25:03',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25895-MM-NA',
+                sku: '15632-AA-NA',
+                prod_name: 'Basilica White - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 310,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-25 04:25:07',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25896-MM-NA',
+                sku: '15633-AA-NA',
+                prod_name: 'Martian Mars Red - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 284,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-05 04:25:06',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25897-MM-NA',
+                sku: '15634-AA-NA',
+                prod_name: 'Diamonds &amp; Pearls - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 148,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:25:06',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25898-MM-NA',
+                sku: '15635-AA-NA',
+                prod_name: 'Teal-tastic - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 183,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-06-09 10:26:49',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25899-MM-NA',
+                sku: '15636-AA-NA',
+                prod_name: 'OJ Orange - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 301,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-25 04:25:14',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25900-MM-NA',
+                sku: '15637-AA-NA',
+                prod_name: 'Glow in the Dark PLA - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 144,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-13 04:25:14',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25901-MM-NA',
+                sku: '15638-AA-NA',
+                prod_name: 'Clearly Blue - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 247,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-25 04:25:08',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25902-MM-NA',
+                sku: '15639-AA-NA',
+                prod_name: 'Clearly Pink - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 144,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:25:06',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25903-MM-NA',
+                sku: '15640-AA-NA',
+                prod_name: 'Clearly Green - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 526,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-21 04:25:06',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25904-MM-NA',
+                sku: '15641-AA-NA',
+                prod_name: 'Clearly Clear - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 238,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-26 04:25:23',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25905-MM-NA',
+                sku: '15642-AA-NA',
+                prod_name: 'Robo Silver - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 298,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-26 04:25:19',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25906-MM-NA',
+                sku: '15643-AA-NA',
+                prod_name: 'Perfectly Purple - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 155,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-25 04:25:14',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25907-MM-NA',
+                sku: '15644-AA-NA',
+                prod_name: 'Island Blue - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 545,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-21 04:25:05',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25908-MM-NA',
+                sku: '15645-AA-NA',
+                prod_name: 'Brownie Brown - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 302,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-21 04:25:04',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25909-MM-NA',
+                sku: '15646-AA-NA',
+                prod_name: 'Snow White - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 150,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-25 04:25:30',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25910-MM-NA',
+                sku: '15647-AA-NA',
+                prod_name: 'Rubber Ducky Yellow - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 294,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-25 04:25:30',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25911-MM-NA',
+                sku: '15648-AA-NA',
+                prod_name: 'Chili Pepper Red - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 192,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-25 04:25:07',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25912-MM-NA',
+                sku: '15649-AA-NA',
+                prod_name: 'Greener Grass - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 204,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-25 04:25:30',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25913-MM-NA',
+                sku: '15650-AA-NA',
+                prod_name: 'Royal Blue - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 209,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-25 04:25:07',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25914-MM-NA',
+                sku: '15651-AA-NA',
+                prod_name: 'Tuxedo Black - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 257,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-25 04:25:30',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25915-MM-NA',
+                sku: '15652-AA-NA',
+                prod_name: 'Totally Teal - Single Color ABS Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 275,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-04 02:25:27',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25916-MM-NA',
+                sku: '15653-AA-NA',
+                prod_name: 'Glow in the Dark ABS - Single Color ABS Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 116,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-26 04:25:23',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25917-MM-NA',
+                sku: '15654-AA-NA',
+                prod_name: 'Hot Pink - Single Color ABS Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 367,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-25 04:25:07',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25918-MM-NA',
+                sku: '15655-AA-NA',
+                prod_name: 'Highlighter Orange - Single Color ABS Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 170,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-26 14:25:02',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25919-MM-NA',
+                sku: '15656-AA-NA',
+                prod_name: 'Grrreally Green - Single Color ABS Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 200,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-26 14:25:02',
+                modify_by: 'odiliawong'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25920-MM-NA',
+                sku: '15657-AA-NA',
+                prod_name: 'Super Yellow - Single Color ABS Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 181,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-26 14:25:02',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25921-MM-NA',
+                sku: '15658-AA-NA',
+                prod_name: 'Skyline Silver - Single color ABS pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 157,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-21 04:25:05',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25922-MM-NA',
+                sku: '15659-AA-NA',
+                prod_name: 'Plum Purple - Single Color ABS Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 268,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-06-30 04:25:04',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25923-MM-NA',
+                sku: '15660-AA-NA',
+                prod_name: '3Doodler ABS Plastic Filament Strands for the 3Doodler (Lagoon Blue, 25 Strands)(AB08-BLGN)',
+                sourcing_status: 'A',
+                etrade_qty: 134,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-25 04:25:07',
+                modify_by: 'ginapan'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25924-MM-NA',
+                sku: '15661-AA-NA',
+                prod_name: '3Doodler ABS Plastic Filament Strands for the 3Doodler (Choco Brown, 25 Strands)(AB07-CHOC)',
+                sourcing_status: 'A',
+                etrade_qty: 197,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-25 04:25:30',
+                modify_by: 'ginapan'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25925-MM-NA',
+                sku: '15662-AA-NA',
+                prod_name: '3Doodler ABS Plastic Filament Strands for the 3Doodler (Polar White, 25 Strands)(AB06-POLA)',
+                sourcing_status: 'A',
+                etrade_qty: 283,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-26 14:25:02',
+                modify_by: 'ginapan'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25926-MM-NA',
+                sku: '15663-AA-NA',
+                prod_name: 'Sunnyside Yellow - Single Color ABS Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 249,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-20 03:25:14',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25927-MM-NA',
+                sku: '15664-AA-NA',
+                prod_name: '3Doodler ABS Plastic Filament Strands for the 3Doodler (Riding Hood Red, 25 Strands)(AB04-HOOD)',
+                sourcing_status: 'A',
+                etrade_qty: 197,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-26 14:25:02',
+                modify_by: 'ginapan'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25928-MM-NA',
+                sku: '15665-AA-NA',
+                prod_name: 'EverGreen - Single Color ABS Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 195,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-20 03:25:14',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25929-MM-NA',
+                sku: '15666-AA-NA',
+                prod_name: '3Doodler ABS Plastic Filament Strands for the 3Doodler (Grand Bleu, 25 Strands)(AB02-BLEU)',
+                sourcing_status: 'A',
+                etrade_qty: 130,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-26 14:25:02',
+                modify_by: 'ginapan'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25930-MM-NA',
+                sku: '15667-AA-NA',
+                prod_name: '3Doodler  Black Belt Black - Single color ABS pack (25 strands) (AB01-BBB)',
+                sourcing_status: 'A',
+                etrade_qty: 182,
+                es_hk_qty: 1,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-26 14:25:02',
+                modify_by: 'helenwang'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25931-MM-NA',
+                sku: '15668-AA-NA',
+                prod_name: '3Doodler ABS Essentials Mixed Filament Pack (25 Strands) (AB-MIX1)',
+                sourcing_status: 'A',
+                etrade_qty: 519,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-26 04:25:22',
+                modify_by: 'ginapan'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25932-MM-NA',
+                sku: '15669-AA-NA',
+                prod_name: '3Doodler ABS Meta Mixed Filament Pack (25 Strands) (AB-MIX2)',
+                sourcing_status: 'A',
+                etrade_qty: 300,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-26 04:25:22',
+                modify_by: 'ginapan'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25933-MM-NA',
+                sku: '15670-AA-NA',
+                prod_name: '3Doodler ABS Put On Yo Shades Mixed Filament Pack (25 Strands) (AB-MIX3) ',
+                sourcing_status: 'A',
+                etrade_qty: 431,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:25:13',
+                modify_by: 'ginapan'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25934-MM-NA',
+                sku: '15671-AA-NA',
+                prod_name: '3Doodler PLA Essentials Mixed Filament Pack (25 Strands) (PL-MIX1)',
+                sourcing_status: 'A',
+                etrade_qty: 224,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-20 10:25:03',
+                modify_by: 'ginapan'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25935-MM-NA',
+                sku: '15672-AA-NA',
+                prod_name: '3Doodler PLA Meta Mixed Filament Pack (25 Strands) (PL-MIX2)',
+                sourcing_status: 'A',
+                etrade_qty: 246,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-06-24 06:25:01',
+                modify_by: 'ginapan'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25936-MM-NA',
+                sku: '15673-AA-NA',
+                prod_name: '3Doodler PLA Clearly Awesome Mixed Filament Pack (25 Strands) (PL-MIX3)',
+                sourcing_status: 'A',
+                etrade_qty: 298,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-06-03 03:25:19',
+                modify_by: 'ginapan'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25937-MM-NA',
+                sku: '15674-AA-NA',
+                prod_name: '3Doodler PLA Full Metal Jacket Mixed Filament Pack (25 Strands)(PL-MIX4)',
+                sourcing_status: 'A',
+                etrade_qty: 290,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-25 04:25:09',
+                modify_by: 'ginapan'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '25938-MM-NA',
+                sku: '15675-AA-NA',
+                prod_name: '3Doodler PLA Plastic: PLA ',
+                sourcing_status: 'A',
+                etrade_qty: 295,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-06-03 03:25:19',
+                modify_by: 'ginapan'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '31799-MM-NA',
+                sku: '15677-UK-NA',
+                prod_name: 'UK Plug Pack',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '0.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-04-29 05:45:32',
+                modify_by: 'ginapan'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '31800-MM-NA',
+                sku: '15678-US-NA',
+                prod_name: 'US Plug Pack',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '0.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-04-29 05:45:32',
+                modify_by: 'ginapan'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '31797-MM-NA',
+                sku: '15679-AU-NA',
+                prod_name: 'AU Plug Pack',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '0.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-04-29 05:45:33',
+                modify_by: 'ginapan'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '31798-MM-NA',
+                sku: '15680-EU-NA',
+                prod_name: 'EU Plug Pack',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '0.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-04-29 05:45:33',
+                modify_by: 'ginapan'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '26096-MM-NA',
+                sku: '15681-AA-NA',
+                prod_name: '3Doodler 3D Printing Pen',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '99.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-05-26 10:07:12',
+                modify_by: 'ping'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26403-MM-NA',
+                sku: '15682-AA-NA',
+                prod_name: 'Sh!t in the woods womens fitted t-shirt (S)',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '180.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:42:46',
+                modify_by: 'ext-AAF-main'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26404-MM-NA',
+                sku: '15683-AA-NA',
+                prod_name: 'Sh!t in the woods womens fitted t-shirt (M)',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '180.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:42:31',
+                modify_by: 'ext-AAF-main'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26405-MM-NA',
+                sku: '15684-AA-NA',
+                prod_name: 'Sh!t in the woods womens fitted t-shirt (L)',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '180.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:42:09',
+                modify_by: 'ext-AAF-main'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '26406-MM-NA',
+                sku: '15685-AA-NA',
+                prod_name: 'Sh!t in the woods womens fitted t-shirt (XL)',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '0.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:45:48',
+                modify_by: 'ext-AAF-main'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26407-MM-NA',
+                sku: '15686-AA-NA',
+                prod_name: 'Sh!t in the woods mens t-shirt (S)',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '180.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:41:09',
+                modify_by: 'ext-AAF-main'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26408-MM-NA',
+                sku: '15687-AA-NA',
+                prod_name: 'Sh!t in the woods mens t-shirt (M)',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '180.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:40:44',
+                modify_by: 'ext-AAF-main'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26409-MM-NA',
+                sku: '15688-AA-NA',
+                prod_name: 'Sh!t in the woods mens t-shirt (L)',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '180.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:40:26',
+                modify_by: 'ext-AAF-main'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26410-MM-NA',
+                sku: '15689-AA-NA',
+                prod_name: 'Sh!t in the woods mens t-shirt (XL)',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '180.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:41:49',
+                modify_by: 'ext-AAF-main'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '26411-MM-NA',
+                sku: '15690-AA-NA',
+                prod_name: '3Doodler DoodleStand for 3Doodler 3D Printing Pen (DOODSTND)',
+                sourcing_status: 'A',
+                etrade_qty: 20,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-27 16:11:09',
+                modify_by: 'ping'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '26497-MM-NA',
+                sku: '15691-AA-NA',
+                prod_name: 'Radioactive Yellow - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 190,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-19 08:25:03',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '26498-MM-NA',
+                sku: '15692-AA-NA',
+                prod_name: 'Pink Flamingo - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 223,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-21 04:25:05',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '26499-MM-NA',
+                sku: '15693-AA-NA',
+                prod_name: 'Rainforest Green - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 210,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-05 04:25:06',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '26500-MM-NA',
+                sku: '15694-AA-NA',
+                prod_name: 'Cotton Candy Pink - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 257,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-25 04:25:08',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '26501-MM-NA',
+                sku: '15695-AA-NA',
+                prod_name: 'Foggy Day grey - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 304,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-14 04:25:08',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '26502-MM-NA',
+                sku: '15696-AA-NA',
+                prod_name: 'Cafe au lait - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 240,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-25 04:25:14',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '26503-MM-NA',
+                sku: '15697-AA-NA',
+                prod_name: 'Clearly Yellow - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 253,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:25:06',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '26504-MM-NA',
+                sku: '15698-AA-NA',
+                prod_name: 'Clearly Black - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 176,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:25:06',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '26505-MM-NA',
+                sku: '15699-AA-NA',
+                prod_name: 'Clearly Clementine - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 192,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:25:06',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '26506-MM-NA',
+                sku: '15700-AA-NA',
+                prod_name: 'Clearly Cherry - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 192,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-04 02:25:23',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '26507-MM-NA',
+                sku: '15701-AA-NA',
+                prod_name: 'Clearly Teal - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 191,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:25:06',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '26508-MM-NA',
+                sku: '15702-AA-NA',
+                prod_name: 'Clearly Stormy - Single Color PLA Pack (25 strands)',
+                sourcing_status: 'A',
+                etrade_qty: 253,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '9.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:25:06',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '26509-MM-NA',
+                sku: '15703-AA-NA',
+                prod_name: '3Doodler Nozzle Set (DOODNZZL)',
+                sourcing_status: 'A',
+                etrade_qty: 99,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '19.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-27 16:11:09',
+                modify_by: 'ping'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '26510-MM-NA',
+                sku: '15705-AA-NA',
+                prod_name: '3Doodler Pedal for 3Doodler 3D Printing Pen (DOODPDAL)',
+                sourcing_status: 'A',
+                etrade_qty: 184,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '19.99',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-26 07:26:24',
+                modify_by: 'sophiacheung'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26605-MM-GR',
+                sku: '15707-AA-NA',
+                prod_name: 'Devotec USB Fuel charger Green',
+                sourcing_status: 'A',
+                etrade_qty: 242,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '10.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-04-28 06:50:56',
+                modify_by: 'sebastian'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26605-MM-RD',
+                sku: '15708-AA-NA',
+                prod_name: 'Devotec USB Fuel charger Red',
+                sourcing_status: 'A',
+                etrade_qty: 12,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '0.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-04-28 06:52:22',
+                modify_by: 'sebastian'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26605-MM-WH',
+                sku: '15709-AA-NA',
+                prod_name: 'Devotec USB Fuel charger White',
+                sourcing_status: 'A',
+                etrade_qty: 96,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '0.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-04-28 06:53:17',
+                modify_by: 'sebastian'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26850-MM-NA',
+                sku: '15710-AA-NA',
+                prod_name: 'Plush Moonie key chain',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '30.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:28:55',
+                modify_by: 'ext-AAF-main'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26882-MM-NA',
+                sku: '15711-AA-NA',
+                prod_name: 'Cosmetics bag set',
+                sourcing_status: 'A',
+                etrade_qty: 15,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '0.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:18:29',
+                modify_by: 'ext-AAF-main'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '26860-MM-NA',
+                sku: '15713-AA-NA',
+                prod_name: 'Memo pad (Lamma)',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '0.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:29:54',
+                modify_by: 'ext-AAF-main'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26883-MM-NA',
+                sku: '15714-AA-NA',
+                prod_name: 'Hello Kitty Love Moonie T-shirt (S)',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '368.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:34:05',
+                modify_by: 'ext-AAF-main'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26885-MM-NA',
+                sku: '15715-AA-NA',
+                prod_name: 'Hello Kitty Love Moonie T-shirt (L)',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '368.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:33:27',
+                modify_by: 'ext-AAF-main'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26865-MM-NA',
+                sku: '15716-AA-NA',
+                prod_name: 'Animals Asia black hoodie (M)',
+                sourcing_status: 'A',
+                etrade_qty: 18,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '200.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-06-20 04:25:07',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26863-MM-NA',
+                sku: '15718-AA-NA',
+                prod_name: 'Animals Asia black hoodie (XS)',
+                sourcing_status: 'A',
+                etrade_qty: 38,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '200.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-18 04:25:04',
+                modify_by: 'karychu'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26868-MM-NA',
+                sku: '15719-AA-NA',
+                prod_name: 'Animals Asia black hoodie (XXL)',
+                sourcing_status: 'A',
+                etrade_qty: 25,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '200.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-04 02:25:26',
+                modify_by: 'cherie'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26873-MM-NA',
+                sku: '15720-AA-NA',
+                prod_name: 'Journey to Freedom womens fitted T-shirt (S)',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '180.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:39:10',
+                modify_by: 'ext-AAF-main'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26874-MM-NA',
+                sku: '15721-AA-NA',
+                prod_name: 'Journey to Freedom womens fitted T-shirt (M)',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '180.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:38:54',
+                modify_by: 'ext-AAF-main'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26875-MM-NA',
+                sku: '15722-AA-NA',
+                prod_name: 'Journey to Freedom womens fitted T-shirt (L)',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '180.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:38:37',
+                modify_by: 'ext-AAF-main'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26887-MM-NA',
+                sku: '15723-AA-NA',
+                prod_name: 'Animals Asia logo mens polo shirt (L)',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '200.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:39:43',
+                modify_by: 'ext-AAF-main'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26886-MM-NA',
+                sku: '15724-AA-NA',
+                prod_name: 'Animals Asia logo mens polo shirt (M)',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '200.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:40:01',
+                modify_by: 'ext-AAF-main'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26864-MM-NA',
+                sku: '15725-AA-NA',
+                prod_name: 'Animals Asia black hoodie (S)',
+                sourcing_status: 'A',
+                etrade_qty: 20,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '200.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-06-15 04:25:02',
+                modify_by: 'karychu'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26866-MM-NA',
+                sku: '15726-AA-NA',
+                prod_name: 'Animals Asia black hoodie (L)',
+                sourcing_status: 'A',
+                etrade_qty: 20,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '200.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-11 07:25:03',
+                modify_by: 'karychu'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26867-MM-NA',
+                sku: '15727-AA-NA',
+                prod_name: 'Animals Asia black hoodie (XL)',
+                sourcing_status: 'A',
+                etrade_qty: 17,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '200.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-07 08:25:02',
+                modify_by: 'karychu'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26884-MM-NA',
+                sku: '15728-AA-NA',
+                prod_name: 'Hello Kitty Love Moonie T-shirt (M)',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '368.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:33:44',
+                modify_by: 'ext-AAF-main'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26859-MM-NA',
+                sku: '15729-AA-NA',
+                prod_name: 'Memo pad (Jasper)',
+                sourcing_status: 'A',
+                etrade_qty: 0,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '0.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-15 03:29:38',
+                modify_by: 'ext-AAF-main'
+            }, {
+                markerplace_id: 'BCLAZUS',
+                master_sku: '26855-MM-NA',
+                sku: '15730-AA-NA',
+                prod_name: 'Freedom Moon Book (hardback)',
+                sourcing_status: 'A',
+                etrade_qty: 63,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '0.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-07 08:25:01',
+                modify_by: 'system'
+            }, {
+                markerplace_id: 'BCLAZHK',
+                master_sku: '26856-MM-NA',
+                sku: '15731-AA-NA',
+                prod_name: 'Note cards with envelopes',
+                sourcing_status: 'A',
+                etrade_qty: 135,
+                es_hk_qty: 0,
+                es_dg_qty: 0,
+                item_price: '0.00',
+                profit: '0.00',
+                margin: '0.00',
+                modify_on: '2016-07-20 03:25:15',
+                modify_by: 'system'
+            }]
+        };
+    },
+
+    methods: {
+        /* for test fetch data from other server
+        fetchPrice() {
+            this.$http({
+                url:'http://price_tool/api/price',
+                method: 'GET'
+            }).then(function (response) {
+                // console.log(response.data)
+                // this.$set('items', response.data)
+            })
+        }
+        */
+        initDatatable: function initDatatable() {
+            var table = $('#datatable-fixed-header').DataTable({
+                dom: "Bfrtip",
+                fixedHeader: true,
+                bSort: false,
+                iDisplayLength: 25,
+                buttons: [{
+                    extend: "csv",
+                    className: "btn-sm",
+                    exportOptions: {
+                        columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                    }
+                }, {
+                    extend: "excel",
+                    className: "btn-sm",
+                    exportOptions: {
+                        columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                    }
+                }, {
+                    extend: "pdfHtml5",
+                    className: "btn-sm",
+                    exportOptions: {
+                        columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                    }
+                }, {
+                    extend: "print",
+                    className: "btn-sm",
+                    exportOptions: {
+                        columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                    }
+                }]
+            });
+        }
+    }
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"col-md-12 col-sm-12 col-xs-12\">\n    <div class=\"x_panel\">\n        <div class=\"x_title\">\n            <h2>Filters <small>[Base]</small></h2>\n            <ul class=\"nav navbar-right panel_toolbox\">\n                <li></li>\n            </ul>\n            <div class=\"clearfix\"></div>\n        </div>\n        <div class=\"x_content\">\n            <div class=\"modal fade custom_header\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\" style=\"display: none;\">\n                <customheader></customheader>\n            </div>\n            <table id=\"datatable-fixed-header\" class=\"table table-striped table-bordered bulk_action jambo_table\" width=\"100%\">\n                <thead>\n                    <tr>\n                        <th>\n                            <input type=\"checkbox\" id=\"check-all\" class=\"flat\">\n                        </th>\n                        <th>Marketplace ID</th>\n                        <th>ESG Master SKU</th>\n                        <th>ESG SKU</th>\n                        <th>Product Name</th>\n                        <th>Sourcing status</th>\n                        <th width=\"5%\">ETRADE QTY</th>\n                        <th>ES_HK QTY</th>\n                        <th>ES_DG QTY</th>\n                        <th>Listing QTY</th>\n                        <th>Item Cost</th>\n                        <th>Selling Price</th>\n                        <th>Profit</th>\n                        <th>Margin</th>\n                        <th>\n                            <b class=\"btn btn-success\" data-toggle=\"modal\" data-target=\".custom_header\">Custom Header</b>\n                        </th>\n                    </tr>\n                </thead>\n                <tbody>\n                    <tr v-for=\"item in items\">\n                        <td class=\"a-center \">\n                            <input type=\"checkbox\" class=\"flat\" name=\"table_records\">\n                        </td>\n                        <td>{{item.markerplace_id}}</td>\n                        <td>{{item.master_sku}}</td>\n                        <td>{{item.sku}}</td>\n                        <td>{{item.prod_name}}</td>\n                        <td>{{item.sourcing_status}}</td>\n                        <td>\n                            <input type=\"text\" value=\"{{item.etrade_qty}}\" name=\"etrade_qty\" class=\"price_input_sm\">\n                        </td>\n                        <td>\n                            <input type=\"text\" value=\"{{item.es_hk_qty}}\" name=\"es_hk_qty\" class=\"price_input_sm\">\n                        </td>\n                        <td>\n                            <input type=\"text\" value=\"{{item.es_dg_qty}}\" name=\"es_dg_qty\" class=\"price_input_sm\">\n                        </td>\n                        <td>\n                            <input type=\"text\" value=\"{{item.es_dg_qty}}\" name=\"es_dg_qty\" class=\"price_input_sm\">\n                        </td>\n                        <td>\n                            <input type=\"text\" value=\"{{item.item_price}}\" name=\"item_price\" class=\"price_input_sm\">\n                        </td>\n                        <td>\n                            <input type=\"text\" value=\"{{item.item_price + 2}}\" name=\"item_price\" class=\"price_input_sm\">\n                        </td>\n                        <td>{{item.profit}}</td>\n                        <td>{{item.margin}}</td>\n                        <td data-toggle=\"tooltip\" data-placement=\"left\" title=\"\" data-original-title=\"Update On: {{item.modify_on}}  Update By:{{item.modify_by}}\">\n                            <input type=\"Button\" value=\"Detail\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\".overview-modal{{$index}}\">\n                            <div class=\"modal fade overview-modal{{$index}}\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\" style=\"display: none;\">\n                                <!-- detail overview-->\n                                <overviewmodal :item=\"item\"></overviewmodal>\n                            </div>\n                        </td>\n                    </tr>\n                </tbody>\n            </table>\n        </div>\n    </div>\n</div>\n<div class=\"navbar navbar-default navbar-fixed-bottom\">\n    <div class=\"x_panel\">\n        <div class=\"\">\n            <div class=\"col-md-12 col-sm-12 col-xs-12 col-md-offset-5\">\n                <button type=\"submit\" class=\"btn btn-primary\">Cancel</button>\n                <button type=\"submit\" class=\"btn btn-success\">Update</button>\n            </div>\n        </div>\n    </div>\n</div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.dispose(function () {
+    __vueify_insert__.cache["\n\n"] = false
+    document.head.removeChild(__vueify_style__)
+  })
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-5deac7fc", module.exports)
+  } else {
+    hotAPI.update("_v-5deac7fc", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"./CustomHeader.vue":14,"./OverviewModal.vue":16,"vue":5,"vue-hot-reload-api":2,"vueify/lib/insert-css":6}],16:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    props: ['item']
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"modal-dialog modal-lg\">\n    <div class=\"modal-content\">\n        <div class=\"modal-header\">\n            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                <span aria-hidden=\"true\">×</span>\n            </button>\n             <h4 class=\"modal-title\" id=\"myModalLabel2\">Overview [ {{item.markerplace_id}} ] - {{item.master_sku}} - {{item.sku}}</h4>\n        </div>\n        <div class=\"modal-body\">\n            <form class=\"form-horizontal form-label-left\">\n                <div class=\"form-group col-md-12\">\n                    <label class=\"control-label col-md-3\">Marketplace ID</label>\n                    <div class=\"col-md-6 col-xs-12\">\n                        <input type=\"text\" class=\"form-control col-md-4 col-xs-12\" value=\"{{item.markerplace_id}}\" readonly=\"readonly\">\n                    </div>\n                </div>\n                <div class=\"form-group col-md-12\">\n                    <label class=\"control-label col-md-3\">Master SKU</label>\n                    <div class=\"col-md-6 col-xs-12\">\n                        <input type=\"text\" class=\"form-control col-md-4 col-xs-12\" value=\"{{item.master_sku}}\" readonly=\"readonly\">\n                    </div>\n                </div>\n                <div class=\"form-group col-md-12\">\n                    <label class=\"control-label col-md-3\">ESG SKU</label>\n                    <div class=\"col-md-6 col-xs-12\">\n                        <input type=\"text\" class=\"form-control col-md-4 col-xs-12\" value=\"{{item.sku}}\" readonly=\"readonly\">\n                    </div>\n                </div>\n                <div class=\"form-group col-md-12\">\n                    <label class=\"control-label col-md-3\">Product Name</label>\n                    <div class=\"col-md-9 col-xs-12\">\n                        <input type=\"text\" class=\"form-control col-md-9 col-xs-12 form_name\" value=\"{{item.prod_name}}\" readonly=\"readonly\" style=\"width:100%\">\n                    </div>\n                </div>\n                <div class=\"form-group col-md-12\">\n                    <label class=\"control-label col-md-3\">Sourcing status</label>\n                    <div class=\"col-md-6 col-xs-12\">\n                        <select class=\"form-control col-md-4 col-xs-12\">\n                            <option value=\"\">Readily Available</option>\n                            <option value=\"\">Out Of Stock</option>\n                        </select>\n                        <!-- <input type=\"text\" value=\"15621-AA-NA\" readonly=\"readonly\"> -->\n                    </div>\n                </div>\n                <div class=\"form-group col-md-12\">\n                    <label class=\"control-label col-md-3\">ETRADE QTY</label>\n                    <div class=\"col-md-6 col-xs-12\">\n                        <input type=\"text\" class=\"form-control col-md-4 col-xs-12\" value=\"{{item.etrade_qty}}\">\n                    </div>\n                </div>\n                <div class=\"form-group col-md-12\">\n                    <label class=\"control-label col-md-3\">ES_HK QTY</label>\n                    <div class=\"col-md-6 col-xs-12\">\n                        <input type=\"text\" class=\"form-control col-md-4 col-xs-12\" value=\"{{item.es_hk_qty}}\">\n                    </div>\n                </div>\n                <div class=\"form-group col-md-12\">\n                    <label class=\"control-label col-md-3\">ES_DG QTY</label>\n                    <div class=\"col-md-6 col-xs-12\">\n                        <input type=\"text\" class=\"form-control col-md-4 col-xs-12\" value=\"{{item.es_dg_qty}}\">\n                    </div>\n                </div>\n                <div class=\"form-group col-md-12\">\n                    <label class=\"control-label col-md-3\">Item Cost</label>\n                    <div class=\"col-md-6 col-xs-12\">\n                        <input type=\"text\" class=\"form-control col-md-4 col-xs-12\" value=\"{{item.item_price}}\">\n                    </div>\n                </div>\n                <div class=\"form-group col-md-12\">\n                    <label class=\"control-label col-md-3\">Selling Price</label>\n                    <div class=\"col-md-6 col-xs-12\">\n                        <input type=\"text\" class=\"form-control col-md-4 col-xs-12\" value=\"{{item.item_price}}\">\n                    </div>\n                </div>\n                <div class=\"form-group col-md-12\">\n                    <label class=\"control-label col-md-3\">Profit</label>\n                    <div class=\"col-md-6 col-xs-12\">\n                        <input type=\"text\" class=\"form-control col-md-4 col-xs-12\" value=\"{{item.profit}}\">\n                    </div>\n                </div>\n                <div class=\"form-group col-md-12\">\n                    <label class=\"control-label col-md-3\">Margin</label>\n                    <div class=\"col-md-6 col-xs-12\">\n                        <input type=\"text\" class=\"form-control col-md-4 col-xs-12\" value=\"{{item.margin}}\">\n                    </div>\n                </div>\n                <div class=\"form-group col-md-12\">\n                    <label class=\"control-label col-md-3\">Update On</label>\n                    <div class=\"control-label col-md-4\">{{item.modify_on}}</div>\n                </div>\n                <div class=\"form-group col-md-12\">\n                    <label class=\"control-label col-md-3\">Update By</label>\n                    <div class=\"control-label col-md-4\">{{item.modify_by}}</div>\n                </div>\n        </form></div>\n        <div class=\"modal-footer\">\n            <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n            <button type=\"button\" class=\"btn btn-primary\">Save</button>\n        </div>\n    </div>\n</div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-0784ba4c", module.exports)
+  } else {
+    hotAPI.update("_v-0784ba4c", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":5,"vue-hot-reload-api":2}],17:[function(require,module,exports){
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"page-title\">\n    <div class=\"title_left\">\n         <h3>[Accelerator]<small>  Prcing Overview</small></h3>\n    </div>\n</div>\n<div class=\"clearfix\"></div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-4879ade1", module.exports)
+  } else {
+    hotAPI.update("_v-4879ade1", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":5,"vue-hot-reload-api":2}],18:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+
+var brandList = { '108': 'Lenovo', '217': 'Harman Kardon', '310': 'iTech', '311': 'ClearOne', '314': 'RTX', '577': 'Zopo', '596': 'Leap Motion', '627': 'Biloop', '630': 'Blue Microphones', '643': 'AYL', '648': '3Doodler', '650': 'AAF x Stella McCartney', '651': 'AAF Animals Asia', '652': 'Made4Pets', '653': 'Devotec', '654': 'loudjam', '655': 'Ring', '656': 'ButterUp', '657': 'Rapide 3D', '658': 'SleepACE', '659': 'Little Green Mouse', '660': 'Ghostdrone', '661': 'ParaShoot', '662': 'Jo Test Brand', '663': 'SKIVA', '664': 'Luminox', '665': 'Seiko', '666': 'Zeuse', '667': 'Catalyst Lifestyle', '668': 'Case Scenario', '669': 'BodyAwakening', '670': 'EMIE', '671': 'FashionComm', '672': 'Golf', '673': 'Pantone', '674': 'Atongm', '675': 'AVI-8', '676': 'Solartime', '677': 'Cycliq', '678': 'Marc Jacobs', '679': 'Michael Kors', '680': 'Zero', '681': 'Nevo', '682': 'Looking Glass', '683': 'Bluedio', '684': 'Sugr', '685': 'Diesel', '686': 'Dame Products', '687': '3Glasses', '688': 'Zig', '689': 'GlobalSources', '690': 'DaoTian', '691': 'Bookniture', '692': 'Sandbucket', '694': 'Jolla Asia LTD.', '695': 'AMITIDY', '696': 'KONNEXT', '697': 'VTECH', '698': 'PowerDot', '699': 'Bluesmart', '700': 'Syabas', '701': 'New Matter', '702': 'Quitbit', '703': 'The Bamboo Barn', '704': 'Ceed Ltd.', '706': 'ESG', '707': 'Z-Camera', '708': 'Lumio', '709': 'DFrobot', '710': 'EzeeCube', '711': 'Noitom', '712': 'TLF', '713': 'Telecom Lifestyle Fashion', '714': 'RiCi', '715': 'Palettegear', '716': 'Future of Play', '717': 'MEITU', '718': 'hereO', '719': 'Vector', '720': 'OontZ', '721': 'Linjer', '722': 'ShopifyBrand', '723': 'MagentoBrand', '724': 'OMIMO', '725': 'FUTURE MAKE ', '726': 'Future Former', '727': 'Aiwatch', '728': 'Zuk', '729': 'Multi CAV', '730': '4PX', '731': 'Sounder', '732': 'EasyBBQ', '733': 'XuanWheel', '734': 'Sustyle', '735': 'Huadoo', '736': 'AmTidy', '737': 'XGIMI', '738': 'ALOMA', '739': 'Upair', '740': 'Autobot', '741': 'Fgoola', '742': 'Boboo', '743': 'RunCam', '744': 'LUMO', '745': 'CamFi', '746': 'Exptest', '747': 'Nubia', '748': 'G10', '749': 'Z-Ben', '750': 'Redpepper', '751': 'Bolt Power', '752': 'TopWatch', '753': 'Coollang', '754': 'Czur', '755': 'Dlodlo', '756': 'Fisher Price', '757': 'Barbie', '758': 'Mega bloks', '759': 'Mattel', '760': 'palette', '761': 'Keekoon', '762': 'Amkov', '763': 'MINIX', '764': 'Tronsmart', '765': 'wowstick', '766': 'Zidoo', '767': 'Vwalker', '768': 'Reke', '769': 'Aimo', '770': 'SenseON', '771': 'Yiban', '772': 'KXL', '773': 'Emish', '774': 'Hugsby', '775': 'Echoman', '776': 'Patpet', '777': 'Fortune Dragon', '778': 'FH-801', '779': 'FTL', '780': 'kinder', '781': 'Eyemore', '782': 'uPlane', '783': 'CardioCycle', '784': 'VIBOTON', '785': 'Danmini', '786': 'LESI', '787': 'VSTARCAM⇥', '788': 'SolarCharger', '789': 'QIVV', '790': 'SONIDA', '791': 'Qlippie', '792': 'VeePai', '793': 'AIMOMETER', '794': 'ABLY', '795': 'Visiontek', '796': 'ZoneCharge', '797': 'scarletto', '798': 'Ausek', '799': 'Blackphone', '800': 'Soundbrenner' };
+function PutSelectorContent(selector, list) {
+	for (var i in list) {
+		selector.options[selector.options.length] = new Option(list[i], i);
+	}
+}
+exports.default = {
+	ready: function ready() {
+		$("body").scrollspy({ target: '#myScrollspy', offset: 30 });
+		PutSelectorContent(document.basicInfoForm.brandId, brandList);
+	}
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\t\t\t\t\t\n<div id=\"basicInfoDiv\" class=\"x_panel\">\n\t<div class=\"x_title\">\n\t\t<h2>Basic Product Information</h2>\n\t\t<div class=\"clearfix\"></div>\n\t</div>\n\t<div class=\"x_content\">\n\t\t<form class=\"form-horizontal form-label-left\" data-parsley-validate=\"\" id=\"basicInfoForm\" name=\"basicInfoForm\" novalidate=\"\">\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<label for=\"productName\" class=\"control-label col-md-3 col-sm-3 col-xs-12\">Product name <span class=\"required\">*</span>\n\t\t\t\t</label>\n\t\t\t\t<div class=\"col-md-6 col-sm-6 col-xs-12\">\n\t\t\t\t\t<input type=\"text\" class=\"form-control col-md-7 col-xs-12\" required=\"required\" id=\"productName\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<label for=\"merchantSku\" class=\"control-label col-md-3 col-sm-3 col-xs-12\">Merchant SKU <span class=\"required\">*</span>\n\t\t\t\t</label>\n\t\t\t\t<div class=\"col-md-6 col-sm-6 col-xs-12\">\n\t\t\t\t\t<input type=\"text\" class=\"form-control col-md-7 col-xs-12\" required=\"required\" name=\"merchantSku\" id=\"merchantSku\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<label class=\"control-label col-md-3 col-sm-3 col-xs-12\" for=\"brandId\">Brand <span class=\"required\">*</span></label>\n\t\t\t\t<div class=\"col-md-6 col-sm-6 col-xs-12\">\n\t\t\t\t\t<select name=\"brandId\" id=\"brandId\" class=\"form-control\">\n\t\t\t\t\t</select>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<label class=\"control-label col-md-3 col-sm-3 col-xs-12\" for=\"supplier\">Supplier <span class=\"required\">*</span></label>\n\t\t\t\t<div class=\"col-md-6 col-sm-6 col-xs-12\">\n\t\t\t\t\t<select name=\"supplier\" id=\"supplier\" class=\"form-control\">\n\t\t\t\t\t</select>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"ln_solid\"></div>\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<div class=\"col-md-6 col-sm-6 col-xs-12 col-md-offset-3\">\n\t\t\t\t\t<button class=\"btn btn-primary\" type=\"submit\">Cancel</button>\n\t\t\t\t\t<button class=\"btn btn-success\" type=\"submit\">Submit</button>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t</form>\n\t</div>\n</div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-5f2bc98c", module.exports)
+  } else {
+    hotAPI.update("_v-5f2bc98c", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":5,"vue-hot-reload-api":2}],19:[function(require,module,exports){
+'use strict';
+
+var _vue = require('vue');
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _App = require('./App.vue');
+
+var _App2 = _interopRequireDefault(_App);
+
+var _vueRouter = require('vue-router');
+
+var _vueRouter2 = _interopRequireDefault(_vueRouter);
+
+var _vueResource = require('vue-resource');
+
+var _vueResource2 = _interopRequireDefault(_vueResource);
+
+var _vue3 = require('./vue.config');
+
+var _vue4 = _interopRequireDefault(_vue3);
+
+var _routers = require('./routers');
+
+var _routers2 = _interopRequireDefault(_routers);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Vue.config.debug = true
+
+_vue2.default.use(_vueRouter2.default);
+
+_vue2.default.use(_vueResource2.default);
+
+/* eslint-disable no-new */
+
+var router = new _vueRouter2.default({
+    history: true,
+    root: ''
+});
+
+(0, _routers2.default)(router);
+
+router.start(_App2.default, 'body');
+
+},{"./App.vue":7,"./routers":20,"./vue.config":21,"vue":5,"vue-resource":3,"vue-router":4}],20:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (router) {
+    router.map({
+        '/': {
+            name: 'dashboard',
+            component: require('./components/Dashboard.vue'),
+            auth: true
+        },
+        '/price-overview/': {
+            name: 'price-overview',
+            component: require('./components/Price.vue'),
+            auth: true
+        },
+        '/product-overview/': {
+            name: 'product-overview',
+            component: require('./components/Product.vue'),
+            auth: true
+        }
+    });
+
+    //todo
+    router.beforeEach(function (transition) {
+        if (transition.to.auth) {
+            transition.next();
+        } else {
+            var redirect = encodeURIComponent(transition.to.path);
+            transition.redirect('/?redirect=' + redirect);
+        }
+    });
+};
+
+},{"./components/Dashboard.vue":8,"./components/Price.vue":9,"./components/Product.vue":10}],21:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function () {};
+
+},{}]},{},[19]);
+
+//# sourceMappingURL=main.js.map
