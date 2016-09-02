@@ -1,3 +1,15 @@
+# cache
+cache:
+  paths:
+  - bower_components/
+  - node_modules/
+
 # Before Script
 before_script:
   - echo 'Building start...'
+
+# package
+package:
+    bower install
+    npm install
+    gulp --production
