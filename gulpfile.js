@@ -1,3 +1,5 @@
+var Promise = require('es6-promise').Promise;
+process.env.DISABLE_NOTIFIER = true;
 process.env.DISABLE_NOTIFIER = true;
 var elixir = require('laravel-elixir');
 elixir.config.js.browserify.watchify.options.poll = true;
