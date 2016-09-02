@@ -31,6 +31,7 @@ elixir(function(mix) {
     mix.copy('./bower_components/jquery-pjax/jquery.pjax.js', 'public/js/jquery.pjax.js');
     //copy css file from bower_components
     mix.copy('./bower_components/bootstrap/dist/css/bootstrap.min.css', 'public/css/bootstrap.min.css');
+    mix.copy('./bower_components/bootstrap/dist/css/bootstrap.min.css.map', 'public/css/bootstrap.min.css.map');
     mix.copy('./bower_components/bootstrap/dist/fonts/', 'public/fonts/');
     mix.copy('./bower_components/font-awesome/', 'public/css/font-awesome/');
     mix.copy('./bower_components/iCheck/', 'public/css/iCheck/');

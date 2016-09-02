@@ -50,7 +50,8 @@
                             <td>{{item.sourcing_status}}</td>
                             <td>
                                 <div class="col-md col-xs-12">
-                                    <select name="delivery_type" class="form-control">
+                                    <select name="delivery_type" class="form-control"
+                                            v-on:change="changeDeliveryType(item, $event)">
                                         <option value="STD">STD</option>
                                         <option value="EXPED">EXPED</option>
                                         <option value="FBA">FBA</option>
@@ -58,22 +59,22 @@
                                 </div>
                             </td>
                             <td>
-                                <input type="text" value="{{item.etrade_qty}}" name="etrade_qty" class="price_input_sm">
+                                <input type="number" value="{{item.etrade_qty}}" name="etrade_qty" class="price_input_sm">
                             </td>
                             <td>
-                                <input type="text" value="{{item.es_hk_qty}}" name="es_hk_qty" class="price_input_sm">
+                                <input type="number" value="{{item.es_hk_qty}}" name="es_hk_qty" class="price_input_sm">
                             </td>
                             <td>
-                                <input type="text" value="{{item.es_dg_qty}}" name="es_dg_qty" class="price_input_sm">
+                                <input type="number" value="{{item.es_dg_qty}}" name="es_dg_qty" class="price_input_sm">
                             </td>
                             <td>
-                                <input type="text" value="{{item.es_dg_qty}}" name="es_dg_qty" class="price_input_sm">
+                                <input type="number" value="{{item.es_dg_qty}}" name="es_dg_qty" class="price_input_sm">
                             </td>
                             <td>
-                                <input type="text" value="{{item.item_price}}" name="item_price" class="price_input_sm">
+                                <input type="number" value="{{item.item_price}}" name="item_price" class="price_input_sm">
                             </td>
                             <td>
-                                <input type="text" value="{{item.item_price + 2}}" name="item_price" class="price_input_sm">
+                                <input type="number" value="{{item.item_price + 2}}" name="item_price" class="price_input_sm">
                             </td>
                             <td>{{item.profit}}</td>
                             <td>{{item.margin}}</td>
@@ -226,6 +227,16 @@
                             $('.bulk-actions').hide();
                         }
                     }
+                });
+            },
+            changeDeliveryType: function(item,event) {
+                var type = event.target.value;
+                this.$http.post(
+                    'http://price_tool/api/price',item,
+                    {emulateJSON: true}
+                ).then(function (response) {
+                    item.profit = Math.floor(Math.random()*100);
+                    item.margin = Math.floor(Math.random()*100);
                 })
             }
         },
