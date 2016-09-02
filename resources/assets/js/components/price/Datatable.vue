@@ -1,9 +1,14 @@
+<style>
+.price_input_sm {
+  width: 50px;
+}
+</style>
 <template>
     <pricesearch></pricesearch>
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Filters <small>[Base]</small></h2>
+                <h2>Overview</h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li></li>
                 </ul>
@@ -38,7 +43,7 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody v-if="items.length > 0">
                         <tr v-for="item in items">
                             <td class="a-center ">
                                 <input type="checkbox" class="flat" name="table_records">
@@ -59,22 +64,22 @@
                                 </div>
                             </td>
                             <td>
-                                <input type="number" value="{{item.etrade_qty}}" name="etrade_qty" class="price_input_sm">
+                                <input type="text" value="{{item.etrade_qty}}" name="etrade_qty" class="price_input_sm">
                             </td>
                             <td>
-                                <input type="number" value="{{item.es_hk_qty}}" name="es_hk_qty" class="price_input_sm">
+                                <input type="text" value="{{item.es_hk_qty}}" name="es_hk_qty" class="price_input_sm">
                             </td>
                             <td>
-                                <input type="number" value="{{item.es_dg_qty}}" name="es_dg_qty" class="price_input_sm">
+                                <input type="text" value="{{item.es_dg_qty}}" name="es_dg_qty" class="price_input_sm">
                             </td>
                             <td>
-                                <input type="number" value="{{item.es_dg_qty}}" name="es_dg_qty" class="price_input_sm">
+                                <input type="text" value="{{item.es_dg_qty}}" name="es_dg_qty" class="price_input_sm">
                             </td>
                             <td>
-                                <input type="number" value="{{item.item_price}}" name="item_price" class="price_input_sm">
+                                <input type="text" value="{{item.item_price}}" name="item_price" class="price_input_sm">
                             </td>
                             <td>
-                                <input type="number" value="{{item.item_price + 2}}" name="item_price" class="price_input_sm">
+                                <input type="text" value="{{item.item_price + 2}}" name="item_price" class="price_input_sm">
                             </td>
                             <td>{{item.profit}}</td>
                             <td>{{item.margin}}</td>

@@ -36,7 +36,9 @@
     "select2": "^4.0.2",
     "switchery": "^0.8.1",
     "starrr": "^2.0.0",
-    "jquery-pjax": "1.9.6"
+    "jquery-pjax": "1.9.6",
+    "blueimp-file-upload": "^9.12.5",
+    "jquery-ui": "^1.12.0"
   },
   "resolutions": {
     "fastclick": "^1.0.6"

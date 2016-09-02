@@ -16,6 +16,11 @@ export default function(router) {
             name: 'product-overview',
             component: require('./components/Product.vue'),
             auth: true
+        },
+        '/upload-product/': {
+            name: 'Upload Product',
+            component: require('./components/UploadProduct.vue'),
+            auth: true
         }
     })
 
