@@ -1,3 +1,4 @@
+process.env.DISABLE_NOTIFIER = true;
 var elixir = require('laravel-elixir');
 elixir.config.js.browserify.watchify.options.poll = true;
 
@@ -26,7 +27,6 @@ elixir(function(mix) {
     mix.copy('./bower_components/jquery/dist/jquery.min.js', 'public/js/jquery.min.js');
     mix.copy('./bower_components/bootstrap/dist/js/bootstrap.min.js', 'public/js/bootstrap.min.js');
     mix.copy('./bower_components/fastclick/lib/fastclick.js', 'public/js/fastclick.js');
-    mix.copy('./bower_components/jquery.tagsinput/src/jquery.tagsinput.js', 'public/js/jquery.tagsinput.js');
     mix.copy('./bower_components/iCheck/icheck.min.js', 'public/js/icheck.min.js');
     mix.copy('./bower_components/jquery-pjax/jquery.pjax.js', 'public/js/jquery.pjax.js');
     //copy css file from bower_components
