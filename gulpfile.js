@@ -31,6 +31,7 @@ elixir(function(mix) {
     mix.copy('./bower_components/fastclick/lib/fastclick.js', 'public/js/fastclick.js');
     mix.copy('./bower_components/iCheck/icheck.min.js', 'public/js/icheck.min.js');
     mix.copy('./bower_components/jquery-pjax/jquery.pjax.js', 'public/js/jquery.pjax.js');
+    mix.copy('./bower_components/is-loading/jquery.isloading.min.js', 'public/js/jquery.isloading.min.js');
     //copy css file from bower_components
     mix.copy('./bower_components/bootstrap/dist/css/bootstrap.min.css', 'public/css/bootstrap.min.css');
     mix.copy('./bower_components/bootstrap/dist/css/bootstrap.min.css.map', 'public/css/bootstrap.min.css.map');

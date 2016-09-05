@@ -15,22 +15,8 @@
                     </div>
                     <div class="x_content">
                         <div class="x_title">
-                              <a class="toggle-vis btn btn-success" data-column="0">Checkbox</a>
-                            - <a class="toggle-vis btn btn-success" data-column="1">Marketplace ID</a>
-                            - <a class="toggle-vis btn btn-success" data-column="2">ESG Master SKU</a>
-                            - <a class="toggle-vis btn btn-success" data-column="3">ESG SKU</a>
-                            - <a class="toggle-vis btn btn-success" data-column="4">Product Name</a>
-                            - <a class="toggle-vis btn btn-success" data-column="5">Sourcing status</a>
-                            - <a class="toggle-vis btn btn-success" data-column="6">Delivery Type</a>
-                            - <a class="toggle-vis btn btn-success" data-column="7">ETRADE QTY</a>
-                            - <a class="toggle-vis btn btn-success" data-column="8">ES_HK QTY</a>
-                            - <a class="toggle-vis btn btn-success" data-column="9">ES_DG QTY</a>
-                            - <a class="toggle-vis btn btn-success" data-column="10">Listing QTY</a>
-                            - <a class="toggle-vis btn btn-success" data-column="11">Item Cost</a>
-                            - <a class="toggle-vis btn btn-success" data-column="12">Selling Price</a>
-                            - <a class="toggle-vis btn btn-success" data-column="13">Profit</a>
-                            - <a class="toggle-vis btn btn-success" data-column="14">Margin</a>
-                            <!-- - <a class="toggle-vis btn btn-success" data-column="14">Detail</a> -->
+                            <a class="toggle-vis btn btn-success" data-column="0">Checkbox</a>
+                            <a class="toggle-vis btn btn-success" v-for="header in headers" data-column="{{$index + 1}}">{{header}}</a>
                         </div>
                     </div>
                 </div>
@@ -42,4 +28,12 @@
     </div>
 </template>
 <script>
+    export default {
+        props: [
+            'headers',
+            'hidden_columns'
+        ],
+        ready() {
+        }
+    }
 </script>

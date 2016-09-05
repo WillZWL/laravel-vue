@@ -1,3 +1,7 @@
+<style>
+.isloading-overlay{position:relative;text-align:center;}
+.isloading-overlay .isloading-wrapper{background:#FFFFFF;font-size:24px;-webkit-border-radius:7px;-webkit-background-clip:padding-box;-moz-border-radius:7px;-moz-background-clip:padding;border-radius:7px;background-clip:padding-box;display:inline-block;margin:0 auto;padding:10px 20px;top:10%;z-index:9000;}
+</style>
 <template>
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
@@ -15,7 +19,7 @@
                     <div class="form-group col-md-6">
                         <label class="control-label col-md-4">Marketplace ID</label>
                         <div class="col-md-6 col-xs-12">
-                            <select class="form-control" name="markerplace_id">
+                            <select class="form-control" name="marketplace_id">
                                 <option value=""></option>
                                 <option v-for="marketplace in marketplace_list" value="{{marketplace.marketplace_id}}">{{marketplace.marketplace_id}}</option>
                             </select>
@@ -261,106 +265,219 @@ export default {
             })
         },
         submitForm() {
+            $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
             var str = $("form[name='fm']").serialize();
             var search_result = {};
             this.$http({
-                // url:'http://price_tool/api/price?'+str,
+                // url:'http://vanguard.sites.dev/api/marketplace-product/search?marketplace_id=BCAMAZON&access_token=JCR7S5FdqLoCb6pOdz7djGW5GnuU6ngRnDHRKXfE',
                 // method: 'GET'
             }).then(function (response) {
                 search_result = [
-                 {
-                     markerplace_id:'BCLAZHK',
-                     master_sku:'24697-MM-NA',
-                     sku:'15621-AA-NA',
-                     prod_name:'Biloop Cry Translator',
-                     sourcing_status:'A',
-                     etrade_qty:0,
-                     es_hk_qty:0,
-                     es_dg_qty:0,
-                     item_price:'279.58',
-                     profit:'0.00',
-                     margin:'0.00',
-                     modify_on:'2016-02-18 09:41:11',
-                     modify_by:'system',
-                 },
-                 {
-                     markerplace_id:'BCLAZUS',
-                     master_sku:'25893-MM-NA',
-                     sku:'15630-AA-NA',
-                     prod_name:'Gangsta Gold - Single Color PLA Pack (25 strands)',
-                     sourcing_status:'A',
-                     etrade_qty:0,
-                     es_hk_qty:3,
-                     es_dg_qty:0,
-                     item_price:'10.01',
-                     profit:'0.00',
-                     margin:'0.00',
-                     modify_on:'2016-07-21 04:25:04',
-                     modify_by:'system',
-                 },
-                 {
-                     markerplace_id:'BCLAZUS',
-                     master_sku:'25894-MM-NA',
-                     sku:'15631-AA-NA',
-                     prod_name:'Blue Steel - Single Color PLA Pack (25 strands)',
-                     sourcing_status:'A',
-                     etrade_qty:201,
-                     es_hk_qty:2,
-                     es_dg_qty:0,
-                     item_price:'9.99',
-                     profit:'0.00',
-                     margin:'0.00',
-                     modify_on:'2016-07-19 08:25:03',
-                     modify_by:'system',
-                 },
-                 {
-                     markerplace_id:'BCLAZUS',
-                     master_sku:'25895-MM-NA',
-                     sku:'15632-AA-NA',
-                     prod_name:'Basilica White - Single Color PLA Pack (25 strands)',
-                     sourcing_status:'A',
-                     etrade_qty:310,
-                     es_hk_qty:0,
-                     es_dg_qty:0,
-                     item_price:'9.99',
-                     profit:'0.00',
-                     margin:'0.00',
-                     modify_on:'2016-07-25 04:25:07',
-                     modify_by:'system',
-                 },
-                 {
-                     markerplace_id:'BCLAZUS',
-                     master_sku:'25896-MM-NA',
-                     sku:'15633-AA-NA',
-                     prod_name:'Martian Mars Red - Single Color PLA Pack (25 strands)',
-                     sourcing_status:'A',
-                     etrade_qty:284,
-                     es_hk_qty:0,
-                     es_dg_qty:0,
-                     item_price:'9.99',
-                     profit:'0.00',
-                     margin:'0.00',
-                     modify_on:'2016-07-05 04:25:06',
-                     modify_by:'system',
-                 },
-                 {
-                     markerplace_id:'BCLAZUS',
-                     master_sku:'25897-MM-NA',
-                     sku:'15634-AA-NA',
-                     prod_name:'Diamonds &amp; Pearls - Single Color PLA Pack (25 strands)',
-                     sourcing_status:'A',
-                     etrade_qty:148,
-                     es_hk_qty:0,
-                     es_dg_qty:0,
-                     item_price:'9.99',
-                     profit:'0.00',
-                     margin:'0.00',
-                     modify_on:'2016-07-15 03:25:06',
-                     modify_by:'system',
-                }]
+                                    {
+                                        "id": 1,
+                                        "marketplace_id": "BCAMAZON",
+                                        "country_id": "US",
+                                        "master_sku": "master sku",
+                                        "marketplace_sku": "15991-AA-LM-A",
+                                        "esg_sku": "15991-AA-LM",
+                                        "product_name": "product name",
+                                        "sourcing_status": "A",
+                                        "selling_price": "9.99",
+                                        "profit": "1.40",
+                                        "margin": "14.01",
+                                        "warehouse": {
+                                            "ES_HK": {
+                                                "name": "ES_HK",
+                                                "inventory": 23
+                                            },
+                                            "ETRADE": {
+                                                "name": "ETRADE",
+                                                "inventory": 3
+                                            }
+                                        },
+                                        "selected_delivery_type": "FBA",
+                                        "available_delivery_type": [
+                                            "STD",
+                                            "EXP",
+                                            "EXPED"
+                                        ],
+                                        "listing_status": "Y",
+                                        "listing_quantity": 0,
+                                        "updated_at": "2016-08-30 14:03:28",
+                                        "updated_by": ""
+                                    },
+                                    {
+                                        "id": 2,
+                                        "marketplace_id": "BCAMAZON",
+                                        "country_id": "US",
+                                        "master_sku": "master sku",
+                                        "marketplace_sku": "15992-AA-YL",
+                                        "esg_sku": "15992-AA-YL",
+                                        "product_name": "product name",
+                                        "sourcing_status": "A",
+                                        "selling_price": "9.99",
+                                        "profit": "1.40",
+                                        "margin": "14.01",
+                                        "warehouse": {
+                                            "ES_HK": {
+                                                "name": "ES_HK",
+                                                "inventory": 23
+                                            },
+                                            "ETRADE": {
+                                                "name": "ETRADE",
+                                                "inventory": 3
+                                            }
+                                        },
+                                        "selected_delivery_type": "FBA",
+                                        "available_delivery_type": [
+                                            "STD",
+                                            "EXP",
+                                            "EXPED"
+                                        ],
+                                        "listing_status": "Y",
+                                        "listing_quantity": 0,
+                                        "updated_at": "2016-07-01 10:10:05",
+                                        "updated_by": ""
+                                    },
+                                    {
+                                        "id": 3,
+                                        "marketplace_id": "BCAMAZON",
+                                        "country_id": "US",
+                                        "master_sku": "master sku",
+                                        "marketplace_sku": "15993-AA-PK",
+                                        "esg_sku": "15993-AA-PK",
+                                        "product_name": "product name",
+                                        "sourcing_status": "A",
+                                        "selling_price": "9.99",
+                                        "profit": "1.40",
+                                        "margin": "14.01",
+                                        "warehouse": {
+                                            "ES_HK": {
+                                                "name": "ES_HK",
+                                                "inventory": 23
+                                            },
+                                            "ETRADE": {
+                                                "name": "ETRADE",
+                                                "inventory": 3
+                                            }
+                                        },
+                                        "selected_delivery_type": "FBA",
+                                        "available_delivery_type": [
+                                            "STD",
+                                            "EXP",
+                                            "EXPED"
+                                        ],
+                                        "listing_status": "Y",
+                                        "listing_quantity": 0,
+                                        "updated_at": "2016-07-01 10:10:05",
+                                        "updated_by": ""
+                                    },
+                                    {
+                                        "id": 4,
+                                        "marketplace_id": "BCAMAZON",
+                                        "country_id": "US",
+                                        "master_sku": "master sku",
+                                        "marketplace_sku": "15994-AA-GY",
+                                        "esg_sku": "15994-AA-GY",
+                                        "product_name": "product name",
+                                        "sourcing_status": "A",
+                                        "selling_price": "9.99",
+                                        "profit": "1.40",
+                                        "margin": "14.01",
+                                        "warehouse": {
+                                            "ES_HK": {
+                                                "name": "ES_HK",
+                                                "inventory": 23
+                                            },
+                                            "ETRADE": {
+                                                "name": "ETRADE",
+                                                "inventory": 3
+                                            }
+                                        },
+                                        "selected_delivery_type": "FBA",
+                                        "available_delivery_type": [
+                                            "STD",
+                                            "EXP",
+                                            "EXPED"
+                                        ],
+                                        "listing_status": "Y",
+                                        "listing_quantity": 0,
+                                        "updated_at": "2016-07-01 10:10:05",
+                                        "updated_by": ""
+                                    },
+                                    {
+                                        "id": 5,
+                                        "marketplace_id": "BCAMAZON",
+                                        "country_id": "US",
+                                        "master_sku": "master sku",
+                                        "marketplace_sku": "15995-AA-BL",
+                                        "esg_sku": "15995-AA-BL",
+                                        "product_name": "product name",
+                                        "sourcing_status": "A",
+                                        "selling_price": "9.99",
+                                        "profit": "1.40",
+                                        "margin": "14.01",
+                                        "warehouse": {
+                                            "ES_HK": {
+                                                "name": "ES_HK",
+                                                "inventory": 23
+                                            },
+                                            "ETRADE": {
+                                                "name": "ETRADE",
+                                                "inventory": 3
+                                            }
+                                        },
+                                        "selected_delivery_type": "FBA",
+                                        "available_delivery_type": [
+                                            "STD",
+                                            "EXP",
+                                            "EXPED"
+                                        ],
+                                        "listing_status": "Y",
+                                        "listing_quantity": 0,
+                                        "updated_at": "2016-07-01 10:00:10",
+                                        "updated_by": ""
+                                    },
+                                    {
+                                        "id": 6,
+                                        "marketplace_id": "BCAMAZON",
+                                        "country_id": "US",
+                                        "master_sku": "master sku",
+                                        "marketplace_sku": "15996-AA-LM",
+                                        "esg_sku": "15996-AA-LM",
+                                        "product_name": "product name",
+                                        "sourcing_status": "A",
+                                        "selling_price": "12.99",
+                                        "profit": "1.68",
+                                        "margin": "12.93",
+                                        "warehouse": {
+                                            "ES_HK": {
+                                                "name": "ES_HK",
+                                                "inventory": 23
+                                            },
+                                            "ETRADE": {
+                                                "name": "ETRADE",
+                                                "inventory": 3
+                                            }
+                                        },
+                                        "selected_delivery_type": "STD",
+                                        "available_delivery_type": [
+                                            "STD",
+                                            "EXP",
+                                            "EXPED"
+                                        ],
+                                        "listing_status": "Y",
+                                        "listing_quantity": 2,
+                                        "updated_at": "2016-07-27 09:00:05",
+                                        "updated_by": ""
+                                    }
+                                ]
+                // search_result = response.data.data
             }).then(function(){
                 this.$dispatch('form-search', search_result);
-            })
+            }).then(function(){
+                $.isLoading("hide");
+            });
         }
     }
 }

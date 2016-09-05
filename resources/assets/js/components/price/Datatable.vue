@@ -16,7 +16,7 @@
             </div>
             <div class="x_content">
                 <div class="modal fade custom_header" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-                    <customheader></customheader>
+                    <customheader :headers="headers"></customheader>
                 </div>
                 <table id="datatable-fixed-header" class="table table-striped table-bordered bulk_action jambo_table" width="100%">
                     <thead>
@@ -24,62 +24,79 @@
                             <th>
                                 <input type="checkbox" id="check-all" class="flat">
                             </th>
-                            <th>Marketplace ID</th>
-                            <th>ESG Master SKU</th>
-                            <th>ESG SKU</th>
-                            <th>Product Name</th>
-                            <th>Sourcing status</th>
-                            <th>Delivery Type</th>
-                            <th>ETRADE QTY</th>
-                            <th>ES_HK QTY</th>
-                            <th>ES_DGME QTY</th>
-                            <th>Listing QTY</th>
-                            <th>Item Cost</th>
-                            <th>Selling Price</th>
-                            <th>Profit</th>
-                            <th>Margin</th>
+                            <th v-for="header in headers">{{header}}</th>
                             <th>
                                 <b class="btn btn-success" data-toggle="modal" data-target=".custom_header">Custom Header</b>
                             </th>
                         </tr>
                     </thead>
-                    <tbody v-if="items.length > 0">
+                    <tbody>
                         <tr v-for="item in items">
                             <td class="a-center ">
                                 <input type="checkbox" class="flat" name="table_records">
                             </td>
-                            <td>{{item.markerplace_id}}</td>
-                            <td>{{item.master_sku}}</td>
-                            <td>{{item.sku}}</td>
-                            <td>{{item.prod_name}}</td>
+                            <td>{{item.marketplace_id}}</td>
+                            <td>{{item.marketplace_sku}}</td>
+                            <td>{{item.esg_sku}}</td>
+                            <td>{{item.product_name}}</td>
                             <td>{{item.sourcing_status}}</td>
                             <td>
                                 <div class="col-md col-xs-12">
                                     <select name="delivery_type" class="form-control"
                                             v-on:change="changeDeliveryType(item, $event)">
-                                        <option value="STD">STD</option>
-                                        <option value="EXPED">EXPED</option>
-                                        <option value="FBA">FBA</option>
+                                        <option
+                                            v-for="delivery_type in item.available_delivery_type"
+                                            value="{{delivery_type}}">
+                                                {{delivery_type}}
+                                            </option>
                                     </select>
                                 </div>
                             </td>
+                            <td v-if="typeof (item.warehouse.ETRADE) != 'undefined'">
+                                {{item.warehouse.ETRADE.inventory}}
+                            </td>
+                            <td v-else></td>
+                            <td v-if="typeof (item.warehouse.ES_HK) != 'undefined'">
+                                {{item.warehouse.ES_HK.inventory}}
+                            </td>
+                            <td v-else></td>
+                            <td v-if="typeof (item.warehouse.ES_DGME) != 'undefined'">
+                                {{item.warehouse.ES_DGME.inventory}}
+                            </td>
+                            <td v-else></td>
+                            <td v-if="typeof (item.warehouse.CV_AMZ_FBA_UK) != 'undefined'">
+                                {{item.warehouse.CV_AMZ_FBA_UK.inventory}}
+                            </td>
+                            <td v-else></td>
+                            <td v-if="typeof (item.warehouse.CV_AMZ_FBA_US) != 'undefined'">
+                                {{item.warehouse.CV_AMZ_FBA_US.inventory}}
+                            </td>
+                            <td v-else></td>
+                            <td v-if="typeof (item.warehouse.ESG_AMZN_JP_FBA) != 'undefined'">
+                                {{item.warehouse.ESG_AMZN_JP_FBA.inventory}}
+                            </td>
+                            <td v-else></td>
+                            <td v-if="typeof (item.warehouse.ESG_AMZN_UK_FBA) != 'undefined'">
+                                {{item.warehouse.ESG_AMZN_UK_FBA.inventory}}
+                            </td>
+                            <td v-else></td>
+                            <td v-if="typeof (item.warehouse.ESG_AMZN_US_FBA) != 'undefined'">
+                                {{item.warehouse.ESG_AMZN_US_FBA.inventory}}
+                            </td>
+                            <td v-else></td>
+                            <td v-if="typeof (item.warehouse.PX_AMZN_FBA_UK) != 'undefined'">
+                                {{item.warehouse.PX_AMZN_FBA_UK.inventory}}
+                            </td>
+                            <td v-else></td>
+                            <td v-if="typeof (item.warehouse.ES_HK) != 'undefined'">
+                                {{item.warehouse.ES_HK.inventory}}
+                            </td>
+                            <td v-else></td>
                             <td>
-                                <input type="text" value="{{item.etrade_qty}}" name="etrade_qty" class="price_input_sm">
+                                <input type="text" value="{{item.selling_price}}" name="item_price" class="price_input_sm">
                             </td>
                             <td>
-                                <input type="text" value="{{item.es_hk_qty}}" name="es_hk_qty" class="price_input_sm">
-                            </td>
-                            <td>
-                                <input type="text" value="{{item.es_dg_qty}}" name="es_dg_qty" class="price_input_sm">
-                            </td>
-                            <td>
-                                <input type="text" value="{{item.es_dg_qty}}" name="es_dg_qty" class="price_input_sm">
-                            </td>
-                            <td>
-                                <input type="text" value="{{item.item_price}}" name="item_price" class="price_input_sm">
-                            </td>
-                            <td>
-                                <input type="text" value="{{item.item_price + 2}}" name="item_price" class="price_input_sm">
+                                <input type="text" value="{{item.selling_price}}" name="item_price" class="price_input_sm">
                             </td>
                             <td>{{item.profit}}</td>
                             <td>{{item.margin}}</td>
@@ -118,19 +135,47 @@
             Overviewmodal,
             Customheader
         },
-        // for test
         ready() {
-            // this.initDatatable()
+            this.initDatatable()
         },
         data() {
             return {
-                items: {}
+                items: {},
+                headers:
+                [
+                    'Marketplace ID',
+                    'ESG Master SKU',
+                    'ESG SKU',
+                    'Product Name',
+                    'Sourcing status',
+                    'Delivery Type',
+                    'ETRADE QTY',
+                    'ES_HK QTY',
+                    'ES_DGME QTY',
+                    'CV_AMZ_FBA_UK',
+                    'CV_AMZ_FBA_US',
+                    'ESG_AMZN_JP_FBA',
+                    'ESG_AMZN_UK_FBA',
+                    'ESG_AMZN_US_FBA',
+                    'PX_AMZN_FBA_UK',
+                    'Listing QTY',
+                    'Item Cost',
+                    'Selling Price',
+                    'Profit',
+                    'Margin'
+                ],
+                hidden_columns: [10, 11, 12, 13, 14, 15],
+                export_columns: [1,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
             }
         },
         methods: {
             initDatatable() {
+                $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
+                //hidden some columns when init
+                var hidden_columns = this.hidden_columns;
+                //export csv file
+                var export_columns = this.export_columns;
                 this.$http({
-
                 }).then(function() {
                     var table = $('#datatable-fixed-header').DataTable({
                         dom: "Bfrtip",
@@ -141,31 +186,37 @@
                             {
                                 extend: "csv",
                                 className: "btn-sm",
+                                title:"Accelerator_Product_Prcing_Overview",
                                 exportOptions: {
-                                    columns: [1,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+                                    columns: export_columns
                                 }
                             },
                             {
                                 extend: "excel",
                                 className: "btn-sm",
+                                title:"Accelerator_Product_Prcing_Overview",
                                 exportOptions: {
-                                    columns: [1,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+                                    columns: export_columns
                                 }
                             },
                             {
                                 extend: "print",
                                 className: "btn-sm",
                                 exportOptions: {
-                                    columns: [1,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+                                    columns: export_columns
                                 }
                             }
                         ]
                     });
+                    //hidden columns
+                    for (var i = 0; i < hidden_columns.length; i++) {
+                        var column = table.column(hidden_columns[i]);
+                        column.visible( ! column.visible() );
+                        $('a.toggle-vis').eq(hidden_columns[i]).removeClass("btn-success").addClass('btn-danger');
+                    }
                     $('a.toggle-vis').on( 'click', function (e) {
                         e.preventDefault();
-                        // Get the column API object
                         var column = table.column( $(this).attr('data-column') );
-                        // Toggle the visibility
                         column.visible( ! column.visible() );
                         if (!column.visible()) {
                             $(this).removeClass("btn-success").addClass('btn-danger');
@@ -180,7 +231,6 @@
                             radioClass: 'iradio_flat-green'
                         });
                     }
-                    // /iCheck
                     // Table
                     $('table input').on('ifChecked', function () {
                         checkState = '';
@@ -222,7 +272,6 @@
                         }
 
                         var checkCount = $(".bulk_action input[name='table_records']:checked").length;
-
                         if (checkCount) {
                             $('.column-title').hide();
                             $('.bulk-actions').show();
@@ -232,6 +281,8 @@
                             $('.bulk-actions').hide();
                         }
                     }
+                }).then(function() {
+                    $.isLoading("hide");
                 });
             },
             changeDeliveryType: function(item,event) {
