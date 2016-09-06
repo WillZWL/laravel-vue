@@ -129,7 +129,6 @@
                             <textarea name="sku_list" class="form-control" style="height:140px;"></textarea>
                         </div>
                     </div>
-                    <!-- <div class="ln_solid"></div> -->
                     <div class="form-group col-md-12">
                         <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
                             <input type="button" class="btn btn-dark" name='reset' value="Reset">
@@ -142,7 +141,7 @@
     </div>
 </template>
 <script>
-import {api_url, access_token} from '../../vue.config.js'
+import {api_url, access_token} from '../../../js/vue.config.js'
 export default {
     ready() {
         this.fetchMarketplace(),

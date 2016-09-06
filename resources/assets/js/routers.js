@@ -4,22 +4,22 @@ export default function(router) {
     router.map({
         '/': {
             name: 'dashboard',
-            component: require('./components/Dashboard.vue'),
+            component: require('../views/components/Dashboard.vue'),
             auth: true
         },
         '/price-overview/': {
             name: 'price-overview',
-            component: require('./components/Price.vue'),
+            component: require('../views/components/Price.vue'),
             auth: true
         },
         '/product-overview/': {
             name: 'product-overview',
-            component: require('./components/Product.vue'),
+            component: require('../views/components/Product.vue'),
             auth: true
         },
         '/upload-product/': {
             name: 'Upload Product',
-            component: require('./components/UploadProduct.vue'),
+            component: require('../views/components/UploadProduct.vue'),
             auth: true
         }
     })

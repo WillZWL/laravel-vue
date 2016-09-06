@@ -76,15 +76,16 @@ scout
 |   |---assets
 |        |---css                      Project css Directory
 |        |---js                       Project Js Directory
-|             |--components           Vue components Directory
-|               |--layout
-|               |--price
-|               |--price.vue          vue file
-|             |--App.vue              App.vue —— Layouts of the Project
 |             |--custom.js
 |             |--main.js              main.js, entry vue file
 |             |--routers.js           route map file
 |             |--vue.config.js        config
+|        |---views
+|             |--components           Vue components Directory
+|                 |--layout
+|                 |--price
+|                 |--price.vue          vue file
+|             |--App.vue              App.vue —— Layouts of the Project
 |--bower.json                         bower.json, Manage JS && css dependencies
 |--gulpfile.js                        gulp command, For manage JS and CSS resources file, package, copy file and etc
 |--package.json                       Node dependencies,
