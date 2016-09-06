@@ -58,7 +58,6 @@ function PutSelectorContent(selector, list)
 }
 export default {
 	ready() {
-		$("body").scrollspy({target: '#myScrollspy', offset: 30});
 		PutSelectorContent(document.basicInfoForm.brandId, brandList);
 	}
 }
