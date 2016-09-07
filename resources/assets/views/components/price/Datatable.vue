@@ -33,7 +33,7 @@
                     <tbody>
                         <tr v-for="item in items">
                             <td class="a-center ">
-                                <input type="checkbox" class="flat" name="table_records">
+                                <input type="checkbox" class="flat" name="table_records" value="{{item.id}}">
                             </td>
                             <td>{{item.marketplace_id}}</td>
                             <td>{{item.marketplace_sku}}</td>
@@ -92,17 +92,15 @@
                                 {{item.warehouse.ES_HK.inventory}}
                             </td>
                             <td v-else></td>
-                            <td>
-                                <input type="text" value="{{item.selling_price}}" name="item_price" class="price_input_sm">
-                            </td>
+                            <td></td>
                             <td>
                                 <input type="text" value="{{item.selling_price}}" name="item_price" class="price_input_sm">
                             </td>
                             <td>{{item.profit}}</td>
                             <td>{{item.margin}}</td>
                             <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: {{item.modify_on}}  Update By:{{item.modify_by}}">
-                                <input type="Button" value="Detail" class="btn btn-primary" data-toggle="modal" data-target=".overview-modal{{$index}}">
-                                <div class="modal fade overview-modal{{$index}}" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                <input type="Button" value="Detail" class="btn btn-primary" data-toggle="modal" data-target=".overview-modal{{item.id}}">
+                                <div class="modal fade overview-modal{{item.id}}" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
                                     <!-- detail overview-->
                                     <overviewmodal :item="item"></overviewmodal>
                                 </div>

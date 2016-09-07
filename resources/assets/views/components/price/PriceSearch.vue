@@ -1,9 +1,7 @@
 <style>
 .isloading-overlay{position:relative;text-align:center;}
 .isloading-overlay .isloading-wrapper{background:#FFFFFF;font-size:24px;-webkit-border-radius:7px;-webkit-background-clip:padding-box;-moz-border-radius:7px;-moz-background-clip:padding;border-radius:7px;background-clip:padding-box;display:inline-block;margin:0 auto;padding:10px 20px;top:10%;z-index:9000;}
-.form-horizontal .required {
-    color: red;
-}
+.form-horizontal .required {color: red;}
 </style>
 <template>
     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -18,7 +16,7 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content" id="pjax-container">
-                <form name="fm" class="form-horizontal form-label-left" onsubmit="return false">
+                <form name="fm" class="form_search form-horizontal form-label-left" onsubmit="return false">
                     <div class="form-group col-md-6">
                         <label class="control-label col-md-4">Marketplace ID <span class="required">*</span>
                         </label>
@@ -51,7 +49,7 @@
                         <div class="col-md-6 col-xs-12">
                             <select class="form-control" name="brand_id">
                                 <option></option>
-                                <option v-for="brand in brand_list" value="{{brand.brand_id}}">{{brand.brand_name}}</option>
+                                <option v-for="brand in brand_list | orderBy 'brand_name'" value="{{brand.brand_id}}">{{brand.brand_name}}</option>
                             </select>
                         </div>
                     </div>
@@ -153,7 +151,10 @@ export default {
         this.fetchBrand(),
         this.fetchMerchant(),
         this.fetchCountry(),
-        this.initSearchForm()
+        this.initSearchForm();
+        if (url('query')) {
+            this.submitForm(url('query'));
+        }
     },
     data() {
         return {
@@ -230,7 +231,13 @@ export default {
                     return false;
                 }
             });
-
+        },
+        setSearchFormValue() {
+            for (var i = 0; i < $(".form_search select").length; i++) {
+                var key = $(".form_search select")[i].name;
+                var value = url('?' + key);
+                $(".form_search select[name="+key+"]").val(value);
+            }
         },
         PutSelectorContent (selector, list) {
             for (var i in list) {
@@ -277,23 +284,24 @@ export default {
                 this.$set('country_list', response.data.data);
             })
         },
-        submitForm() {
+        submitForm(query_str = '') {
             $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
-            var str = $("form[name='fm']").serialize();
+            if (query_str == '') {
+                var query_str = $("form[name='fm']").serialize();
+            }
+            window.history.pushState(null, null, 'price-overview?'+query_str);
             var search_result = {};
             this.$http({
-                url:this.api_url+'marketplace-product/search?access_token='+this.access_token+'&'+str,
+                url:this.api_url+'marketplace-product/search?access_token='+this.access_token+'&'+query_str,
                 method: 'GET'
             }).then(function (response) {
                 search_result = response.data.data
             }).then(function(){
                 this.$dispatch('form-search', search_result);
+            }).then(function() {
+                this.setSearchFormValue();
             }).then(function(){
                 $.isLoading("hide");
-                // if (response.data.status == 500) {
-                //     $.isLoading({ text: "HTTP Internal Server Error", class:"fa fa-exclamation-triangle" });
-                // } else {
-                // }
             });
         }
     }
