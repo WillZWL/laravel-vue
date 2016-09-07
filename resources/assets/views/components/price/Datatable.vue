@@ -298,12 +298,10 @@
         },
         events: {
             'form-search': function(search_result) {
-                if (search_result.length > 0) {
-                    this.$set('items', search_result);
-                    var table = $('#datatable-fixed-header').DataTable();
-                    table.destroy();
-                    this.initDatatable();
-                }
+                this.$set('items', search_result);
+                var table = $('#datatable-fixed-header').DataTable();
+                table.destroy();
+                this.initDatatable();
             }
         }
     };

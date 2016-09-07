@@ -242,7 +242,6 @@ export default {
                 url:this.api_url+'marketplace?access_token='+this.access_token,
                 method: 'GET'
             }).then(function (response) {
-                // console.log(response);
                 this.$set('marketplace_list', response.data.data);
             })
         },
