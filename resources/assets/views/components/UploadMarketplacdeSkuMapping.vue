@@ -64,7 +64,7 @@
     <div class="panel-body">
         <ul>
             <li>
-                <a href="download-xlsx/example.xlsx">Download Example.xlsx
+                <a href="/download-xlsx/example.xlsx">Download Example.xlsx
                     <strong><i class="fa fa-download"></i></strong>
                 </a>
             </li>

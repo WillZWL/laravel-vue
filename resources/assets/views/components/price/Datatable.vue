@@ -1,7 +1,5 @@
 <style>
-.price_input_sm {
-  width: 50px;
-}
+.price_input_sm {width: 50px;}
 </style>
 <template>
     <pricesearch></pricesearch>
@@ -42,8 +40,8 @@
                             <td>{{item.sourcing_status}}</td>
                             <td>
                                 <div class="col-md col-xs-12">
-                                    <select name="delivery_type" class="form-control"
-                                            v-on:change="changeDeliveryType(item, $event)">
+                                    <select name="delivery_type" class="form-control delivery_type{{item.id}}"
+                                            v-on:change="getProfitAndMargin(item)">
                                         <option
                                             v-for="delivery_type in item.available_delivery_type"
                                             value="{{delivery_type}}">
@@ -94,7 +92,9 @@
                             <td v-else></td>
                             <td></td>
                             <td>
-                                <input type="text" value="{{item.selling_price}}" name="item_price" class="price_input_sm">
+                                <input type="text" value="{{item.selling_price}}" name="item_price"
+                                    class="price_input_sm selling_price{{item.id}}"
+                                    v-on:change="getProfitAndMargin(item)">
                             </td>
                             <td>{{item.profit}}</td>
                             <td>{{item.margin}}</td>
@@ -283,10 +283,13 @@
                     $.isLoading("hide");
                 });
             },
-            changeDeliveryType: function(item,event) {
-                var type = event.target.value;
+            getProfitAndMargin: function(item) {
+                var data = {};
+                data.id = item.id;
+                data.type = $(".delivery_type"+item.id).val();
+                data.selling_price = $(".selling_price"+item.id).val();
                 this.$http.post(
-                    'http://price_tool/api/price',item,
+                    'http://price_tool/api/price', data,
                     {emulateJSON: true}
                 ).then(function (response) {
                     item.profit = Math.floor(Math.random()*100);
