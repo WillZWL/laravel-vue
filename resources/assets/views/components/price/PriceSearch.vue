@@ -238,6 +238,9 @@ export default {
                 var value = url('?' + key);
                 $(".form_search select[name="+key+"]").val(value);
             }
+            $(".form_search input[name='inventory']").val(url('?inventory'));
+            $(".form_search textarea[name='master_sku_list']").val(url('?master_sku_list'));
+            $(".form_search textarea[name='esg_sku_list']").val(url('?esg_sku_list'));
         },
         PutSelectorContent (selector, list) {
             for (var i in list) {

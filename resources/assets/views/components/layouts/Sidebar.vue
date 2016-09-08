@@ -28,6 +28,7 @@
                                 <li><a v-link="'price-overview'">Price Overview</a></li>
                                 <li><a v-link="'product-overview'">Product Overview</a></li>
                                 <li><a v-link="'upload-product'">Upload Product</a></li>
+                                <li><a v-link="'upload-marketplace-sku_mapping'">Upload Marketplace SKU Mapping</a></li>
                             </ul>
                         </li>
                         <li>

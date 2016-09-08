@@ -21,6 +21,11 @@ export default function(router) {
             name: 'Upload Product',
             component: require('../views/components/UploadProduct.vue'),
             auth: true
+        },
+        '/upload-marketplace-sku_mapping/': {
+            name: 'Upload Marketplace SKU Mapping',
+            component: require('../views/components/UploadMarketplacdeSkuMapping.vue'),
+            auth: true
         }
     })
 
