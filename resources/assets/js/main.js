@@ -15,7 +15,7 @@ Vue.use(VueResource)
 
 var router = new VueRouter({
     history: true,
-    root: ''
+    root: 'scout'
 });
 
 routerMap(router);
