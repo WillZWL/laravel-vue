@@ -16,6 +16,7 @@
                 <div class="modal fade custom_header" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
                     <customheader :headers="headers"></customheader>
                 </div>
+                <form name="fm_price" class="post_price">
                 <table id="datatable-fixed-header" class="table table-striped table-bordered bulk_action jambo_table" width="100%">
                     <thead>
                         <tr>
@@ -31,22 +32,25 @@
                     <tbody>
                         <tr v-for="item in items">
                             <td class="a-center ">
-                                <input type="checkbox" class="flat" name="table_records" value="{{item.id}}">
+                                <input type="checkbox" class="flat" name="id" value="{{item.id}}">
                             </td>
-                            <td>{{item.marketplace_id}}</td>
-                            <td>{{item.marketplace_sku}}</td>
+                            <td>{{item.marketplace_id}}{{item.country_id}}</td>
+                            <td>{{item.master_sku}}</td>
                             <td>{{item.esg_sku}}</td>
                             <td>{{item.product_name}}</td>
                             <td>{{item.sourcing_status}}</td>
                             <td>
                                 <div class="col-md col-xs-12">
-                                    <select name="delivery_type" class="form-control delivery_type{{item.id}}"
+                                    <select class="form-control delivery_type{{item.id}}"
                                             v-on:change="getProfitAndMargin(item)">
-                                        <option
-                                            v-for="delivery_type in item.available_delivery_type"
-                                            value="{{delivery_type}}">
-                                                {{delivery_type}}
+                                        <option></option>
+                                        <template v-for="delivery_type in item.available_delivery_type">
+                                            <option value="{{delivery_type}}"
+                                            v-if="delivery_type == item.selected_delivery_type" selected>
+                                            {{delivery_type}}
                                             </option>
+                                        <option value="{{delivery_type}}" v-else>{{delivery_type}}</option>
+                                        </template>
                                     </select>
                                 </div>
                             </td>
@@ -92,13 +96,21 @@
                             <td v-else></td>
                             <td></td>
                             <td>
-                                <input type="text" value="{{item.selling_price}}" name="item_price"
+                                <input type="text" value="{{item.selling_price}}"
                                     class="price_input_sm selling_price{{item.id}}"
                                     v-on:change="getProfitAndMargin(item)">
                             </td>
+                            <td>
+                                <div class="col-md col-xs-12">
+                                    <select class="form-control listing_status{{item.id}}">
+                                        <option value="Y" v-if="'Y' == item.listing_status" selected>Y</option>
+                                        <option value="N" v-else>N</option>
+                                    </select>
+                                </div>
+                            </td>
                             <td>{{item.profit}}</td>
                             <td>{{item.margin}}</td>
-                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: {{item.modify_on}}  Update By:{{item.modify_by}}">
+                            <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: {{item.updated_at}}">
                                 <input type="Button" value="Detail" class="btn btn-primary" data-toggle="modal" data-target=".overview-modal{{item.id}}">
                                 <div class="modal fade overview-modal{{item.id}}" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
                                     <!-- detail overview-->
@@ -115,12 +127,12 @@
         <div class="x_panel">
             <div class="">
                 <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
-                    <button type="submit" class="btn btn-primary">Cancel</button>
-                    <button type="submit" class="btn btn-success">Update</button>
+                    <input type="submit" class="btn btn-success" value="Update" @click="postForm()">
                 </div>
             </div>
         </div>
     </div>
+    </form>
 </template>
 
 <script>
@@ -159,11 +171,12 @@
                     'Listing QTY',
                     'Item Cost',
                     'Selling Price',
+                    'Listing Status',
                     'Profit',
                     'Margin'
                 ],
-                hidden_columns: [10, 11, 12, 13, 14, 15],
-                export_columns: [1,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+                hidden_columns: [9, 10, 11, 12, 13, 14, 15],
+                export_columns: [1,2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
             }
         },
         methods: {
@@ -263,13 +276,13 @@
                     });
                     function countChecked() {
                         if (checkState === 'all') {
-                            $(".bulk_action input[name='table_records']").iCheck('check');
+                            $(".bulk_action input[name='id']").iCheck('check');
                         }
                         if (checkState === 'none') {
-                            $(".bulk_action input[name='table_records']").iCheck('uncheck');
+                            $(".bulk_action input[name='id']").iCheck('uncheck');
                         }
 
-                        var checkCount = $(".bulk_action input[name='table_records']:checked").length;
+                        var checkCount = $(".bulk_action input[name='id']:checked").length;
                         if (checkCount) {
                             $('.column-title').hide();
                             $('.bulk-actions').show();
@@ -286,7 +299,7 @@
             getProfitAndMargin: function(item) {
                 var data = {};
                 data.id = item.id;
-                data.type = $(".delivery_type"+item.id).val();
+                data.delivery_type = $(".delivery_type"+item.id).val();
                 data.selling_price = $(".selling_price"+item.id).val();
                 this.$http.post(
                     'http://price_tool/api/price', data,
@@ -295,6 +308,28 @@
                     item.profit = Math.floor(Math.random()*100);
                     item.margin = Math.floor(Math.random()*100);
                 })
+            },
+            postForm: function() {
+                var ids = $("form[name='fm_price']").serializeArray();
+                var post_data = {};
+                $.each(ids, function() {
+                    var row = {};
+                    row.id = this.value;
+                    row.selling_price = $(".selling_price"+this.value).val();
+                    row.delivery_type = $(".delivery_type"+this.value).val();
+                    row.listing_status = $(".listing_status"+this.value).val();
+                    post_data[this.value] = row;
+                });
+                post_data.access_token = 'WpMpN6GG1gm4lGmq8o8xzy1ZrPc2RkfnuhUZqhFH';
+                // console.log(post_data);
+                // post_data = $.param(post_data);
+                console.log(post_data);
+                this.$http.post(
+                    'http://price_tool/api/price', post_data,
+                    {emulateJSON: true}
+                ).then(function (response) {
+                    console.log(response);
+                });
             }
         },
         events: {

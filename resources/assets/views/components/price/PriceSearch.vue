@@ -299,12 +299,15 @@ export default {
                 method: 'GET'
             }).then(function (response) {
                 search_result = response.data.data
-            }).then(function(){
                 this.$dispatch('form-search', search_result);
-            }).then(function() {
                 this.setSearchFormValue();
-            }).then(function(){
                 $.isLoading("hide");
+            }).catch(function(){
+                $.isLoading("hide");
+                $.isLoading({ text: "Error 500, Internal Server Error", class:"fa fa-exclamation-triangle" });
+                setTimeout( function(){
+                    $.isLoading("hide");
+                }, 5000)
             });
         }
     }
