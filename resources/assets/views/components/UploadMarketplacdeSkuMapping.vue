@@ -16,7 +16,7 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
-                <form class="form-horizontal form-label-left" name="edit-form" method="post" enctype="multipart/form-data" action="platform-market/upload-mapping">
+                <form class="form-horizontal form-label-left" name="edit-form" method="post" enctype="multipart/form-data" action="/platform-market/upload-mapping">
                     <input type="hidden" class="form-control" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group col-md-6">
                         <div class="col-md-6 col-sm-6 col-xs-12">
