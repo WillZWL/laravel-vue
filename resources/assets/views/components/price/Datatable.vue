@@ -124,6 +124,37 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="dataTables_info" id="datatable-fixed-header_info" role="status" aria-live="polite"
+                    v-if="meta.pagination.current_page > 0">
+                    Total Records: {{meta.pagination.total}}, Per Page: {{meta.pagination.per_page}}, Total Pages: {{meta.pagination.total_pages}}
+                </div>
+                <div class="dataTables_paginate paging_simple_numbers" v-if="meta.pagination.current_page > 0">
+                    <ul class="pagination">
+                        <template v-if="meta.pagination.current_page == 1">
+                            <li class="paginate_button previous disabled">
+                                <a aria-controls="datatable-fixed-header" tabindex="0">Previous</a>
+                            </li>
+                        </template>
+                        <template v-else>
+                            <li class="paginate_button previous">
+                                <a aria-controls="datatable-fixed-header" tabindex="0" @click="pagination(meta.pagination.links.previous)">Previous</a>
+                            </li>
+                        </template>
+                        <li class="paginate_button current disabled">
+                            <a aria-controls="datatable-fixed-header" tabindex="0" >{{meta.pagination.current_page}}</a>
+                        </li>
+                        <template v-if="meta.pagination.current_page < meta.pagination.total_pages">
+                            <li class="paginate_button next" id="datatable-fixed-header_next">
+                                <a aria-controls="datatable-fixed-header" tabindex="0" @click="pagination(meta.pagination.links.next)">Next</a>
+                            </li>
+                        </template>
+                        <template v-else>
+                            <li class="paginate_button next disabled" id="datatable-fixed-header_next">
+                                <a aria-controls="datatable-fixed-header" tabindex="0">Next</a>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -156,6 +187,11 @@
         data() {
             return {
                 items: {},
+                meta: {
+                   pagination: {
+                        'current_page': 0
+                   }
+                },
                 headers:
                 [
                     'Marketplace ID',
@@ -199,7 +235,9 @@
                         dom: "Bfrtip",
                         fixedHeader: true,
                         bSort:false,
-                        iDisplayLength:25,
+                        iDisplayLength:30,
+                        "paging":   false,
+                        "info":false,
                         buttons: [
                             {
                                 extend: "csv",
@@ -337,11 +375,15 @@
                 ).then(function (response) {
                     console.log(response);
                 });
+            },
+            pagination: function(url) {
+                this.$children[0].submitForm(url);
             }
         },
         events: {
             'form-search': function(search_result) {
-                this.$set('items', search_result);
+                this.$set('items', search_result.data);
+                this.$set('meta', search_result.meta);
                 var table = $('#datatable-fixed-header').DataTable();
                 table.destroy();
                 this.initDatatable();

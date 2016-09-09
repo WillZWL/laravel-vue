@@ -298,7 +298,7 @@ export default {
                 url:this.api_url+'marketplace-product/search?access_token='+this.access_token+'&'+query_str,
                 method: 'GET'
             }).then(function (response) {
-                search_result = response.data.data
+                search_result = response.data
                 this.$dispatch('form-search', search_result);
                 this.setSearchFormValue();
                 $.isLoading("hide");
