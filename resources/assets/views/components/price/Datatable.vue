@@ -246,7 +246,7 @@
                     'Price',
                     'delivery_type'
                 ],
-                hidden_columns: [8, 9, 10, 11, 12, 13, 14, 15, 16, 18],
+                hidden_columns: [8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 23, 24],
                 always_hidden_columns: [23, 24],
                 export_columns: [3, 4, 1, 2, 24, 23, 17],
                 api_url:api_url,
@@ -275,6 +275,7 @@
                         buttons: [
                             {
                                 extend: "csv",
+                                text: 'Export CSV Current Page',
                                 className: "btn-sm",
                                 title:"Accelerator_Product_Prcing_Overview",
                                 exportOptions: {
@@ -283,6 +284,7 @@
                             },
                             {
                                 extend: "excel",
+                                text: 'Export Excel Current Page',
                                 className: "btn-sm",
                                 title:"Accelerator_Product_Prcing_Overview",
                                 exportOptions: {
@@ -291,6 +293,7 @@
                             },
                             {
                                 extend: "print",
+                                text: 'Print Current Page',
                                 className: "btn-sm",
                                 exportOptions: {
                                     columns: export_columns
