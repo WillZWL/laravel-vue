@@ -16,7 +16,7 @@
                     <div class="x_content">
                         <div class="x_title">
                             <a class="toggle-vis btn btn-success" data-column="0">Checkbox</a>
-                            <a class="toggle-vis btn btn-success" v-for="header in headers" data-column="{{$index + 1}}">{{header}}</a>
+                            <a class="toggle-vis btn btn-success" v-for="header in headers" v-if="$index<22" data-column="{{$index + 1}}">{{header}}</a>
                         </div>
                     </div>
                 </div>

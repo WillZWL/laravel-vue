@@ -25,7 +25,7 @@
                             </th>
                             <th v-for="header in headers">{{header}}</th>
                             <th>
-                                <b class="btn btn-success" data-toggle="modal" data-target=".custom_header">Custom Header</b>
+                                <b class="btn btn-success" data-toggle="modal" data-target=".custom_header">Custom<br/>Header</b>
                             </th>
                         </tr>
                     </thead>
@@ -34,7 +34,8 @@
                             <td class="a-center td_checkbox{{item.id}}">
                                 <input v-if="item.selected_delivery_type != ''" type="checkbox" class="flat" name="id" value="{{item.id}}">
                             </td>
-                            <td>{{item.marketplace_id}}{{item.country_id}}</td>
+                            <td>{{item.marketplace_id}}</td>
+                            <td>{{item.country_id}}</td>
                             <td>{{item.master_sku}}</td>
                             <td>{{item.esg_sku}}</td>
                             <td>{{item.product_name}}</td>
@@ -52,7 +53,6 @@
                                             </option>
                                             <option value="{{key}}" v-else>{{key}}</option>
                                         </template>
-                                        <option v-if="item.available_delivery_type.length == 0" selected>UnAvailable</option>
                                     </select>
                                 </div>
                             </td>
@@ -105,15 +105,40 @@
                             <td>
                                 <div class="col-md col-xs-12">
                                     <select class="form-control listing_status{{item.id}}">
-                                        <option value="Y" v-if="'Y' == item.listing_status" selected>Y</option>
-                                        <option value="N" v-else>N</option>
+                                    <template v-if="'Y' == item.listing_status">
+                                        <option value="Y" selected>Y</option>
+                                        <option value="N">N</option>
+                                    </template>
+                                    <template v-else>
+                                        <option value="Y">Y</option>
+                                        <option value="N" selected>N</option>
+                                    </template>
                                     </select>
                                 </div>
                             </td>
-                            <td v-if="item.selected_delivery_type != ''">{{item.available_delivery_type[item.selected_delivery_type].profit}}</td>
-                            <td v-else></td>
-                            <td v-if="item.selected_delivery_type != ''">{{item.available_delivery_type[item.selected_delivery_type].margin}}</td>
-                            <td v-else></td>
+                            <td v-if="item.selected_delivery_type != ''">
+                                <span v-if="item.available_delivery_type[item.selected_delivery_type].margin < 0.0"
+                                      class="alert-danger">
+                                    {{item.available_delivery_type[item.selected_delivery_type].profit}}
+                                </span>
+                                <span v-else>
+                                    {{item.available_delivery_type[item.selected_delivery_type].profit}}
+                                </span>
+                            </td>
+                            <td v-else>N/A</td>
+                            <td v-if="item.selected_delivery_type != ''">
+                                <span v-if="item.available_delivery_type[item.selected_delivery_type].margin < 0.0"
+                                      class="alert-danger">
+                                    {{item.available_delivery_type[item.selected_delivery_type].margin}}
+                                </span>
+                                <span v-else>
+                                    {{item.available_delivery_type[item.selected_delivery_type].margin}}
+                                </span>
+                                %
+                            </td>
+                            <td v-else>N/A</td>
+                            <td>{{item.selling_price}}</td>
+                            <td>{{item.selected_delivery_type}}</td>
                             <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: {{item.updated_at}}">
                                 <input type="Button" value="Detail" class="btn btn-primary" data-toggle="modal" data-target=".overview-modal{{item.id}}">
                                 <div class="modal fade overview-modal{{item.id}}" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
@@ -141,7 +166,9 @@
                             </li>
                         </template>
                         <li class="paginate_button current disabled">
-                            <a aria-controls="datatable-fixed-header" tabindex="0" >{{meta.pagination.current_page}}</a>
+                            <a aria-controls="datatable-fixed-header" tabindex="0" >
+                                Page {{meta.pagination.current_page}} of {{meta.pagination.total_pages}}
+                            </a>
                         </li>
                         <template v-if="meta.pagination.current_page < meta.pagination.total_pages">
                             <li class="paginate_button next" id="datatable-fixed-header_next">
@@ -161,7 +188,7 @@
     <div class="navbar navbar-default navbar-fixed-bottom">
         <div class="x_panel">
             <div class="">
-                <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
+                <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-6">
                     <input type="submit" class="btn btn-success" value="Update" @click="postForm()">
                 </div>
             </div>
@@ -195,8 +222,9 @@
                 headers:
                 [
                     'Marketplace ID',
-                    'ESG Master SKU',
-                    'ESG SKU',
+                    'Country ID',
+                    'ESG_Master_SKU',
+                    'ESG_____SKU',
                     'Product Name',
                     'Sourcing status',
                     'Delivery Type',
@@ -214,10 +242,13 @@
                     'Selling Price',
                     'Listing Status',
                     'Profit',
-                    'Margin'
+                    'Margin',
+                    'Price',
+                    'delivery_type'
                 ],
-                hidden_columns: [9, 10, 11, 12, 13, 14, 15],
-                export_columns: [1,2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+                hidden_columns: [8, 9, 10, 11, 12, 13, 14, 15, 16, 18],
+                always_hidden_columns: [23, 24],
+                export_columns: [3, 4, 1, 2, 24, 23, 17],
                 api_url:api_url,
                 access_token:access_token
             }
@@ -229,6 +260,9 @@
                 var hidden_columns = this.hidden_columns;
                 //export csv file
                 var export_columns = this.export_columns;
+
+                var always_hidden_columns = this.always_hidden_columns;
+
                 this.$http({
                 }).then(function() {
                     var table = $('#datatable-fixed-header').DataTable({
@@ -269,7 +303,11 @@
                         var column = table.column(hidden_columns[i]);
                         column.visible( ! column.visible() );
                         $('a.toggle-vis').eq(hidden_columns[i]).removeClass("btn-success").addClass('btn-danger');
-                    }
+                    };
+                    for (var j = 0; j < always_hidden_columns.length; j++) {
+                        table.column(always_hidden_columns[i]);
+                        column.visible( ! column.visible() );
+                    };
                     $('a.toggle-vis').on( 'click', function (e) {
                         e.preventDefault();
                         var column = table.column( $(this).attr('data-column') );
@@ -367,11 +405,12 @@
                     row.listing_status = $(".listing_status"+this.value).val();
                     post_data[this.value] = row;
                 });
-                post_data.access_token = 'WpMpN6GG1gm4lGmq8o8xzy1ZrPc2RkfnuhUZqhFH';
-                console.log(post_data);
+                // post_data.access_token = 'WpMpN6GG1gm4lGmq8o8xzy1ZrPc2RkfnuhUZqhFH';
                 this.$http.post(
                     'http://price_tool/api/price', post_data,
-                    {emulateJSON: true}
+                    {
+                        emulateJSON: true
+                    }
                 ).then(function (response) {
                     console.log(response);
                 });
