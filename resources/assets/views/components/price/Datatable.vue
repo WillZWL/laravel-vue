@@ -31,8 +31,8 @@
                     </thead>
                     <tbody>
                         <tr v-for="item in items">
-                            <td class="a-center ">
-                                <input type="checkbox" class="flat" name="id" value="{{item.id}}">
+                            <td class="a-center td_checkbox{{item.id}}">
+                                <input v-if="item.selected_delivery_type != ''" type="checkbox" class="flat" name="id" value="{{item.id}}">
                             </td>
                             <td>{{item.marketplace_id}}{{item.country_id}}</td>
                             <td>{{item.master_sku}}</td>
@@ -42,15 +42,17 @@
                             <td>
                                 <div class="col-md col-xs-12">
                                     <select class="form-control delivery_type{{item.id}}"
-                                            v-on:change="getProfitAndMargin(item)">
-                                        <option></option>
-                                        <template v-for="delivery_type in item.available_delivery_type">
-                                            <option value="{{delivery_type}}"
-                                            v-if="delivery_type == item.selected_delivery_type" selected>
-                                            {{delivery_type}}
+                                            v-if="item.available_delivery_type"
+                                            v-on:change="changeDeliveryType(item)">
+                                        <option value=""></option>
+                                        <template v-for="(key, delivery_type) in item.available_delivery_type">
+                                            <option value="{{key}}"
+                                            v-if="key == item.selected_delivery_type" selected>
+                                            {{key}}
                                             </option>
-                                        <option value="{{delivery_type}}" v-else>{{delivery_type}}</option>
+                                            <option value="{{key}}" v-else>{{key}}</option>
                                         </template>
+                                        <option v-if="item.available_delivery_type.length == 0" selected>UnAvailable</option>
                                     </select>
                                 </div>
                             </td>
@@ -108,8 +110,10 @@
                                     </select>
                                 </div>
                             </td>
-                            <td>{{item.profit}}</td>
-                            <td>{{item.margin}}</td>
+                            <td v-if="item.selected_delivery_type != ''">{{item.available_delivery_type[item.selected_delivery_type].profit}}</td>
+                            <td v-else></td>
+                            <td v-if="item.selected_delivery_type != ''">{{item.available_delivery_type[item.selected_delivery_type].margin}}</td>
+                            <td v-else></td>
                             <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: {{item.updated_at}}">
                                 <input type="Button" value="Detail" class="btn btn-primary" data-toggle="modal" data-target=".overview-modal{{item.id}}">
                                 <div class="modal fade overview-modal{{item.id}}" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
@@ -136,6 +140,7 @@
 </template>
 
 <script>
+    import {api_url, access_token} from '../../../js/vue.config.js'
     import Pricesearch from './PriceSearch.vue'
     import Overviewmodal from './OverviewModal.vue'
     import Customheader from './CustomHeader.vue'
@@ -176,7 +181,9 @@
                     'Margin'
                 ],
                 hidden_columns: [9, 10, 11, 12, 13, 14, 15],
-                export_columns: [1,2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+                export_columns: [1,2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+                api_url:api_url,
+                access_token:access_token
             }
         },
         methods: {
@@ -296,17 +303,19 @@
                     $.isLoading("hide");
                 });
             },
+            changeDeliveryType: function(item) {
+                var delivery_type = $(".delivery_type"+item.id).val();
+                item.selected_delivery_type = delivery_type;
+            },
             getProfitAndMargin: function(item) {
-                var data = {};
-                data.id = item.id;
-                data.delivery_type = $(".delivery_type"+item.id).val();
-                data.selling_price = $(".selling_price"+item.id).val();
-                this.$http.post(
-                    'http://price_tool/api/price', data,
-                    {emulateJSON: true}
-                ).then(function (response) {
-                    item.profit = Math.floor(Math.random()*100);
-                    item.margin = Math.floor(Math.random()*100);
+                var id = item.id;
+                var delivery_type = $(".delivery_type"+item.id).val();
+                var selling_price = $(".selling_price"+item.id).val();
+                this.$http({
+                    url:this.api_url+"marketplace-product/estimate?id="+id+"&selling_price="+selling_price+"&access_token="+this.access_token,
+                    method: 'GET'
+                }).then(function (response) {
+                    item.available_delivery_type = response.data;
                 })
             },
             postForm: function() {
@@ -321,8 +330,6 @@
                     post_data[this.value] = row;
                 });
                 post_data.access_token = 'WpMpN6GG1gm4lGmq8o8xzy1ZrPc2RkfnuhUZqhFH';
-                // console.log(post_data);
-                // post_data = $.param(post_data);
                 console.log(post_data);
                 this.$http.post(
                     'http://price_tool/api/price', post_data,
