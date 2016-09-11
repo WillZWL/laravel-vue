@@ -11,7 +11,7 @@ import routerMap from './routers'
 Vue.use(VueRouter)
 Vue.use(VueResource)
 
-Vue.http.headers.common['Authorization'] = 'Bearer o1lY40f8I5OtSA2JvGAlchxYB3vClbj79iDAe15d';
+Vue.http.headers.common['Authorization'] = 'Bearer 7nAzUymnvo4mKrW4RRGIkLCBzRE3RtzLN46o1K6l';
 
 /* eslint-disable no-new */
 
