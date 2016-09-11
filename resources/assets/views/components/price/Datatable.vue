@@ -116,7 +116,7 @@
                                     </select>
                                 </div>
                             </td>
-                            <td v-if="item.selected_delivery_type != ''">
+                            <td v-if="(item.selected_delivery_type != '') && (item.available_delivery_type.length > 0)">
                                 <span v-if="item.available_delivery_type[item.selected_delivery_type].margin < 0.0"
                                       class="alert-danger">
                                     {{item.available_delivery_type[item.selected_delivery_type].profit}}
@@ -126,7 +126,7 @@
                                 </span>
                             </td>
                             <td v-else>N/A</td>
-                            <td v-if="item.selected_delivery_type != ''">
+                            <td v-if="(item.selected_delivery_type != '') && (item.available_delivery_type.length > 0)">
                                 <span v-if="item.available_delivery_type[item.selected_delivery_type].margin < 0.0"
                                       class="alert-danger">
                                     {{item.available_delivery_type[item.selected_delivery_type].margin}}
@@ -399,23 +399,21 @@
             },
             postForm: function() {
                 var ids = $("form[name='fm_price']").serializeArray();
-                var post_data = {};
+                var post_data = [];
                 $.each(ids, function() {
                     var row = {};
                     row.id = this.value;
                     row.selling_price = $(".selling_price"+this.value).val();
                     row.delivery_type = $(".delivery_type"+this.value).val();
                     row.listing_status = $(".listing_status"+this.value).val();
-                    post_data[this.value] = row;
+                    post_data.push(row);
                 });
-                // post_data.access_token = 'WpMpN6GG1gm4lGmq8o8xzy1ZrPc2RkfnuhUZqhFH';
+
                 this.$http.post(
-                    'http://price_tool/api/price', post_data,
-                    {
-                        emulateJSON: true
-                    }
+                    api_url+'marketplace-product/bulk-updat',
+                    post_data
                 ).then(function (response) {
-                    console.log(response);
+                    // console.log(response);
                 });
             },
             pagination: function(url) {

@@ -144,7 +144,7 @@
     </div>
 </template>
 <script>
-import {api_url, access_token} from '../../../js/vue.config.js'
+import {api_url} from '../../../js/vue.config.js'
 export default {
     ready() {
         this.fetchMarketplace(),
@@ -165,18 +165,7 @@ export default {
             country_list: {},
             merchant_list: {},
             api_url:api_url,
-            warehouse_list: [
-                    'ETRADE',
-                    'ES_HK',
-                    'ES_DGME',
-                    'CV_AMZ_FBA_UK',
-                    'CV_AMZ_FBA_US',
-                    'ESG_AMZN_JP_FBA',
-                    'ESG_AMZN_UK_FBA',
-                    'ESG_AMZN_US_FBA',
-                    'PX_AMZN_FBA_UK'],
-            access_token:access_token
-        }
+            warehouse_list: ['ETRADE', 'ES_HK', 'ES_DGME', 'CV_AMZ_FBA_UK', 'CV_AMZ_FBA_US', 'ESG_AMZN_JP_FBA', 'ESG_AMZN_UK_FBA', 'ESG_AMZN_US_FBA', 'PX_AMZN_FBA_UK'] }
     },
     methods: {
         initSearchForm() {
@@ -249,7 +238,7 @@ export default {
         },
         fetchMarketplace () {
             this.$http({
-                url:this.api_url+'marketplace?access_token='+this.access_token,
+                url:this.api_url+'marketplace',
                 method: 'GET'
             }).then(function (response) {
                 this.$set('marketplace_list', response.data.data);
@@ -257,7 +246,7 @@ export default {
         },
         fetchBrand () {
             this.$http({
-                url:this.api_url+'brand?access_token='+this.access_token,
+                url:this.api_url+'brand',
                 method: 'GET'
             }).then(function (response) {
                 var brand_manager_list = {};
@@ -273,7 +262,7 @@ export default {
         },
         fetchMerchant () {
             this.$http({
-                url:this.api_url+'merchant?access_token='+this.access_token,
+                url:this.api_url+'merchant',
                 method:'GET',
             }).then(function (response) {
                 this.$set('merchant_list', response.data.data);
@@ -281,7 +270,7 @@ export default {
         },
         fetchCountry () {
             this.$http({
-                url:this.api_url+'country?access_token='+this.access_token,
+                url:this.api_url+'country',
                 method: 'GET'
             }).then(function (response) {
                 this.$set('country_list', response.data.data);
@@ -295,7 +284,7 @@ export default {
             window.history.pushState(null, null, 'price-overview?'+query_str);
             var search_result = {};
             this.$http({
-                url:this.api_url+'marketplace-product/search?access_token='+this.access_token+'&'+query_str,
+                url:this.api_url+'marketplace-product/search?'+query_str,
                 method: 'GET'
             }).then(function (response) {
                 search_result = response.data
