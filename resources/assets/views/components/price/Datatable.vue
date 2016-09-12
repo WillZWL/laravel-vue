@@ -399,18 +399,20 @@
             },
             postForm: function() {
                 var ids = $("form[name='fm_price']").serializeArray();
-                var post_data = [];
+                var post_data = {}
+
                 $.each(ids, function() {
                     var row = {};
                     row.id = this.value;
-                    row.selling_price = $(".selling_price"+this.value).val();
+                    row.price = $(".selling_price"+this.value).val();
                     row.delivery_type = $(".delivery_type"+this.value).val();
                     row.listing_status = $(".listing_status"+this.value).val();
-                    post_data.push(row);
+                    post_data[this.value] = row;
                 });
 
+                console.debug(post_data);
                 this.$http.post(
-                    api_url+'marketplace-product/bulk-updat',
+                    api_url+'marketplace-product/bulk-update',
                     post_data
                 ).then(function (response) {
                     // console.log(response);
