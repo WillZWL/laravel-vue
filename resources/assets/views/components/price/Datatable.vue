@@ -426,7 +426,8 @@
         ).then(function (response) {});
       },
       pagination: function(url) {
-        this.$children[0].submitForm(url);
+        var query_str = $.url('query', url);
+        this.$children[0].submitForm(query_str);
       }
     },
     events: {
