@@ -1,5 +1,8 @@
 <style>
 .price_input_sm {width: 50px;}
+#datatable-fixed-header td:nth-child(4), #datatable-fixed-header td:nth-child(5) {
+    width: 110px;
+}
 </style>
 <template>
     <pricesearch></pricesearch>
@@ -223,8 +226,8 @@
                 [
                     'Marketplace ID',
                     'Country ID',
-                    'ESG_Master_SKU',
-                    'ESG_____SKU',
+                    'ESG Master SKU',
+                    'ESG SKU',
                     'Product Name',
                     'Sourcing status',
                     'Delivery Type',
