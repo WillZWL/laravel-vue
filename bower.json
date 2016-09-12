@@ -39,7 +39,8 @@
     "jquery-pjax": "1.9.6",
     "blueimp-file-upload": "^9.12.5",
     "jquery-ui": "^1.12.0",
-    "is-loading": "^1.0.6"
+    "is-loading": "^1.0.6",
+    "js-url": "^2.3.0"
   },
   "resolutions": {
     "fastclick": "^1.0.6",

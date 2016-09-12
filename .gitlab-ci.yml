@@ -12,6 +12,6 @@ before_script:
 package:
     script:
     - pwd
-    - bower install
-    - npm install
-    - gulp --production
+    # - bower install
+    # - npm install
+    # - gulp --production

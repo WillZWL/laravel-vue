@@ -5,14 +5,14 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-                 <h4 class="modal-title" id="myModalLabel2">Overview [ {{item.markerplace_id}} ] - {{item.master_sku}} - {{item.sku}}</h4>
+                 <h4 class="modal-title" id="myModalLabel2">Overview [ {{item.marketplace_id}} ] - {{item.master_sku}} - {{item.esg_sku}}</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal form-label-left">
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-3">Marketplace ID</label>
                         <div class="col-md-6 col-xs-12">
-                            <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.markerplace_id}}" readonly="readonly">
+                            <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.marketplace_id}}" readonly="readonly">
                         </div>
                     </div>
                     <div class="form-group col-md-12">
@@ -24,13 +24,13 @@
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-3">ESG SKU</label>
                         <div class="col-md-6 col-xs-12">
-                            <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.sku}}" readonly="readonly">
+                            <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.esg_sku}}" readonly="readonly">
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-3">Product Name</label>
                         <div class="col-md-9 col-xs-12">
-                            <input type="text" class="form-control col-md-9 col-xs-12 form_name" value="{{item.prod_name}}" readonly="readonly" style="width:100%">
+                            <input type="text" class="form-control col-md-9 col-xs-12 form_name" value="{{item.product_name}}" readonly="readonly" style="width:100%">
                         </div>
                     </div>
                     <div class="form-group col-md-12">
@@ -44,33 +44,9 @@
                         </div>
                     </div>
                     <div class="form-group col-md-12">
-                        <label class="control-label col-md-3">ETRADE QTY</label>
-                        <div class="col-md-6 col-xs-12">
-                            <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.etrade_qty}}">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label class="control-label col-md-3">ES_HK QTY</label>
-                        <div class="col-md-6 col-xs-12">
-                            <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.es_hk_qty}}">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label class="control-label col-md-3">ES_DG QTY</label>
-                        <div class="col-md-6 col-xs-12">
-                            <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.es_dg_qty}}">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label class="control-label col-md-3">Item Cost</label>
-                        <div class="col-md-6 col-xs-12">
-                            <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.item_price}}">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
                         <label class="control-label col-md-3">Selling Price</label>
                         <div class="col-md-6 col-xs-12">
-                            <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.item_price}}">
+                            <input type="text" class="form-control col-md-4 col-xs-12" value="{{item.selling_price}}">
                         </div>
                     </div>
                     <div class="form-group col-md-12">
@@ -87,13 +63,10 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-3">Update On</label>
-                        <div class="control-label col-md-4">{{item.modify_on}}</div>
+                        <div class="col-md-4 left">{{item.updated_at}}</div>
                     </div>
-                    <div class="form-group col-md-12">
-                        <label class="control-label col-md-3">Update By</label>
-                        <div class="control-label col-md-4">{{item.modify_by}}</div>
-                    </div>
-            </form></div>
+                </form>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save</button>

@@ -21,6 +21,16 @@ export default function(router) {
             name: 'Upload Product',
             component: require('../views/components/UploadProduct.vue'),
             auth: true
+        },
+        '/upload-marketplace-sku_mapping/': {
+            name: 'Upload Marketplace SKU Mapping',
+            component: require('../views/components/UploadMarketplacdeSkuMapping.vue'),
+            auth: true
+        },
+        '/tracer-sku-setting/': {
+            name: 'Tracer SKU Setting',
+            component: require('../views/components/TracerSkuSetting.vue'),
+            auth: true
         }
     })
 
@@ -29,8 +39,7 @@ export default function(router) {
         if (transition.to.auth) {
             transition.next();
         } else {
-            let redirect = encodeURIComponent(transition.to.path);
-            transition.redirect('/?redirect=' + redirect);
+            transition.redirect('/');
         }
     });
 }
