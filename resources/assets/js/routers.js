@@ -9,7 +9,7 @@ export default function(router) {
         },
         '/price-overview/': {
             name: 'price-overview',
-            component: require('../views/components/Price.vue'),
+            component: require('../views/components/PriceOverview.vue'),
             auth: true
         },
         '/product-overview/': {
