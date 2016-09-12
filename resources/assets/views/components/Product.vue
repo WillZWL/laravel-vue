@@ -83,7 +83,7 @@ import Common from './product/Common.vue'
 
 export default {
 	ready() {
-		$("body").scrollspy({target: '#myScrollspy', offset: 20});
+		$("body").scrollspy({target: '#myScrollspy', offset: 200});
 	}, 
 	components: {
         BasicInfo,
