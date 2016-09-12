@@ -16,6 +16,7 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
+                <h4 style="color:#26b99a">{{ $message }}</h4>
                 <form class="form-horizontal form-label-left" name="edit-form" method="post" enctype="multipart/form-data" action="/platform-market/upload-mapping">
                     <input type="hidden" class="form-control" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group col-md-6">
@@ -64,7 +65,7 @@
     <div class="panel-body">
         <ul>
             <li>
-                <a href="/download-xlsx/example.xlsx">Download Example.xlsx
+                <a href="download-xlsx/example.xlsx">Download Example.xlsx
                     <strong><i class="fa fa-download"></i></strong>
                 </a>
             </li>
