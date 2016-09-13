@@ -3,17 +3,17 @@
 export default function(router) {
     router.map({
         '/': {
-            name: 'dashboard',
+            name: 'Dashboard',
             component: require('../views/components/Dashboard.vue'),
             auth: true
         },
         '/price-overview/': {
-            name: 'price-overview',
+            name: 'Price Overview',
             component: require('../views/components/PriceOverview.vue'),
             auth: true
         },
         '/product-overview/': {
-            name: 'product-overview',
+            name: 'Product Overview',
             component: require('../views/components/Product.vue'),
             auth: true
         },
