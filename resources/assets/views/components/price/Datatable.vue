@@ -1,5 +1,5 @@
 <style>
-  .price_input_sm {
+  .input_sm {
     width: 50px;
   }
   #datatable-fixed-header td:nth-child(4), #datatable-fixed-header td:nth-child(5) {width: 110px;}
@@ -93,13 +93,12 @@
                   {{item.warehouse.PX_AMZN_FBA_UK.inventory}}
                 </td>
                 <td v-else></td>
-                <td v-if="typeof (item.warehouse.ES_HK) != 'undefined'">
-                  {{item.warehouse.ES_HK.inventory}}
+                <td>
+                    <input type="text" name="listing_quantity" class="input_sm listing_quantity{{item.id}}" value="{{item.listing_quantity}}">
                 </td>
-                <td v-else></td>
                 <td></td>
                 <td>
-                  <input type="text" value="{{item.selling_price}}" class="price_input_sm selling_price{{item.id}}" v-on:change="getProfitAndMargin(item)">
+                  <input type="text" value="{{item.selling_price}}" class="input_sm selling_price{{item.id}}" v-on:change="getProfitAndMargin(item)">
                 </td>
                 <td>
                   <div class="col-md col-xs-12">
@@ -414,6 +413,7 @@
           row.price = $(".selling_price"+this.value).val();
           row.delivery_type = $(".delivery_type"+this.value).val();
           row.listing_status = $(".listing_status"+this.value).val();
+          row.listing_quantity = $(".listing_quantity"+this.value).val();
           post_data[this.value] = row;
         });
 
