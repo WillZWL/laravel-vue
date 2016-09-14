@@ -2,10 +2,8 @@
   .price_input_sm {
     width: 50px;
   }
-  #datatable-fixed-header td:nth-child(4),
-  #datatable-fixed-header td:nth-child(5) {
-    width: 110px;
-  }
+  #datatable-fixed-header td:nth-child(4), #datatable-fixed-header td:nth-child(5) {width: 110px;}
+  #datatable-fixed-header td:nth-child(21), #datatable-fixed-header td:nth-child(22) {width: 100px;}
 </style>
 <template>
   <pricesearch></pricesearch>
@@ -118,7 +116,7 @@
                   </div>
                 </td>
                 <td v-if="(item.selected_delivery_type != '') && (item.available_delivery_type.constructor !== Array)">
-                  <span class="alert-danger"
+                  <span class="text-danger"
                         v-if="item.available_delivery_type[item.selected_delivery_type].margin < 0.0">
                     {{item.available_delivery_type[item.selected_delivery_type].profit}}
                   </span>
@@ -128,14 +126,13 @@
                 </td>
                 <td v-else>N/A</td>
                 <td v-if="(item.selected_delivery_type != '') && (item.available_delivery_type.constructor !== Array)">
-                  <span class="alert-danger"
+                  <span class="text-danger"
                         v-if="item.available_delivery_type[item.selected_delivery_type].margin < 0.0">
-                    {{item.available_delivery_type[item.selected_delivery_type].margin}}
+                    {{item.available_delivery_type[item.selected_delivery_type].margin}}%
                   </span>
                   <span v-else>
-                    {{item.available_delivery_type[item.selected_delivery_type].margin}}
+                    {{item.available_delivery_type[item.selected_delivery_type].margin}}%
                   </span>
-                  %
                 </td>
                 <td v-else>N/A</td>
                 <td>{{item.selling_price}}</td>

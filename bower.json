@@ -33,7 +33,7 @@
     "nprogress": "^0.2.0",
     "jszip": "Stuk/jszip#v2.6.0",
     "pdfmake": "^0.1.20",
-    "select2": "^4.0.2",
+    "select2": "^4.0.3",
     "switchery": "^0.8.1",
     "starrr": "^2.0.0",
     "jquery-pjax": "1.9.6",
