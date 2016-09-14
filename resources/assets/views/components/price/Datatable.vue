@@ -2,8 +2,11 @@
   .input_sm {
     width: 50px;
   }
-  #datatable-fixed-header td:nth-child(4), #datatable-fixed-header td:nth-child(5) {width: 110px;}
+  #datatable-fixed-header td:nth-child(4), #datatable-fixed-header td:nth-child(5) {width: 150px;}
   #datatable-fixed-header td:nth-child(21), #datatable-fixed-header td:nth-child(22) {width: 100px;}
+  #datatable-fixed-header {
+    font-size:11px;
+  }
 </style>
 <template>
   <pricesearch></pricesearch>
@@ -29,7 +32,7 @@
                 </th>
                 <th v-for="header in headers">{{header}}</th>
                 <th>
-                  <b class="btn btn-success" data-toggle="modal" data-target=".custom_header">Custom<br/>Header</b>
+                  <b class="btn btn-success" data-toggle="modal" data-target=".custom_header">Header</b>
                 </th>
               </tr>
             </thead>
@@ -42,6 +45,7 @@
                 <td>{{item.country_id}}</td>
                 <td>{{item.master_sku}}</td>
                 <td>{{item.esg_sku}}</td>
+                <td>{{item.marketplace_sku}}</td>
                 <td>{{item.product_name}}</td>
                 <td>{{item.sourcing_status}}</td>
                 <td>
@@ -136,6 +140,7 @@
                 <td v-else>N/A</td>
                 <td>{{item.selling_price}}</td>
                 <td>{{item.selected_delivery_type}}</td>
+                <td>{{item.listing_quantity}}</td>
                 <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: {{item.updated_at}}">
                   <input type="Button" value="Detail" class="btn btn-primary" data-toggle="modal" data-target=".overview-modal{{item.id}}">
                   <div class="modal fade overview-modal{{item.id}}" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
@@ -224,6 +229,7 @@
         'Country ID',
         'ESG Master SKU',
         'ESG SKU',
+        'MP SKU',
         'Product Name',
         'Sourcing status',
         'Delivery Type',
@@ -243,11 +249,12 @@
         'Profit',
         'Margin',
         'Price',
-        'delivery_type'
+        'delivery type',
+        'listing quantity'
       ],
-      hidden_columns: [8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 23, 24],
-      always_hidden_columns: [23, 24],
-      export_columns: [3, 4, 1, 2, 24, 23, 17],
+      hidden_columns: [9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 24, 25, 26, 27],
+      always_hidden_columns: [25, 26, 27],
+      export_columns: [3, 4, 1, 2, 25, 24, 26],
       api_url:api_url,
       access_token:access_token
     }
