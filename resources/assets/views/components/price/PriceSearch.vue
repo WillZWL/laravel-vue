@@ -300,7 +300,7 @@ export default {
                 $.isLoading({ text: "Error 500, Internal Server Error", class:"fa fa-exclamation-triangle" });
                 setTimeout( function(){
                     $.isLoading("hide");
-                }, 5000)
+                }, 3000)
             });
         }
     }

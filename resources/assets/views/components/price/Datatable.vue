@@ -186,7 +186,7 @@
             <div class="x_panel">
               <div class="">
                 <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-6">
-                  <input type="submit" class="btn btn-success" value="Update" @click="postForm()">
+                  <input type="button" class="btn btn-success" value="Update" @click="postForm()">
                 </div>
               </div>
             </div>
@@ -404,9 +404,8 @@
         })
       },
       postForm: function() {
-        var ids = $("form[name='fm_price']").serializeArray();
-        var post_data = {}
-
+        var ids =  $('input:checkbox[name=id]:checked');
+        var post_data = {};
         $.each(ids, function() {
           var row = {};
           row.id = this.value;
@@ -416,11 +415,24 @@
           row.listing_quantity = $(".listing_quantity"+this.value).val();
           post_data[this.value] = row;
         });
-
+        // console.log(post_data);
         this.$http.post(
           api_url+'marketplace-product/bulk-update',
           post_data
-        ).then(function (response) {});
+        ).then(function (response) {
+            $.isLoading({ text: "Update Success", class:"fa fa-check" });
+            setTimeout( function(){
+                $.isLoading("hide");
+            }, 2000);
+        }).then(function(){
+            $(".bulk_action input[name='id']").iCheck('uncheck');
+        }).catch(function(){
+            //todo
+            $.isLoading({ text: "Error 500, Internal Server Error", class:"fa fa-exclamation-triangle" });
+            setTimeout( function(){
+                $.isLoading("hide");
+            }, 3000);
+        });
       },
       pagination: function(url) {
         var query_str = $.url('query', url);
