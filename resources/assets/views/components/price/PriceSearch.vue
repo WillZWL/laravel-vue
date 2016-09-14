@@ -111,7 +111,7 @@
                             </select>
                         </div>
                         <div class="col-md-3 col-xs-12">
-                            <input type="text" name="inventory" class="form-control col-md-4 col-xs-12" placeholder=">,<,= ">
+                            <input type="number" name="inventory" class="form-control col-md-4 col-xs-12">
                         </div>
                     </div>
                     <div class="form-group col-md-6">
