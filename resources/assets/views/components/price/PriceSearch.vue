@@ -117,14 +117,14 @@
                     <div class="form-group col-md-6">
                         <label class="control-label col-md-4">SKU List
                         <ul class="nav nav-tabs tabs-left">
-                            <li class="active"><a href="#master_sku" data-toggle="tab">Master SKU</a></li>
+                            <li class="active"><a href="#master_sku" data-toggle="tab">ESG Master SKU</a></li>
                             <li><a href="#esg_sku" data-toggle="tab">ESG SKU</a></li>
                         </ul>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="tab-content">
                                 <div class="tab-pane active" id="master_sku">
-                                    <textarea name="master_sku_list" class="form-control" style="height:140px;" placeholder="Please Input Master SKU"></textarea>
+                                    <textarea name="master_sku_list" class="form-control" style="height:140px;" placeholder="Please Input ESG Master SKU"></textarea>
                                 </div>
                                 <div class="tab-pane" id="esg_sku">
                                     <textarea name="esg_sku_list" class="form-control" style="height:140px;" placeholder="Please Input ESG SKU"></textarea>
