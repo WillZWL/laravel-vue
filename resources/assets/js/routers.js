@@ -31,6 +31,11 @@ export default function(router) {
             name: 'Tracer SKU Setting',
             component: require('../views/components/TracerSkuSetting.vue'),
             auth: true
+        },
+        '/order_fulfillment/': {
+            name: 'Order Fulfilment',
+            component: require('../views/components/OrderFulfillment.vue'),
+            auth: true
         }
     })
 

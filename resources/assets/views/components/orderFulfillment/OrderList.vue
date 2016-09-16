@@ -1,0 +1,249 @@
+<style>
+  table {
+    font-size:10px;
+  }
+  table .fa-search-plus {
+    font-size: 16px;
+  }
+</style>
+<template>
+  <table id="{{id}}" class="table table-striped table-bordered bulk_action jambo_table" width="100%">
+    <thead>
+      <tr>
+        <th>
+          <input type="checkbox" id="check-all" class="flat">
+        </th>
+        <th v-for="header in headers">{{header}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="item in items">
+        <td class="a-center td_checkbox">
+          <input type="checkbox" class="flat" name="id" value="">
+        </td>
+        <td>{{item.platform_type}}</td>
+        <td>{{item.biz_type}}</td>
+        <td>{{item.merchant}}</td>
+        <td>{{item.platform_id}}</td>
+        <td>
+          <a data-toggle="modal" data-target=".overview{{$index}}-{{id}}">
+            {{item.lazada_so_no}}&nbsp;&nbsp;<i class="fa fa-search-plus"></i>
+          </a>
+          <div class="modal fade overview{{$index}}-{{id}}" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+            <!-- detail overview-->
+            <over-view></over-view>
+          </div>
+        </td>
+        <td>{{item.esg_so_no}}</td>
+        <td>{{item.order_create_date}}</td>
+        <td>{{item.update_date}}</td>
+        <td>{{item.payment_method}}</td>
+        <td>{{item.price}}</td>
+        <td>{{item.order_qty}}</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</template>
+<script>
+  import OverView from './OverView.vue'
+  export default {
+    components: {
+      OverView
+    },
+    props: [
+      'id'
+    ],
+    ready() {
+      this.init()
+    },
+    data() {
+      return {
+        headers: [
+          'Platform Type',
+          'BizType',
+          'Merchant',
+          'Platform',
+          'Lazada Order No',
+          'ESG Order No',
+          'Order Date',
+          'Updated Date',
+          'Payment Method',
+          'Price',
+          'Order QTY',
+          'Action'
+        ],
+        items: [
+          {
+            platform_type:'Accelerator',
+            biz_type:'Lazada',
+            merchant:'MATTEL',
+            platform_id:'AC-BCLZ-ETRPH',
+            lazada_so_no:'4499667766',
+            esg_so_no:'543634',
+            order_create_date:'2016-09-15 00:00:38',
+            update_date:'2016-09-15 00:00:42',
+            payment_method:'bc_lazada_my',
+            price:'1000.00',
+            order_qty:'5'
+          },
+          {
+            platform_type:'Accelerator',
+            biz_type:'Lazada',
+            merchant:'MATTEL',
+            platform_id:'AC-BCLZ-ETRPH',
+            lazada_so_no:'4499667755',
+            esg_so_no:'543666',
+            order_create_date:'2016-09-15 00:00:38',
+            update_date:'2016-09-15 00:00:42',
+            payment_method:'bc_lazada_ph',
+            price:'6000.00',
+            order_qty:'6'
+          },
+          {
+            platform_type:'Accelerator',
+            biz_type:'Lazada',
+            merchant:'MATTEL',
+            platform_id:'AC-BCLZ-ETRPH',
+            lazada_so_no:'4499667766',
+            esg_so_no:'543634',
+            order_create_date:'2016-09-15 00:00:38',
+            update_date:'2016-09-15 00:00:42',
+            payment_method:'bc_lazada_my',
+            price:'1000.00',
+            order_qty:'5'
+          },
+          {
+            platform_type:'Accelerator',
+            biz_type:'Lazada',
+            merchant:'MATTEL',
+            platform_id:'AC-BCLZ-ETRPH',
+            lazada_so_no:'4499667755',
+            esg_so_no:'543666',
+            order_create_date:'2016-09-15 00:00:38',
+            update_date:'2016-09-15 00:00:42',
+            payment_method:'bc_lazada_ph',
+            price:'6000.00',
+            order_qty:'6'
+          },
+          {
+            platform_type:'Accelerator',
+            biz_type:'Lazada',
+            merchant:'MATTEL',
+            platform_id:'AC-BCLZ-ETRPH',
+            lazada_so_no:'4499667766',
+            esg_so_no:'543634',
+            order_create_date:'2016-09-15 00:00:38',
+            update_date:'2016-09-15 00:00:42',
+            payment_method:'bc_lazada_my',
+            price:'1000.00',
+            order_qty:'5'
+          },
+          {
+            platform_type:'Accelerator',
+            biz_type:'Lazada',
+            merchant:'MATTEL',
+            platform_id:'AC-BCLZ-ETRPH',
+            lazada_so_no:'4499667755',
+            esg_so_no:'543666',
+            order_create_date:'2016-09-15 00:00:38',
+            update_date:'2016-09-15 00:00:42',
+            payment_method:'bc_lazada_ph',
+            price:'6000.00',
+            order_qty:'6'
+          },
+          {
+            platform_type:'Accelerator',
+            biz_type:'Lazada',
+            merchant:'MATTEL',
+            platform_id:'AC-BCLZ-ETRPH',
+            lazada_so_no:'4499667766',
+            esg_so_no:'543634',
+            order_create_date:'2016-09-15 00:00:38',
+            update_date:'2016-09-15 00:00:42',
+            payment_method:'bc_lazada_my',
+            price:'1000.00',
+            order_qty:'5'
+          },
+          {
+            platform_type:'Accelerator',
+            biz_type:'Lazada',
+            merchant:'MATTEL',
+            platform_id:'AC-BCLZ-ETRPH',
+            lazada_so_no:'4499667755',
+            esg_so_no:'543666',
+            order_create_date:'2016-09-15 00:00:38',
+            update_date:'2016-09-15 00:00:42',
+            payment_method:'bc_lazada_ph',
+            price:'6000.00',
+            order_qty:'6'
+          },
+          {
+            platform_type:'Accelerator',
+            biz_type:'Lazada',
+            merchant:'MATTEL',
+            platform_id:'AC-BCLZ-ETRPH',
+            lazada_so_no:'4499667766',
+            esg_so_no:'543634',
+            order_create_date:'2016-09-15 00:00:38',
+            update_date:'2016-09-15 00:00:42',
+            payment_method:'bc_lazada_my',
+            price:'1000.00',
+            order_qty:'5'
+          },
+          {
+            platform_type:'Accelerator',
+            biz_type:'Lazada',
+            merchant:'MATTEL',
+            platform_id:'AC-BCLZ-ETRPH',
+            lazada_so_no:'4499667755',
+            esg_so_no:'543666',
+            order_create_date:'2016-09-15 00:00:38',
+            update_date:'2016-09-15 00:00:42',
+            payment_method:'bc_lazada_ph',
+            price:'6000.00',
+            order_qty:'6'
+          },
+          {
+            platform_type:'Accelerator',
+            biz_type:'Lazada',
+            merchant:'MATTEL',
+            platform_id:'AC-BCLZ-ETRPH',
+            lazada_so_no:'4499667766',
+            esg_so_no:'543634',
+            order_create_date:'2016-09-15 00:00:38',
+            update_date:'2016-09-15 00:00:42',
+            payment_method:'bc_lazada_my',
+            price:'1000.00',
+            order_qty:'5'
+          },
+          {
+            platform_type:'Accelerator',
+            biz_type:'Lazada',
+            merchant:'MATTEL',
+            platform_id:'AC-BCLZ-ETRPH',
+            lazada_so_no:'4499667755',
+            esg_so_no:'543666',
+            order_create_date:'2016-09-15 00:00:38',
+            update_date:'2016-09-15 00:00:42',
+            payment_method:'bc_lazada_ph',
+            price:'6000.00',
+            order_qty:'6'
+          }
+        ]
+      }
+    },
+    methods: {
+      init() {
+        var table_selector = '#'+this.id;
+        console.log(table_selector);
+        var table = $(table_selector).DataTable({
+          // dom: "Bfrtip",
+          fixedHeader: true,
+          bSort:false,
+          buttons: []
+        });
+      }
+    }
+  }
+</script>
