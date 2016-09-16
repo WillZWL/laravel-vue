@@ -34,6 +34,12 @@
                 <li><a v-link="'tracer-sku-setting'">Tracer SKU Setting</a></li>
               </ul>
             </li>
+            <li>
+              <a><i class="fa fa-bar-chart"></i> Order Management <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li><a v-link="'order_fulfillment'">DC Order Fulfilment</a></li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>
