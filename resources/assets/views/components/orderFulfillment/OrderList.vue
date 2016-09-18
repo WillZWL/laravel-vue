@@ -31,7 +31,7 @@
           </a>
           <div class="modal fade overview{{$index}}-{{id}}" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
             <!-- detail overview-->
-            <over-view></over-view>
+            <order-detail :index="$index"></order-detail>
           </div>
         </td>
         <td>{{item.esg_so_no}}</td>
@@ -40,16 +40,25 @@
         <td>{{item.payment_method}}</td>
         <td>{{item.price}}</td>
         <td>{{item.order_qty}}</td>
-        <td></td>
+        <td>
+          <select class="form-control">
+            <option value=""></option>
+            <option value="">shipped</option>
+            <option value="">canceled</option>
+            <option value="">returned</option>
+            <option value="">delivered</option>
+            <option value="">delivered failed</option>
+          </select>
+        </td>
       </tr>
     </tbody>
   </table>
 </template>
 <script>
-  import OverView from './OverView.vue'
+  import OrderDetail from './OrderDetail.vue'
   export default {
     components: {
-      OverView
+      OrderDetail
     },
     props: [
       'id'
@@ -236,9 +245,7 @@
     methods: {
       init() {
         var table_selector = '#'+this.id;
-        console.log(table_selector);
         var table = $(table_selector).DataTable({
-          // dom: "Bfrtip",
           fixedHeader: true,
           bSort:false,
           buttons: []

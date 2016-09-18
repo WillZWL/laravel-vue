@@ -64,6 +64,12 @@ elixir(function(mix) {
             "./bower_components/blueimp-file-upload/js/jquery.iframe-transport.js",
             "./bower_components/blueimp-file-upload/js/jquery.fileupload-ui.js"
         ], "public/js/jquery.fileupload.js");
+    // combine datapicker scripts
+    mix.scripts([
+            "./bower_components/moment/min/moment.min.js",
+            "./bower_components/bootstrap-daterangepicker/daterangepicker.js"
+        ], "public/js/jquery.datepicker.js");
+
 
     //combine css
     mix.styles([

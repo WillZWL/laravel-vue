@@ -40,7 +40,8 @@
     "blueimp-file-upload": "^9.12.5",
     "jquery-ui": "^1.12.0",
     "is-loading": "^1.0.6",
-    "js-url": "^2.3.0"
+    "js-url": "^2.3.0",
+    "bootstrap-daterangepicker": "^2.1.24"
   },
   "resolutions": {
     "fastclick": "^1.0.6",

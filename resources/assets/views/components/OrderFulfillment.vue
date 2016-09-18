@@ -1,18 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="x_panel">
-        <div class="x_title">
-          <h2>Filters</h2>
-          <ul class="nav navbar-right panel_toolbox">
-            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-          </ul>
-          <div class="clearfix"></div>
-        </div>
-        <div class="x_content">
-        </div>
-      </div>
-    </div>
+    <order-filters></order-filters>
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="x_panel">
         <div class="x_content">
@@ -40,12 +28,14 @@
               <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="shipped-tab">
                 <order-list :id="'table_content4'"></order-list>
               </div>
+
               <div class="x_content">
-                <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Print Select Delivery Note">Delivery Note</button>
-                <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Print Select Custom Invoice">Custom Invoice</button>
-                <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Print Select Invoice">Invoice</button>
-                <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Allocate those Orders">Allocate Orders</button>
+                <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Print Select Delivery Note"><i class="fa fa-print"></i>  Delivery Note</button>
+                <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Print Select Custom Invoice"><i class="fa fa-print"></i>  Custom Invoice</button>
+                <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Print Select Invoice"><i class="fa fa-print"></i>  Invoice</button>
+                <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Allocate those Orders"><i class="fa fa-send"></i>  Allocate Orders</button>
               </div>
+
             </div>
           </div>
         </div>
@@ -54,10 +44,12 @@
   </div>
 </template>
 <script>
+  import OrderFilters from './orderFulfillment/OrderFilters.vue'
   import OrderList from './orderFulfillment/OrderList.vue'
   export default {
     components: {
-      OrderList
+      OrderList,
+      OrderFilters
     }
   }
 </script>
