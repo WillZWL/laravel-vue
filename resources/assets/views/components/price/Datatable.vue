@@ -220,11 +220,11 @@
       return {
         items: {},
         meta: {
-         pagination: {
-          'current_page': 0
-        }
-      },
-      headers: [
+          pagination: {
+            'current_page': 0
+          }
+        },
+        headers: [
         'Marketplace ID',
         'Country ID',
         'ESG Master SKU',
@@ -251,18 +251,17 @@
         'Price',
         'delivery type',
         'listing quantity'
-      ],
-      hidden_columns: [9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 24, 25, 26, 27],
-      always_hidden_columns: [25, 26, 27],
-      export_columns: [3, 4, 1, 2, 25, 24, 26],
-      api_url:api_url,
-      access_token:access_token
-    }
-  },
-
-  methods: {
-    initDatatable() {
-      $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
+        ],
+        hidden_columns: [9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 24, 25, 26, 27],
+        always_hidden_columns: [25, 26, 27],
+        export_columns: [3, 4, 1, 2, 25, 24, 26],
+        api_url:api_url,
+        access_token:access_token
+      }
+    },
+    methods: {
+      initDatatable() {
+        $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
         //hidden some columns when init
         var hidden_columns = this.hidden_columns;
         //export csv file
