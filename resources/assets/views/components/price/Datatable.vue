@@ -5,7 +5,7 @@
   #datatable-fixed-header td:nth-child(4), #datatable-fixed-header td:nth-child(5) {width: 150px;}
   #datatable-fixed-header td:nth-child(21), #datatable-fixed-header td:nth-child(22) {width: 100px;}
   #datatable-fixed-header {
-    font-size:11px;
+    font-size:10px;
   }
 </style>
 <template>
@@ -48,6 +48,7 @@
                 <td>{{item.marketplace_sku}}</td>
                 <td>{{item.product_name}}</td>
                 <td>{{item.sourcing_status}}</td>
+                <td>{{item.surplus_quantity}}</td>
                 <td>
                   <div class="col-md col-xs-12">
                     <select class="form-control delivery_type{{item.id}}"
@@ -224,37 +225,38 @@
             'current_page': 0
           }
         },
-        headers: [
-        'Marketplace ID',
-        'Country ID',
-        'ESG Master SKU',
-        'ESG SKU',
-        'MP SKU',
-        'Product Name',
-        'Sourcing status',
-        'Delivery Type',
-        'ETRADE QTY',
-        'ES_HK QTY',
-        'ES_DGME QTY',
-        'CV_AMZ_FBA_UK',
-        'CV_AMZ_FBA_US',
-        'ESG_AMZN_JP_FBA',
-        'ESG_AMZN_UK_FBA',
-        'ESG_AMZN_US_FBA',
-        'PX_AMZN_FBA_UK',
-        'Listing QTY',
-        'Item Cost',
-        'Selling Price',
-        'Listing Status',
-        'Profit',
-        'Margin',
-        'Price',
-        'delivery type',
-        'listing quantity'
-        ],
-        hidden_columns: [9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 24, 25, 26, 27],
-        always_hidden_columns: [25, 26, 27],
-        export_columns: [3, 4, 1, 2, 25, 24, 26],
+        headers: {
+          1:'Marketplace ID',
+          2:'Country ID',
+          3:'ESG Master SKU',
+          4:'ESG SKU',
+          5:'MP SKU',
+          6:'Product Name',
+          7:'Sourcing status',
+          8:'Surplus QTY',
+          9:'Delivery Type',
+         10:'ETRADE QTY',
+         11:'ES_HK QTY',
+         12:'ES_DGME QTY',
+         13:'CV_AMZ_FBA_UK',
+         14:'CV_AMZ_FBA_US',
+         15:'ESG_AMZN_JP_FBA',
+         16:'ESG_AMZN_UK_FBA',
+         17:'ESG_AMZN_US_FBA',
+         18:'PX_AMZN_FBA_UK',
+         19:'Listing QTY',
+         20:'Item Cost',
+         21:'Selling Price',
+         22:'Listing Status',
+         23:'Profit',
+         24:'Margin',
+         25:'Price',
+         26:'delivery type',
+         27:'listing quantity'
+        },
+        hidden_columns: [10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 25, 26, 27, 28],
+        always_hidden_columns: [26, 27, 28],
+        export_columns: [3, 4, 1, 2, 26, 25, 27],
         api_url:api_url,
         access_token:access_token
       }

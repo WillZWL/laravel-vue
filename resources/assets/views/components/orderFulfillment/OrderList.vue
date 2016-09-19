@@ -56,8 +56,8 @@
   </table>
   <div v-if="id != 'table_content4'" class="x_content">
     <button v-if="id == 'table_content1'" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="For selected orders"><i class="fa fa-print"></i>  Picking List</button>
-    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="For selected orders"><i class="fa fa-print"></i>  Invoice</button>
-    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="For selected orders"><i class="fa fa-print"></i>  AWB label</button>
+    <button v-if="id == 'table_content2'" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="For selected orders"><i class="fa fa-print"></i>  Invoice</button>
+    <button v-if="id == 'table_content2'" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="For selected orders"><i class="fa fa-print"></i>  AWB label</button>
     <button v-if="id == 'table_content1'" type="button" class="btn btn-primary"
             data-toggle="tooltip" data-placement="bottom" title="Moves all orders with available stock to 'Ready to Ship'"
             v-on:click="allocateOrders('all')"><i class="fa fa-send"></i> Allocate Orders</button>
