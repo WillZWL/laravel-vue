@@ -13,7 +13,12 @@
         <th>
           <input type="checkbox" id="check-all" class="flat">
         </th>
-        <th v-for="header in headers">{{header}}</th>
+        <template v-if="id == 'table_content1'">
+          <th v-for="header in new_headers">{{header}}</th>
+        </template>
+        <template v-if="id == 'table_content2'">
+          <th v-for="header in ready_headers">{{header}}</th>
+        </template>
       </tr>
     </thead>
     <tbody>
@@ -40,7 +45,7 @@
         <td>{{item.payment_method}}</td>
         <td>{{item.price}}</td>
         <td>{{item.order_qty}}</td>
-        <td>
+        <td v-if="id == 'table_content1'">
           <select class="form-control">
             <option value=""></option>
             <option value="">shipped</option>
@@ -53,6 +58,7 @@
       </tr>
     </tbody>
   </table>
+
 </template>
 <script>
   import OrderDetail from './OrderDetail.vue'
@@ -69,7 +75,7 @@
     },
     data() {
       return {
-        headers: [
+        new_headers: [
           'Platform Type',
           'BizType',
           'Merchant',
@@ -82,6 +88,19 @@
           'Price',
           'Order QTY',
           'Action'
+        ],
+        ready_headers: [
+          'Platform Type',
+          'BizType',
+          'Merchant',
+          'Platform',
+          'Lazada Order No',
+          'ESG Order No',
+          'Order Date',
+          'Updated Date',
+          'Payment Method',
+          'Price',
+          'Order QTY'
         ]
       }
     },

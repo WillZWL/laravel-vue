@@ -21,14 +21,14 @@
                     <input type="text" name="" class="form-control col-md-6 col-xs-12">
                 </div>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label class="control-label col-md-4">Platform</label>
                 <div class="col-md-6 col-xs-12">
                     <select class="form-control">
                       <option value=""></option>
                     </select>
                 </div>
-            </div>
+            </div> -->
             <div class="form-group">
               <label class="control-label col-md-4">Order Create Date</label>
               <div class="col-md-6 col-xs-12">
@@ -49,14 +49,14 @@
                     <input type="text" name="" class="form-control col-md-6 col-xs-12">
                 </div>
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label class="control-label col-md-4">Biz Type</label>
                 <div class="col-md-6 col-xs-12">
                     <select class="form-control">
                       <option value=""></option>
                     </select>
                 </div>
-            </div>
+              </div> -->
           </div>
           <div class="form-group col-md-12">
 
