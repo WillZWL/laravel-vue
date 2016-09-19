@@ -21,11 +21,12 @@
                 data-toggle="tab" aria-expanded="false"
                 v-on:click="changeOrderStatus('in-transit')">In Transit</a>
               </li>
+              -->
               <li role="presentation" class="">
                 <a href="#tab_content4" role="tab" id="shipped"
                 data-toggle="tab" aria-expanded="false"
                 v-on:click="changeOrderStatus('shipped')">Shipped</a>
-              </li> -->
+              </li>
             </ul>
             <div id="myTabContent" class="tab-content">
               <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="new">
@@ -37,17 +38,10 @@
               <!-- <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="in-transit">
                 <order-list :id="'table_content3'" :items='items'></order-list>
               </div>
+              -->
               <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="shipped">
                 <order-list :id="'table_content4'" :items='items'></order-list>
-              </div> -->
-
-              <div class="x_content">
-                <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Print Select Delivery Note"><i class="fa fa-print"></i>  Picking List</button>
-                <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Print Select Custom Invoice"><i class="fa fa-print"></i>  Custom Invoice</button>
-                <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Print Select Invoice"><i class="fa fa-print"></i>  Invoice</button>
-                <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Allocate those Orders"><i class="fa fa-send"></i>  Allocate Orders</button>
               </div>
-
             </div>
           </div>
         </div>
