@@ -20,7 +20,7 @@
           <th v-for="header in ready_headers">{{header}}</th>
         </template>
         <template v-if="id == 'table_content4'">
-          <th v-for="header in ready_headers">{{header}}</th>
+          <th v-for="header in shipped_headers">{{header}}</th>
         </template>
       </tr>
     </thead>
@@ -48,8 +48,15 @@
         <td>{{item.payment_method}}</td>
         <td>{{item.price}}</td>
         <td>{{item.order_qty}}</td>
-        <td v-if="id == 'table_content1'">
-          <button type="button" class="btn btn-primary btn-sm">Set Ready to Ship</button>
+        <td v-if="id == 'table_content2'">
+          <input type="text" name="tracking_no" class="col-md form-control input_sm tracking-no-{{item.esg_so_no}}"
+            v-on:change="scanTrackingNo(item.esg_so_no)">
+        </td>
+        <td v-if="id != 'table_content4'">
+          <button v-if="id == 'table_content1'" type="button" class="btn btn-primary btn-sm"
+                  v-on:click="readyToShip(item.esg_so_no)">Ready to Ship
+          </button><br />
+          <button type="button" class="btn btn-primary btn-sm" v-on:click="cancel(item.esg_so_no)">Cancel</button>
         </td>
       </tr>
     </tbody>
@@ -103,6 +110,21 @@
           'Updated Date',
           'Payment Method',
           'Price',
+          'Order QTY',
+          'Scan Tracking No.',
+          'Action'
+        ],
+        shipped_headers: [
+          'Platform Type',
+          'BizType',
+          'Merchant',
+          'Platform',
+          'Lazada Order No',
+          'ESG Order No',
+          'Order Date',
+          'Updated Date',
+          'Payment Method',
+          'Price',
           'Order QTY'
         ]
       }
@@ -111,7 +133,7 @@
       init() {
         var table_selector = '#'+this.id;
         var table = $(table_selector).DataTable({
-          fixedHeader: true,
+          // fixedHeader: true,
           bSort:false,
           buttons: []
         });
@@ -119,6 +141,28 @@
       allocateOrders: function(orders)
       {
         $.isLoading({ text: "All order with available stock moving to Ready to Ship", class:"fa fa-refresh fa-spin" });
+        setTimeout( function(){
+          $.isLoading("hide");
+        }, 2000)
+      },
+      readyToShip: function(order_no)
+      {
+        $.isLoading({ text: "Setting "+order_no+ " to Ready To Ship", class:"fa fa-refresh fa-spin" });
+        setTimeout( function(){
+          $.isLoading("hide");
+        }, 2000)
+      },
+      cancel: function(order_no)
+      {
+        $.isLoading({ text: order_no + " Canceling", class:"fa fa-refresh fa-spin" });
+        setTimeout( function(){
+          $.isLoading("hide");
+        }, 2000)
+      },
+      scanTrackingNo: function(order_no)
+      {
+        var tracking_no = $(".tracking-no-"+order_no).val();
+        $.isLoading({ text: order_no + " Shipped, TrackingNo is "+ tracking_no, class:"fa fa-refresh fa-spin" });
         setTimeout( function(){
           $.isLoading("hide");
         }, 2000)
