@@ -121,11 +121,11 @@
           <blockquote>
             <p>Send your products in comma-separated or tab-separated spreadsheet format.</p>
             <p>Spreadsheet templates are a quick way to upload products in bulk. Edit the spreadsheet as needed. Don't change the columns.</p>
-            <p class="col-md-3 col-xs-12"><a href="#">Download Example File <strong><i class="fa fa-download"></i></strong></a></p>
+            <p class="col-md-3 col-xs-12"><a href="/product-upload/donwload-example-file/UploadExample.csv">Download Example File <strong><i class="fa fa-download"></i></strong></a></p>
           <div class="clearfix"></div>
           </blockquote>
           <!-- The file upload form used as target for the file upload widget -->
-          <form id="fileupload" action="http://vanguard/api/product-upload" method="POST" enctype="multipart/form-data">
+          <form id="fileupload" action="{{api_url}}product-upload" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="access_token" value="">
             <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
             <div class="row fileupload-buttonbar">
@@ -178,7 +178,7 @@
     <div class="panel-body">
       <ul>
         <li>The maximum file size for uploads in this tool is 1024 KB&nbsp;&nbsp;<strong>  ( 1M )</strong>.</li>
-        <li>Only text files (<strong>csv , txt</strong>) are allowed in this tool.</li>
+        <li>Only (<strong>CSV , Excel</strong>) are allowed in this tool.</li>
         <li>You can <strong>drag &amp; drop</strong> files from your desktop on this webpage.</li>
         <li>You need download the example file when you use the tool the first time.</li>
         <li>You need any problem when you upload, please ask IT for support.</li>
@@ -261,26 +261,26 @@
 </template>
 
 <script>
+import {api_url} from '../../js/vue.config.js'
 export default {
   ready() {
     this.initUpload()
   },
   data() {
     return {
+      api_url: api_url,
       files: {}
     }
   },
   methods: {
     initUpload() {
-      $("input[name='access_token']").val('JlzQcW3PEZP2fmd5G4ZILMfXMXmmDSCd5sxzlQ40');
-
+      var access_token = 'pvGqur2mHcPNeb8dmzYiUybLhGuybpkptiAFEaRZ';
+      $("input[name='access_token']").val(access_token);
       $('#fileupload').fileupload({
-        url: 'http://vanguard/api/product-upload?access_token=JlzQcW3PEZP2fmd5G4ZILMfXMXmmDSCd5sxzlQ40'
+        url: this.api_url+'product-upload?access_token='+access_token
       });
-
       // Load existing files:
       $('#fileupload').addClass('fileupload-processing');
-
       $.ajax({
         url: $('#fileupload').fileupload('option', 'url'),
         dataType: 'json',
