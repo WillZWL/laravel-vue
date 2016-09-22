@@ -71,7 +71,8 @@
             update_date:'2016-09-15 00:00:42',
             payment_method:'bc_lazada_my',
             price:'1000.00',
-            order_qty:'5'
+            order_qty:'5',
+            inventory: '10'
           },
           {
             platform_type:'Accelerator',
@@ -84,7 +85,8 @@
             update_date:'2016-09-15 00:00:42',
             payment_method:'bc_lazada_ph',
             price:'6000.00',
-            order_qty:'6'
+            order_qty:'6',
+            inventory: '15'
           },
           {
             platform_type:'Accelerator',
@@ -97,7 +99,8 @@
             update_date:'2016-09-15 00:00:42',
             payment_method:'bc_lazada_my',
             price:'1000.00',
-            order_qty:'5'
+            order_qty:'5',
+            inventory: '10'
           },
           {
             platform_type:'Accelerator',
@@ -110,7 +113,8 @@
             update_date:'2016-09-15 00:00:42',
             payment_method:'bc_lazada_ph',
             price:'6000.00',
-            order_qty:'6'
+            order_qty:'6',
+            inventory: '15'
           },
           {
             platform_type:'Accelerator',
@@ -123,7 +127,8 @@
             update_date:'2016-09-15 00:00:42',
             payment_method:'bc_lazada_my',
             price:'1000.00',
-            order_qty:'5'
+            order_qty:'5',
+            inventory: '10'
           },
           {
             platform_type:'Accelerator',
@@ -136,7 +141,8 @@
             update_date:'2016-09-15 00:00:42',
             payment_method:'bc_lazada_ph',
             price:'6000.00',
-            order_qty:'6'
+            order_qty:'6',
+            inventory: '15'
           },
           {
             platform_type:'Accelerator',
@@ -149,7 +155,8 @@
             update_date:'2016-09-15 00:00:42',
             payment_method:'bc_lazada_my',
             price:'1000.00',
-            order_qty:'5'
+            order_qty:'5',
+            inventory: '10'
           },
           {
             platform_type:'Accelerator',
@@ -162,7 +169,8 @@
             update_date:'2016-09-15 00:00:42',
             payment_method:'bc_lazada_ph',
             price:'6000.00',
-            order_qty:'6'
+            order_qty:'6',
+            inventory: '15'
           },
           {
             platform_type:'Accelerator',
@@ -175,7 +183,8 @@
             update_date:'2016-09-15 00:00:42',
             payment_method:'bc_lazada_my',
             price:'1000.00',
-            order_qty:'5'
+            order_qty:'5',
+            inventory: '10'
           },
           {
             platform_type:'Accelerator',
@@ -188,7 +197,8 @@
             update_date:'2016-09-15 00:00:42',
             payment_method:'bc_lazada_ph',
             price:'6000.00',
-            order_qty:'6'
+            order_qty:'6',
+            inventory: '15'
           },
           {
             platform_type:'Accelerator',
@@ -201,7 +211,8 @@
             update_date:'2016-09-15 00:00:42',
             payment_method:'bc_lazada_my',
             price:'1000.00',
-            order_qty:'5'
+            order_qty:'5',
+            inventory: '10'
           },
           {
             platform_type:'Accelerator',
@@ -214,7 +225,8 @@
             update_date:'2016-09-15 00:00:42',
             payment_method:'bc_lazada_ph',
             price:'6000.00',
-            order_qty:'6'
+            order_qty:'6',
+            inventory: '15'
           }
         ]
       }

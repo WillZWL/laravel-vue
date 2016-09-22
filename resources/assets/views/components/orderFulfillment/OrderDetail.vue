@@ -25,7 +25,7 @@
                 Items List
               </a>
             </li>
-            <li role="presentation" class="">
+           <!--  <li role="presentation" class="">
               <a href="#order-detail-{{index}}-tab3" role="tab" id="item-history-tab" data-toggle="tab" aria-expanded="false">
                 Items History
               </a>
@@ -33,8 +33,7 @@
               <a href="#order-detail-{{index}}-tab4" role="tab" id="components-tab" data-toggle="tab" aria-expanded="false">
                 Comments
               </a>
-            </li>
-            </li>
+            </li> -->
           </ul>
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade active in" id="order-detail-{{index}}-tab1" aria-labelledby="customer-info-tab">
@@ -53,10 +52,9 @@
               <table class="table table-striped table-bordered bulk_action jambo_table" width="100%">
                 <thead>
                   <tr>
-                    <th>Item ID</th>
-                    <th>Lazada ID</th>
-                    <th>ESG SKU</th>
-                    <th>Lazada SKU</th>
+                    <th>Platform Order no.</th>
+                    <!-- <th>ESG SKU</th> -->
+                    <th>Platform SKU</th>
                     <th>Product Name</th>
                     <th>Shipment Type</th>
                     <th>Price</th>
@@ -66,9 +64,8 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>99997777</td>
                     <td>58009133</td>
-                    <td>16567-AA-NA</td>
+                    <!-- <td>16567-AA-NA</td> -->
                     <td>FR43890934BHK</td>
                     <td>Iphone 7 plus ()</td>
                     <td>DropShipping</td>
@@ -77,9 +74,8 @@
                     <td>Shipped</td>
                   </tr>
                   <tr>
-                    <td>99997777</td>
                     <td>58009133</td>
-                    <td>16567-AA-NA</td>
+                    <!-- <td>16567-AA-NA</td> -->
                     <td>FR43890934BHK</td>
                     <td>Iphone 7 plus ()</td>
                     <td>DropShipping</td>
@@ -89,50 +85,6 @@
                   </tr>
                 </tbody>
               </table>
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="order-detail-{{index}}-tab3" aria-labelledby="item-history-tab">
-              <table class="table table-striped table-bordered bulk_action jambo_table" width="100%">
-                <thead>
-                  <tr>
-                    <th>Item ID</th>
-                    <th>Lazada ID</th>
-                    <th>ESG SKU</th>
-                    <th>Lazada SKU</th>
-                    <th>Name</th>
-                    <th>Create At</th>
-                    <th>Editor</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>99997777</td>
-                    <td>58009133</td>
-                    <td>16567-AA-NA</td>
-                    <td>FR43890934BHK</td>
-                    <td>Iphone 7 plus</td>
-                    <td>2016-09-15 12:00:00</td>
-                    <td>System</td>
-                  </tr>
-                  <tr>
-                    <td>99997777</td>
-                    <td>58009133</td>
-                    <td>16567-AA-NA</td>
-                    <td>FR43890934BHK</td>
-                    <td>Iphone 7 plus</td>
-                    <td>2016-09-15 12:00:00</td>
-                    <td>System</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="order-detail-{{index}}-tab4" aria-labelledby="components-tab">
-              <div class="x_panel">
-                <ul>
-                  <li>create at:2016-09-15 00:00:38 </li>
-                  <li>update at:2016-09-15 00:00:38</li>
-                  <li>Those are Test Order</li>
-                </ul>
-              </div>
             </div>
           </div>
         </div>

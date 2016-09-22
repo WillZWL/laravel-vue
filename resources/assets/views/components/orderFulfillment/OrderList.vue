@@ -29,10 +29,8 @@
         <td class="a-center td_checkbox">
           <input type="checkbox" class="flat" name="id" value="">
         </td>
-        <td>{{item.platform_type}}</td>
         <td>{{item.biz_type}}</td>
         <td>{{item.merchant}}</td>
-        <td>{{item.platform_id}}</td>
         <td>
           <a data-toggle="modal" data-target=".overview{{$index}}-{{id}}">
             {{item.lazada_so_no}}&nbsp;&nbsp;<i class="fa fa-search-plus"></i>
@@ -42,12 +40,11 @@
             <order-detail :index="$index"></order-detail>
           </div>
         </td>
-        <td>{{item.esg_so_no}}</td>
         <td>{{item.order_create_date}}</td>
         <td>{{item.update_date}}</td>
         <td>{{item.payment_method}}</td>
-        <td>{{item.price}}</td>
         <td>{{item.order_qty}}</td>
+        <td>{{item.inventory}}</td>
         <td v-if="id == 'table_content2'">
           <input type="text" name="tracking_no" class="col-md form-control input_sm tracking-no-{{item.esg_so_no}}"
             v-on:change="scanTrackingNo(item.esg_so_no)">
@@ -56,7 +53,7 @@
           <button v-if="id == 'table_content1'" type="button" class="btn btn-primary btn-sm"
                   v-on:click="readyToShip(item.esg_so_no)">Ready to Ship
           </button><br />
-          <button type="button" class="btn btn-primary btn-sm" v-on:click="cancel(item.esg_so_no)">Cancel</button>
+          <button type="button" class="btn btn-danger btn-sm" v-on:click="cancel(item.esg_so_no)"><i class="fa fa-trash-o"></i> Cancel</button>
         </td>
       </tr>
     </tbody>
@@ -68,6 +65,12 @@
     <button v-if="id == 'table_content1'" type="button" class="btn btn-primary"
             data-toggle="tooltip" data-placement="bottom" title="Moves all orders with available stock to 'Ready to Ship'"
             v-on:click="allocateOrders('all')"><i class="fa fa-send"></i> Allocate Orders</button>
+    <button v-if="id == 'table_content1'" type="button" class="btn btn-primary"
+            data-toggle="tooltip" data-placement="bottom" title="For selected orders">
+            Ready To Ship</button>
+    <button v-if="id != 'table_content4'" type="button" class="btn btn-danger"
+            data-toggle="tooltip" data-placement="bottom" title="For selected orders">
+            <i class="fa fa-trash-o"></i>  Cancel</button>
   </div>
 </template>
 <script>
@@ -86,46 +89,37 @@
     data() {
       return {
         new_headers: [
-          'Platform Type',
           'BizType',
           'Merchant',
-          'Platform',
-          'Lazada Order No',
-          'ESG Order No',
+          'Platform Order No',
           'Order Date',
           'Updated Date',
           'Payment Method',
-          'Price',
-          'Order QTY',
+          'Item QTY',
+          'Inventory',
           'Action'
         ],
         ready_headers: [
-          'Platform Type',
           'BizType',
           'Merchant',
-          'Platform',
-          'Lazada Order No',
-          'ESG Order No',
+          'Platform Order No',
           'Order Date',
           'Updated Date',
           'Payment Method',
-          'Price',
-          'Order QTY',
+          'Item QTY',
+          'Inventory',
           'Scan Tracking No.',
           'Action'
         ],
         shipped_headers: [
-          'Platform Type',
           'BizType',
           'Merchant',
-          'Platform',
-          'Lazada Order No',
-          'ESG Order No',
+          'Platform Order No',
           'Order Date',
           'Updated Date',
           'Payment Method',
-          'Price',
-          'Order QTY'
+          'Item QTY',
+          'Inventory'
         ]
       }
     },
