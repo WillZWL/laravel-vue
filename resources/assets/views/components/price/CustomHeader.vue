@@ -30,8 +30,7 @@
 <script>
     export default {
         props: [
-            'headers',
-            'hidden_columns'
+            'headers'
         ],
         ready() {
         }

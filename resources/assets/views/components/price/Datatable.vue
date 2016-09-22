@@ -9,7 +9,6 @@
   }
 </style>
 <template>
-  <pricesearch></pricesearch>
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
@@ -204,27 +203,35 @@
 </template>
 
 <script>
-  import {api_url, access_token} from '../../../js/vue.config.js'
-  import Pricesearch from './PriceSearch.vue'
+  import {api_url} from '../../../js/vue.config.js'
   import Overviewmodal from './OverviewModal.vue'
   import Customheader from './CustomHeader.vue'
+  import {
+          initPriceOverviewDatatable,
+          } from '../../../vuex/actions';
+  import {
+            getPriceOverviewLists,
+            getPriceOverviewMeta,
+          } from '../../../vuex/getters';
   export default {
     components: {
-      Pricesearch,
       Overviewmodal,
       Customheader
+    },
+    vuex: {
+      actions: {
+        initDatatable: initPriceOverviewDatatable,
+      },
+      getters: {
+        items: getPriceOverviewLists,
+        meta: getPriceOverviewMeta,
+      }
     },
     ready() {
       this.initDatatable()
     },
     data() {
       return {
-        items: {},
-        meta: {
-          pagination: {
-            'current_page': 0
-          }
-        },
         headers: {
           1:'Marketplace ID',
           2:'Country ID',
@@ -254,148 +261,10 @@
          26:'delivery type',
          27:'listing quantity'
         },
-        hidden_columns: [10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 25, 26, 27, 28],
-        always_hidden_columns: [26, 27, 28],
-        export_columns: [3, 4, 1, 2, 26, 25, 27],
         api_url:api_url,
-        access_token:access_token
       }
     },
     methods: {
-      initDatatable() {
-        $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
-        //hidden some columns when init
-        var hidden_columns = this.hidden_columns;
-        //export csv file
-        var export_columns = this.export_columns;
-
-        var always_hidden_columns = this.always_hidden_columns;
-
-        this.$http({}).then(function() {
-          var table = $('#datatable-fixed-header').DataTable({
-            dom: "Bfrtip",
-            fixedHeader: true,
-            bSort:false,
-            iDisplayLength:30,
-            "paging":   false,
-            "info":false,
-            buttons: [
-              {
-                extend: "csv",
-                text: 'Export CSV Current Page',
-                className: "btn-sm",
-                title:"Accelerator_Product_Prcing_Overview",
-                exportOptions: {
-                  columns: export_columns
-                }
-              },
-              {
-                extend: "excel",
-                text: 'Export Excel Current Page',
-                className: "btn-sm",
-                title:"Accelerator_Product_Prcing_Overview",
-                exportOptions: {
-                  columns: export_columns
-                }
-              },
-              {
-                extend: "print",
-                text: 'Print Current Page',
-                className: "btn-sm",
-                exportOptions: {
-                  columns: export_columns
-                }
-              }
-            ]
-          });
-
-          //hidden columns
-          for (var i = 0; i < hidden_columns.length; i++) {
-            var column = table.column(hidden_columns[i]);
-            column.visible( ! column.visible() );
-            $('a.toggle-vis').eq(hidden_columns[i]).removeClass("btn-success").addClass('btn-danger');
-          };
-
-          for (var j = 0; j < always_hidden_columns.length; j++) {
-            table.column(always_hidden_columns[i]);
-            column.visible( ! column.visible() );
-          };
-
-          $('a.toggle-vis').on( 'click', function (e) {
-            e.preventDefault();
-            var column = table.column( $(this).attr('data-column') );
-            column.visible( ! column.visible() );
-            if (!column.visible()) {
-              $(this).removeClass("btn-success").addClass('btn-danger');
-            } else {
-              $(this).removeClass("btn-danger").addClass('btn-success');
-            }
-          });
-        }).then(function() {
-          if ($("input.flat")[0]) {
-            $('input.flat').iCheck({
-              checkboxClass: 'icheckbox_flat-green',
-              radioClass: 'iradio_flat-green'
-            });
-          }
-          // Table
-          $('table input').on('ifChecked', function () {
-            checkState = '';
-            $(this).parent().parent().parent().addClass('selected');
-            countChecked();
-          });
-          $('table input').on('ifUnchecked', function () {
-            checkState = '';
-            $(this).parent().parent().parent().removeClass('selected');
-            countChecked();
-          });
-
-          var checkState = '';
-
-          $('.bulk_action input').on('ifChecked', function () {
-            checkState = '';
-            $(this).parent().parent().parent().addClass('selected');
-            countChecked();
-          });
-
-          $('.bulk_action input').on('ifUnchecked', function () {
-            checkState = '';
-            $(this).parent().parent().parent().removeClass('selected');
-            countChecked();
-          });
-
-          $('.bulk_action input#check-all').on('ifChecked', function () {
-            checkState = 'all';
-            countChecked();
-          });
-
-          $('.bulk_action input#check-all').on('ifUnchecked', function () {
-            checkState = 'none';
-            countChecked();
-          });
-
-          function countChecked() {
-            if (checkState === 'all') {
-              $(".bulk_action input[name='id']").iCheck('check');
-            }
-            if (checkState === 'none') {
-              $(".bulk_action input[name='id']").iCheck('uncheck');
-            }
-
-            var checkCount = $(".bulk_action input[name='id']:checked").length;
-            if (checkCount) {
-              $('.column-title').hide();
-              $('.bulk-actions').show();
-              $('.action-cnt').html(checkCount + ' Records Selected');
-            } else {
-              $('.column-title').show();
-              $('.bulk-actions').hide();
-            }
-          }
-        }).then(function() {
-          $.isLoading("hide");
-        });
-      },
       changeDeliveryType: function(item) {
         var delivery_type = $(".delivery_type"+item.id).val();
         item.selected_delivery_type = delivery_type;
@@ -445,15 +314,6 @@
       pagination: function(url) {
         var query_str = $.url('query', url);
         this.$children[0].submitForm(query_str);
-      }
-    },
-    events: {
-      'form-search': function(search_result) {
-        this.$set('items', search_result.data);
-        this.$set('meta', search_result.meta);
-        var table = $('#datatable-fixed-header').DataTable();
-        table.destroy();
-        this.initDatatable();
       }
     }
   };

@@ -1,13 +1,16 @@
 <template>
   <div class="row">
-    <datatable></datatable>
+    <price-search></price-search>
+    <data-table></data-table>
   </div>
 </template>
 <script>
-  import Datatable from './price/Datatable.vue'
+  import DataTable from './price/Datatable.vue'
+  import PriceSearch from './price/PriceSearch.vue'
   export default {
     components: {
-      Datatable
+      PriceSearch,
+      DataTable
     }
   }
 </script>

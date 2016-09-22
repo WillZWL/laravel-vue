@@ -115,11 +115,12 @@ When you start a new page, you can view Price.vue as a reference,
 ## Template && Plugin included:
 1. Template [Gentellela Admin template](https://github.com/puikinsh/gentelella).
 2. Vue Js [Vue Js](http://vuejs.org/)
-3. Route [vue-router](https://github.com/vuejs/vue-router)
-4. HTTP client [vue-resource](https://github.com/vuejs/vue-resource)
-5. Upload plugin [jQuery File Upload](https://github.com/blueimp/jQuery-File-Upload)
-6. Table plugin [Datatable](https://www.datatables.net/)
-7. Loading plugin [is-loading](https://github.com/hekigan/is-loading)
+3. Vuex [Vuex](http://vuex.vuejs.org/en/index.html)
+4. Route [vue-router](https://github.com/vuejs/vue-router)
+5. HTTP client [vue-resource](https://github.com/vuejs/vue-resource)
+6. Upload plugin [jQuery File Upload](https://github.com/blueimp/jQuery-File-Upload)
+7. Table plugin [Datatable](https://www.datatables.net/)
+8. Loading plugin [is-loading](https://github.com/hekigan/is-loading)
 
 
 ## Thanks

@@ -22,10 +22,11 @@
 </template>
 
 <script>
-import Titlebar from './components/layouts/Titlebar.vue'
-import Navbar from './components/layouts/Navbar.vue'
-import Sidebar from './components/layouts/Sidebar.vue'
-import Footbar from './components/layouts/Footbar.vue'
+import Titlebar from './components/layouts/Titlebar.vue';
+import Navbar from './components/layouts/Navbar.vue';
+import Sidebar from './components/layouts/Sidebar.vue';
+import Footbar from './components/layouts/Footbar.vue';
+import store from '../vuex/store';
 
 export default {
   components: {
@@ -34,6 +35,7 @@ export default {
   Sidebar,
   Footbar
   },
+  store,
   replace: false
 }
 </script>
