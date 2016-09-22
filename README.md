@@ -85,7 +85,11 @@ scout
 |                 |--layout
 |                 |--price
 |                 |--price.vue        vue file
-|             |--App.vue              App.vue —— Layouts of the Project
+|             |--App.vue              App.vue —— Layouts of the Projec
+|        |---vuex
+|             |---actions.js          exports all actions
+|             |---store.js            where we assemble modules and export the store
+|             |---getters.js          get state for store.js
 |--bower.json                         bower.json, Manage JS && css dependencies
 |--gulpfile.js                        gulp command, For manage JS and CSS resources file, package, copy file and etc
 |--package.json                       Node dependencies,
