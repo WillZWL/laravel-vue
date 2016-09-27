@@ -8,6 +8,16 @@ export const getMerchantLists = (state) => state.merchantLists;
 
 export const getCountryLists = (state) => state.countryLists;
 
+export const getCategoryLists = (state) => state.categoryLists;
+
+export const getColourLists = (state) => state.colourLists;
+
+export const getVersionLists = (state) => state.versionLists;
+
+export const getSupplierLists = (state) => state.supplierLists;
+
+export const getHscodeCategoryLists = (state) => state.hscodeCategoryLists;
+
 export const getListingStatusLists = (state) => state.listingStatusLists;
 
 export const getSourcingStatusLists = (state) => state.sourcingStatusLists;
@@ -17,3 +27,17 @@ export const getWarehouseLists = (state) => state.warehouseLists;
 export const getPriceOverviewLists = (state) => state.priceOverviewLists;
 
 export const getPriceOverviewMeta = (state) => state.priceOverviewMeta;
+
+export const getProductSku = (state) => state.productSku;
+
+export const getProductInfo = (state) => state.productInfo;
+
+export const getMerchantProductMapping = (state) => state.merchantProductMapping;
+
+export const getSupplierProduct = (state) => state.supplierProduct;
+
+export const getProductImages = (state) => state.productImages;
+
+export const getProductContent = (state) => state.productContent;
+
+export const getProductFeatures = (state) => state.productFeatures;

@@ -2,7 +2,8 @@ import Vue from 'vue';
 import VueResource from 'vue-resource'
 Vue.use(VueResource);
 
-export const API_URL = 'http://admincentre.eservicesgroup.com:7890/api/';
+export const API_URL = 'http://localhost/api/';
+// export const API_URL = 'http://vanguard.dev/api/';
 
 //fetch Lists
 export const fetchBrandLists = ({ dispatch }) => {
@@ -47,6 +48,52 @@ export const fetchCountryLists = ({ dispatch }) => {
         return dispatch('FETCH_COUNTRY_LIST', response.data.data);
     })
 };
+
+export const fetchCategoryLists = ({ dispatch }) => {
+    Vue.http({
+        url:API_URL+'category',
+        method: 'GET'
+    }).then(function (response) {
+        return dispatch('FETCH_CATEGORY_LIST', response.data.data);
+    })
+};
+
+export const fetchColourLists = ({ dispatch }) => {
+    Vue.http({
+        url:API_URL+'colour',
+        method: 'GET'
+    }).then(function (response) {
+        return dispatch('FETCH_COLOUR_LIST', response.data.data);
+    })
+};
+
+export const fetchVersionLists = ({ dispatch }) => {
+    Vue.http({
+        url:API_URL+'version',
+        method: 'GET'
+    }).then(function (response) {
+        return dispatch('FETCH_VERSION_LIST', response.data.data);
+    })
+};
+
+export const fetchSupplierLists = ({ dispatch }) => {
+    Vue.http({
+        url:API_URL+'supplier',
+        method: 'GET'
+    }).then(function (response) {
+        return dispatch('FETCH_SUPPLIER_LIST', response.data.data);
+    })
+};
+
+export const fetchHscodeCategoryLists = ({ dispatch }) => {
+    Vue.http({
+        url:API_URL+'hscode_category',
+        method: 'GET'
+    }).then(function (response) {
+        return dispatch('FETCH_HSCODE_CATEGORY_LIST', response.data.data);
+    })
+};
+
 // end of fetch Lists
 
 //Price Overview
@@ -225,3 +272,319 @@ export const initPriceOverviewDatatable = ({ dispatch }) => {
 
 //end price OverView
 
+//=======================================================================================
+//=================================== Product OverView ==================================
+
+const msgBox = (content='', type, timeout) => {
+    if (type=='S') {
+      var seledClacss = "fa-check";
+  } else {
+      var seledClacss = 'fa-exclamation-triangle'
+  }
+  $.isLoading("hide");
+  $.isLoading({ text: content, class:"fa " + seledClacss });
+  setTimeout( function(){
+      $.isLoading("hide");
+  }, timeout);
+};
+
+// ProdInfo for Product OverView
+export const setProductSku = ({ dispatch }, newSku='') => {
+    return dispatch('SET_PRODUCT_SKU', newSku);
+};
+
+export const getProduct = ({ dispatch }, sku, lang_id='en') => {
+    if (!sku) {
+          return false;
+    }
+
+    Vue.http({
+        url:API_URL + 'product/' + sku + '/' + lang_id,
+        method: 'GET'
+    }).then(function (response) {
+      if (response.data.data.product_info) {
+            dispatch('SET_PRODUCT_INFO', response.data.data.product_info);
+            dispatch('SET_MERCHANT_PRODUCT_MAPPING', response.data.data.merchant_sku_mapping);
+            dispatch('SET_SUPPLIER_PRODUCT', response.data.data.supplier_product);
+            dispatch('SET_PRODUCT_IMAGES', response.data.data.images);
+            dispatch('SET_PRODUCT_CONTENT', response.data.data.product_content);
+            dispatch('SET_PRODUCT_FEATURES', response.data.data.product_features);
+
+            $.isLoading("hide");
+        } else {
+            msgBox("Failed, Cannot take a product info", "F", 3000);
+        }
+    }).catch(function(){
+        msgBox("Error 500, Internal Server Error", "F", 3000);
+    });
+};
+
+export const submitBasicInfoForm = ({dispatch, state}) => {
+    var submitForm = $('#product-info-form');
+    submitForm.parsley().validate();
+
+    if (true === submitForm.parsley().isValid()) {
+        var jsonData = submitForm.serializeObject();
+        jsonData['sku'] = state.productSku;
+
+        Vue.http({
+            url: API_URL + "product/" + state.productSku,
+            method: 'POST',
+            data: jsonData,
+        }).then(function (response) {
+            if (response.data.success === true) {
+                dispatch('SET_PRODUCT_INFO', response.data.product_info);
+                msgBox(response.data.msg, "S", 2000);
+            } else if (response.data.fialed) {
+              msgBox(response.data.msg, "F", 3000);
+            } else {
+                msgBox("Error 500, Internal Server Error", "F", 3000);
+            }
+        }).catch(function(){
+            msgBox("Error 500, Internal Server Error", "F", 3000);
+        });
+    }
+};
+// ProdInfo for Product OverView End
+
+// Product Mapping for Product OverView
+export const submitMerchantProductMappingForm = ({dispatch, state}) => {
+    if ( state.productSku ) {
+        var submitForm = $('#merchant-product-mapping-form');
+        submitForm.parsley().validate();
+
+        if (true === submitForm.parsley().isValid()) {
+            var jsonData = submitForm.serializeObject();
+            jsonData['sku'] = state.productSku;
+
+            Vue.http({
+                url: API_URL + "product/product-mapping",
+                method: 'POST',
+                data: jsonData,
+            }).then(function (response) {
+                if (response.data.success) {
+                    dispatch('SET_MERCHANT_PRODUCT_MAPPING', response.data.prod_map_info);
+                    msgBox(response.data.msg, "S", 2000);
+                } else if (response.data.fialed) {
+                    msgBox(response.data.msg, "F", 3000);
+                } else {
+                    msgBox("Error 500, Internal Server Error", "F", 3000);
+                }
+            }).catch(function(){
+                msgBox("Error 500, Internal Server Error", "F", 3000);
+            });
+        }
+    } else {
+        msgBox("Error, no have available sku", "F", 3000);
+    }
+};
+// Product Mapping for Product OverView
+
+// Supplier Product for Product OverView End
+export const submitSupplierProductFrom = ({dispatch, state}) => {
+    if (state.productSku) {
+        var submitForm = $('#supplier-product-from');
+        submitForm.parsley().validate();
+
+        if (true === submitForm.parsley().isValid()) {
+            var jsonData = submitForm.serializeObject();
+            jsonData['sku'] = state.productSku;
+
+            Vue.http({
+                url: API_URL + "product/supplier-product",
+                method: 'POST',
+                data: jsonData,
+            }).then(function (response) {
+                if (response.data.success) {
+                    dispatch('SET_SUPPLIER_PRODUCT', response.data.supplier_product);
+
+                    msgBox(response.data.msg, "S", 2000);
+                } else if (response.data.fialed) {
+                    msgBox(response.data.msg, "F", 3000);
+                } else {
+                    msgBox("Error 500, Internal Server Error", "F", 3000);
+                }
+            }).catch(function(){
+                msgBox("Error 500, Internal Server Error", "F", 3000);
+            });
+        }
+    } else {
+        msgBox("Error, no have available sku", "F", 3000);
+    }
+};
+// Supplier Product for Product OverView End
+
+// Weight Dimension for Product OverView
+export const submitWeightDimensionForm = ({dispatch, state}) => {
+    if (state.productSku) {
+        var submitForm = $('#product-weight-dimension-form');
+        submitForm.parsley().validate();
+
+        if (true === submitForm.parsley().isValid()) {
+            var jsonData = submitForm.serializeObject();
+            jsonData['sku'] = state.productSku;
+
+            Vue.http({
+                url: API_URL + "product/weight-dimension",
+                method: 'POST',
+                data: jsonData,
+            }).then(function (response) {
+                if (response.data.success) {
+                    dispatch('SET_PRODUCT_INFO', response.data.product_info);
+
+                    msgBox(response.data.msg, "S", 2000);
+                } else if (response.data.fialed) {
+                    msgBox(response.data.msg, "F", 3000);
+                } else {
+                    msgBox("Error 500, Internal Server Error", "F", 3000);
+                }
+            }).catch(function(){
+                msgBox("Error 500, Internal Server Error", "F", 3000);
+            });
+        }
+    } else {
+        msgBox("Error, no have available sku", "F", 3000);
+    }
+};
+// Weight Dimension for Product OverView End
+
+// Product Code for Product OverView
+export const submitProductCodeForm = ({dispatch, state}) => {
+    if (state.productSku) {
+        var submitForm = $('#product-code-form');
+        submitForm.parsley().validate();
+
+        if (true === submitForm.parsley().isValid()) {
+            var jsonData = submitForm.serializeObject();
+            jsonData['sku'] = state.productSku;
+
+            Vue.http({
+                url: API_URL + "product/product-code",
+                method: 'POST',
+                data: jsonData,
+            }).then(function (response) {
+                if (response.data.success) {
+                    dispatch('SET_PRODUCT_INFO', response.data.product_info);
+
+                    msgBox(response.data.msg, "S", 2000);
+                } else if (response.data.fialed) {
+                    msgBox(response.data.msg, "F", 3000);
+                } else {
+                    msgBox("Error 500, Internal Server Error", "F", 3000);
+                }
+            }).catch(function(){
+                msgBox("Error 500, Internal Server Error", "F", 3000);
+            });
+        }
+    } else {
+        msgBox("Error, no have available sku", "F", 3000);
+    }
+};
+// Product Code for Product OverView End
+
+// Product Content for Product OverView
+export const submitProductContentForm = ({dispatch, state}) => {
+    if (state.productSku) {
+        var submitForm = $('#product-content-form');
+        submitForm.parsley().validate();
+
+        if (true === submitForm.parsley().isValid()) {
+            var jsonData = submitForm.serializeObject();
+            jsonData['sku'] = state.productSku;
+            jsonData['lang_id'] = state.productContent.lang_id;
+            jsonData['prod_name'] = state.productInfo.name;
+
+            Vue.http({
+                url: API_URL + "product/product-content",
+                method: 'POST',
+                data: jsonData,
+            }).then(function (response) {
+                if (response.data.success) {
+                    dispatch('SET_PRODUCT_CONTENT', response.data.product_content);
+
+                    msgBox(response.data.msg, "S", 2000);
+                } else if (response.data.fialed) {
+                    msgBox(response.data.msg, "F", 3000);
+                } else {
+                    msgBox("Error 500, Internal Server Error", "F", 3000);
+                }
+            }).catch(function(){
+                msgBox("Error 500, Internal Server Error", "F", 3000);
+            });
+        }
+    } else {
+        msgBox("Error, no have available sku", "F", 3000);
+    }
+};
+
+export const submitProductDescriptionForm = ({dispatch, state}) => {
+    if (state.productSku) {
+        var submitForm = $('#product-description-form');
+        submitForm.parsley().validate();
+
+        if (true === submitForm.parsley().isValid()) {
+            var jsonData = submitForm.serializeObject();
+            jsonData['sku'] = state.productSku;
+            jsonData['lang_id'] = state.productContent.lang_id;
+            jsonData['prod_name'] = state.productInfo.name;
+
+            Vue.http({
+                url: API_URL + "product/product-content",
+                method: 'POST',
+                data: jsonData,
+            }).then(function (response) {
+                if (response.data.success) {
+                    dispatch('SET_PRODUCT_CONTENT', response.data.product_content);
+
+                    msgBox(response.data.msg, "S", 2000);
+                } else if (response.data.fialed) {
+                    msgBox(response.data.msg, "F", 3000);
+                } else {
+                    msgBox("Error 500, Internal Server Error", "F", 3000);
+                }
+            }).catch(function(){
+                msgBox("Error 500, Internal Server Error", "F", 3000);
+            });
+        }
+    } else {
+        msgBox("Error, no have available sku", "F", 3000);
+    }
+};
+// Product Content for Product OverView End
+
+// Product features for Product OverView
+export const submitProductFeaturesForm = ({dispatch, state}) => {
+    if (state.productSku) {
+        var submitForm = $('#product-features-form');
+        submitForm.parsley().validate();
+
+        if (true === submitForm.parsley().isValid()) {
+            var jsonData = submitForm.serializeObject();
+            jsonData['sku'] = state.productSku;
+
+            Vue.http({
+                url: API_URL + "product/product-features",
+                method: 'POST',
+                data: jsonData,
+            }).then(function (response) {
+                if (response.data.success) {
+                    dispatch('SET_PRODUCT_FEATURES', response.data.product_features);
+
+                    msgBox(response.data.msg, "S", 2000);
+                } else if (response.data.fialed) {
+                    msgBox(response.data.msg, "F", 3000);
+                } else {
+                    msgBox("Error 500, Internal Server Error", "F", 3000);
+                }
+            }).catch(function(){
+                msgBox("Error 500, Internal Server Error", "F", 3000);
+            });
+        }
+    } else {
+        msgBox("Error, no have available sku", "F", 3000);
+    }
+};
+// Product features for Product OverView End
+
+//================================= Product OverView End ================================
+//=======================================================================================

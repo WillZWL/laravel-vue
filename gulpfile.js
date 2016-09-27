@@ -1,5 +1,5 @@
 var Promise = require('es6-promise').Promise;
-process.env.DISABLE_NOTIFIER = true;
+// process.env.DISABLE_NOTIFIER = true;
 var elixir = require('laravel-elixir');
 elixir.config.js.browserify.watchify.options.poll = true;
 
@@ -34,6 +34,10 @@ elixir(function(mix) {
     mix.copy('./bower_components/is-loading/jquery.isloading.min.js', 'public/js/jquery.isloading.min.js');
     mix.copy('./bower_components/js-url/url.min.js', 'public/js/url.min.js');
     mix.copy('./bower_components/select2/dist/js/select2.min.js', 'public/js/select2.min.js');
+    mix.copy('./bower_components/validator/validator.js', 'public/js/validator.js');
+    mix.copy('./bower_components/vue-resource/dist/vue-resource.min.js', 'public/js/vue-resource.min.js');
+    mix.copy('./bower_components/parsleyjs/dist/parsley.min.js', 'public/js/parsley.min.js');
+    mix.copy('./bower_components/jquery-serialize-object/dist/jquery.serialize-object.min.js', 'public/js/jquery.serialize-object.min.js');
     //copy css file from bower_components
     mix.copy('./bower_components/select2/dist/css/select2.min.css', 'public/css/select2.min.css');
     mix.copy('./bower_components/bootstrap/dist/css/bootstrap.min.css', 'public/css/bootstrap.min.css');
@@ -78,6 +82,6 @@ elixir(function(mix) {
             "./bower_components/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css"
         ], "public/css/datatables-net.css");
 
-    // mix.browserSync();
+    mix.browserSync();
     mix.livereload();
 });

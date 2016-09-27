@@ -1,30 +1,32 @@
 <template>
-  <div id="commonDiv" class="x_panel">
+  <div id="boxContentDiv" class="x_panel">
     <div class="x_title">
-      <h2>Common Information</h2>
+      <h2>Box Content Information</h2>
       <div class="clearfix"></div>
     </div>
     <div class="x_content">
-      <form class="form-horizontal form-label-left" data-parsley-validate="" id="product-description-form" name="product-description-form" novalidate="">
+      <form class="form-horizontal form-label-left" data-parsley-validate="" id="product-content-form" name="product-content-form" novalidate="">
         <div class="form-group">
-          <label for="detail_desc" class="control-label col-md-3 col-sm-3 col-xs-12">Product Description </label>
+          <label for="contents" class="control-label col-md-3 col-sm-3 col-xs-12">Box Content
+          </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
             <textarea class="form-control col-md-7 col-xs-12"
-                      name="detail_desc"
-                      id="detail_desc">{{prodContent.detail_desc}}</textarea>
+            required="required"
+            name="contents"
+            id="boxContent">{{prodContent.contents}}</textarea>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="detail_desc_original" class="control-label col-md-3 col-sm-3 col-xs-12">Manual Translation
+          <label for="contents_original" class="control-label col-md-3 col-sm-3 col-xs-12">Manual Translation
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12 checkbox">
             <label>
-              <template v-if="prodContent.detail_desc_original">
-                <input type="checkbox" class="flat" name="detail_desc_original" value="1" checked>
+              <template v-if="prodContent.contents_original">
+                <input type="checkbox" class="flat" name="contents_original" value="1" checked>
               </template>
               <template v-else>
-                <input type="checkbox" class="flat" name="detail_desc_original" value="">
+                <input type="checkbox" class="flat" name="contents_original" value="">
               </template>
             </label>
           </div>
@@ -44,7 +46,7 @@
 
 <script>
   import {
-    submitProductDescriptionForm,
+    submitProductContentForm,
   } from '../../../vuex/actions';
   import {
     getProductContent,
@@ -52,7 +54,7 @@
   export default {
     vuex: {
       actions: {
-        submitForm: submitProductDescriptionForm,
+        submitForm: submitProductContentForm,
       },
       getters: {
         prodContent: getProductContent,
