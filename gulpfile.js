@@ -1,5 +1,5 @@
 var Promise = require('es6-promise').Promise;
-// process.env.DISABLE_NOTIFIER = true;
+process.env.DISABLE_NOTIFIER = true;
 var elixir = require('laravel-elixir');
 elixir.config.js.browserify.watchify.options.poll = true;
 
@@ -82,6 +82,6 @@ elixir(function(mix) {
             "./bower_components/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css"
         ], "public/css/datatables-net.css");
 
-    mix.browserSync();
+    // mix.browserSync();
     mix.livereload();
 });

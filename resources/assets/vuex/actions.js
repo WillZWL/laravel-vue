@@ -2,8 +2,7 @@ import Vue from 'vue';
 import VueResource from 'vue-resource'
 Vue.use(VueResource);
 
-export const API_URL = 'http://localhost/api/';
-// export const API_URL = 'http://vanguard.dev/api/';
+export const API_URL = 'http://admincentre.eservicesgroup.com:7890/api/';
 
 //fetch Lists
 export const fetchBrandLists = ({ dispatch }) => {

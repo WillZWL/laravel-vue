@@ -11,13 +11,12 @@ import routerMap from './routers'
 Vue.use(VueRouter)
 Vue.use(VueResource)
 
-Vue.http.headers.common['Authorization'] = 'Bearer PooJTPgDFLIYJ5dkPlPuceViYo7nYZAhU4PDo8sP';
+Vue.http.headers.common['Authorization'] = 'Bearer ';
 
 /* eslint-disable no-new */
 
 var router = new VueRouter({
     history: true,
-    root: '/scout'
 });
 
 routerMap(router);
