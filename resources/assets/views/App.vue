@@ -1,7 +1,7 @@
 <template>
 <div class="container body">
   <div id="app">
-    <div class="main_container">
+    <div class="main_container" v-if="show">
       <sidebar></sidebar>
       <navbar></navbar>
       <!-- Main content -->
@@ -18,6 +18,9 @@
       <footbar></footbar>
     </div>
   </div>
+  <div v-else>
+    Please Login
+  </div>
 </div>
 </template>
 
@@ -29,6 +32,14 @@ import Footbar from './components/layouts/Footbar.vue';
 import store from '../vuex/store';
 
 export default {
+  data() {
+    return {
+      show: false
+    }
+  },
+  ready() {
+    this.$set('show', this.$route.auth);
+  },
   components: {
   Titlebar,
   Navbar,
