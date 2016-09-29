@@ -46,7 +46,7 @@
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">Section <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="#productCodeDiv">Product Code</a></li>
-                <li><a href="#productfeaturesDiv">Product Features</a></li>
+                <li><a href="#productFeaturesDiv">Product Features</a></li>
               </ul>
             </li>
           </ul>
