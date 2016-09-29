@@ -7,16 +7,16 @@
     <div class="x_content">
       <form class="form-horizontal form-label-left" id="product-features-form" novalidate>
         <div class="row">
-          <template v-for="(index, features) in featuresItems">
+          <template v-for="(index, features) in featuresItems | orderBy 'id'">
             <div class="item form-group form-group-sm">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="peatur1">Features Point {{index}}</label>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="peatur">Features Point {{index}}</label>
               <div class="col-md-6 col-sm-6 col-xs-12">
 
                 <template v-if="features">
                   <input type="text"
                          class="form-control col-md-7 col-xs-6"
                          name="feature_{{features.id}}"
-                         id="peatur1"
+                         id="peatur"
                          placeholder="Features Point {{index}}"
                          :value="features.feature">
                   <input type="hidden" name="ids[]" :value="features.id">
@@ -25,8 +25,9 @@
                   <input type="text"
                          class="form-control col-md-7 col-xs-6"
                          name="add_feature[]"
-                         id="peatur1"
-                         placeholder="Features Point {{index}}">
+                         id="add_feature"
+                         placeholder="Features Point {{index}}"
+                         :value="">
                 </template>
               </div>
             </div>

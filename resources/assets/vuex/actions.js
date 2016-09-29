@@ -4,6 +4,8 @@ Vue.use(VueResource);
 
 export const API_URL = 'http://admincentre.eservicesgroup.com:7890/api/';
 
+export const ACCESS_TOKEN = 'hhwNqYiJMRNwR3tQGsJhTiist002SJ8dXotwKYCE'
+
 //fetch Lists
 export const fetchBrandLists = ({ dispatch }) => {
     Vue.http({
@@ -311,10 +313,10 @@ export const getProduct = ({ dispatch }, sku, lang_id='en') => {
 
             $.isLoading("hide");
         } else {
-            msgBox("Failed, Cannot take a product info", "F", 3000);
+            msgBox("Failed, Cannot take a product info", "F", 2000);
         }
     }).catch(function(){
-        msgBox("Error 500, Internal Server Error", "F", 3000);
+        msgBox("Error 500, Internal Server Error", "F", 2000);
     });
 };
 
@@ -333,14 +335,14 @@ export const submitBasicInfoForm = ({dispatch, state}) => {
         }).then(function (response) {
             if (response.data.success === true) {
                 dispatch('SET_PRODUCT_INFO', response.data.product_info);
-                msgBox(response.data.msg, "S", 2000);
+                msgBox(response.data.msg, "S", 1000);
             } else if (response.data.fialed) {
-              msgBox(response.data.msg, "F", 3000);
+              msgBox(response.data.msg, "F", 2000);
             } else {
-                msgBox("Error 500, Internal Server Error", "F", 3000);
+                msgBox("Error 500, Internal Server Error", "F", 2000);
             }
         }).catch(function(){
-            msgBox("Error 500, Internal Server Error", "F", 3000);
+            msgBox("Error 500, Internal Server Error", "F", 2000);
         });
     }
 };
@@ -363,18 +365,18 @@ export const submitMerchantProductMappingForm = ({dispatch, state}) => {
             }).then(function (response) {
                 if (response.data.success) {
                     dispatch('SET_MERCHANT_PRODUCT_MAPPING', response.data.prod_map_info);
-                    msgBox(response.data.msg, "S", 2000);
+                    msgBox(response.data.msg, "S", 1000);
                 } else if (response.data.fialed) {
-                    msgBox(response.data.msg, "F", 3000);
+                    msgBox(response.data.msg, "F", 2000);
                 } else {
-                    msgBox("Error 500, Internal Server Error", "F", 3000);
+                    msgBox("Error 500, Internal Server Error", "F", 2000);
                 }
             }).catch(function(){
-                msgBox("Error 500, Internal Server Error", "F", 3000);
+                msgBox("Error 500, Internal Server Error", "F", 2000);
             });
         }
     } else {
-        msgBox("Error, no have available sku", "F", 3000);
+        msgBox("Error, no have available sku", "F", 2000);
     }
 };
 // Product Mapping for Product OverView
@@ -397,18 +399,18 @@ export const submitSupplierProductFrom = ({dispatch, state}) => {
                 if (response.data.success) {
                     dispatch('SET_SUPPLIER_PRODUCT', response.data.supplier_product);
 
-                    msgBox(response.data.msg, "S", 2000);
+                    msgBox(response.data.msg, "S", 1000);
                 } else if (response.data.fialed) {
-                    msgBox(response.data.msg, "F", 3000);
+                    msgBox(response.data.msg, "F", 2000);
                 } else {
-                    msgBox("Error 500, Internal Server Error", "F", 3000);
+                    msgBox("Error 500, Internal Server Error", "F", 2000);
                 }
             }).catch(function(){
-                msgBox("Error 500, Internal Server Error", "F", 3000);
+                msgBox("Error 500, Internal Server Error", "F", 2000);
             });
         }
     } else {
-        msgBox("Error, no have available sku", "F", 3000);
+        msgBox("Error, no have available sku", "F", 2000);
     }
 };
 // Supplier Product for Product OverView End
@@ -431,18 +433,18 @@ export const submitWeightDimensionForm = ({dispatch, state}) => {
                 if (response.data.success) {
                     dispatch('SET_PRODUCT_INFO', response.data.product_info);
 
-                    msgBox(response.data.msg, "S", 2000);
+                    msgBox(response.data.msg, "S", 1000);
                 } else if (response.data.fialed) {
-                    msgBox(response.data.msg, "F", 3000);
+                    msgBox(response.data.msg, "F", 2000);
                 } else {
-                    msgBox("Error 500, Internal Server Error", "F", 3000);
+                    msgBox("Error 500, Internal Server Error", "F", 2000);
                 }
             }).catch(function(){
-                msgBox("Error 500, Internal Server Error", "F", 3000);
+                msgBox("Error 500, Internal Server Error", "F", 2000);
             });
         }
     } else {
-        msgBox("Error, no have available sku", "F", 3000);
+        msgBox("Error, no have available sku", "F", 2000);
     }
 };
 // Weight Dimension for Product OverView End
@@ -465,18 +467,18 @@ export const submitProductCodeForm = ({dispatch, state}) => {
                 if (response.data.success) {
                     dispatch('SET_PRODUCT_INFO', response.data.product_info);
 
-                    msgBox(response.data.msg, "S", 2000);
+                    msgBox(response.data.msg, "S", 1000);
                 } else if (response.data.fialed) {
-                    msgBox(response.data.msg, "F", 3000);
+                    msgBox(response.data.msg, "F", 2000);
                 } else {
-                    msgBox("Error 500, Internal Server Error", "F", 3000);
+                    msgBox("Error 500, Internal Server Error", "F", 2000);
                 }
             }).catch(function(){
-                msgBox("Error 500, Internal Server Error", "F", 3000);
+                msgBox("Error 500, Internal Server Error", "F", 2000);
             });
         }
     } else {
-        msgBox("Error, no have available sku", "F", 3000);
+        msgBox("Error, no have available sku", "F", 2000);
     }
 };
 // Product Code for Product OverView End
@@ -501,18 +503,18 @@ export const submitProductContentForm = ({dispatch, state}) => {
                 if (response.data.success) {
                     dispatch('SET_PRODUCT_CONTENT', response.data.product_content);
 
-                    msgBox(response.data.msg, "S", 2000);
+                    msgBox(response.data.msg, "S", 1000);
                 } else if (response.data.fialed) {
-                    msgBox(response.data.msg, "F", 3000);
+                    msgBox(response.data.msg, "F", 2000);
                 } else {
-                    msgBox("Error 500, Internal Server Error", "F", 3000);
+                    msgBox("Error 500, Internal Server Error", "F", 2000);
                 }
             }).catch(function(){
-                msgBox("Error 500, Internal Server Error", "F", 3000);
+                msgBox("Error 500, Internal Server Error", "F", 2000);
             });
         }
     } else {
-        msgBox("Error, no have available sku", "F", 3000);
+        msgBox("Error, no have available sku", "F", 2000);
     }
 };
 
@@ -535,18 +537,18 @@ export const submitProductDescriptionForm = ({dispatch, state}) => {
                 if (response.data.success) {
                     dispatch('SET_PRODUCT_CONTENT', response.data.product_content);
 
-                    msgBox(response.data.msg, "S", 2000);
+                    msgBox(response.data.msg, "S", 1000);
                 } else if (response.data.fialed) {
-                    msgBox(response.data.msg, "F", 3000);
+                    msgBox(response.data.msg, "F", 2000);
                 } else {
-                    msgBox("Error 500, Internal Server Error", "F", 3000);
+                    msgBox("Error 500, Internal Server Error", "F", 2000);
                 }
             }).catch(function(){
-                msgBox("Error 500, Internal Server Error", "F", 3000);
+                msgBox("Error 500, Internal Server Error", "F", 2000);
             });
         }
     } else {
-        msgBox("Error, no have available sku", "F", 3000);
+        msgBox("Error, no have available sku", "F", 2000);
     }
 };
 // Product Content for Product OverView End
@@ -567,23 +569,148 @@ export const submitProductFeaturesForm = ({dispatch, state}) => {
                 data: jsonData,
             }).then(function (response) {
                 if (response.data.success) {
+                    $("input[id=add_feature]").each(function(i){
+                        $(this).val("");
+                    });
+
                     dispatch('SET_PRODUCT_FEATURES', response.data.product_features);
 
-                    msgBox(response.data.msg, "S", 2000);
+                    msgBox(response.data.msg, "S", 1000);
                 } else if (response.data.fialed) {
-                    msgBox(response.data.msg, "F", 3000);
+                    msgBox(response.data.msg, "F", 2000);
                 } else {
-                    msgBox("Error 500, Internal Server Error", "F", 3000);
+                    msgBox("Error 500, Internal Server Error", "F", 2000);
                 }
             }).catch(function(){
-                msgBox("Error 500, Internal Server Error", "F", 3000);
+                msgBox("Error 500, Internal Server Error", "F", 2000);
             });
         }
     } else {
-        msgBox("Error, no have available sku", "F", 3000);
+        msgBox("Error, no have available sku", "F", 2000);
     }
 };
 // Product features for Product OverView End
+
+// Product Images Upload for Product OverView End
+export const initUploadProductImages = ({dispatch, state}) => {
+    if (state.productSku) {
+        $("input[name='prod_sku']").val(state.productSku);
+
+        $("input[name='access_token']").val(ACCESS_TOKEN);
+        var url = API_URL +'product/upload-image?access_token='+ ACCESS_TOKEN;
+        $('#fileupload').fileupload({
+            url: url,
+            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+            maxFileSize: 1 * 1024 * 1024,
+            minFileSize: 5,
+            messages: {
+                maxFileSize: 'File exceeds maximum allowed size of 1MB',
+                acceptFileTypes: 'File type not allowed'
+            },
+            done: function (e, data) {
+                if (e.isDefaultPrevented()) {
+                    return false;
+                }
+
+                if (data.result.product_images) {
+                    dispatch('SET_PRODUCT_IMAGES', data.result.product_images);
+                }
+
+                var that = $(this).data('blueimp-fileupload') ||
+                        $(this).data('fileupload'),
+                    getFilesFromResponse = data.getFilesFromResponse ||
+                        that.options.getFilesFromResponse,
+                    files = getFilesFromResponse(data),
+                    template,
+                    deferred;
+                if (data.context) {
+                    data.context.each(function (index) {
+                        var file = files[index] ||
+                                {error: 'Empty file upload result'};
+                        deferred = that._addFinishedDeferreds();
+                        that._transition($(this)).done(
+                            function () {
+                                var node = $(this);
+                                template = that._renderDownload([file])
+                                    .replaceAll(node);
+                                that._forceReflow(template);
+                                that._transition(template).done(
+                                    function () {
+                                        data.context = $(this);
+                                        that._trigger('completed', e, data);
+                                        that._trigger('finished', e, data);
+                                        deferred.resolve();
+                                    }
+                                );
+                            }
+                        );
+                    });
+                } else {
+                    template = that._renderDownload(files)[
+                        that.options.prependFiles ? 'prependTo' : 'appendTo'
+                    ](that.options.filesContainer);
+                    that._forceReflow(template);
+                    deferred = that._addFinishedDeferreds();
+                    that._transition(template).done(
+                        function () {
+                            data.context = $(this);
+                            that._trigger('completed', e, data);
+                            that._trigger('finished', e, data);
+                            deferred.resolve();
+                        }
+                    );
+                }
+            }
+        });
+
+        // Load existing files:
+        $('#fileupload').addClass('fileupload-processing');
+        $.ajax({
+          url: $('#fileupload').fileupload('option', 'url'),
+          dataType: 'json',
+          crossDomain:true,
+          context: $('#fileupload')[0]
+        }).always(function () {
+          $(this).removeClass('fileupload-processing');
+        }).done(function (result) {
+          $(this).fileupload('option', 'done').call(this, $.Event('done'), {result: result});
+        });
+
+        $('input.iCheck-helper').iCheck({
+          checkboxClass: 'icheckbox_flat-green',
+          radioClass: 'iradio_flat-green'
+        });
+    }
+};
+
+export const deleteProductImage = ({dispatch, state}, imgId) => {
+    if(confirm("You confirm delete this image?")){
+        var jsonData = {};
+        jsonData['id'] = imgId;
+        jsonData['sku'] = state.productSku;
+
+        Vue.http({
+            url: API_URL + "product/delete-image/",
+            method: 'POST',
+            data: jsonData,
+        }).then(function (response) {
+            if (response.data.success) {
+                $("#show-img-box-"+ imgId).remove();
+
+                msgBox(response.data.msg, "S", 1000);
+            } else if (response.data.fialed) {
+                msgBox(response.data.msg, "F", 2000);
+            } else {
+                msgBox("Error 500, Internal Server Error", "F", 2000);
+            }
+        }).catch(function(){
+            msgBox("Error 500, Internal Server Error", "F", 2000);
+        });
+    }
+};
+
+// Product Images Upload for Product OverView End
+
 
 //================================= Product OverView End ================================
 //=======================================================================================

@@ -159,6 +159,24 @@
                   </div>
                 </div>
 
+                <template v-if="prodInfo.sku">
+                  <div class="form-group form-group-sm">
+                    <label class="control-label col-md-5 col-sm-3 col-xs-12" for="status">Status <span class="required">*</span></label>
+                    <div class="col-md-7 col-sm-9 col-xs-12">
+                      <select name="status" id="status" class="form-control">
+                        <template v-for="(index, status) in statusList">
+                          <option :value="index" v-if="index == prodInfo.status" selected>
+                            {{ status }}
+                          </option>
+                          <option :value="index" v-else>
+                            {{ status }}
+                          </option>
+                        </template>
+                      </select>
+                    </div>
+                  </div>
+                </template>
+
               </div>
             </div>
           </div>
@@ -184,7 +202,6 @@
   import CompHscodeCategory from './HscodeCategory.vue'
   import {
     setProductSku,
-    msgBox,
     getProduct,
     submitBasicInfoForm,
   } from '../../../vuex/actions';
@@ -195,7 +212,6 @@
     vuex: {
       actions: {
         setSku: setProductSku,
-        getMsg: msgBox,
         getProduct: getProduct,
         submitForm: submitBasicInfoForm,
       },
@@ -230,6 +246,7 @@
     },
     data() {
       return {
+        statusList: {'0': 'Inactive', '1': 'Created', '2': 'Listed'},
         batteryList: {'0': 'Without', '1': 'Built-In', '2': 'External'},
         fragileList: {'0': 'No', '1': 'Yes'},
         condtionsList: ['New', 'Used', 'Refurbished', 'Reconditioned', 'Like New'],

@@ -24,44 +24,36 @@
       name="hs_code"
       id="hsCode"
       minlenght="10"
-      placeholder="Hs Code">
+      placeholder="Hs Code"
+      :value="prodInfo.hs_code">
     </div>
   </div>
 
 </template>
 
 <script>
-  import {api_url} from '../../../js/vue.config.js'
-  import CompProductSupplier from './ProductSupplier.vue'
-  import {fetchHscodeCategoryLists} from '../../../vuex/actions';
-  import {getHscodeCategoryLists} from '../../../vuex/getters';
+  import {
+    fetchHscodeCategoryLists
+  } from '../../../vuex/actions';
+  import {
+    getHscodeCategoryLists,
+    getProductInfo,
+  } from '../../../vuex/getters';
   export default {
     vuex: {
       actions: {
         fetchHscodeCategoryLists,
       },
       getters: {
+        prodInfo: getProductInfo,
         hscodeCategoryList: getHscodeCategoryLists,
       }
     },
     props: [
     'select-hcid',
     ],
-    components: {
-      CompProductSupplier,
-    },
     created() {
       this.fetchHscodeCategoryLists();
-    },
-    ready() {
-
-    },
-    data() {
-      return {
-        apiUrl: api_url,
-      }
-    },
-    methods: {
     }
   }
 </script>

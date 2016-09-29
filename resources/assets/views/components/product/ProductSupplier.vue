@@ -62,29 +62,32 @@
           </div>
         </div>
 
-        <div class="item form-group form-group-sm">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="productCostHkd">Product Cost (HKD)</label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" class="form-control col-md-7 col-xs-6" name="product_cost_hkd" id="productCostHkd" placeholder="0.00" readonly :value="supProd.pricehkd">
+        <template v-if="supProd.prod_sku">
+          <div class="item form-group form-group-sm">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="productCostHkd">Product Cost (HKD)</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input type="text" class="form-control col-md-7 col-xs-6" name="product_cost_hkd" id="productCostHkd" placeholder="0.00" readonly :value="supProd.pricehkd">
+            </div>
           </div>
-        </div>
 
-        <div class="item form-group form-group-sm">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="suppliedStatus">Supplied Status</label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <select name="supplier_status" id="supplier_status" class="form-control" v-if="supProd.supplier_status">
-              <template v-for="(index, suppliedStatus) in suppliedStatusList">
-                <option :value="index" v-if="index == supProd.supplier_status" selected>
-                  {{ suppliedStatus }}
-                </option>
-                <option :value="index" v-else>
-                  {{ suppliedStatus }}
-                </option>
-              </template>
-            </select>
-            <select name="supplier_status" id="supplier_status" class="form-control" v-else disabled></select>
+          <div class="item form-group form-group-sm">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="suppliedStatus">Supplied Status</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <select name="supplier_status" id="supplier_status" class="form-control" v-if="supProd.supplier_status">
+                <template v-for="(index, suppliedStatus) in suppliedStatusList">
+                  <option :value="index" v-if="index == supProd.supplier_status" selected>
+                    {{ suppliedStatus }}
+                  </option>
+                  <option :value="index" v-else>
+                    {{ suppliedStatus }}
+                  </option>
+                </template>
+              </select>
+              <select name="supplier_status" id="supplier_status" class="form-control" v-else disabled></select>
+            </div>
           </div>
-        </div>
+        </template>
+
       </div>
 
       <div class="ln_solid"></div>

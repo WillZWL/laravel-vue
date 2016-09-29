@@ -61,7 +61,7 @@
 
           <weight-dimension></weight-dimension>
 
-          <product-image :prod-images="prodImages"></product-image>
+          <product-image></product-image>
 
           <common></common>
 
