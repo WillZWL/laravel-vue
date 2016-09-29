@@ -1,7 +1,7 @@
 <template>
 <div class="container body">
   <div id="app">
-    <div class="main_container" v-if="show">
+    <div class="main_container">
       <sidebar></sidebar>
       <navbar></navbar>
       <!-- Main content -->
@@ -17,9 +17,6 @@
       <!-- /.content -->
       <footbar></footbar>
     </div>
-  </div>
-  <div v-else>
-    Please Login
   </div>
 </div>
 </template>

@@ -17,6 +17,7 @@ Vue.http.headers.common['Authorization'] = 'Bearer ';
 
 var router = new VueRouter({
     history: true,
+    root: '/scout'
 });
 
 routerMap(router);
