@@ -42,7 +42,9 @@
     "js-url": "^2.3.0",
     "bootstrap-daterangepicker": "^2.1.24",
     "validator": "https://github.com/yairEO/validator.git#^1.0.6",
-    "parsleyjs": "^2.4.4"
+    "parsleyjs": "^2.4.4",
+    "vue-resource": "^1.0.3",
+    "jquery-serialize-object": "^2.5.0"
   },
   "resolutions": {
     "fastclick": "^1.0.6",
