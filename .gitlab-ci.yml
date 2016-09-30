@@ -1,17 +1,25 @@
 # cache
 cache:
+  untracked: true
   paths:
-  - bower_components/
-  - node_modules/
+    - bower_components/
+    - node_modules/
 
 # Before Script
 before_script:
   - echo 'Building start...'
 
-# package
-package:
-    script:
-    - pwd
+stages:
+  - setup
+  - deploy
+
+setup:
+  stage: setup
+  script:
     - bower install
     - npm install
+
+delopy:
+  stage: deploy
+  script:
     - gulp --production
