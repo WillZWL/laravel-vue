@@ -15,11 +15,6 @@ stages:
 
 setup:
   stage: setup
-  script:
-    - bower install
-    - npm install
 
 delopy:
   stage: deploy
-  script:
-    - gulp --production
