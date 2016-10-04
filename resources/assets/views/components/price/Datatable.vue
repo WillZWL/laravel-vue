@@ -208,6 +208,7 @@
   import Customheader from './CustomHeader.vue'
   import {
           initPriceOverviewDatatable,
+          priceOverviewSearch,
           } from '../../../vuex/actions';
   import {
             getPriceOverviewLists,
@@ -221,6 +222,7 @@
     vuex: {
       actions: {
         initDatatable: initPriceOverviewDatatable,
+        submitForm: priceOverviewSearch,
       },
       getters: {
         items: getPriceOverviewLists,
@@ -313,7 +315,7 @@
       },
       pagination: function(url) {
         var query_str = $.url('query', url);
-        this.$children[0].submitForm(query_str);
+        this.submitForm(query_str);
       }
     }
   };
