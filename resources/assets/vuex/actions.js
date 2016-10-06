@@ -135,7 +135,7 @@ export const setSearchFormValue = ({ dispatch }) => {
     $(".form_search textarea[name='esg_sku_list']").val(url('?esg_sku_list'));
 };
 
-var defalut_hidden_columns = {"hidden": [10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 25, 26, 27, 28]};
+var defalut_hidden_columns = {"hidden": [10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 25, 26, 27]};
 
 const _saveColumnState = (column, isHidden) => {
     var hidden_columns, index; 
@@ -161,11 +161,11 @@ const _initPriceOverviewDatatable = () => {
     $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
         //hidden some columns when init
     Vue.http({}).then(function() {
-        var hidden_columns = defalut_hidden_columns;
+        var hidden_columns = defalut_hidden_columns.hidden;
         if (Cookies.getJSON("priceOverviewHeaderHiddenList")) {
             hidden_columns = Cookies.getJSON("priceOverviewHeaderHiddenList").hidden;
         }
-        var always_hidden_columns = [26, 27, 28];
+        var always_hidden_columns = [26, 27];
         var export_columns = [3, 4, 1, 2, 26, 25, 27];
         var table = $('#datatable-fixed-header').DataTable({
             dom: "Bfrtip",
