@@ -212,7 +212,7 @@ const _initPriceOverviewDatatable = () => {
         };
 
         for (var j = 0; j < always_hidden_columns.length; j++) {
-            table.column(always_hidden_columns[i]);
+            var column = table.column(always_hidden_columns[i]);
             column.visible( ! column.visible() );
         };
 
