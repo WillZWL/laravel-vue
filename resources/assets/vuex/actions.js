@@ -135,11 +135,36 @@ export const setSearchFormValue = ({ dispatch }) => {
     $(".form_search textarea[name='esg_sku_list']").val(url('?esg_sku_list'));
 };
 
+var defalut_hidden_columns = {"hidden": [10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 25, 26, 27, 28]};
+
+const _saveColumnState = (column, isHidden) => {
+    var hidden_columns, index; 
+    //Cookies.remove("priceOverviewHeaderHiddenList");
+    if (!Cookies.getJSON("priceOverviewHeaderHiddenList"))
+        hidden_columns = defalut_hidden_columns;
+    else
+        hidden_columns = Cookies.getJSON("priceOverviewHeaderHiddenList");
+
+    index = $.inArray(parseInt(column), hidden_columns.hidden);
+    if (isHidden) {
+        if (index > -1)
+            hidden_columns.hidden.splice(index, 1);
+        hidden_columns.hidden.push(parseInt(column));
+    } else {
+        if (index > -1)
+            hidden_columns.hidden.splice($.inArray(parseInt(column), hidden_columns.hidden), 1);
+    }
+    Cookies.set("priceOverviewHeaderHiddenList", hidden_columns);
+}
+
 const _initPriceOverviewDatatable = () => {
     $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
         //hidden some columns when init
     Vue.http({}).then(function() {
-        var hidden_columns = [10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 25, 26, 27, 28];
+        var hidden_columns = defalut_hidden_columns;
+        if (Cookies.getJSON("priceOverviewHeaderHiddenList")) {
+            hidden_columns = Cookies.getJSON("priceOverviewHeaderHiddenList").hidden;
+        }
         var always_hidden_columns = [26, 27, 28];
         var export_columns = [3, 4, 1, 2, 26, 25, 27];
         var table = $('#datatable-fixed-header').DataTable({
@@ -193,12 +218,15 @@ const _initPriceOverviewDatatable = () => {
 
         $('a.toggle-vis').on( 'click', function (e) {
             e.preventDefault();
-            var column = table.column( $(this).attr('data-column') );
+            var columnId = $(this).attr('data-column');
+            var column = table.column($(this).attr('data-column'));
             column.visible( ! column.visible() );
             if (!column.visible()) {
                 $(this).removeClass("btn-success").addClass('btn-danger');
+                _saveColumnState(columnId, true);
             } else {
                 $(this).removeClass("btn-danger").addClass('btn-success');
+                _saveColumnState(columnId, false);
             }
         });
     }).then(function() {

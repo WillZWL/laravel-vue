@@ -26,6 +26,7 @@ elixir(function(mix) {
 
     //copy javascript file from bower_components
     mix.copy('./bower_components/jquery/dist/jquery.min.js', 'public/js/jquery.min.js');
+    mix.copy('./bower_components/js-cookie/src/js.cookie.js', 'public/js/js.cookie.js');
     // mix.copy('./bower_components/jquery-ui/jquery-ui.min.js', 'public/js/jquery-ui.min.js');
     mix.copy('./bower_components/bootstrap/dist/js/bootstrap.min.js', 'public/js/bootstrap.min.js');
     mix.copy('./bower_components/fastclick/lib/fastclick.js', 'public/js/fastclick.js');
