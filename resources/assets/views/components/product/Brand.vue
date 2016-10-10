@@ -2,7 +2,7 @@
   <div class="form-group form-group-sm">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="brandId">Brand <span class="required">*</span></label>
     <div class="col-md-9 col-sm-9 col-xs-12">
-      <select name="brand_id" id="brandId" class="select2_single form-control" tabindex="-1" required="required">
+      <select name="brand_id" id="brandId" class="form-control" tabindex="-1" required="required">
       <option></option>
       <template v-for="brand in brandList | orderBy 'brand_name'">
           <option :value="brand.brand_id" v-if="brand.brand_id == selectBrand" selected>

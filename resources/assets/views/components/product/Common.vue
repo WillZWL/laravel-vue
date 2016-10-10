@@ -1,3 +1,9 @@
+<style type="text/css">
+  .detail_desc {
+    min-height: 100px;
+  }
+</style>
+
 <template>
   <div id="commonDiv" class="x_panel">
     <div class="x_title">
@@ -7,9 +13,18 @@
     <div class="x_content">
       <form class="form-horizontal form-label-left" data-parsley-validate="" id="product-description-form" name="product-description-form" novalidate="">
         <div class="form-group">
-          <label for="detail_desc" class="control-label col-md-3 col-sm-3 col-xs-12">Product Description </label>
+          <label for="short_desc" class="control-label col-md-3 col-sm-3 col-xs-12">Short Description </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
             <textarea class="form-control col-md-7 col-xs-12"
+                      name="short_desc"
+                      id="short_desc">{{prodContent.short_desc}}</textarea>
+          </div>
+        </div>
+        <hr/>
+        <div class="form-group">
+          <label for="detail_desc" class="control-label col-md-3 col-sm-3 col-xs-12">Product Description </label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <textarea class="form-control col-md-7 col-xs-12 detail_desc"
                       name="detail_desc"
                       id="detail_desc">{{prodContent.detail_desc}}</textarea>
           </div>

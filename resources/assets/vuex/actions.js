@@ -88,10 +88,19 @@ export const fetchSupplierLists = ({ dispatch }) => {
 
 export const fetchHscodeCategoryLists = ({ dispatch }) => {
     Vue.http({
-        url:API_URL+'hscode_category',
+        url:API_URL+'hscode-category',
         method: 'GET'
     }).then(function (response) {
         return dispatch('FETCH_HSCODE_CATEGORY_LIST', response.data.data);
+    })
+};
+
+export const fetchDefaultWarehouseLists = ({ dispatch }) => {
+    Vue.http({
+        url:API_URL+'warehouse/default-warehouse',
+        method: 'GET'
+    }).then(function (response) {
+        return dispatch('FETCH_DEFAULT_WAREHOUSE_LIST', response.data.data);
     })
 };
 
@@ -138,7 +147,7 @@ export const setSearchFormValue = ({ dispatch }) => {
 var defalut_hidden_columns = {"hidden": [10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 25, 26, 27]};
 
 const _saveColumnState = (column, isHidden) => {
-    var hidden_columns, index; 
+    var hidden_columns, index;
     //Cookies.remove("priceOverviewHeaderHiddenList");
     if (!Cookies.getJSON("priceOverviewHeaderHiddenList"))
         hidden_columns = defalut_hidden_columns;
@@ -335,16 +344,18 @@ export const getProduct = ({ dispatch }, sku, lang_id='en') => {
             dispatch('SET_PRODUCT_INFO', response.data.data.product_info);
             dispatch('SET_MERCHANT_PRODUCT_MAPPING', response.data.data.merchant_sku_mapping);
             dispatch('SET_SUPPLIER_PRODUCT', response.data.data.supplier_product);
-            dispatch('SET_PRODUCT_IMAGES', response.data.data.images);
             dispatch('SET_PRODUCT_CONTENT', response.data.data.product_content);
+            dispatch('SET_PRODUCT_CONTENT_EXTEND', response.data.data.supplier_product_extend);
+            dispatch('SET_PRODUCT_IMAGES', response.data.data.images);
             dispatch('SET_PRODUCT_FEATURES', response.data.data.product_features);
+            dispatch('SET_HS_CODE', response.data.data.hs_code);
 
             $.isLoading("hide");
         } else {
-            msgBox("Failed, Cannot take a product info", "F", 2000);
+            msgBox("Failed, Cannot take a product info", "F", 1000);
         }
     }).catch(function(){
-        msgBox("Error 500, Internal Server Error", "F", 2000);
+        msgBox("Error 500, Internal Server Error", "F", 1000);
     });
 };
 
@@ -363,14 +374,14 @@ export const submitBasicInfoForm = ({dispatch, state}) => {
         }).then(function (response) {
             if (response.data.success === true) {
                 dispatch('SET_PRODUCT_INFO', response.data.product_info);
-                msgBox(response.data.msg, "S", 1000);
+                msgBox(response.data.msg, "S", 600);
             } else if (response.data.fialed) {
-              msgBox(response.data.msg, "F", 2000);
+              msgBox(response.data.msg, "F", 1000);
             } else {
-                msgBox("Error 500, Internal Server Error", "F", 2000);
+                msgBox("Error 500, Internal Server Error", "F", 1000);
             }
         }).catch(function(){
-            msgBox("Error 500, Internal Server Error", "F", 2000);
+            msgBox("Error 500, Internal Server Error", "F", 1000);
         });
     }
 };
@@ -393,18 +404,18 @@ export const submitMerchantProductMappingForm = ({dispatch, state}) => {
             }).then(function (response) {
                 if (response.data.success) {
                     dispatch('SET_MERCHANT_PRODUCT_MAPPING', response.data.prod_map_info);
-                    msgBox(response.data.msg, "S", 1000);
+                    msgBox(response.data.msg, "S", 600);
                 } else if (response.data.fialed) {
-                    msgBox(response.data.msg, "F", 2000);
+                    msgBox(response.data.msg, "F", 1000);
                 } else {
-                    msgBox("Error 500, Internal Server Error", "F", 2000);
+                    msgBox("Error 500, Internal Server Error", "F", 1000);
                 }
             }).catch(function(){
-                msgBox("Error 500, Internal Server Error", "F", 2000);
+                msgBox("Error 500, Internal Server Error", "F", 1000);
             });
         }
     } else {
-        msgBox("Error, no have available sku", "F", 2000);
+        msgBox("Error, no have available sku", "F", 1000);
     }
 };
 // Product Mapping for Product OverView
@@ -427,18 +438,18 @@ export const submitSupplierProductFrom = ({dispatch, state}) => {
                 if (response.data.success) {
                     dispatch('SET_SUPPLIER_PRODUCT', response.data.supplier_product);
 
-                    msgBox(response.data.msg, "S", 1000);
+                    msgBox(response.data.msg, "S", 600);
                 } else if (response.data.fialed) {
-                    msgBox(response.data.msg, "F", 2000);
+                    msgBox(response.data.msg, "F", 1000);
                 } else {
-                    msgBox("Error 500, Internal Server Error", "F", 2000);
+                    msgBox("Error 500, Internal Server Error", "F", 1000);
                 }
             }).catch(function(){
-                msgBox("Error 500, Internal Server Error", "F", 2000);
+                msgBox("Error 500, Internal Server Error", "F", 1000);
             });
         }
     } else {
-        msgBox("Error, no have available sku", "F", 2000);
+        msgBox("Error, no have available sku", "F", 1000);
     }
 };
 // Supplier Product for Product OverView End
@@ -461,18 +472,18 @@ export const submitWeightDimensionForm = ({dispatch, state}) => {
                 if (response.data.success) {
                     dispatch('SET_PRODUCT_INFO', response.data.product_info);
 
-                    msgBox(response.data.msg, "S", 1000);
+                    msgBox(response.data.msg, "S", 600);
                 } else if (response.data.fialed) {
-                    msgBox(response.data.msg, "F", 2000);
+                    msgBox(response.data.msg, "F", 1000);
                 } else {
-                    msgBox("Error 500, Internal Server Error", "F", 2000);
+                    msgBox("Error 500, Internal Server Error", "F", 1000);
                 }
             }).catch(function(){
-                msgBox("Error 500, Internal Server Error", "F", 2000);
+                msgBox("Error 500, Internal Server Error", "F", 1000);
             });
         }
     } else {
-        msgBox("Error, no have available sku", "F", 2000);
+        msgBox("Error, no have available sku", "F", 1000);
     }
 };
 // Weight Dimension for Product OverView End
@@ -495,67 +506,58 @@ export const submitProductCodeForm = ({dispatch, state}) => {
                 if (response.data.success) {
                     dispatch('SET_PRODUCT_INFO', response.data.product_info);
 
-                    msgBox(response.data.msg, "S", 1000);
+                    msgBox(response.data.msg, "S", 600);
                 } else if (response.data.fialed) {
-                    msgBox(response.data.msg, "F", 2000);
+                    msgBox(response.data.msg, "F", 1000);
                 } else {
-                    msgBox("Error 500, Internal Server Error", "F", 2000);
+                    msgBox("Error 500, Internal Server Error", "F", 1000);
                 }
             }).catch(function(){
-                msgBox("Error 500, Internal Server Error", "F", 2000);
+                msgBox("Error 500, Internal Server Error", "F", 1000);
             });
         }
     } else {
-        msgBox("Error, no have available sku", "F", 2000);
+        msgBox("Error, no have available sku", "F", 1000);
     }
 };
 // Product Code for Product OverView End
 
 // Product Content for Product OverView
 export const submitProductContentForm = ({dispatch, state}) => {
-    if (state.productSku) {
-        var submitForm = $('#product-content-form');
-        submitForm.parsley().validate();
+    var submitForm = $('#product-content-form');
 
-        if (true === submitForm.parsley().isValid()) {
-            var jsonData = submitForm.serializeObject();
-            jsonData['sku'] = state.productSku;
-            jsonData['lang_id'] = state.productContent.lang_id;
-            jsonData['prod_name'] = state.productInfo.name;
+    submitProductContent({dispatch, state},submitForm);
+};
 
-            Vue.http({
-                url: API_URL + "product/product-content",
-                method: 'POST',
-                data: jsonData,
-            }).then(function (response) {
-                if (response.data.success) {
-                    dispatch('SET_PRODUCT_CONTENT', response.data.product_content);
+export const submitProductBoxContentForm = ({dispatch, state}) => {
+    var submitForm = $('#product-box-content-form');
 
-                    msgBox(response.data.msg, "S", 1000);
-                } else if (response.data.fialed) {
-                    msgBox(response.data.msg, "F", 2000);
-                } else {
-                    msgBox("Error 500, Internal Server Error", "F", 2000);
-                }
-            }).catch(function(){
-                msgBox("Error 500, Internal Server Error", "F", 2000);
-            });
-        }
-    } else {
-        msgBox("Error, no have available sku", "F", 2000);
-    }
+    submitProductContent({dispatch, state}, submitForm);
 };
 
 export const submitProductDescriptionForm = ({dispatch, state}) => {
+    var submitForm = $('#product-description-form');
+
+    submitProductContent({dispatch, state},submitForm);
+};
+
+const submitProductContent = ({dispatch, state}, submitForm="") => {
     if (state.productSku) {
-        var submitForm = $('#product-description-form');
+
+        var prod_name_val = $('#product-content-form input[name="prod_name"]').val();
+
         submitForm.parsley().validate();
 
         if (true === submitForm.parsley().isValid()) {
+            if ($.trim(prod_name_val) == "") {
+                msgBox("Failed, Website display name is required", "F", 1500);
+                $('#product-content-form input[name="prod_name"]').focus();
+                return false;
+            }
+
             var jsonData = submitForm.serializeObject();
             jsonData['sku'] = state.productSku;
-            jsonData['lang_id'] = state.productContent.lang_id;
-            jsonData['prod_name'] = state.productInfo.name;
+            jsonData['lang_id'] = state.productContent.lang_id ? state.productContent.lang_id : 'en';
 
             Vue.http({
                 url: API_URL + "product/product-content",
@@ -565,20 +567,54 @@ export const submitProductDescriptionForm = ({dispatch, state}) => {
                 if (response.data.success) {
                     dispatch('SET_PRODUCT_CONTENT', response.data.product_content);
 
-                    msgBox(response.data.msg, "S", 1000);
+                    msgBox(response.data.msg, "S", 600);
                 } else if (response.data.fialed) {
-                    msgBox(response.data.msg, "F", 2000);
+                    msgBox(response.data.msg, "F", 1000);
                 } else {
-                    msgBox("Error 500, Internal Server Error", "F", 2000);
+                    msgBox("Error 500, Internal Server Error", "F", 1000);
                 }
             }).catch(function(){
-                msgBox("Error 500, Internal Server Error", "F", 2000);
+                msgBox("Error 500, Internal Server Error", "F", 1000);
             });
         }
     } else {
-        msgBox("Error, no have available sku", "F", 2000);
+        msgBox("Error, no have available sku", "F", 1000);
     }
-};
+}
+
+export const submitProductContentExtendForm = ({dispatch, state}) => {
+    var submitForm = $('#product-content-extend-form');
+
+    if (state.productSku) {
+        submitForm.parsley().validate();
+
+        if (true === submitForm.parsley().isValid()) {
+            var jsonData = submitForm.serializeObject();
+            jsonData['sku'] = state.productSku;
+            jsonData['lang_id'] = state.productContent.lang_id ? state.productContent.lang_id : 'en';
+
+            Vue.http({
+                url: API_URL + "product/product-content-extend",
+                method: 'POST',
+                data: jsonData,
+            }).then(function (response) {
+                if (response.data.success) {
+                    dispatch('SET_PRODUCT_CONTENT_EXTEND', response.data.product_content_extend);
+
+                    msgBox(response.data.msg, "S", 600);
+                } else if (response.data.fialed) {
+                    msgBox(response.data.msg, "F", 1000);
+                } else {
+                    msgBox("Error 500, Internal Server Error", "F", 1000);
+                }
+            }).catch(function(){
+                msgBox("Error 500, Internal Server Error", "F", 1000);
+            });
+        }
+    } else {
+        msgBox("Error, no have available sku", "F", 1000);
+    }
+}
 // Product Content for Product OverView End
 
 // Product features for Product OverView
@@ -603,18 +639,18 @@ export const submitProductFeaturesForm = ({dispatch, state}) => {
 
                     dispatch('SET_PRODUCT_FEATURES', response.data.product_features);
 
-                    msgBox(response.data.msg, "S", 1000);
+                    msgBox(response.data.msg, "S", 600);
                 } else if (response.data.fialed) {
-                    msgBox(response.data.msg, "F", 2000);
+                    msgBox(response.data.msg, "F", 1000);
                 } else {
-                    msgBox("Error 500, Internal Server Error", "F", 2000);
+                    msgBox("Error 500, Internal Server Error", "F", 1000);
                 }
             }).catch(function(){
-                msgBox("Error 500, Internal Server Error", "F", 2000);
+                msgBox("Error 500, Internal Server Error", "F", 1000);
             });
         }
     } else {
-        msgBox("Error, no have available sku", "F", 2000);
+        msgBox("Error, no have available sku", "F", 1000);
     }
 };
 // Product features for Product OverView End
@@ -725,14 +761,14 @@ export const deleteProductImage = ({dispatch, state}, imgId) => {
             if (response.data.success) {
                 $("#show-img-box-"+ imgId).remove();
 
-                msgBox(response.data.msg, "S", 1000);
+                msgBox(response.data.msg, "S", 600);
             } else if (response.data.fialed) {
-                msgBox(response.data.msg, "F", 2000);
+                msgBox(response.data.msg, "F", 1000);
             } else {
-                msgBox("Error 500, Internal Server Error", "F", 2000);
+                msgBox("Error 500, Internal Server Error", "F", 1000);
             }
         }).catch(function(){
-            msgBox("Error 500, Internal Server Error", "F", 2000);
+            msgBox("Error 500, Internal Server Error", "F", 1000);
         });
     }
 };

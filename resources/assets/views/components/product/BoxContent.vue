@@ -5,7 +5,7 @@
       <div class="clearfix"></div>
     </div>
     <div class="x_content">
-      <form class="form-horizontal form-label-left" data-parsley-validate="" id="product-content-form" name="product-content-form" novalidate="">
+      <form class="form-horizontal form-label-left" data-parsley-validate="" id="product-box-content-form" name="product-box-content-form">
         <div class="form-group">
           <label for="contents" class="control-label col-md-3 col-sm-3 col-xs-12">Box Content
           </label>
@@ -46,7 +46,7 @@
 
 <script>
   import {
-    submitProductContentForm,
+    submitProductBoxContentForm,
   } from '../../../vuex/actions';
   import {
     getProductContent,
@@ -54,7 +54,7 @@
   export default {
     vuex: {
       actions: {
-        submitForm: submitProductContentForm,
+        submitForm: submitProductBoxContentForm,
       },
       getters: {
         prodContent: getProductContent,

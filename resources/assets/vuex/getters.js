@@ -18,6 +18,8 @@ export const getSupplierLists = (state) => state.supplierLists;
 
 export const getHscodeCategoryLists = (state) => state.hscodeCategoryLists;
 
+export const getDefaultWarehouseLists = (state) => state.defaultWarehouseLists;
+
 export const getListingStatusLists = (state) => state.listingStatusLists;
 
 export const getSourcingStatusLists = (state) => state.sourcingStatusLists;
@@ -40,4 +42,8 @@ export const getProductImages = (state) => state.productImages;
 
 export const getProductContent = (state) => state.productContent;
 
+export const getProductContentExtend = (state) => state.productContentExtend;
+
 export const getProductFeatures = (state) => state.productFeatures;
+
+export const getHsCode = (state) => state.hsCode;

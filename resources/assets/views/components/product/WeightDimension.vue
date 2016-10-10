@@ -11,7 +11,8 @@
           <div class="form-group form-group-sm">
             <label for="vol_weight" class="control-label col-md-3 col-sm-3 col-xs-12">Volumetric Weight (Kg): <span class="required">*</span></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="number"
+              <input type="text"
+              onkeyup="value=value.replace(/[^\d.]/g,'')"
               name="vol_weight"
               id="vol_weight"
               max='999'
@@ -26,7 +27,8 @@
           <div class="form-group form-group-sm">
             <label for="weight" class="control-label col-md-3 col-sm-3 col-xs-12">Weight (Kg): <span class="required">*</span></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="number"
+              <input type="text"
+              onkeyup="value=value.replace(/[^\d.]/g,'')"
               name="weight"
               id="weight"
               max='999'
@@ -41,7 +43,8 @@
           <div class="form-group form-group-sm">
             <label for="length" class="control-label col-md-3 col-sm-3 col-xs-12">Length (cm): <span class="required">*</span></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="number"
+              <input type="text"
+              onkeyup="value=value.replace(/[^\d.]/g,'')"
               name="length"
               id="length"
               max='999'
@@ -56,7 +59,8 @@
           <div class="form-group form-group-sm">
             <label for="width" class="control-label col-md-3 col-sm-3 col-xs-12">Width (cm): <span class="required">*</span></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="number"
+              <input type="text"
+              onkeyup="value=value.replace(/[^\d.]/g,'')"
               name="width"
               id="width"
               max='999'
@@ -71,7 +75,8 @@
           <div class="form-group form-group-sm">
             <label for="height" class="control-label col-md-3 col-sm-3 col-xs-12">Height (cm): <span class="required">*</span></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="number"
+              <input type="text"
+              onkeyup="value=value.replace(/[^\d.]/g,'')"
               name="height"
               id="height"
               max='999'

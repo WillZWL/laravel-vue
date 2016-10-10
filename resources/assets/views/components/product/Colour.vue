@@ -2,7 +2,7 @@
   <div class="form-group form-group-sm">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="colour_id">Colour <span class="required">*</span></label>
     <div class="col-md-9 col-sm-9 col-xs-12">
-      <select  name="colour_id" id="colour_id" class="select2_single form-control" required="required">
+      <select  name="colour_id" id="colour_id" class="form-control" required="required">
         <option></option>
         <template v-for="colour in colourList | orderBy 'colour_name'">
             <option :value="colour.colour_id" v-if="colour.colour_id == selectColour" selected>

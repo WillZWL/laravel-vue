@@ -5,7 +5,7 @@
       <div class="clearfix"></div>
     </div>
     <div class="x_content">
-      <form class="form-horizontal form-label-left" id="product-code-form" novalidate>
+      <form class="form-horizontal form-label-left" id="product-code-form" data-parsley-validate="">
         <div class="row">
 
           <div class="item form-group form-group-sm">

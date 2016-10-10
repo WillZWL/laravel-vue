@@ -2,7 +2,7 @@
   <div class="form-group form-group-sm">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="version_id">Version  <span class="required">*</span></label>
     <div class="col-md-9 col-sm-9 col-xs-12">
-      <select name="version_id" id="version_id" class="select2_single form-control" required="required">
+      <select name="version_id" id="version_id" class="form-control" required="required">
         <option></option>
         <template v-for="version in versionList | orderBy 'version_name'">
             <option :value="version.version_id" v-if="version.version_id == selectVersion" selected>
