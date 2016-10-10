@@ -5,14 +5,17 @@ Vue.use(Vuex);
 
 const state = {
     productSku: '',
+    hsCode: '',
     productInfo: {},
     merchantProductMapping: {},
     supplierProduct: {},
     productImages: {},
     productContent: {},
+    productContentExtend: {},
     productFeatures: {},
     brandLists: [],
     brandManagerLists: [],
+    defaultWarehouseLists: [],
     marketplaceLists: [],
     merchantLists: [],
     countryLists: [],
@@ -71,6 +74,10 @@ const mutations = {
         state.hscodeCategoryLists = hscodeCategoryLists;
     },
 
+    FETCH_DEFAULT_WAREHOUSE_LIST(state, defaultWarehouseLists) {
+        state.defaultWarehouseLists = defaultWarehouseLists;
+    },
+
     FETCH_PRICEOVERVIEW_LISTS(state, priceOverviewLists, priceOverviewMeta) {
         state.priceOverviewLists = priceOverviewLists;
         state.priceOverviewMeta = priceOverviewMeta;
@@ -100,8 +107,16 @@ const mutations = {
         state.productContent = newProductContent;
     },
 
-    SET_PRODUCT_FEATURES(state, newproductFeatures) {
-        state.productFeatures = newproductFeatures;
+    SET_PRODUCT_CONTENT_EXTEND(state, newProductContentExtend) {
+        state.productContentExtend = newProductContentExtend;
+    },
+
+    SET_PRODUCT_FEATURES(state, newProductFeatures) {
+        state.productFeatures = newProductFeatures;
+    },
+
+    SET_HS_CODE(state, newHsCode) {
+        state.hsCode = newHsCode;
     },
 
 };

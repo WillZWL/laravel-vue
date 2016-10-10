@@ -5,7 +5,7 @@
       <div class="clearfix"></div>
     </div>
     <div class="x_content">
-      <form class="form-horizontal form-label-left" id="supplier-product-from" novalidate>
+      <form class="form-horizontal form-label-left" id="supplier-product-from" data-parsley-validate="">
         <div class="row">
           <div class="item form-group form-group-sm">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="supplier_id">Supplier <span class="required">*</span></label>
@@ -44,21 +44,14 @@
         <div class="item form-group form-group-sm">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="declaredValue">Declared Value <span class="required">*</span></label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" class="form-control col-md-7 col-xs-6" required="required" name="declared_value" id="declaredValue" placeholder="Declared Value" :value="supProd.declared_value">
+            <input type="text" onkeyup="value=value.replace(/[^\d.]/g,'')" class="form-control col-md-7 col-xs-6" required="required" name="declared_value" id="declaredValue" placeholder="Declared Value" :value="supProd.declared_value">
           </div>
         </div>
-
-        <!-- <div class="item form-group form-group-sm">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="declaredValue">Declared Value Currency</label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" class="form-control col-md-7 col-xs-6" required="required" name="declared_value" id="declaredValue" placeholder="Declared Value Currency ID" readonly :value="supProd.declared_value_currency_id">
-          </div>
-        </div> -->
 
         <div class="item form-group form-group-sm">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cost">Product Cost <span class="required">*</span></label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" class="form-control col-md-7 col-xs-6" required="required" name="cost" id="cost" placeholder="Product Cost" :value="supProd.cost">
+            <input type="text" onkeyup="value=value.replace(/[^\d.]/g,'')" class="form-control col-md-7 col-xs-6" required="required" name="cost" id="cost" placeholder="Product Cost" :value="supProd.cost">
           </div>
         </div>
 
@@ -66,7 +59,7 @@
           <div class="item form-group form-group-sm">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="productCostHkd">Product Cost (HKD)</label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="text" class="form-control col-md-7 col-xs-6" name="product_cost_hkd" id="productCostHkd" placeholder="0.00" readonly :value="supProd.pricehkd">
+              <input type="text" onkeyup="value=value.replace(/[^\d.]/g,'')" class="form-control col-md-7 col-xs-6" name="product_cost_hkd" id="productCostHkd" placeholder="0.00" readonly :value="supProd.pricehkd">
             </div>
           </div>
 

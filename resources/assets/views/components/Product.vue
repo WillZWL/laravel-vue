@@ -40,8 +40,18 @@
             <li><a href="#productSupplierDiv">Product Supplier</a></li>
             <li><a href="#weightDimensionDiv">Weight Dimension</a></li>
             <li><a href="#productImageDiv">Product Image</a></li>
-            <li><a href="#commonDiv">Common Info</a></li>
-            <li><a href="#boxContentDiv">Box Content Info</a></li>
+            <!-- <li><a href="#commonDiv">Common Info</a></li> -->
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Product Content <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#productContentDiv">Product Content</a></li>
+                <li><a href="#commonDiv">Common Info</a></li>
+                <li><a href="#boxContentDiv">Box Content Info</a></li>
+                <li><a href="#contentExtendDiv">Product Content Extend</a></li>
+              </ul>
+            </li>
+
+            <!-- <li><a href="#boxContentDiv">Box Content Info</a></li> -->
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">Section <span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -63,9 +73,13 @@
 
           <product-image></product-image>
 
+          <product-content></product-content>
+
           <common></common>
 
           <box-content></box-content>
+
+          <product-content-extend></product-content-extend>
 
           <product-code></product-code>
 
@@ -84,8 +98,10 @@
   import WeightDimension from './product/WeightDimension.vue'
   import ProductCode from './product/ProductCode.vue'
   import ProductImage from './product/ProductImage.vue'
+  import ProductContent from './product/ProductContent.vue'
   import Common from './product/Common.vue'
   import BoxContent from './product/BoxContent.vue'
+  import ProductContentExtend from './product/ProductContentExtend.vue'
   import ProductFeatures from './product/ProductFeatures.vue'
   export default {
     components: {
@@ -95,8 +111,10 @@
       WeightDimension,
       ProductCode,
       ProductImage,
+      ProductContent,
       Common,
       BoxContent,
+      ProductContentExtend,
       ProductFeatures,
     },
     created() {

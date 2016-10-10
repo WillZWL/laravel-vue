@@ -99,15 +99,23 @@
               </div>
               <div class="x_content">
 
-                <comp-hscode-category :select-hcid="prodInfo.hscode_cat_id"></comp-hscode-category>
+                <comp-hscode-category :select-hcid="prodInfo.hscode_cat_id" :hs-code="hsCode"></comp-hscode-category>
 
                 <div class="form-group form-group-sm">
                   <label class="control-label col-md-5 col-sm-3 col-xs-12" for="condtions">Condtions <span class="required">*</span></label>
                   <div class="col-md-7 col-sm-9 col-xs-12">
                     <select name="condtions" id="condtions" class="form-control" required="required">
-                      <option v-for="condtions in condtionsList"
-                      :value="condtions">{{condtions}}</option>
+                      <option></option>
+                      <template v-for="(index, condtions) in condtionsList">
+                        <option :value="index" v-if="index == prodInfo.condtions" selected>
+                          {{ condtions }}
+                        </option>
+                        <option :value="index" v-else>
+                          {{ condtions }}
+                        </option>
+                      </template>
                     </select>
+
                   </div>
                 </div>
 
@@ -115,6 +123,7 @@
                   <label class="control-label col-md-5 col-sm-3 col-xs-12" for="warranty_in_month">Warranty</label>
                   <div class="col-md-7 col-sm-9 col-xs-12">
                     <select name="warranty_in_month" id="warranty_in_month" class="form-control">
+                      <option></option>
                       <template v-for="warranty in warrantyList">
                         <option :value="warranty" v-if="warranty == prodInfo.warranty_in_month" selected>
                           {{ warranty }}
@@ -130,7 +139,8 @@
                 <div class="form-group form-group-sm">
                   <label class="control-label col-md-5 col-sm-3 col-xs-12" for="battery">Battery <span class="required">*</span></label>
                   <div class="col-md-7 col-sm-9 col-xs-12">
-                    <select name="battery" id="battery" class="form-control">
+                    <select name="battery" id="battery" class="form-control"  required="required">
+                      <option></option>
                       <template v-for="(index, battery) in batteryList">
                         <option :value="index" v-if="index == prodInfo.battery" selected>
                           {{ battery }}
@@ -146,7 +156,8 @@
                 <div class="form-group form-group-sm">
                   <label class="control-label col-md-5 col-sm-3 col-xs-12" for="fragile">Fragile <span class="required">*</span></label>
                   <div class="col-md-7 col-sm-9 col-xs-12">
-                    <select name="fragile" id="fragile" class="form-control">
+                    <select name="fragile" id="fragile" class="form-control"  required="required">
+                      <option></option>
                       <template v-for="(index, fragile) in fragileList">
                         <option :value="index" v-if="index == prodInfo.fragile" selected>
                           {{ fragile }}
@@ -159,11 +170,45 @@
                   </div>
                 </div>
 
+                <div class="form-group form-group-sm">
+                  <label class="control-label col-md-5 col-sm-3 col-xs-12" for="default_ship_to_warehouse">Default Warehouse <span class="required">*</span></label>
+                  <div class="col-md-7 col-sm-9 col-xs-12">
+                    <select name="default_ship_to_warehouse" id="default_ship_to_warehouse" class="form-control"  required="required">
+                      <option></option>
+                      <template  v-for="warehouse in defaultWarehouseList">
+                          <option :value="warehouse.warehouse_id" v-if="warehouse.warehouse_id == prodInfo.default_ship_to_warehouse" selected>
+                              {{ warehouse.warehouse_name }}
+                          </option>
+                          <option :value="warehouse.warehouse_id" v-else>
+                              {{ warehouse.warehouse_name }}
+                          </option>
+                      </template>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group form-group-sm">
+                  <label class="control-label col-md-5 col-sm-3 col-xs-12" for="website_status">Website Status <span class="required">*</span></label>
+                  <div class="col-md-7 col-sm-9 col-xs-12">
+                    <select name="website_status" id="website_status" class="form-control"  required="required">
+                      <option></option>
+                      <template v-for="(index, websiteStatus) in websiteStatusList">
+                        <option :value="index" v-if="index == prodInfo.website_status" selected>
+                          {{ websiteStatus }}
+                        </option>
+                        <option :value="index" v-else>
+                          {{ websiteStatus }}
+                        </option>
+                      </template>
+                    </select>
+                  </div>
+                </div>
+
                 <template v-if="prodInfo.sku">
                   <div class="form-group form-group-sm">
                     <label class="control-label col-md-5 col-sm-3 col-xs-12" for="status">Status <span class="required">*</span></label>
                     <div class="col-md-7 col-sm-9 col-xs-12">
-                      <select name="status" id="status" class="form-control">
+                      <select name="status" id="status" class="form-control"  required="required">
                         <template v-for="(index, status) in statusList">
                           <option :value="index" v-if="index == prodInfo.status" selected>
                             {{ status }}
@@ -204,19 +249,25 @@
     setProductSku,
     getProduct,
     submitBasicInfoForm,
+    fetchDefaultWarehouseLists,
   } from '../../../vuex/actions';
   import {
     getProductInfo,
+    getHsCode,
+    getDefaultWarehouseLists,
   } from '../../../vuex/getters';
   export default {
     vuex: {
       actions: {
         setSku: setProductSku,
         getProduct: getProduct,
+        fetchDefaultWarehouseLists,
         submitForm: submitBasicInfoForm,
       },
       getters: {
         prodInfo: getProductInfo,
+        hsCode: getHsCode,
+        defaultWarehouseList: getDefaultWarehouseLists,
       }
     },
     components: {
@@ -235,6 +286,9 @@
         }
       }
     },
+    created() {
+      this.fetchDefaultWarehouseLists();
+    },
     ready() {
       this.initBasicInfoForm();
       if (url('?sku')) {
@@ -246,10 +300,11 @@
     },
     data() {
       return {
+        websiteStatusList: {'I': 'Instock', 'O': 'Outstock', 'P': 'Pre-Order', 'A': 'Arriving'},
         statusList: {'0': 'Inactive', '1': 'Created', '2': 'Listed'},
         batteryList: {'0': 'Without', '1': 'Built-In', '2': 'External'},
         fragileList: {'0': 'No', '1': 'Yes'},
-        condtionsList: ['New', 'Used', 'Refurbished', 'Reconditioned', 'Like New'],
+        condtionsList: {'0': 'New', '1': 'Used', '2': 'Refurbished', '3': 'Reconditioned', '4': 'Like New'},
         warrantyList: ['0', '6', '12', '18', '24', '36'],
       }
     },

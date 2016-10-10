@@ -5,14 +5,14 @@
       <div class="clearfix"></div>
     </div>
     <div class="x_content">
-      <form class="form-horizontal form-label-left" id="product-features-form" novalidate>
+      <form class="form-horizontal form-label-left" id="product-features-form" data-parsley-validate="">
         <div class="row">
-          <template v-for="(index, features) in featuresItems | orderBy 'id'">
+          <template v-for="(index, features) in featuresItems">
             <div class="item form-group form-group-sm">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="peatur">Features Point {{index}}</label>
               <div class="col-md-6 col-sm-6 col-xs-12">
 
-                <template v-if="features">
+                <template v-if="features.id">
                   <input type="text"
                          class="form-control col-md-7 col-xs-6"
                          name="feature_{{features.id}}"
@@ -74,7 +74,7 @@
     },
     data() {
       return {
-        featuresItems: []
+        featuresItems: {},
       }
     },
     created() {
@@ -82,9 +82,13 @@
     },
     methods: {
       setDefaultFeaturesItem(){
-        var newVal = {};
-        for (var i = 0;i< 6;i++) {
-          newVal[i+1] = [i];
+        var newVal = {
+          '1': {'feature': ''},
+          '2': {'feature': ''},
+          '3': {'feature': ''},
+          '4': {'feature': ''},
+          '5': {'feature': ''},
+          '6': {'feature': ''},
         }
 
         this.$set("featuresItems", newVal);
