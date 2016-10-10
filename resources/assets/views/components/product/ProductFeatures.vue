@@ -12,7 +12,7 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="peatur">Features Point {{index}}</label>
               <div class="col-md-6 col-sm-6 col-xs-12">
 
-                <template v-if="features.id">
+                <template v-if="features">
                   <input type="text"
                          class="form-control col-md-7 col-xs-6"
                          name="feature_{{features.id}}"
@@ -82,13 +82,9 @@
     },
     methods: {
       setDefaultFeaturesItem(){
-        var newVal = {
-          '1': {'feature': ''},
-          '2': {'feature': ''},
-          '3': {'feature': ''},
-          '4': {'feature': ''},
-          '5': {'feature': ''},
-          '6': {'feature': ''},
+        var newVal = {};
+        for (var i = 1;i<= 6;i++) {
+          newVal[i] = {};
         }
 
         this.$set("featuresItems", newVal);
