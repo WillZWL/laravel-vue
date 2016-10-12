@@ -15,108 +15,135 @@
                 </ul>
                 <div class="clearfix"></div>
             </div>
-            <div class="x_content" id="pjax-container">
+            <div class="x_content col-md-10 col-md-offset-1 col-sm-12" id="pjax-container">
                 <form name="fm" class="form_search form-horizontal form-label-left" onsubmit="return false">
-                    <div class="form-group col-md-6">
-                        <label class="control-label col-md-4">Marketplace ID <span class="required">*</span>
+
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label for="inputProductName" class="col-sm-4 control-label">Product Name:</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="product_name" id="inputProductName" class="form-control" value="" required="required" pattern="" title="">
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label class="control-label col-md-4">Marketplace ID
                         </label>
-                        <div class="col-md-6 col-xs-12">
-                            <select class="select2_single form-control" tabindex="-1" name="marketplace_id" required>
+                        <div class="col-md-8 col-xs-12">
+                            <select class="select2_single form-control" tabindex="-1" name="marketplace_id">
+                                <option value=""></option>
                                 <option v-for="marketplace in marketplaceLists" value="{{marketplace.marketplace_id}}">{{marketplace.marketplace_id}}</option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
+
+                    <div class="form-group col-sm-6 col-xs-12">
                         <label class="control-label col-md-4">Merchant</label>
-                        <div class="col-md-6 col-xs-12">
+                        <div class="col-md-8 col-xs-12">
                             <select class="select2_single form-control" tabindex="-1" name="merchant_id">
                                 <option value=""></option>
                                 <option v-for="merchant in merchantLists" value="{{merchant.merchant_id}}">{{merchant.merchant_id}}</option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-sm-6 col-xs-12">
                         <label class="control-label col-md-4">Country</label>
-                        <div class="col-md-6 col-xs-12">
+                        <div class="col-md-8 col-xs-12">
                             <select class="select2_single form-control" tabindex="-1" name="country_id">
                                 <option value=""></option>
                                 <option v-for="country in countryLists" value="{{country.country_id}}">{{country.country_name}}</option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
+
+                    <div class="form-group col-sm-6 col-xs-12">
                         <label class="control-label col-md-4">Brand</label>
-                        <div class="col-md-6 col-xs-12">
+                        <div class="col-md-8 col-xs-12">
                             <select class="select2_single form-control" tabindex="-1" name="brand_id">
                                 <option></option>
                                 <option v-for="brand in brandLists | orderBy 'brand_name'" value="{{brand.brand_id}}">{{brand.brand_name}}</option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-sm-6 col-xs-12">
                         <label class="control-label col-md-4">Category</label>
-                        <div class="col-md-6 col-xs-12">
+                        <div class="col-md-8 col-xs-12">
                             <select class="select2_single form-control" tabindex="-1" name="category_id">
                                 <option></option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
+
+                    <div class="form-group col-sm-6 col-xs-12">
                         <label class="control-label col-md-4">Brand Manager</label>
-                        <div class="col-md-6 col-xs-12">
+                        <div class="col-md-8 col-xs-12">
                             <select class="select2_single form-control" tabindex="-1" name='brand_manager'>
                                 <option value=""></option>
                                 <option v-for="brand_manager in brandManagerLists" value="{{brand_manager}}">{{brand_manager}}</option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-sm-6 col-xs-12">
                         <label class="control-label col-md-4">Sub-Category</label>
-                        <div class="col-md-6 col-xs-12">
+                        <div class="col-md-8 col-xs-12">
                             <select class="form-control" tabindex="-1" name="sub_category_id">
                                 <option></option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
+
+                    <div class="form-group col-sm-6 col-xs-12">
                         <label class="control-label col-md-4">Listing Status</label>
-                        <div class="col-md-6 col-xs-12">
+                        <div class="col-md-8 col-xs-12">
                             <select class="form-control" tabindex="-1" name='listing_status'>
                                 <option value=""></option>
                                 <option v-for="listing_status in listingStatusLists" value="{{listing_status}}">{{listing_status}}</option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-sm-6 col-xs-12">
                         <label class="control-label col-md-4">Sub-Sub-Category</label>
-                        <div class="col-md-6 col-xs-12">
+                        <div class="col-md-8 col-xs-12">
                             <select class="form-control" tabindex="-1" name="sub_sub_category_id">
                                 <option></option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
+
+                    <div class="form-group col-sm-6 col-xs-12">
                         <label class="control-label col-md-4">Sourcing Status</label>
-                        <div class="col-md-6 col-xs-12">
+                        <div class="col-md-8 col-xs-12">
                             <select class="form-control" tabindex="-1" name='sourcingStatusLists'>
                                 <option value=""></option>
                                 <option v-for="(index,sourcing_status) in sourcingStatusLists" value="{{index}}">{{sourcing_status}}</option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-sm-6 col-xs-12">
+                        <label class="control-label col-md-4">Surplus</label>
+                        <div class="col-md-8 col-xs-12">
+                            <div class="input-group">
+                                <input type="number" name="from_surplus" class="form-control col-xs-6" placeholder="min qty">
+                                <div class="input-group-addon">-</div>
+                                <input type="number" name="end_surplus" class="form-control col-xs-6" placeholder="max qty">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6 col-xs-12">
                         <label class="control-label col-md-4">Inventory</label>
-                        <div class="col-md-3 col-xs-12">
-                            <select class="form-control" tabindex="-1" name='warehouse_id'>
+                        <div class="col-md-2 col-xs-12">
+                            <select class="form-control" tabindex="-1" name='inventory[warehouse_id]'>
                                 <option value=""></option>
                                 <option v-for="warehouse in warehouseLists" value="{{warehouse}}">{{warehouse}}</option>
                             </select>
                         </div>
-                        <div class="col-md-3 col-xs-12">
-                            <input type="number" name="inventory" class="form-control col-md-4 col-xs-12">
+                        <div class="col-md-6 col-xs-12">
+                            <div class="input-group">
+                                <input type="number" name="inventory[from_inventory]" class="form-control col-xs-6" placeholder="min qty">
+                                <div class="input-group-addon">-</div>
+                                <input type="number" name="inventory[end_inventory]" class="form-control col-xs-6" placeholder="max qty">
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-sm-6 col-xs-12">
                         <label class="control-label col-md-4">SKU List
                         <ul class="nav nav-tabs tabs-left">
                             <li class="active"><a href="#master_sku" data-toggle="tab">ESG Master SKU</a></li>

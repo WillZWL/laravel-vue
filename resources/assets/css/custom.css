@@ -820,14 +820,6 @@ h2 {
 .x_title span {
   color: #BDBDBD; }
 
-.x_content {
-  padding: 0 5px 6px;
-  position: relative;
-  width: 100%;
-  float: left;
-  clear: both;
-  margin-top: 5px; }
-
 .x_content h4 {
   font-size: 16px;
   font-weight: 500; }
@@ -1820,10 +1812,6 @@ span.section {
   color: #333;
   border: 0;
   border-bottom: 1px solid #e5e5e5; }
-
-.form-control {
-  border-radius: 0;
-  width: 100%; }
 
 .form-horizontal .control-label {
   padding-top: 8px; }
@@ -3433,8 +3421,8 @@ div[data-role="editor-toolbar"] {
 .select2-container--default .select2-selection--multiple {
   background-color: #fff;
   border: 1px solid #ccc;
-  border-radius: 0;
-  min-height: 38px; }
+  border-radius: 4px;
+  min-height: 34px; }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
   color: #73879C;
