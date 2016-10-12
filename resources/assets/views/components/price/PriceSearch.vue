@@ -118,16 +118,6 @@
                         </div>
                     </div>
                     <div class="form-group col-sm-6 col-xs-12">
-                        <label class="control-label col-md-4">Margin</label>
-                        <div class="col-md-8 col-xs-12">
-                            <div class="input-group">
-                                <input type="number" name="from_margin" class="form-control col-xs-6" placeholder="min qty">
-                                <div class="input-group-addon">-</div>
-                                <input type="number" name="end_margin" class="form-control col-xs-6" placeholder="max qty">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group col-sm-6 col-xs-12">
                         <label class="control-label col-md-4">Surplus</label>
                         <div class="col-md-8 col-xs-12">
                             <div class="input-group">

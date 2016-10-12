@@ -141,6 +141,7 @@
                 <td>{{item.selling_price}}</td>
                 <td>{{item.selected_delivery_type}}</td>
                 <td>{{item.listing_quantity}}</td>
+                <td> {{ item.default_warehouse }} </td>
                 <td data-toggle="tooltip" data-placement="left" title="" data-original-title="Update On: {{item.updated_at}}">
                   <input type="Button" value="Detail" class="btn btn-primary" data-toggle="modal" data-target=".overview-modal{{item.id}}">
                   <div class="modal fade overview-modal{{item.id}}" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
@@ -261,7 +262,8 @@
          24:'Margin',
          25:'Price',
          26:'delivery type',
-         27:'listing quantity'
+         27:'listing quantity',
+         28:'Default Warehouse'
         },
         api_url:api_url,
       }
