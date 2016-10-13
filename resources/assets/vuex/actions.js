@@ -104,6 +104,15 @@ export const fetchDefaultWarehouseLists = ({ dispatch }) => {
     })
 };
 
+export const fetchMarketplaceContentFieldLists = ({ dispatch }) => {
+    Vue.http({
+        url:API_URL+'marketplace-content-field',
+        method: 'GET'
+    }).then(function (response) {
+        return dispatch('FETCH_MARKETPLACE_CONTENT_FIELD_LIST', response.data.data);
+    })
+};
+
 // end of fetch Lists
 
 //Price Overview
@@ -778,3 +787,51 @@ export const deleteProductImage = ({dispatch, state}, imgId) => {
 
 //================================= Product OverView End ================================
 //=======================================================================================
+
+export const changeMarketplace = ({dispatch, state}) => {
+    $.isLoading({ text: "loading", class:"fa fa-refresh fa-spin" });
+
+    var marketplace = $("select[name=marketplace]").val();
+    dispatch('SET_MARKETPLACE', marketplace);
+
+    Vue.http({
+        url: API_URL + "marketplace-content-export/"+ marketplace,
+        method: 'GET',
+    }).then(function (response) {
+        dispatch('SET_MARKETPLACE_CONTENT_EXPORT_LIST', response.data.data);
+    }).then(function (response) {
+        $.isLoading("hide");
+    }).catch(function(){
+        msgBox("Error 500, Internal Server Error", "F", 1000);
+    });
+};
+
+export const submitMarketplaceContentSettingForm = ({dispatch, state}) => {
+        if (state.marketplace) {
+        var submitForm = $('#marketplace-content-setting-form');
+        var jsonData = submitForm.serializeObject();
+console.debug(jsonData);
+        Vue.http({
+            url: API_URL + "marketplace-content-export/setting",
+            method: 'POST',
+            data: jsonData,
+        }).then(function (response) {
+            if (response.data.success) {
+                dispatch('SET_MARKETPLACE_CONTENT_EXPORT_LIST', response.data.marketplace_content_export);
+
+                msgBox(response.data.msg, "S", 600);
+            } else if (response.data.fialed) {
+                msgBox(response.data.msg, "F", 1000);
+            } else {
+                msgBox("Error 500, Internal Server Error", "F", 1000);
+            }
+        }).catch(function(){
+            msgBox("Error 500, Internal Server Error", "F", 1000);
+        });
+      } else {
+        $.isLoading("hide");
+        // $("select[name='marketplace']").focus();
+        msgBox("Please selected a marketplace", "F", 1000);
+      }
+}
+// Marketplace Content Setting End
