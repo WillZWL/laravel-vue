@@ -152,7 +152,6 @@
                   <ul>
                     <li>Here support drag [ <span class='glyphicon glyphicon-move'></span> ] change the list re-order [ <span class='glyphicon glyphicon-sort'></span> ]</li>
                     <li>Marketplace content export report will be generated in this order.</li>
-                    <li>You need any problem when you upload, please ask IT for support.</li>
                   </ul>
                 </div>
               </div>
