@@ -111,7 +111,7 @@
                     <div class="form-group col-sm-6 col-xs-12">
                         <label class="control-label col-md-4">Sourcing Status</label>
                         <div class="col-md-8 col-xs-12">
-                            <select class="form-control" tabindex="-1" name='sourcingStatusLists'>
+                            <select class="form-control" tabindex="-1" name='sourcing_status'>
                                 <option value=""></option>
                                 <option v-for="(index,sourcing_status) in sourcingStatusLists" value="{{index}}">{{sourcing_status}}</option>
                             </select>
