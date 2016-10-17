@@ -31,6 +31,11 @@ export default function(router) {
             name: 'Tracer SKU Setting',
             component: require('../views/components/TracerSkuSetting.vue'),
             auth: true
+        },
+        '/marketplace-content-export/': {
+            name: 'Marketplace Content Export',
+            component: require('../views/components/MarketplaceContentExport.vue'),
+            auth: true
         }
         // '/order_fulfillment/': {
         //     name: 'Order Fulfilment',

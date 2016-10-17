@@ -13,6 +13,9 @@ const state = {
     productContent: {},
     productContentExtend: {},
     productFeatures: {},
+    marketplace: '',
+    marketplaceContentFieldLists: [],
+    marketplaceContentExportList: {},
     brandLists: [],
     brandManagerLists: [],
     defaultWarehouseLists: [],
@@ -78,6 +81,10 @@ const mutations = {
         state.defaultWarehouseLists = defaultWarehouseLists;
     },
 
+    FETCH_MARKETPLACE_CONTENT_FIELD_LIST(state, marketplaceContentFieldLists) {
+        state.marketplaceContentFieldLists = marketplaceContentFieldLists;
+    },
+
     FETCH_PRICEOVERVIEW_LISTS(state, priceOverviewLists, priceOverviewMeta) {
         state.priceOverviewLists = priceOverviewLists;
         state.priceOverviewMeta = priceOverviewMeta;
@@ -117,6 +124,14 @@ const mutations = {
 
     SET_HS_CODE(state, newHsCode) {
         state.hsCode = newHsCode;
+    },
+
+    SET_MARKETPLACE(state, newMarketplace) {
+        state.marketplace = newMarketplace;
+    },
+
+    SET_MARKETPLACE_CONTENT_EXPORT_LIST(state, newMarketplaceContentExportList) {
+        state.marketplaceContentExportList = newMarketplaceContentExportList;
     },
 
 };

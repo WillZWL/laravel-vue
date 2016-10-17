@@ -28,6 +28,8 @@ export const getWarehouseLists = (state) => state.warehouseLists;
 
 export const getPriceOverviewLists = (state) => state.priceOverviewLists;
 
+export const getMarketplaceContentFieldLists = (state) => state.marketplaceContentFieldLists;
+
 export const getPriceOverviewMeta = (state) => state.priceOverviewMeta;
 
 export const getProductSku = (state) => state.productSku;
@@ -47,3 +49,7 @@ export const getProductContentExtend = (state) => state.productContentExtend;
 export const getProductFeatures = (state) => state.productFeatures;
 
 export const getHsCode = (state) => state.hsCode;
+
+export const getMarketplace = (state) => state.marketplace;
+
+export const getMarketplaceContentExportList = (state) => state.marketplaceContentExportList;
