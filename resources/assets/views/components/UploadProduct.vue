@@ -121,6 +121,7 @@
           <blockquote>
             <p>Send your products in comma-separated or tab-separated spreadsheet format.</p>
             <p>Spreadsheet templates are a quick way to upload products in bulk. Edit the spreadsheet as needed. Don't change the columns.</p>
+            <p><b>Notice:</b> If you want to create new product, please let ESG SKU (the first column) blank, Otherwise this ESG SKU will be updated</p>
             <p class="col-md-3 col-xs-12"><a href="/product-upload/donwload-example-file/UploadExample.csv">Download Example File <strong><i class="fa fa-download"></i></strong></a></p>
           <div class="clearfix"></div>
           </blockquote>
