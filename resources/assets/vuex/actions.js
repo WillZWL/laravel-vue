@@ -844,7 +844,7 @@ export const submitCommissionChargeDownloadFrom = ({dispatch, state}) => {
         $.isLoading({ text: "Downloading ...", class:"fa fa-refresh fa-spin" });
 
         Vue.http({
-            url: API_URL + "commission-charge",
+            url: API_URL + "commission-charge-report",
             method: 'GET',
             data: jsonData,
         }).then(function (response) {
