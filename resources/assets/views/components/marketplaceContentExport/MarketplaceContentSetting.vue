@@ -3,7 +3,7 @@
   #marketplace-content-setting .ul-field-list {
     border-left: 2px solid #eee;
     margin: 0;
-    padding: 0px 25px;
+    padding: 0px 30px;
     list-style-type:upper-alpha;
   }
   #marketplace-content-setting .ul-field-list li {

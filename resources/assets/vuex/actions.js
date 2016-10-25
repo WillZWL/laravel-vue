@@ -810,7 +810,7 @@ export const submitMarketplaceContentSettingForm = ({dispatch, state}) => {
         if (state.marketplace) {
         var submitForm = $('#marketplace-content-setting-form');
         var jsonData = submitForm.serializeObject();
-console.debug(jsonData);
+
         Vue.http({
             url: API_URL + "marketplace-content-export/setting",
             method: 'POST',
@@ -835,3 +835,43 @@ console.debug(jsonData);
       }
 }
 // Marketplace Content Setting End
+
+
+export const submitCommissionChargeDownloadFrom = ({dispatch, state}) => {
+    var submitForm = $('#commission-charge-download-from');
+    var jsonData = submitForm.serializeObject();
+    if (jsonData['marketplace']) {
+        $.isLoading({ text: "Downloading ...", class:"fa fa-refresh fa-spin" });
+
+        Vue.http({
+            url: API_URL + "commission-charge",
+            method: 'GET',
+            data: jsonData,
+        }).then(function (response) {
+            $.isLoading("hide");
+            var content = response["data"];
+
+            var filename = 'commission-charge-'
+                    + (jsonData['payment_gateway'] ? jsonData['payment_gateway'] : jsonData['marketplace'])
+                    + '-report';
+
+            $('<a></a>')
+            .attr('id','download')
+            .attr('href','data:text/csv;charset=utf8,' + encodeURIComponent(content))
+            .attr('download', filename +'.csv')
+            .css('visibility', 'hidden')
+            .attr('target', '_blank')
+            .appendTo("#load-download");
+
+            document.getElementById("download").click();
+            $('#download').remove();
+
+            msgBox("Downloading report for Commission Charge", "S", 1000);
+        }).catch(function(){
+            msgBox("Error 500, Internal Server Error", "F", 1000);
+        });
+    } else {
+        $.isLoading("hide");
+        msgBox("Please selected a marketplace", "F", 1000);
+    }
+};

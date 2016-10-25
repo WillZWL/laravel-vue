@@ -36,6 +36,11 @@ export default function(router) {
             name: 'Marketplace Content Export',
             component: require('../views/components/MarketplaceContentExport.vue'),
             auth: true
+        },
+        '/commission-charge-export/': {
+            name: 'Commission Charge Export',
+            component: require('../views/components/CommissionChargeExport.vue'),
+            auth: true
         }
         // '/order_fulfillment/': {
         //     name: 'Order Fulfilment',
