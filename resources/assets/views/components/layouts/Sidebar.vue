@@ -33,6 +33,7 @@
                 <li><a v-link="'upload-marketplace-sku_mapping'">Upload Marketplace SKU Mapping</a></li>
                 <li><a v-link="'tracer-sku-setting'">Tracer SKU Setting</a></li>
                 <li><a v-link="'marketplace-content-export'">Marketplace Content Export</a></li>
+                <li><a v-link="'commission-charge-export'">Commission Charge Export</a></li>
               </ul>
             </li>
             <!-- <li>
