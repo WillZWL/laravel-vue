@@ -41,6 +41,11 @@ export default function(router) {
             name: 'Commission Charge Export',
             component: require('../views/components/CommissionChargeExport.vue'),
             auth: true
+        },
+        'marketplace-product-field-mapping/': {
+            name: 'Marketplace Product Field Mapping',
+            component: require('../views/components/MarketplaceProductFieldMapping.vue'),
+            auth: true
         }
         // '/order_fulfillment/': {
         //     name: 'Order Fulfilment',
