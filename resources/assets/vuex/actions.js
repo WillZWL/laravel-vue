@@ -126,7 +126,7 @@ export const priceOverviewSearch = ({ dispatch }, queryStr = '') => {
         url:API_URL+'marketplace-product/search?'+queryStr,
         method: 'GET'
     }).then(function (response) {
-        setSearchFormValue;
+        // setSearchFormValue;
         $.isLoading("hide");
         var table = $('#datatable-fixed-header').DataTable();
         table.destroy();
@@ -177,6 +177,26 @@ const _saveColumnState = (column, isHidden) => {
 
 const _initPriceOverviewDatatable = () => {
     $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
+
+    function ignoreZeroOrBelow(a, b, high) {
+        a = parseFloat(a);
+        if (a == 'N/A') {
+            a = 0;
+        }
+        b = parseFloat(b);
+        if (b == 'N/A') {
+            b = 0;
+        }
+        return ((a < b) ? -1 : ((a > b) ? 1 : 1));
+    }
+    jQuery.extend( jQuery.fn.dataTableExt.oSort, {
+        "sort-positive-numbers-only-asc": function (a, b) {
+            return ignoreZeroOrBelow(a, b, Number.POSITIVE_INFINITY);
+        },
+        "sort-positive-numbers-only-desc": function (a, b) {
+            return ignoreZeroOrBelow(a, b, Number.NEGATIVE_INFINITY) * -1;
+        }
+    });
         //hidden some columns when init
     Vue.http({}).then(function() {
         var hidden_columns = defalut_hidden_columns.hidden;
@@ -188,7 +208,12 @@ const _initPriceOverviewDatatable = () => {
         var table = $('#datatable-fixed-header').DataTable({
             dom: "Bfrtip",
             fixedHeader: true,
-            bSort:false,
+            "columnDefs": [
+                { "type": "sort-positive-numbers-only", "targets": 24 }
+            ],
+            "columnDefs": [
+                { "type": "sort-positive-numbers-only", "targets": 25 }
+            ],
             iDisplayLength:30,
             "paging":   false,
             "info":false,
