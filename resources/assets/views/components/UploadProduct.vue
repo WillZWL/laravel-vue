@@ -275,7 +275,7 @@ export default {
   },
   methods: {
     initUpload() {
-      var access_token = 'pvGqur2mHcPNeb8dmzYiUybLhGuybpkptiAFEaRZ';
+      var access_token = 'hhwNqYiJMRNwR3tQGsJhTiist002SJ8dXotwKYCE';
       $("input[name='access_token']").val(access_token);
       $('#fileupload').fileupload({
         url: this.api_url+'product-upload?access_token='+access_token
