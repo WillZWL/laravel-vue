@@ -147,7 +147,7 @@ export const exportInventoryFeed = ({ dispatch }, queryStr = '') => {
         var queryStr = $("form[name='fm']").serialize();
     }
 
-    var downloadLink = API_URL+'marketplace-product/export?'+queryStr;
+    var downloadLink = API_URL+'marketplace-product/export?'+queryStr+'&access_token='+ACCESS_TOKEN;
     window.open(downloadLink);
 };
 
