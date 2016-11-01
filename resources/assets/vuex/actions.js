@@ -142,6 +142,15 @@ export const priceOverviewSearch = ({ dispatch }, queryStr = '') => {
     });
 };
 
+export const exportInventoryFeed = ({ dispatch }, queryStr = '') => {
+    if (queryStr == '') {
+        var queryStr = $("form[name='fm']").serialize();
+    }
+
+    var downloadLink = API_URL+'marketplace-product/export?'+queryStr;
+    window.open(downloadLink);
+};
+
 export const setSearchFormValue = ({ dispatch }) => {
     for (var i = 0; i < $(".form_search select").length; i++) {
         var key = $(".form_search select")[i].name;

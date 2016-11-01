@@ -144,6 +144,17 @@
                         </div>
                     </div>
                     <div class="form-group col-sm-6 col-xs-12">
+                        <label class="control-label col-md-4">Per Page</label>
+                        <div class="col-md-2 col-xs-12">
+                            <select class="form-control" tabindex="-1" name='per_page'>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6 col-xs-12">
                         <label class="control-label col-md-4">SKU List
                         <ul class="nav nav-tabs tabs-left">
                             <li class="active"><a href="#master_sku" data-toggle="tab">ESG Master SKU</a></li>
@@ -162,8 +173,8 @@
                         </div>
                     </div>
                     <div class="form-group col-md-12">
-                        <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
-                            <!-- <input type="button" class="btn btn-dark" name='reset' value="Reset"> -->
+                        <div class="col-md-12 col-sm-12 col-sm-offset-3">
+                            <input type="button" class="btn btn-primary" name='export' value="Export Inventory Feed" @click="exportInventoryFeed()">
                             <input type="button" class="btn btn-success" name="search" value="Search" @click="submitForm()">
                         </div>
                     </div>
@@ -180,6 +191,7 @@ import {
         fetchMerchantLists,
         fetchCountryLists,
         priceOverviewSearch,
+        exportInventoryFeed,
         } from '../../../vuex/actions';
 import {
         getBrandLists,
@@ -202,6 +214,7 @@ export default {
             fetchMerchantLists,
             fetchCountryLists,
             submitForm: priceOverviewSearch,
+            exportInventoryFeed,
         },
         getters: {
            brandLists: getBrandLists,
