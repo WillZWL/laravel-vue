@@ -218,36 +218,9 @@ const _initPriceOverviewDatatable = () => {
             "paging":   false,
             "info":false,
             buttons: [
-                {
-                    extend: "csv",
-                    text: 'Export CSV Current Page',
-                    className: "btn-sm",
-                    title:"Accelerator_Product_Prcing_Overview",
-                    exportOptions: {
-                      columns: export_columns
-                    }
-                },
-                {
-                    extend: "excel",
-                    text: 'Export Excel Current Page',
-                    className: "btn-sm",
-                    title:"Accelerator_Product_Prcing_Overview",
-                    exportOptions: {
-                      columns: export_columns
-                    }
-                },
-                    {
-                    extend: "print",
-                    text: 'Print Current Page',
-                    className: "btn-sm",
-                    exportOptions: {
-                      columns: export_columns
-                    }
-                }
             ]
         });
-        //hidden columns
-        console.log(hidden_columns.length);
+
         for (var i = 0; i < hidden_columns.length; i++) {
             var column = table.column(hidden_columns[i]);
             column.visible( ! column.visible() );
