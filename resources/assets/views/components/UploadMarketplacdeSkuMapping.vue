@@ -12,7 +12,7 @@
       </div>
       <div class="x_content">
         <h4 style="color:#26b99a">{{ $message }}</h4>
-        <form class="form-horizontal form-label-left" name="edit-form" method="post" enctype="multipart/form-data" action="/platform-market/upload-mapping">
+        <form class="form-horizontal form-label-left" name="edit-form" method="post" enctype="multipart/form-data" action="http://admincentre.eservicesgroup.com:7890/platform-market/upload-mapping">
           <div class="form-group col-md-6">
             <div class="col-md-6 col-sm-6 col-xs-12">
               <select name="check" class="form-control">
