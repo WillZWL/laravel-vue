@@ -59,7 +59,7 @@
   <div class="panel-body">
     <ul>
       <li>
-        <a href="/platform-market/download-xlsx/example.xlsx">Download Example.xlsx
+        <a href="http://admincentre.eservicesgroup.com:7890/platform-market/download-xlsx/example.xlsx">Download Example.xlsx
           <strong><i class="fa fa-download"></i></strong>
         </a>
       </li>
