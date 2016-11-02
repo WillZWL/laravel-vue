@@ -17,7 +17,7 @@ Vue.http.headers.common['Authorization'] = 'Bearer hhwNqYiJMRNwR3tQGsJhTiist002S
 
 var router = new VueRouter({
     history: true,
-    root: '/scout'
+    root: '/accelerator'
 });
 
 routerMap(router);

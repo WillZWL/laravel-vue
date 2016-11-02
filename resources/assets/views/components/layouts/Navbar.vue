@@ -8,7 +8,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li class="">
             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              <img src="/images/img.jpg" alt="">John Doe <span class=" fa fa-angle-down"></span>
+              <img src="/accelerator/images/img.jpg" alt="">John Doe <span class=" fa fa-angle-down"></span>
             </a>
             <ul class="dropdown-menu dropdown-usermenu pull-right">
               <li><a href="javascript:;"> Profile</a>
@@ -21,7 +21,7 @@
               </li>
               <li><a href="javascript:;">Help</a>
               </li>
-              <li><a href="/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+              <li><a href="http://admincentre.eservicesgroup.com/auth/auth/deauth"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
               </li>
             </ul>
           </li>
@@ -32,7 +32,7 @@
             <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
               <li>
                 <a>
-                  <span class="image"><img src="/images/img.jpg" alt="Profile Image"></span>
+                  <span class="image"><img src="/accelerator/images/img.jpg" alt="Profile Image"></span>
                   <span>
                     <span>John Smith</span>
                     <span class="time">3 mins ago</span>
@@ -42,7 +42,7 @@
               </li>
               <li>
                 <a>
-                  <span class="image"><img src="/images/img.jpg" alt="Profile Image"></span>
+                  <span class="image"><img src="/accelerator/images/img.jpg" alt="Profile Image"></span>
                   <span>
                     <span>John Smith</span>
                     <span class="time">3 mins ago</span>
@@ -52,7 +52,7 @@
               </li>
               <li>
                 <a>
-                  <span class="image"><img src="/images/img.jpg" alt="Profile Image"></span>
+                  <span class="image"><img src="/accelerator/images/img.jpg" alt="Profile Image"></span>
                   <span>
                     <span>John Smith</span>
                     <span class="time">3 mins ago</span>
@@ -62,7 +62,7 @@
               </li>
               <li>
                 <a>
-                  <span class="image"><img src="/images/img.jpg" alt="Profile Image"></span>
+                  <span class="image"><img src="/accelerator/images/img.jpg" alt="Profile Image"></span>
                   <span>
                     <span>John Smith</span>
                     <span class="time">3 mins ago</span>
