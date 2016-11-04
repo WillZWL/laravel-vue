@@ -187,23 +187,20 @@ const _saveColumnState = (column, isHidden) => {
 const _initPriceOverviewDatatable = () => {
     $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
 
-    function ignoreZeroOrBelow(a, b, high) {
+    function sortPercentNumber(a, b) {
         a = parseFloat(a);
-        if (a == 'N/A') {
-            a = 0;
-        }
+        a = isNaN(a) ? Number.NEGATIVE_INFINITY : a;
         b = parseFloat(b);
-        if (b == 'N/A') {
-            b = 0;
-        }
-        return ((a < b) ? -1 : ((a > b) ? 1 : 1));
+        b = isNaN(b) ? Number.NEGATIVE_INFINITY : b;
+
+        return ((a < b) ? -1 : ((a > b) ? 1 : 0));
     }
     jQuery.extend( jQuery.fn.dataTableExt.oSort, {
-        "sort-positive-numbers-only-asc": function (a, b) {
-            return ignoreZeroOrBelow(a, b, Number.POSITIVE_INFINITY);
+        "sort-percent-numbers-asc": function (a, b) {
+            return sortPercentNumber(a, b);
         },
-        "sort-positive-numbers-only-desc": function (a, b) {
-            return ignoreZeroOrBelow(a, b, Number.NEGATIVE_INFINITY) * -1;
+        "sort-percent-numbers-desc": function (a, b) {
+            return sortPercentNumber(a, b) * -1;
         }
     });
         //hidden some columns when init
@@ -218,10 +215,10 @@ const _initPriceOverviewDatatable = () => {
             dom: "Bfrtip",
             fixedHeader: true,
             "columnDefs": [
-                { "type": "sort-positive-numbers-only", "targets": 24 }
+                { "type": "sort-percent-numbers", "targets": 24 }
             ],
             "columnDefs": [
-                { "type": "sort-positive-numbers-only", "targets": 25 }
+                { "type": "sort-percent-numbers", "targets": 25 }
             ],
             iDisplayLength:30,
             "paging":   false,
