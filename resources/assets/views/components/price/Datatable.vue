@@ -118,7 +118,8 @@
                     </select>
                   </div>
                 </td>
-                <td v-if="(item.selected_delivery_type != '') && (item.available_delivery_type.constructor !== Array)">
+                <td v-if="(item.selected_delivery_type != '') && (item.available_delivery_type[item.selected_delivery_type] !== undefined)">
+
                   <span class="text-danger"
                         v-if="item.available_delivery_type[item.selected_delivery_type].margin < 0.0">
                     {{item.available_delivery_type[item.selected_delivery_type].profit}}
@@ -128,7 +129,7 @@
                   </span>
                 </td>
                 <td v-else>N/A</td>
-                <td v-if="(item.selected_delivery_type != '') && (item.available_delivery_type.constructor !== Array)">
+                <td v-if="(item.selected_delivery_type != '') && (item.available_delivery_type[item.selected_delivery_type] !== undefined)">
                   <span class="text-danger"
                         v-if="item.available_delivery_type[item.selected_delivery_type].margin < 0.0">
                     {{item.available_delivery_type[item.selected_delivery_type].margin}}%
