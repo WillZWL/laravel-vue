@@ -134,7 +134,10 @@
                     {{item.available_delivery_type[item.selected_delivery_type].margin}}%
                   </span>
                   <span v-else>
-                    {{item.available_delivery_type[item.selected_delivery_type].margin}}%
+                    <span v-if="item.available_delivery_type.length == 0">N/A</span>
+                    <span v-else>
+                      {{item.available_delivery_type[item.selected_delivery_type].margin}}%
+                    </span>
                   </span>
                 </td>
                 <td v-else>N/A</td>
