@@ -118,28 +118,14 @@
                     </select>
                   </div>
                 </td>
-                <td v-if="(item.selected_delivery_type != '') && (item.available_delivery_type[item.selected_delivery_type] !== undefined)">
-
-                  <span class="text-danger"
-                        v-if="item.available_delivery_type[item.selected_delivery_type].margin < 0.0">
+                <td class="text-center" v-if="(item.selected_delivery_type != '') && (item.available_delivery_type[item.selected_delivery_type] !== undefined)"
+                    v-bind:class="getDangerClass(item.available_delivery_type[item.selected_delivery_type].profit)">
                     {{item.available_delivery_type[item.selected_delivery_type].profit}}
-                  </span>
-                  <span v-else>
-                    {{item.available_delivery_type[item.selected_delivery_type].profit}}
-                  </span>
                 </td>
                 <td v-else>N/A</td>
-                <td v-if="(item.selected_delivery_type != '') && (item.available_delivery_type[item.selected_delivery_type] !== undefined)">
-                  <span class="text-danger"
-                        v-if="item.available_delivery_type[item.selected_delivery_type].margin < 0.0">
-                    {{item.available_delivery_type[item.selected_delivery_type].margin}}%
-                  </span>
-                  <span v-else>
-                    <span v-if="item.available_delivery_type.length == 0">N/A</span>
-                    <span v-else>
+                <td class="text-center" v-if="(item.selected_delivery_type != '') && (item.available_delivery_type[item.selected_delivery_type] !== undefined)"
+                    v-bind:class="getDangerClass(item.available_delivery_type[item.selected_delivery_type].margin)">
                       {{item.available_delivery_type[item.selected_delivery_type].margin}}%
-                    </span>
-                  </span>
                 </td>
                 <td v-else>N/A</td>
                 <td>{{item.selling_price}}</td>
@@ -269,7 +255,7 @@
          27:'listing quantity',
          28:'Default Warehouse'
         },
-        api_url:api_url,
+        api_url: api_url,
       }
     },
     methods: {
@@ -322,6 +308,11 @@
       pagination: function(url) {
         var query_str = $.url('query', url);
         this.submitForm(query_str);
+      },
+      getDangerClass: function(number) {
+        if (number < 0) {
+          return ['text-danger'];
+        }
       }
     }
   };

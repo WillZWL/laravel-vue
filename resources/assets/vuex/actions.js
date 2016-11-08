@@ -187,20 +187,20 @@ const _saveColumnState = (column, isHidden) => {
 const _initPriceOverviewDatatable = () => {
     $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
 
-    function sortPercentNumber(a, b) {
+    function sortMixNumber(a, b) {
         a = parseFloat(a);
         a = isNaN(a) ? Number.NEGATIVE_INFINITY : a;
         b = parseFloat(b);
         b = isNaN(b) ? Number.NEGATIVE_INFINITY : b;
 
-        return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+        return a - b;
     }
     jQuery.extend( jQuery.fn.dataTableExt.oSort, {
-        "sort-percent-numbers-asc": function (a, b) {
-            return sortPercentNumber(a, b);
+        "mix-num-fmt-asc": function (a, b) {
+            return sortMixNumber(a, b);
         },
-        "sort-percent-numbers-desc": function (a, b) {
-            return sortPercentNumber(a, b) * -1;
+        "mix-num-fmt-desc": function (a, b) {
+            return sortMixNumber(a, b) * -1;
         }
     });
         //hidden some columns when init
@@ -210,21 +210,15 @@ const _initPriceOverviewDatatable = () => {
             hidden_columns = Cookies.getJSON("priceOverviewHeaderHiddenList").hidden;
         }
         var always_hidden_columns = [26, 27];
-        var export_columns = [3, 4, 1, 2, 26, 25, 27];
         var table = $('#datatable-fixed-header').DataTable({
-            dom: "Bfrtip",
             fixedHeader: true,
             "columnDefs": [
-                { "type": "sort-percent-numbers", "targets": 24 }
+                { "type": "mix-num-fmt", "targets": [23, 24] }
             ],
-            "columnDefs": [
-                { "type": "sort-percent-numbers", "targets": 25 }
-            ],
-            iDisplayLength:30,
-            "paging":   false,
-            "info":false,
-            buttons: [
-            ]
+            iDisplayLength: 30,
+            "paging": false,
+            "info": false,
+            buttion: []
         });
 
         for (var i = 0; i < hidden_columns.length; i++) {
