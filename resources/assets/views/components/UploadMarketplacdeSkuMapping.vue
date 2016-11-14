@@ -11,7 +11,6 @@
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-        <h4 style="color:#26b99a">{{ $message }}</h4>
         <form class="form-horizontal form-label-left" name="edit-form" method="post" enctype="multipart/form-data" action="http://admincentre.eservicesgroup.com:7890/platform-market/upload-mapping">
           <div class="form-group col-md-6">
             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -68,4 +67,62 @@
   </div>
 </div>
 
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Download Marketplace SKU Mapping</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+         <form name="fm" class="form_search form-horizontal form-label-left" onsubmit="return false">
+            <div class="form-group col-sm-6 col-xs-12">
+                <label class="control-label col-md-4">Marketplace
+                </label>
+                <div class="col-md-4 col-xs-12">
+                  <select name="marketplace_id" class="select2_single form-control">
+                    <option value=""></option>
+                    <option v-for="marketplace in marketplaceLists" value="{{ marketplace.marketplace_id }}">{{ marketplace.marketplace_name}}</option>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <div class="col-md-12 col-sm-12 col-sm-offset-5">
+                    <input type="button" class="btn btn-success" name="search" value="Download" @click="downloadReport()">
+                </div>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
+
+<script>
+  import { fetchMarketplaceLists, API_URL } from '../../vuex/actions';
+  import { getMarketplaceLists } from '../../vuex/getters';
+
+  export default {
+    vuex: {
+      actions: {
+        fetchMarketplaceLists
+      },
+      getters: {
+        marketplaceLists: getMarketplaceLists,
+      }
+    },
+    ready() {
+      this.fetchMarketplaceLists(),
+      $(".select2_single").select2({
+          placeholder: "",
+          allowClear: true
+      })
+    },
+    methods: {
+      downloadReport() {
+        var marketplace_id = $("select[name='marketplace_id']").val();
+        window.open('http://admincentre.eservicesgroup.com:7890/marketplace-sku-mapping-download/'+marketplace_id);
+      }
+    }
+  }
+</script>

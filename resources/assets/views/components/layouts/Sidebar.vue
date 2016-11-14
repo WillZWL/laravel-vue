@@ -36,12 +36,6 @@
                 <li><a v-link="'marketplace-product-field-mapping'">Marketplace product field mapping</a></li>
               </ul>
             </li>
-            <!-- <li>
-              <a><i class="fa fa-bar-chart"></i> Order Management <span class="fa fa-chevron-down"></span></a>
-              <ul class="nav child_menu">
-                <li><a v-link="'order_fulfillment'">DC Order Fulfilment</a></li>
-              </ul>
-            </li> -->
           </ul>
         </div>
       </div>
@@ -122,15 +116,6 @@
 
       setContentHeight();
     });
-
-    // check active menu
-    // $('#sidebar-menu').find('a[href="' + CURRENT_URL + '"]').parent('li').addClass('current-page');
-
-    // $('#sidebar-menu').find('a').filter(function () {
-    //     return this.href == CURRENT_URL;
-    // }).parent('li').addClass('current-page').parents('ul').slideDown(function() {
-    //     setContentHeight();
-    // }).parent().addClass('active');
 
     // recompute content when resizing
     $(window).smartresize(function(){
