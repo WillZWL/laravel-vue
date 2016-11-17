@@ -1,4 +1,13 @@
 <template>
+  <div class="form-group form-group-sm" v-show="selectBrand">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name" >Business unit</label>
+    <div class="col-md-9 col-sm-9 col-xs-12">
+    <input type="text"
+           class="form-control"
+           disabled
+           :value="business_unit">
+    </div>
+  </div>
   <div class="form-group form-group-sm">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="brandId">Brand <span class="required">*</span></label>
     <div class="col-md-9 col-sm-9 col-xs-12">
@@ -42,9 +51,27 @@
     data() {
       return {
         api_url: api_url,
+        business_unit_arr: {1: 'BRANDS', 2: 'TRADING', 3: 'PRIVATE LABEL', 4: 'NA'},
+        business_unit: ''
+      }
+    },
+    watch: {
+      selectBrand: function() {
+        var selected= $("select[name='brand_id']").val();
+        this.businessUnit(selected, this.brandList);
       }
     },
     methods: {
+      businessUnit: function (selectBrand, brandList) {
+        var business_unit_arr = this.business_unit_arr;
+        var instance = this;
+        brandList.filter(function (brand) {
+          if (brand.brand_id == selectBrand) {
+            instance.$set('business_unit', business_unit_arr[brand.business_unit]);
+            return business_unit_arr[brand.business_unit];
+          }
+        })
+      }
     }
   }
 </script>
