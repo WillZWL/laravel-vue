@@ -36,6 +36,10 @@ const state = {
             'current_page': 0
         }
     },
+    freightCostList: [],
+    countryWithStateList: [],
+    weightList: [],
+    selectedCouriers: [],
 };
 
 const mutations = {
@@ -43,6 +47,22 @@ const mutations = {
     FETCH_BRAND_LISTS(state, brandLists, brandManagerLists) {
         state.brandLists = brandLists;
         state.brandManagerLists = brandManagerLists;
+    },
+
+    FETCH_FREIGHT_COST_LIST(state, freightCostList) {
+        state.freightCostList = freightCostList;
+    },
+
+    FETCH_COUNTRY_WITH_STATE_LIST(state, countryWithStateList) {
+        state.countryWithStateList = countryWithStateList;
+    },
+
+    FETCH_WEIGHT_LIST(state, weightList) {
+        state.weightList = weightList;
+    },
+
+    FETCH_SELECTED_COURIERS(state, selectedCouriers) {
+        state.selectedCouriers = selectedCouriers;
     },
 
     FETCH_MARKETPLACE_LISTS(state, marketplaceLists) {

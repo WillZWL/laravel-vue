@@ -41,6 +41,11 @@ export default function(router) {
             name: 'Marketplace Product Field Mapping',
             component: require('../views/components/MarketplaceProductFieldMapping.vue'),
             auth: true
+        },
+        'freight-cost-compare-tool/': {
+            name: 'Freight Cost Compare Tool',
+            component: require('../views/components/FreightCostCompareTool.vue'),
+            auth: true
         }
         // '/order_fulfillment/': {
         //     name: 'Order Fulfilment',

@@ -53,3 +53,11 @@ export const getHsCode = (state) => state.hsCode;
 export const getMarketplace = (state) => state.marketplace;
 
 export const getMarketplaceContentExportList = (state) => state.marketplaceContentExportList;
+
+export const getFreightCostList = (state) => state.freightCostList;
+
+export const getCountryWithStateList = (state) => state.countryWithStateList;
+
+export const getWeightList = (state) => state.weightList;
+
+export const getSelectedCouriers = (state) => state.selectedCouriers;

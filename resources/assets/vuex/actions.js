@@ -23,6 +23,42 @@ export const fetchBrandLists = ({ dispatch }) => {
     })
 };
 
+export const fetchFreightCostList = ({ dispatch }, country, state, weight) => {
+    Vue.http({
+        url: API_URL + 'freight-cost?country=' + country + '&state=' + state + '&weight=' + weight,
+        method: 'GET'
+    }).then(function (response) {
+        return dispatch('FETCH_FREIGHT_COST_LIST', response.data);
+    })
+};
+
+export const fetchCountryWithStateList = ({ dispatch }) => {
+    Vue.http({
+        url: API_URL + 'country-state',
+        method: 'GET'
+    }).then(function (response) {
+        return dispatch('FETCH_COUNTRY_WITH_STATE_LIST', response.data);
+    })
+};
+
+export const fetchWeightList = ({ dispatch }) => {
+    Vue.http({
+        url: API_URL + 'weight',
+        method: 'GET'
+    }).then(function (response) {
+        return dispatch('FETCH_WEIGHT_LIST', response.data.data);
+    })
+};
+
+export const fetchSelectedCouriers = ({ dispatch }, country) => {
+    Vue.http({
+        url: API_URL + 'accelerator-shipping?country=' + country,
+        method: 'GET'
+    }).then(function (response) {
+        return dispatch('FETCH_SELECTED_COURIERS', response.data);
+    })
+};
+
 export const fetchMarketplaceLists = ({ dispatch }) => {
     Vue.http({
         url:API_URL+'marketplace',

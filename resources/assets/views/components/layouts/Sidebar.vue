@@ -12,7 +12,7 @@
         </div>
         <div class="profile_info">
           <span>Welcome,</span>
-          <h2>John Doe</h2>
+          <h2></h2>
         </div>
       </div>
       <!-- /menu profile quick info -->
@@ -34,6 +34,12 @@
                 <li><a v-link="'tracer-sku-setting'">Tracer SKU Setting</a></li>
                 <li><a v-link="'marketplace-content-export'">Marketplace Content Export</a></li>
                 <li><a v-link="'marketplace-product-field-mapping'">Marketplace product field mapping</a></li>
+              </ul>
+            </li>
+            <li>
+              <a><i class="fa fa-edit"></i> Compare Tools <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li><a v-link="'freight-cost-compare-tool'">Freight Cost Compare Tool</a></li>
               </ul>
             </li>
           </ul>
