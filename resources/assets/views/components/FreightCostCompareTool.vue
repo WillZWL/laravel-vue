@@ -45,7 +45,7 @@
 
     <section class="warehouse-section">
       <label>Warehouse: </label>
-      <button @click="changeWarehouse('ES_HK')" type="button" class="btn btn-default">ES_HK</button>
+      <button @click="changeWarehouse('ES_HK')" type="button" class="btn active btn-default">ES_HK</button>
       <button @click="changeWarehouse('ES_DGME')" type="button" class="btn btn-default">ES_DGME</button>
       <button @click="changeWarehouse('4PXDG_PL')" type="button" class="btn btn-default">4PXDG_PL</button>
     </section>
