@@ -35,6 +35,34 @@
         </div>
 
         <div class="form-group">
+          <label for="inputDelivery_type" class="col-sm-2 control-label">Delivery Type:</label>
+          <div class="col-sm-8">
+            <div>
+              <select v-model="deliveryType" name="delivery_type" id="inputDelivery_type" class="form-control">
+                <option value="">-- Please Select One --</option>
+                <option value="FBA">FBA</option>
+                <option value="SBN">SBN</option>
+                <option value="POSTAGE">STD</option>
+                <option value="COURIER_EXP">EXP</option>
+                <option value="COURIER">EXPED</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputBattery_type" class="col-sm-2 control-label">Battery Type:</label>
+          <div class="col-sm-8">
+            <select v-model="batteryType" name="battery_type" id="inputBattery_type" class="form-control">
+              <option value="">-- Please Select One --</option>
+              <option value="0">No Battery</option>
+              <option value="1">Built-in</option>
+              <option value="2">External</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
           <div class="col-sm-2 col-sm-offset-5">
             <button @click="fetchFreightCost()" type="submit" class="btn btn-primary">Search</button>
           </div>
@@ -46,7 +74,6 @@
     <section class="warehouse-section">
       <label>Warehouse: </label>
       <button @click="changeWarehouse('ES_HK')" type="button" class="btn btn-default">ES_HK</button>
-      <button @click="changeWarehouse('ES_DGME')" type="button" class="btn btn-default">ES_DGME</button>
       <button @click="changeWarehouse('4PXDG_PL')" type="button" class="btn btn-default">4PXDG_PL</button>
     </section>
 
@@ -99,11 +126,13 @@ export default {
   name: 'freightCostCompareTool',
   data () {
     return {
+      country: '',
+      state: '',
+      weight: '',
+      deliveryType: '',
+      batteryType: '',
       selectedCountry: '',
       selectedState: '',
-      country: '',
-      weight: '',
-      state: '',
       selectedWarehouse: 'ES_HK'
     }
   },
@@ -147,7 +176,27 @@ export default {
       return states
     },
     sortedCouriers: function () {
-      return this.couriers.sort(function (a, b) {
+      var sortedCouriers = this.couriers;
+
+      if (this.deliveryType) {
+        sortedCouriers = sortedCouriers.filter(function (a) {
+          return a.type === this.deliveryType;
+        }, this);
+      }
+
+      if (this.batteryType !== '') {
+          sortedCouriers = sortedCouriers.filter(function (b) {
+          if (this.batteryType === '0') {
+            return b.allowBuiltInBattery == 0 && b.allowExternalBattery == 0;
+          } else if (this.batteryType === '1') {
+            return b.allowBuiltInBattery == 1;
+          } else if (this.batteryType === '2') {
+            return b.allowExternalBattery == 1;
+          }
+        }, this)
+      }
+
+      return sortedCouriers.sort(function (a, b) {
         if (a.type > b.type) {
           return 1
         }
