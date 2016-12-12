@@ -174,6 +174,7 @@
                     </div>
                     <div class="form-group col-md-12">
                         <div class="col-md-12 col-sm-12 col-sm-offset-3">
+                            <a class="btn btn-primary" v-link="'upload-price'">BULK UPDATE</a>
                             <input type="button" class="btn btn-primary" name='export' value="Export Inventory Feed" @click="exportInventoryFeed()">
                             <input type="button" class="btn btn-success" name="search" value="Search" @click="submitForm()">
                         </div>
