@@ -120,7 +120,7 @@
         <div class="x_content">
           <blockquote>
             <p>Send your prices in comma-separated or tab-separated spreadsheet format.</p>
-            <p>Spreadsheet templates are a quick way to upload products in bulk. Edit the spreadsheet as needed. Don't change the columns.</p>
+            <p>Spreadsheet templates are a quick way to upload prices in bulk. Edit the spreadsheet as needed. Don't change the columns.</p>
             <p class="col-md-3 col-xs-12"><a href="http://admincentre.eservicesgroup.com:7890/price-upload/donwload-example-file/UploadExample.csv">Download Example File <strong><i class="fa fa-download"></i></strong></a></p>
           <div class="clearfix"></div>
           </blockquote>
