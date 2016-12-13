@@ -12,6 +12,11 @@ export default function(router) {
             component: require('../views/components/PriceOverview.vue'),
             auth: true
         },
+        '/upload-price/': {
+            name: 'Upload Price',
+            component: require('../views/components/UploadPrice.vue'),
+            auth: true
+        },
         '/product-overview/': {
             name: 'Product Overview',
             component: require('../views/components/Product.vue'),
