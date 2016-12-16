@@ -147,6 +147,7 @@
                 <!-- The global file processing state -->
                 <span class="fileupload-process"></span>
               </div>
+
               <!-- The global progress state -->
               <div class="col-lg-5 fileupload-progress fade">
                 <!-- The global progress bar -->
@@ -162,15 +163,20 @@
               <tbody class="files"></tbody>
             </table>
           </form>
-          <div class="dropzone">
-            <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
-          </div>
-          <br>
-          <br>
+
         </div>
       </div>
     </div>
   </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Upload Result</h3>
+    </div>
+    <div id="upload-result" class="panel-body">
+
+    </div>
+  </div>
+
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Upload Notes</h3>
@@ -278,22 +284,15 @@ export default {
       $("input[name='access_token']").val(access_token);
       $('#fileupload').fileupload({
         url: this.api_url+'price-upload?access_token='+access_token
-      });
-      // Load existing files:
-      $('#fileupload').addClass('fileupload-processing');
-      $.ajax({
-        url: $('#fileupload').fileupload('option', 'url'),
-        dataType: 'json',
-        crossDomain:true,
-        context: $('#fileupload')[0]
-      }).always(function () {
-        $(this).removeClass('fileupload-processing');
-      }).done(function (result) {
-        $(this).fileupload('option', 'done').call(this, $.Event('done'), {result: result});
-      });
-      $('input.iCheck-helper').iCheck({
-        checkboxClass: 'icheckbox_flat-green',
-        radioClass: 'iradio_flat-green'
+      }).bind('fileuploaddone', function (e, data) {
+
+        var filename = data.result.files[0].name;
+        var tip_class = "error";
+        if (data.result.status){
+          tip_class = "success";
+        }
+        $("#upload-result").append("<div class='alert alert-"+tip_class+" alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button><h4>"+filename+"</h4>"+data.result.message+"</div>");
+
       });
     }
   }
