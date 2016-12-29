@@ -61,3 +61,7 @@ export const getCountryWithStateList = (state) => state.countryWithStateList;
 export const getWeightList = (state) => state.weightList;
 
 export const getSelectedCouriers = (state) => state.selectedCouriers;
+
+export const getProductLists = (state) => state.productLists;
+
+export const getUserLists = (state) => state.userLists;

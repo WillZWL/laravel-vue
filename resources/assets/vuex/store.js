@@ -5,6 +5,8 @@ Vue.use(Vuex);
 
 const state = {
     productSku: '',
+    productLists:[],
+    userLists:[],
     hsCode: '',
     productInfo: {},
     merchantProductMapping: {},
@@ -43,6 +45,14 @@ const state = {
 };
 
 const mutations = {
+    //Fetch ESG Sku
+    FETCH_PRODUCT_LISTS(state, productLists) {
+        state.productLists = productLists;
+    },
+    //
+    FETCH_USER_LISTS(state, userLists) {
+        state.userLists = userLists;
+    },
     //Fetch Brand List
     FETCH_BRAND_LISTS(state, brandLists, brandManagerLists) {
         state.brandLists = brandLists;

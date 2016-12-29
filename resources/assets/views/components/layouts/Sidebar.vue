@@ -34,6 +34,7 @@
                 <li><a v-link="'tracer-sku-setting'">Tracer SKU Setting</a></li>
                 <li><a v-link="'marketplace-content-export'">Marketplace Content Export</a></li>
                 <li><a v-link="'marketplace-product-field-mapping'">Marketplace product field mapping</a></li>
+                <li><a v-link="'update-sku-buyer'">SKU Buyer and Operator</a></li>
               </ul>
             </li>
             <li>

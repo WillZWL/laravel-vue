@@ -51,6 +51,11 @@ export default function(router) {
             name: 'Freight Cost Compare Tool',
             component: require('../views/components/FreightCostCompareTool.vue'),
             auth: true
+        },
+        'update-sku-buyer/': {
+            name: 'SKU Buyer and Operator',
+            component: require('../views/components/Product/Buyer.vue'),
+            auth: true
         }
         // '/order_fulfillment/': {
         //     name: 'Order Fulfilment',
