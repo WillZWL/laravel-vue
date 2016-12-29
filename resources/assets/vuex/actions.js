@@ -7,6 +7,24 @@ export const API_URL = 'http://admincentre.eservicesgroup.com:7890/api/';
 export const ACCESS_TOKEN = 'hhwNqYiJMRNwR3tQGsJhTiist002SJ8dXotwKYCE'
 
 //fetch Lists
+export const fetchProductLists = ({ dispatch }, keyword) => {
+    Vue.http({
+        url: API_URL + 'product/sku-mapping-list?keyword=' + keyword,
+        method: 'GET'
+    }).then(function (response) {
+        return dispatch('FETCH_PRODUCT_LISTS', response.data);
+    })
+};
+
+export const fetchUserLists = ({ dispatch }) => {
+    Vue.http({
+        url: API_URL + 'user/list',
+        method: 'GET'
+    }).then(function (response) {
+        return dispatch('FETCH_USER_LISTS', response.data);
+    })
+};
+
 export const fetchBrandLists = ({ dispatch }) => {
     Vue.http({
         url:API_URL+'brand',
