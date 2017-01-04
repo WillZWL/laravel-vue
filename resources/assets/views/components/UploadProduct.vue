@@ -262,7 +262,7 @@
 </template>
 
 <script>
-import {api_url} from '../../js/vue.config.js'
+import {api_url, ACCESS_TOKEN} from '../../js/vue.config.js'
 export default {
   ready() {
     this.initUpload()
@@ -270,12 +270,13 @@ export default {
   data() {
     return {
       api_url: api_url,
+      access_token: ACCESS_TOKEN,
       files: {}
     }
   },
   methods: {
     initUpload() {
-      var access_token = 'hhwNqYiJMRNwR3tQGsJhTiist002SJ8dXotwKYCE';
+      var access_token = this.access_token
       $("input[name='access_token']").val(access_token);
       $('#fileupload').fileupload({
         url: this.api_url+'product-upload?access_token='+access_token

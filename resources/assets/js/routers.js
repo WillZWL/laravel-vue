@@ -54,9 +54,9 @@ export default function(router) {
         },
         'update-sku-buyer/': {
             name: 'SKU Buyer and Operator',
-            component: require('../views/components/Product/Buyer.vue'),
+            component: require('../views/components/product/Buyer.vue'),
             auth: true
-        }
+        },
         // '/order_fulfillment/': {
         //     name: 'Order Fulfilment',
         //     component: require('../views/components/OrderFulfillment.vue'),
