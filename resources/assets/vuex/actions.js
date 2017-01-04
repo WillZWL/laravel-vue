@@ -16,9 +16,15 @@ export const fetchProductLists = ({ dispatch }, keyword) => {
     })
 };
 
-export const fetchUserLists = ({ dispatch }) => {
+export const fetchUserLists = ({ dispatch }, roles) => {
+
+    for (var i = roles.length - 1; i >= 0; i--) {
+        roles[i] = "role[]="+roles[i];
+    }
+    var query = roles.join("&");
+
     Vue.http({
-        url: API_URL + 'user/list',
+        url: API_URL + 'user/list?'+query,
         method: 'GET'
     }).then(function (response) {
         return dispatch('FETCH_USER_LISTS', response.data);
