@@ -8,12 +8,20 @@ export const ACCESS_TOKEN = 'hhwNqYiJMRNwR3tQGsJhTiist002SJ8dXotwKYCE'
 
 //fetch Lists
 export const fetchProductLists = ({ dispatch }, keyword) => {
+    $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
     Vue.http({
         url: API_URL + 'product/sku-mapping-list?keyword=' + keyword,
         method: 'GET'
     }).then(function (response) {
+        $.isLoading("hide");
         return dispatch('FETCH_PRODUCT_LISTS', response.data);
-    })
+    }).catch(function(){
+        $.isLoading("hide");
+        $.isLoading({ text: "Error 500, Internal Server Error", class:"fa fa-exclamation-triangle" });
+        setTimeout( function(){
+            $.isLoading("hide");
+        }, 3000)
+    });
 };
 
 export const fetchUserLists = ({ dispatch }, roles) => {
