@@ -202,6 +202,12 @@ export const priceOverviewSearch = ({ dispatch }, queryStr = '') => {
     });
 };
 
+export const exportAcceleratorSalesReport = ({ dispatch }, queryStr = '') => {
+    queryStr = (queryStr != '') ? queryStr : $("form[name='export-sales-report-form'") .serialize();
+    var downloadLink = API_URL + 'accelerator-sales-report?' + queryStr + '&access_token=' + ACCESS_TOKEN;
+    window.open(downloadLink);
+};
+
 export const exportInventoryFeed = ({ dispatch }, queryStr = '') => {
     if (queryStr == '') {
         var queryStr = $("form[name='fm']").serialize();
