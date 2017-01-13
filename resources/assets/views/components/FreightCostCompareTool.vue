@@ -185,7 +185,7 @@ export default {
     checkSelectedCourier: function () {
       var notMatch = true;
       this.selectedCouriers[this.selectedWarehouse].forEach(function (selectedCourierId) {
-        this.couriers.forEach(function (courierObj) {
+        this.sortedCouriers.forEach(function (courierObj) {
           if (selectedCourierId == courierObj.courierId) {
             notMatch = false;
           }
