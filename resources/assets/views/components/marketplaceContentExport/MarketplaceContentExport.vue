@@ -42,16 +42,39 @@
               </div>
               <form class="form-horizontal" id="marketplace-content-export-form" role="form">
                 <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group form-group-sm">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Marketplace ID <font color="red">*</font>
+                      </label>
+                      <div class="col-md-9 col-sm-9 col-xs-12">
+                          <select class="select2_single form-control" tabindex="-1" name="marketplace_id">
+                              <option value=""></option>
+                              <option v-for="marketplace in marketplaceLists" value="{{marketplace.marketplace_id}}">{{marketplace.marketplace_id}}</option>
+                          </select>
+                      </div>
+                  </div>
+
+                  <div class="form-group form-group-sm">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Country  <font color="red">*</font></label>
+                      <div class="col-md-9 col-sm-9 col-xs-12">
+                          <select class="select2_single form-control" tabindex="-1" name="country_id">
+                              <option value=""></option>
+                              <option v-for="country in countryLists" value="{{country.country_id}}">{{country.country_name}}</option>
+                          </select>
+                      </div>
+                  </div>
+
                   <comp-colour :select-colour="0"></comp-colour>
 
                   <comp-version :select-version="0"></comp-version>
 
                   <comp-brand :select-brand="0"></comp-brand>
 
-                  <comp-hscode-category :select-hcid="0" :hs-code="0"></comp-hscode-category>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <comp-category :select-cid="0" :select-scid="0" :select-sscid="0"></comp-category>
+
+                  <comp-hscode-category :select-hcid="0" :hs-code="0"></comp-hscode-category>
+
                   <div class="col-md-12 col-sm-12 col-sm-offset-3">
                     <button type="button" class="btn btn-primary" name="export" @click="submitForm()">
                       <i class="fa fa-download" aria-hidden="true"></i>
@@ -77,25 +100,30 @@
   import CompBrand from '../product/Brand.vue'
   import CompHscodeCategory from '../product/HscodeCategory.vue'
   import {
+    fetchCountryLists,
     submitMarketplaceContentExportForm,
   } from '../../../vuex/actions';
   import {
+    getMarketplaceId,
     getMarketplaces,
+    getMarketplaceLists,
+    getCountryLists,
     getMarketplaceContentExportList,
   } from '../../../vuex/getters';
   export default {
     vuex: {
       actions: {
+        fetchCountryLists,
         submitForm: submitMarketplaceContentExportForm,
       },
       getters: {
         marketplaces: getMarketplaces,
+        marketplaceLists: getMarketplaceLists,
+        countryLists: getCountryLists,
+        marketplaceId: getMarketplaceId,
         contentFieldExportList: getMarketplaceContentExportList,
       }
     },
-    props: [
-      'marketplace-id'
-    ],
     components: {
       CompCategory,
       CompColour,
@@ -105,6 +133,7 @@
     },
     ready() {
       this.removeRequired();
+      this.fetchCountryLists();
     },
     methods: {
       removeRequired() {

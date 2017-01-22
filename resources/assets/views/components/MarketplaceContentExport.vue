@@ -24,7 +24,7 @@
               </div>
               <div  v-if='marketplaceId && contentFieldExportList[0]'
                 role="tabpanel" class="tab-pane fade" id="download-content" aria-labelledby="download-content">
-                <marketplace-content-export :marketplace-id='marketplaceId'></marketplace-content-export>
+                <marketplace-content-export></marketplace-content-export>
               </div>
             </div>
           </div>

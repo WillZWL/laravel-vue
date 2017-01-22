@@ -74,7 +74,7 @@
     <div class="col-md-6 col-sm-12 col-xs-12">
       <div class="x_panel">
         <div class="form-group">
-          <h2 for="Marketplace ID">Marketplace ID</h2>
+          <h2 for="Marketplace ID">Marketplace</h2>
           <select class="form-control" tabindex="-1" name="marketplace" @change="changeMarketplaceId()">
             <option></option>
 
@@ -149,6 +149,7 @@
 
 <script>
   import {
+    fetchMarketplaceLists,
     fetchMarketplaceContentFieldLists,
     submitMarketplaceContentSettingForm,
     changeMarketplaceId,
@@ -162,6 +163,7 @@
   export default {
     vuex: {
       actions: {
+        fetchMarketplaceLists,
         fetchMarketplaceContentFieldLists,
         submitForm: submitMarketplaceContentSettingForm,
         changeMarketplaceId,
@@ -176,6 +178,9 @@
     watch: {
       contentFields: function(val) {
         this.icheckbox();
+      },
+      marketplaceId: function(id) {
+        this.fetchMarketplaceLists(id);
       },
       contentFieldExportList: function(val) {
         $("#ul-field-list").find("li").remove();

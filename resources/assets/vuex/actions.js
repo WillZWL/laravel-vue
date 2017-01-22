@@ -91,9 +91,10 @@ export const fetchSelectedCouriers = ({ dispatch }, country) => {
     })
 };
 
-export const fetchMarketplaceLists = ({ dispatch }) => {
+export const fetchMarketplaceLists = ({ dispatch }, marketplaceId='') => {
+        console.log(marketplaceId);
     Vue.http({
-        url:API_URL+'marketplace',
+        url:API_URL+'marketplace?marketplace='+marketplaceId,
         method: 'GET'
     }).then(function (response) {
         return dispatch('FETCH_MARKETPLACE_LISTS', response.data.data);
@@ -917,6 +918,16 @@ export const submitMarketplaceContentSettingForm = ({dispatch, state}) => {
 // Marketplace Content Export
 export const submitMarketplaceContentExportForm = ({dispatch, state}, queryStr='') => {
     if ( state.marketplaceId ) {
+        var marketId = $("select[name=marketplace_id]").val();
+        var countryId = $("select[name=country_id]").val();
+        if (! marketId) {
+            msgBox("Please selected a marketplace Id", "F", 1000);
+            return false;
+        }
+        if (! countryId) {
+            msgBox("Please selected a country", "F", 1000);
+            return false;
+        }
         queryStr = (queryStr != '') ? queryStr : $('#marketplace-content-export-form').serialize();
         var downloadLink = API_URL + 'marketplace-content-export/download?' + queryStr + '&marketplace='+ state.marketplaceId +'&access_token=' + ACCESS_TOKEN;
         window.open(downloadLink);
