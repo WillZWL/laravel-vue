@@ -860,14 +860,19 @@ export const deleteProductImage = ({dispatch, state}, imgId) => {
 //================================= Product OverView End ================================
 //=======================================================================================
 
-export const changeMarketplace = ({dispatch, state}) => {
+export const changeMarketplaceId = ({dispatch, state}) => {
     $.isLoading({ text: "loading", class:"fa fa-refresh fa-spin" });
 
-    var marketplace = $("select[name=marketplace]").val();
-    dispatch('SET_MARKETPLACE', marketplace);
+    var marketplaceId = $("select[name=marketplace]").val();
+    if (marketplaceId) {
+        $("#marketplace-content-setting .marketplace-list-box").show();
+    } else {
+        $("#marketplace-content-setting .marketplace-list-box").hide();
+    }
+    dispatch('SET_MARKETPLACE_ID', marketplaceId);
 
     Vue.http({
-        url: API_URL + "marketplace-content-export/"+ marketplace,
+        url: API_URL + "marketplace-content-export/"+ marketplaceId,
         method: 'GET',
     }).then(function (response) {
         dispatch('SET_MARKETPLACE_CONTENT_EXPORT_LIST', response.data.data);
@@ -879,10 +884,10 @@ export const changeMarketplace = ({dispatch, state}) => {
 };
 
 export const submitMarketplaceContentSettingForm = ({dispatch, state}) => {
-        if (state.marketplace) {
+    if (state.marketplaceId) {
         var submitForm = $('#marketplace-content-setting-form');
         var jsonData = submitForm.serializeObject();
-
+            jsonData['marketplace'] = state.marketplaceId;
         Vue.http({
             url: API_URL + "marketplace-content-export/setting",
             method: 'POST',
@@ -900,10 +905,23 @@ export const submitMarketplaceContentSettingForm = ({dispatch, state}) => {
         }).catch(function(){
             msgBox("Error 500, Internal Server Error", "F", 1000);
         });
-      } else {
+    } else {
         $.isLoading("hide");
         // $("select[name='marketplace']").focus();
-        msgBox("Please selected a marketplace", "F", 1000);
-      }
+        msgBox("Please selected a marketplace Id", "F", 1000);
+    }
 }
 // Marketplace Content Setting End
+
+
+// Marketplace Content Export
+export const submitMarketplaceContentExportForm = ({dispatch, state}, queryStr='') => {
+    if ( state.marketplaceId ) {
+        queryStr = (queryStr != '') ? queryStr : $('#marketplace-content-export-form').serialize();
+        var downloadLink = API_URL + 'marketplace-content-export/download?' + queryStr + '&marketplace='+ state.marketplaceId +'&access_token=' + ACCESS_TOKEN;
+        window.open(downloadLink);
+    } else {
+        msgBox("Please selected a marketplace Id", "F", 1000);
+    }
+};
+// Marketplace Content Export
