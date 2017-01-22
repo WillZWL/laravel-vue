@@ -936,3 +936,10 @@ export const submitMarketplaceContentExportForm = ({dispatch, state}, queryStr='
     }
 };
 // Marketplace Content Export
+
+// Reset Marketplace Id
+export const resetMarketplaceId = ({dispatch, state}) => {
+    dispatch('SET_MARKETPLACE_ID', '');
+    changeMarketplaceId({dispatch, state});
+};
+// Reset Marketplace Id
