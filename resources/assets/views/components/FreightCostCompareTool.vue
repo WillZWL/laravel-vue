@@ -85,7 +85,6 @@
             <th>Shipping Service</th>
             <th>Destination Country</th>
             <th>Destination State</th>
-            <th>Warehouse</th>
             <th>Incoterm</th>
             <th>Courier Name</th>
             <th>Freight Cost (HKD)</th>
@@ -97,7 +96,6 @@
             <td>{{ courier.type }}</td>
             <td>{{ selectedCountry }}</td>
             <td>{{ selectedState }}</td>
-            <td>{{ selectedWarehouse }}</td>
             <td>{{ getIncoterm(courier) }}</td>
             <td>[ID:{{ courier.courierId }}] {{ courier.courierName }}</td>
             <td>{{ courier.freightCost.toFixed(2) }}</td>
