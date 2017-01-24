@@ -870,6 +870,8 @@ export const changeMarketplaceId = ({dispatch, state}) => {
     } else {
         $("#marketplace-content-setting .marketplace-list-box").hide();
     }
+
+    dispatch('SET_MARKETPLACE_CONTENT_EXPORT_LIST', {});
     dispatch('SET_MARKETPLACE_ID', marketplaceId);
 
     Vue.http({
