@@ -13,7 +13,9 @@
     float: left;
     padding: 2px 5px 2px 20px;
   }
-
+  .span-radio {
+    margin-left: 20px;
+  }
 </style>
 
   <template>
@@ -80,6 +82,16 @@
                       <i class="fa fa-download" aria-hidden="true"></i>
                       Export {{ marketplaces[marketplaceId] }} Product Feed
                     </button>
+
+                    <span class="span-radio">
+                      <input type="radio" name="extend" value="xlsx" checked>
+                      <label>.xlsx</label>
+                    </span>
+
+                    <span class="span-radio">
+                      <input type="radio" name="extend" value="csv">
+                      <label>.csv</label>
+                    </span>
                   </div>
                 </div>
               </form>

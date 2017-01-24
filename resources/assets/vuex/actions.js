@@ -911,7 +911,7 @@ export const submitMarketplaceContentSettingForm = ({dispatch, state}) => {
     } else {
         $.isLoading("hide");
         // $("select[name='marketplace']").focus();
-        msgBox("Please selected a marketplace Id", "F", 1000);
+        msgBox("Please selected a marketplace ID", "F", 1000);
     }
 }
 // Marketplace Content Setting End
@@ -923,7 +923,7 @@ export const submitMarketplaceContentExportForm = ({dispatch, state}, queryStr='
         var marketId = $("select[name=marketplace_id]").val();
         var countryId = $("select[name=country_id]").val();
         if (! marketId) {
-            msgBox("Please selected a marketplace Id", "F", 1000);
+            msgBox("Please selected a marketplace ID", "F", 1000);
             return false;
         }
         if (! countryId) {
@@ -934,7 +934,7 @@ export const submitMarketplaceContentExportForm = ({dispatch, state}, queryStr='
         var downloadLink = API_URL + 'marketplace-content-export/download?' + queryStr + '&marketplace='+ state.marketplaceId +'&access_token=' + ACCESS_TOKEN;
         window.open(downloadLink);
     } else {
-        msgBox("Please selected a marketplace Id", "F", 1000);
+        msgBox("Please selected a marketplace ID", "F", 1000);
     }
 };
 // Marketplace Content Export
