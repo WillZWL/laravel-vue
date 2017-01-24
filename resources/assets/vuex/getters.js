@@ -50,7 +50,7 @@ export const getProductFeatures = (state) => state.productFeatures;
 
 export const getHsCode = (state) => state.hsCode;
 
-export const getMarketplace = (state) => state.marketplace;
+export const getMarketplaceId = (state) => state.marketplaceId;
 
 export const getMarketplaceContentExportList = (state) => state.marketplaceContentExportList;
 
@@ -65,3 +65,5 @@ export const getSelectedCouriers = (state) => state.selectedCouriers;
 export const getProductLists = (state) => state.productLists;
 
 export const getUserLists = (state) => state.userLists;
+
+export const getMarketplaces = (state) => state.marketplaces;

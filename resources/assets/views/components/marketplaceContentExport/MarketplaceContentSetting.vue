@@ -1,5 +1,4 @@
 <style>
-
   #marketplace-content-setting .ul-field-list {
     border-left: 2px solid #eee;
     margin: 0;
@@ -65,192 +64,128 @@
     color: #3c763d;
     /* padding: 5px 0; */
   }
+  #marketplace-content-setting .marketplace-list-box {
+    display: none;
+  }
 </style>
 
 <template>
   <div class="row" id="marketplace-content-setting">
-    <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="col-md-6 col-sm-12 col-xs-12">
       <div class="x_panel">
-        <div class="x_title">
-          <h2>Marketplace Content Export Setting</h2>
-          <ul class="nav navbar-right panel_toolbox">
-            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-          </ul>
-          <div class="clearfix"></div>
+        <div class="form-group">
+          <h2 for="Marketplace ID">Marketplace</h2>
+          <select class="form-control" tabindex="-1" name="marketplace" @change="changeMarketplaceId()">
+            <option></option>
+
+            <template v-for="(index, marketplace) in marketplaces">
+              <option :value="index" v-if="index == marketplaceId" selected>
+                {{ marketplace }}
+              </option>
+              <option :value="index" v-else>
+                {{ marketplace }}
+              </option>
+            </template>
+          </select>
         </div>
-        <div class="x_content">
-          <div class="row">
-            <div class=" col-md-6 col-sm-6 col-xs-12">
-              <div class="x_panel">
-                <div class="form-group">
-                  <h2 for="Marketplace ID">Marketplace</h2>
-                  <select class="form-control" tabindex="-1" name="marketplace" @change="changeMarketplace()">
-                    <option></option>
-
-                    <template v-for="marketplace in marketplaceList">
-                      <option :value="marketplace.id" v-if="marketplace.id == marketplace" selected>
-                        {{ marketplace.name }}
-                      </option>
-                      <option :value="marketplace.id" v-else>
-                        {{ marketplace.name }}
-                      </option>
-                    </template>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <span class="label label-warning">
-                    Please select the following field for Marketplace content export
-                  </span>
-                </div>
-
-                <template v-for="field in contentFields">
-                  <div class="checkbox">
-                    <label class="">
-                      <input type="checkbox" class="flat" id="field" name="{{field.marketplace_field_value}}" value="{{ field.marketplace_field_name }}" v-on:click="checkbox()">
-                      <strong>{{ field.marketplace_field_name }}</strong> [ <font color="red"><i>{{field.marketplace_field_value}}</i></font> ]
-                    </label>
-                  </div>
-                </template>
-              </div>
-            </div>
-
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <div class="x_panel">
-                <form action="" method="POST" id="marketplace-content-setting-form" role="form">
-                  <div class="form-group col-md-12">
-                    <h2 v-if='marketplace'>
-                       Selected Export Field List for Marketplace [<b>{{ marketplace }}</b>]
-                    </h2>
-                    <h2 v-else>
-                      Please select a marketplace first.
-                    </h2>
-                  </div>
-
-                  <div class="clearfix"></div>
-
-                  <input type="hidden" name="marketplace" :value="marketplace">
-
-                  <ul id="ul-field-list" class="ul-field-list">
-                  </ul>
-                  <div class="clearfix"></div>
-                  <div class="ln_solid"></div>
-                  <div class="form-group form-group-sm">
-                    <div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-4">
-                      <button type="button" class="btn btn-default" @click="reset()">Reset</button>
-                      <button type="button" class="btn btn-primary" @click="submitForm()">Save</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                <h3 class="panel-title">Setting Notes</h3>
-                </div>
-                <div class="panel-body">
-                  <ul>
-                    <li>Here support drag [ <span class='glyphicon glyphicon-move'></span> ] change the list re-order [ <span class='glyphicon glyphicon-sort'></span> ]</li>
-                    <li>Marketplace content export report will be generated in this order.</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
+        <div class="marketplace-list-box">
+          <div class="form-group">
+            <span class="label label-warning">
+              Please select the following field for Marketplace content export
+            </span>
           </div>
+
+          <template v-for="field in contentFields">
+            <div class="checkbox">
+              <label class="">
+                <input type="checkbox" class="flat" id="field" name="{{field.marketplace_field_value}}" value="{{ field.marketplace_field_name }}" v-on:click="checkbox()">
+                <strong>{{ field.marketplace_field_name }}</strong> [ <font color="red"><i>{{field.marketplace_field_value}}</i></font> ]
+              </label>
+            </div>
+          </template>
         </div>
       </div>
     </div>
-  </div>
 
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <form action="" method="POST" id="marketplace-content-setting-form" role="form">
+          <div class="form-group col-md-12">
+            <h2>
+              Save the marketplace content export fields here
+            </h2>
+          </div>
+
+          <div class="clearfix"></div>
+
+          <ul id="ul-field-list" class="ul-field-list"></ul>
+
+          <div class="clearfix"></div>
+          <div class="ln_solid"></div>
+          <div class="form-group form-group-sm">
+            <div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-4">
+              <button type="button" class="btn btn-default" @click="reset()">Reset</button>
+              <button type="button" class="btn btn-primary" @click="submitForm()">Save</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+        <h3 class="panel-title">Setting Notes</h3>
+        </div>
+        <div class="panel-body">
+          <ul>
+            <li>Here support drag [ <span class='glyphicon glyphicon-move'></span> ] change the list re-order [ <span class='glyphicon glyphicon-sort'></span> ]</li>
+            <li>Marketplace content export report will be generated in this order.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </template>
 
 <script>
-  import {api_url} from '../../../js/vue.config.js';
   import {
+    fetchMarketplaceLists,
     fetchMarketplaceContentFieldLists,
     submitMarketplaceContentSettingForm,
-    changeMarketplace,
+    changeMarketplaceId,
   } from '../../../vuex/actions';
   import {
-    getMarketplace,
+    getMarketplaceId,
+    getMarketplaces,
     getMarketplaceContentFieldLists,
     getMarketplaceContentExportList,
   } from '../../../vuex/getters';
   export default {
     vuex: {
       actions: {
+        fetchMarketplaceLists,
         fetchMarketplaceContentFieldLists,
         submitForm: submitMarketplaceContentSettingForm,
-        changeMarketplace,
+        changeMarketplaceId,
       },
       getters: {
         contentFields: getMarketplaceContentFieldLists,
-        marketplace: getMarketplace,
-        getMarketplaceContentExportList,
-      }
-    },
-    data() {
-      return {
-        marketplaceContentExports: {},
-        marketplaceList: [
-        {
-          'id': 'allegro',
-          'name': 'ALLEGRO'
-        },
-        {
-          'id': 'amazon',
-          'name': 'Amazon'
-        },
-        {
-          'id': 'ebay',
-          'name': 'EBAY'
-        },
-        {
-          'id': 'fnac',
-          'name': 'FNAC'
-        },
-        {
-          'id': 'lazada',
-          'name': 'LAZADA'
-        },
-        {
-          'id': 'linio',
-          'name': 'LINIO'
-        },
-        {
-          'id': 'priceminister',
-          'name': 'PriceMinister'
-        },
-        {
-          'id': 'mercadolibre',
-          'name': 'MERCADOLIBRE'
-        },
-        {
-          'id': 'newegg',
-          'name': 'NEWEGG'
-        },
-        {
-          'id': 'qoo10',
-          'name': 'QOO10'
-        },
-        {
-          'id': 'tanga',
-          'name': 'TANGA'
-        }
-        ]
+        marketplaceId: getMarketplaceId,
+        contentFieldExportList: getMarketplaceContentExportList,
+        marketplaces: getMarketplaces,
       }
     },
     watch: {
       contentFields: function(val) {
         this.icheckbox();
       },
-      getMarketplaceContentExportList: function(val) {
+      marketplaceId: function(id) {
+        this.fetchMarketplaceLists(id);
+      },
+      contentFieldExportList: function(val) {
         $("#ul-field-list").find("li").remove();
 
         $(".checkbox input").iCheck('uncheck');
-
-        this.$set("marketplaceContentExports", val);
 
         var seletedField = [];
 
@@ -281,7 +216,6 @@
             radioClass: 'iradio_flat-green'
           });
         }
-        console.debug(this.marketplaceContentExports);
         function loadSortable() {
           var list = document.getElementById("ul-field-list");
 
@@ -306,7 +240,7 @@
       },
       reset: function() {
         $("#ul-field-list").find("li").remove();
-        this.changeMarketplace();
+        this.changeMarketplaceId();
       }
     }
   }

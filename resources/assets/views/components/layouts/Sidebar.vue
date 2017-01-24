@@ -32,11 +32,19 @@
                 <li><a v-link="'upload-product'">Upload Product</a></li>
                 <li><a v-link="'upload-marketplace-sku_mapping'">Upload Marketplace SKU Mapping</a></li>
                 <li><a v-link="'tracer-sku-setting'">Tracer SKU Setting</a></li>
-                <li><a v-link="'marketplace-content-export'">Marketplace Content Export</a></li>
+                <li><a v-link="'marketplace-content-export'" @click="resetMarketplaceId()">Marketplace Content Export</a></li>
                 <li><a v-link="'marketplace-product-field-mapping'">Marketplace product field mapping</a></li>
                 <li><a v-link="'update-sku-buyer'">SKU Buyer and Operator</a></li>
               </ul>
             </li>
+
+            <li>
+              <a><i class="fa fa-edit"></i> Reports <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li><a v-link="'accelerator-sales-report'">Accelerator Sales report</a></li>
+              </ul>
+            </li>
+
             <li>
               <a><i class="fa fa-edit"></i> Compare Tools <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
@@ -67,6 +75,17 @@
   </div>
 </template>
 <script>
+  import {
+    resetMarketplaceId,
+  } from '../../../vuex/actions';
+  export default {
+    vuex: {
+      actions: {
+        resetMarketplaceId,
+      }
+    }
+  }
+
   // Sidebar
   $(document).ready(function() {
     var CURRENT_URL = window.location.href.split('?')[0];

@@ -75,6 +75,7 @@
       <label>Warehouse: </label>
       <button @click="changeWarehouse('ES_HK')" type="button" class="btn btn-default">ES_HK</button>
       <button @click="changeWarehouse('4PXDG_PL')" type="button" class="btn btn-default">4PXDG_PL</button>
+      <span style="color: red">*note: Please click the warehouse to highlight the selected courier</span>
     </section>
 
     <section class="freight-cost">
@@ -84,6 +85,7 @@
             <th>Shipping Service</th>
             <th>Destination Country</th>
             <th>Destination State</th>
+            <th>Incoterm</th>
             <th>Courier Name</th>
             <th>Freight Cost (HKD)</th>
             <th>Total Cost (including FS) (HKD)</th>
@@ -94,6 +96,7 @@
             <td>{{ courier.type }}</td>
             <td>{{ selectedCountry }}</td>
             <td>{{ selectedState }}</td>
+            <td>{{ getIncoterm(courier) }}</td>
             <td>[ID:{{ courier.courierId }}] {{ courier.courierName }}</td>
             <td>{{ courier.freightCost.toFixed(2) }}</td>
             <td>{{ (courier.freightCost * (1 + courier.fuelSurchargeInPercent)).toFixed(2) }}</td>
@@ -160,6 +163,35 @@ export default {
     },
     changeWarehouse: function (warehouse) {
       this.selectedWarehouse = warehouse;
+      this.checkSelectedCourier()
+    },
+    getIncoterm: function (courier) {
+      var incoterm = '';
+      if (courier.allowDdp == 1) {
+        incoterm =  'DDP' + incoterm
+      }
+
+      if (courier.allowDdu == 1) {
+        if (incoterm != '') {
+          incoterm = incoterm + '/'
+        }
+        incoterm = incoterm + 'DDU'
+      }
+
+      return incoterm;
+    },
+    checkSelectedCourier: function () {
+      var notMatch = true;
+      this.selectedCouriers[this.selectedWarehouse].forEach(function (selectedCourierId) {
+        this.sortedCouriers.forEach(function (courierObj) {
+          if (selectedCourierId == courierObj.courierId) {
+            notMatch = false;
+          }
+        })
+      }, this)
+      if (notMatch) {
+        alert('No match courier!')
+      }
     }
   },
 

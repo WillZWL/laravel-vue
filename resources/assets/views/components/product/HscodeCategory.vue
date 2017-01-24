@@ -1,5 +1,5 @@
 <template>
-  <div class="item form-group form-group-sm">
+  <div id='hscode-cat-id' class="item form-group form-group-sm">
     <label class="control-label col-md-5 col-sm-3 col-xs-12" for="hscodeCategory">HS Category <span class="required">*</span></label>
     <div class="col-md-7 col-sm-9 col-xs-12">
       <select name="hscode_cat_id" id="hscode_cat_id" class="form-control"  tabindex="-1" required="required">
@@ -16,7 +16,7 @@
     </div>
   </div>
 
-  <div class="item form-group form-group-sm">
+  <div id='hs-code' class="item form-group form-group-sm">
     <label class="control-label col-md-5 col-sm-3 col-xs-12" for="hsCode">Hs Code <span class="required">*</span></label>
     <div class="col-md-7 col-sm-9 col-xs-12">
       <input type="text"

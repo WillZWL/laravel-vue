@@ -15,7 +15,7 @@ const state = {
     productContent: {},
     productContentExtend: {},
     productFeatures: {},
-    marketplace: '',
+    marketplaceId: '',
     marketplaceContentFieldLists: [],
     marketplaceContentExportList: {},
     brandLists: [],
@@ -42,6 +42,19 @@ const state = {
     countryWithStateList: [],
     weightList: [],
     selectedCouriers: [],
+    marketplaces: {
+      'allegro': 'ALLEGRO',
+      'amazon': 'Amazon',
+      'ebay': 'EBAY',
+      'fnac': 'FNAC',
+      'lazada': 'LAZADA',
+      'linio': 'LINIO',
+      'priceminister': 'PriceMinister',
+      'mercadolibre': 'MERCADOLIBRE',
+      'newegg': 'NEWEGG',
+      'qoo10': 'QOO10',
+      'tanga': 'TANGA'
+    }
 };
 
 const mutations = {
@@ -156,8 +169,8 @@ const mutations = {
         state.hsCode = newHsCode;
     },
 
-    SET_MARKETPLACE(state, newMarketplace) {
-        state.marketplace = newMarketplace;
+    SET_MARKETPLACE_ID(state, newMarketplaceId) {
+        state.marketplaceId = newMarketplaceId;
     },
 
     SET_MARKETPLACE_CONTENT_EXPORT_LIST(state, newMarketplaceContentExportList) {
