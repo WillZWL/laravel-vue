@@ -57,6 +57,11 @@ export default function(router) {
             component: require('../views/components/product/Buyer.vue'),
             auth: true
         },
+        'accelerator-sales-report/': {
+            name: 'Accelerator Sales Report',
+            component: require('../views/components/reports/AcceleratorSalesReport.vue'),
+            auth: true
+        },
         // '/order_fulfillment/': {
         //     name: 'Order Fulfilment',
         //     component: require('../views/components/OrderFulfillment.vue'),

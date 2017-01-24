@@ -25,11 +25,11 @@
             <td>{{ product.sku }}</td>
             <td>{{ product.name }}</td>
             <td>
-              <div v-if="product.buyer">{{ product.buyer }}</div>
+              <div v-if="product.buyer">{{ product.user.username }}</div>
               <div v-else>
                 <select class="select2_single form-control buyer{{product.sku}}" tabindex="-1" name="user" style="width:200px;">
                     <option value=""></option>
-                    <option v-for="user in users" value="{{user.id}}">{{user.id}}</option>
+                    <option v-for="buyer in buyers" value="{{buyer.id}}">{{buyer.username}}</option>
                 </select>
                 <button class="btn btn-primary" @click="updateProduct(product)" style="margin-bottom:0">set</button>
               </div>
@@ -40,10 +40,21 @@
           </tr>
           <tr id="collapse{{product.sku}}" class="panel-collapse collapse" role="tabpanel">
             <td colspan="4">
-              <table class="table table-bordered table-hover">
+              <!--<section class="search-form">
+                <form action="" onsubmit="return false" method="GET" class="form-inline" role="form">
+                  <div class="form-group">
+                      <select name="country" id="country{{product.sku}}" placeholder="country">
+                        <option value=""></option>
+                        <option value="MY">MY</option>
+                      </select>
+                  </div>
+                  <button @click="showItem(product)" type="submit" class="btn btn-primary btn-xs" style="margin-bottom: 0">Search</button>
+                </form>
+              </section>-->
+              <table class="table table-bordered table-hover" id="marketplace{{product.sku}}">
                 <thead><tr><th>marketplace_sku</th><th>marketplace</th><th>country</th><th>Operator</th></tr></thead>
                 <tbody>
-                <tr v-for="item in product.marketplace_sku_mapping" :class="highlightSelectedBuyer(item.operator)">
+                <tr v-for="item in product.marketplace_sku_mapping" :class="highlightSelectedBuyer(item.operator)" id="marketplace{{item.id}}">
                   <td>{{ item.marketplace_sku }}</td>
                   <td>{{ item.marketplace_id }}</td>
                   <td>{{ item.country_id }}</td>
@@ -52,7 +63,7 @@
                     <div v-else>
                       <select class="select2_single form-control operator{{item.id}}" tabindex="-1" name="operator" style="width:200px;">
                           <option value=""></option>
-                          <option v-for="user in users" value="{{user.id}}">{{user.id}}</option>
+                          <option v-for="operator in operators" value="{{operator.id}}">{{operator.username}}</option>
                       </select>
                       <button class="btn btn-primary" @click="updateMarketplaceSku(item)" style="margin-bottom:0">set</button>
                     </div>
@@ -88,18 +99,33 @@ export default {
   data () {
     return {
       keyword: '',
+      buyers:[],
+      operators:[],
       api_url:api_url
     }
   },
   ready() {
-    this.fetchUserLists();
+    this.fetchUserLists(["ax_buyer","ax_operator"]);
   },
   watch: {
     products: function(val) {
       this.initSelect();
+    },
+    users: function() {
+      this.initUsers();
     }
   },
   methods: {
+    initUsers: function () {
+      var that = this;
+      this.users.forEach(function (c) {
+        if (c.role_id == "ax_buyer") {
+          that.buyers.push(c);
+        } else if (c.role_id == "ax_operator") {
+          that.operators.push(c);
+        }
+      })
+    },
     fetchSku: function () {
       if (this.keyword) {
         this.fetchProductLists(this.keyword);
@@ -108,6 +134,7 @@ export default {
     },
     updateProduct: function (product) {
       var buyer = $(".buyer"+product.sku).val();
+      var buyer_txt = $(".buyer"+product.sku).find("option:selected").text();
       if (buyer == "") {
         return false;
       }
@@ -122,6 +149,7 @@ export default {
           }, 2000);
       }).then(function(){
           product.buyer = buyer;
+          product.user = {username:buyer_txt};
       }).catch(function(){
           //todo
           $.isLoading({ text: "Error 500, Internal Server Error", class:"fa fa-exclamation-triangle" });
@@ -132,6 +160,7 @@ export default {
     },
     updateMarketplaceSku: function (item) {
       var operator = $(".operator"+item.id).val();
+      var operator_txt = $(".operator"+item.id).find("option:selected").text();
       if (operator == "") {
         return false;
       }
@@ -145,7 +174,7 @@ export default {
             $.isLoading("hide");
         }, 2000);
       }).then(function(){
-        item.operator = operator;
+        item.operator = operator_txt;
       }).catch(function(){
           //todo
           $.isLoading({ text: "Error 500, Internal Server Error", class:"fa fa-exclamation-triangle" });
@@ -165,10 +194,21 @@ export default {
           placeholder: "",
           allowClear: true
         });
+    },
+    showItem: function (product) {
+      var selectedCountry = $("#country"+product.sku).val();
+      if (selectedCountry == "") {
+        $("#marketplace"+product.sku+" tr").show();
+        return false;
+      }
 
-        //$("select[name='user']").on('change', function(){
-            //ChangeCat(this.value, this.form.sub_category_id, this.form.sub_sub_category_id)
-        //});
+      product.marketplace_sku_mapping.forEach(function (c) {
+        if (c.country_id === selectedCountry) {
+          $("#marketplace"+c.id).show();
+        } else {
+          $("#marketplace"+c.id).hide();
+        }
+      })
     }
   },
 

@@ -38,10 +38,10 @@ export default {
     this.$set('show', this.$route.auth);
   },
   components: {
-  Titlebar,
-  Navbar,
-  Sidebar,
-  Footbar
+    Titlebar,
+    Navbar,
+    Sidebar,
+    Footbar
   },
   store,
   replace: false

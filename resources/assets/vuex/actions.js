@@ -8,17 +8,31 @@ export const ACCESS_TOKEN = 'hhwNqYiJMRNwR3tQGsJhTiist002SJ8dXotwKYCE'
 
 //fetch Lists
 export const fetchProductLists = ({ dispatch }, keyword) => {
+    $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
     Vue.http({
         url: API_URL + 'product/sku-mapping-list?keyword=' + keyword,
         method: 'GET'
     }).then(function (response) {
+        $.isLoading("hide");
         return dispatch('FETCH_PRODUCT_LISTS', response.data);
-    })
+    }).catch(function(){
+        $.isLoading("hide");
+        $.isLoading({ text: "Error 500, Internal Server Error", class:"fa fa-exclamation-triangle" });
+        setTimeout( function(){
+            $.isLoading("hide");
+        }, 3000)
+    });
 };
 
-export const fetchUserLists = ({ dispatch }) => {
+export const fetchUserLists = ({ dispatch }, roles) => {
+
+    for (var i = roles.length - 1; i >= 0; i--) {
+        roles[i] = "role[]="+roles[i];
+    }
+    var query = roles.join("&");
+
     Vue.http({
-        url: API_URL + 'user/list',
+        url: API_URL + 'user/list?'+query,
         method: 'GET'
     }).then(function (response) {
         return dispatch('FETCH_USER_LISTS', response.data);
@@ -194,6 +208,12 @@ export const priceOverviewSearch = ({ dispatch }, queryStr = '') => {
             $.isLoading("hide");
         }, 3000)
     });
+};
+
+export const exportAcceleratorSalesReport = ({ dispatch }, queryStr = '') => {
+    queryStr = (queryStr != '') ? queryStr : $("form[name='export-sales-report-form'") .serialize();
+    var downloadLink = API_URL + 'accelerator-sales-report?' + queryStr + '&access_token=' + ACCESS_TOKEN;
+    window.open(downloadLink);
 };
 
 export const exportInventoryFeed = ({ dispatch }, queryStr = '') => {
