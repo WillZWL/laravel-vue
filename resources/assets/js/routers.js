@@ -38,7 +38,7 @@ export default function(router) {
             auth: true
         },
         '/marketplace-content-export/': {
-            name: 'Marketplace Content Export',
+            name: 'Marketplace Product Content Export',
             component: require('../views/components/MarketplaceContentExport.vue'),
             auth: true
         },

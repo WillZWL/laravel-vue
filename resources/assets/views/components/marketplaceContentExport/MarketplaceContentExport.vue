@@ -16,8 +16,10 @@
   .span-radio {
     margin-left: 20px;
   }
+  #datatable-fixed-header {
+    background: #fff;
+  }
 </style>
-
   <template>
   <div class="row" id="marketplace-content-export">
     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -77,24 +79,47 @@
 
                   <comp-hscode-category :select-hcid="0" :hs-code="0"></comp-hscode-category>
 
-                  <div class="col-md-12 col-sm-12 col-sm-offset-3">
-                    <button type="button" class="btn btn-primary" name="export" @click="submitForm()">
-                      <i class="fa fa-download" aria-hidden="true"></i>
-                      Export {{ marketplaces[marketplaceId] }} Product Feed
+                  <div class="col-md-9 col-sm-9 col-sm-offset-3">
+                    <button type="button" class="btn btn-success pull-left" @click="submitForm('search')">
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                      PREVIEW
                     </button>
-
-                    <span class="span-radio">
-                      <input type="radio" name="extend" value="xlsx" checked>
-                      <label>.xlsx</label>
-                    </span>
-
-                    <span class="span-radio">
-                      <input type="radio" name="extend" value="csv">
-                      <label>.csv</label>
-                    </span>
+                    <div class="pull-right">
+                      <button type="button" class="btn btn-primary" @click="submitForm('export')">
+                        <i class="fa fa-download" aria-hidden="true"></i>
+                        DOWNLOAD FEED
+                      </button>
+                      <label><input type="radio" name="extend" value="xlsx" checked> .xlsx</label>
+                      <label><input type="radio" name="extend" value="csv"> .csv</label>
+                    </div>
                   </div>
                 </div>
+                <div class="clearfix"></div>
               </form>
+            </div>
+          </div>
+          <div class="x_panel" v-if="contentItems && headers">
+            <div class="x_content">
+              <div class="x_title">
+                <H2>Query results Preview</H2>
+                <div class="clearfix"></div>
+              </div>
+              <table id="datatable-fixed-header" class="table table-striped table-bordered">
+                <thead>
+                  <tr v-if="headers">
+                    <td>NO.</td>
+                    <th v-for="header in headers">{{ header }}</th>
+                  </tr>
+                  <tr v-else></tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(index, item) in contentItems">
+                    <td>{{ index }}</td>
+                    <td v-for="value in item">{{ value }}</td>
+                  </tr>
+                  <tr v-else></tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </template>
@@ -121,6 +146,7 @@
     getMarketplaceLists,
     getCountryLists,
     getMarketplaceContentExportList,
+    getMarketplaceProductContentList,
   } from '../../../vuex/getters';
   export default {
     vuex: {
@@ -134,6 +160,28 @@
         countryLists: getCountryLists,
         marketplaceId: getMarketplaceId,
         contentFieldExportList: getMarketplaceContentExportList,
+        productContentList: getMarketplaceProductContentList,
+      }
+    },
+    watch: {
+      productContentList: function(contentList) {
+        var headers = null;
+        if (contentList[0]) {
+          var headers = contentList[0];
+        }
+        this.$set('headers', headers);
+
+        var contentItems = new Array()
+        if (contentList && contentList.length > 1) {
+          for (var i = 1; i < contentList.length; i++) {
+            contentItems[i-1] = contentList[i];
+          }
+        }
+        if (contentItems) {
+          this.$set('contentItems', contentItems);
+        } else {
+          this.$set('contentItems', null);
+        }
       }
     },
     components: {
@@ -154,8 +202,15 @@
         $("#marketplace-content-export-form #hs-code").remove();
         $("#marketplace-content-export-form #hscode-cat-id > label").removeClass("col-md-5").addClass("col-md-3");
         $("#marketplace-content-export-form #hscode-cat-id > div").removeClass("col-md-7").addClass("col-md-9");
-        // "marketplace-content-export-form"
       }
-    }
+    },
+    data() {
+      return {
+        headers: {},
+        contentItems: null,
+      }
+    },
+
+
   }
 </script>

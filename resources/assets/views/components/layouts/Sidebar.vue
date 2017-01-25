@@ -32,7 +32,7 @@
                 <li><a v-link="'upload-product'">Upload Product</a></li>
                 <li><a v-link="'upload-marketplace-sku_mapping'">Upload Marketplace SKU Mapping</a></li>
                 <li><a v-link="'tracer-sku-setting'">Tracer SKU Setting</a></li>
-                <li><a v-link="'marketplace-content-export'" @click="resetMarketplaceId()">Marketplace Content Export</a></li>
+                <li><a v-link="'marketplace-content-export'" @click="resetMarketplaceId()">Marketplace Product Content Export</a></li>
                 <li><a v-link="'marketplace-product-field-mapping'">Marketplace product field mapping</a></li>
                 <li><a v-link="'update-sku-buyer'">SKU Buyer and Operator</a></li>
               </ul>

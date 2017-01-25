@@ -67,3 +67,5 @@ export const getProductLists = (state) => state.productLists;
 export const getUserLists = (state) => state.userLists;
 
 export const getMarketplaces = (state) => state.marketplaces;
+
+export const getMarketplaceProductContentList = (state) => state.marketplaceProductContentList;
