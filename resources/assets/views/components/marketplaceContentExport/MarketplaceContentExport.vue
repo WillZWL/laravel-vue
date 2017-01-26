@@ -114,7 +114,7 @@
                 </thead>
                 <tbody>
                   <tr v-for="(index, item) in contentItems">
-                    <td>{{ index }}</td>
+                    <td>{{ index + 1 }}</td>
                     <td v-for="value in item">{{ value }}</td>
                   </tr>
                   <tr v-else></tr>
