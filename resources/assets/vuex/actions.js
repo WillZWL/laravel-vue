@@ -926,11 +926,11 @@ export const submitMarketplaceContentExportForm = ({dispatch, state}, action='se
         var dateType = $("select[name=date_type]").val();
         var startDate = $("input[name=start_date]").val();
         var endDate = $("input[name=end_date]").val();
-        if (! marketId && mskuMap!="P") {
+        if (! marketId) {
             msgBox("Please selected a marketplace ID", "F", 1000);
             return false;
         }
-        if (! countryId && mskuMap!="P") {
+        if (! countryId) {
             msgBox("Please selected a country", "F", 1000);
             return false;
         }

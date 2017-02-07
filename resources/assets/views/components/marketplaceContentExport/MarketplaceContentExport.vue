@@ -137,7 +137,7 @@
                       </div>
                   </div>
 
-                  <div class="col-md-9 col-sm-9 col-sm-offset-4">
+                  <div class="col-md-9 col-sm-9 col-sm-offset-3">
                     <button type="button" class="btn btn-success pull-left" @click="submitForm('search')">
                       <i class="fa fa-search" aria-hidden="true"></i>
                       PREVIEW
