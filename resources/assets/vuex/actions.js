@@ -920,16 +920,17 @@ export const submitMarketplaceContentSettingForm = ({dispatch, state}) => {
 export const submitMarketplaceContentExportForm = ({dispatch, state}, action='search', queryStr='') => {
     $.isLoading({ text: "loading", class:"fa fa-refresh fa-spin" });
     if ( state.marketplaceId ) {
+        var mskuMap = $("select[name=msku_map]").val();
         var marketId = $("select[name=marketplace_id]").val();
         var countryId = $("select[name=country_id]").val();
         var dateType = $("select[name=date_type]").val();
         var startDate = $("input[name=start_date]").val();
         var endDate = $("input[name=end_date]").val();
-        if (! marketId) {
+        if (! marketId && mskuMap!="P") {
             msgBox("Please selected a marketplace ID", "F", 1000);
             return false;
         }
-        if (! countryId) {
+        if (! countryId && mskuMap!="P") {
             msgBox("Please selected a country", "F", 1000);
             return false;
         }

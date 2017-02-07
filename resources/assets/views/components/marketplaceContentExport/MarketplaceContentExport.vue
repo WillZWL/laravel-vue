@@ -47,6 +47,19 @@
               <form class="form-horizontal" id="marketplace-content-export-form" role="form">
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group form-group-sm">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" title="Marketplace SKU Mapping">
+                      MP SKU Mapping
+                    </label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                      <select class="form-control" name="msku_map">
+                        <option value="P">Possibly contain mapping</option>
+                        <option value="C">Contain mapping</option>
+                        <option value="N">Not contain mapping</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group form-group-sm">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Marketplace ID
                       </label>
                       <div class="col-md-9 col-sm-9 col-xs-12">
