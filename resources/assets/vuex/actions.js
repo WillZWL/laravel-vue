@@ -181,6 +181,15 @@ export const fetchMarketplaceContentFieldLists = ({ dispatch }) => {
     })
 };
 
+export const fetchMarketplaceStores = ({ dispatch }) => {
+    Vue.http({
+        url: API_URL + 'stores',
+        method: 'GET'
+    }).then(function (response) {
+        return dispatch('FETCH_MARKETPLACE_STORES', response.data.data);
+    })
+};
+
 // end of fetch Lists
 
 //Price Overview
@@ -213,6 +222,7 @@ export const priceOverviewSearch = ({ dispatch }, queryStr = '') => {
 export const exportAcceleratorSalesReport = ({ dispatch }, queryStr = '') => {
     queryStr = (queryStr != '') ? queryStr : $("form[name='export-sales-report-form'") .serialize();
     var downloadLink = API_URL + 'accelerator-sales-report?' + queryStr + '&access_token=' + ACCESS_TOKEN;
+    console.log(downloadLink);
     window.open(downloadLink);
 };
 

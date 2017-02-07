@@ -43,19 +43,11 @@ const state = {
     weightList: [],
     selectedCouriers: [],
     marketplaceProductContentList: {},
-    marketplaces: {
-      'allegro': 'ALLEGRO',
-      'amazon': 'AMAZON',
-      'ebay': 'EBAY',
-      'fnac': 'FNAC',
-      'lazada': 'LAZADA',
-      'linio': 'LINIO',
-      'priceminister': 'PRICEMINISTER',
-      'mercadolibre': 'MERCADOLIBRE',
-      'newegg': 'NEWEGG',
-      'qoo10': 'QOO10',
-      'tanga': 'TANGA'
-    }
+    marketplaceStores: [],
+    marketplaces: [{
+        'key': 'az',
+        'label': 'amazon'
+    }]
 };
 
 const mutations = {
@@ -132,6 +124,10 @@ const mutations = {
     FETCH_PRICEOVERVIEW_LISTS(state, priceOverviewLists, priceOverviewMeta) {
         state.priceOverviewLists = priceOverviewLists;
         state.priceOverviewMeta = priceOverviewMeta;
+    },
+
+    FETCH_MARKETPLACE_STORES(state, marketplaceStores) {
+        state.marketplaceStores = marketplaceStores;
     },
 
     SET_PRODUCT_SKU(state, newSku) {

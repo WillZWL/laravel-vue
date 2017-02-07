@@ -38,6 +38,7 @@ elixir(function(mix) {
     mix.copy('./bower_components/validator/validator.js', 'public/js/validator.js');
     mix.copy('./bower_components/vue-resource/dist/vue-resource.min.js', 'public/js/vue-resource.min.js');
     mix.copy('./bower_components/parsleyjs/dist/parsley.min.js', 'public/js/parsley.min.js');
+    mix.copy('./bower_components/parsleyjs/dist/parsley.min.js.map', 'public/js/parsley.min.js.map');
     mix.copy('./bower_components/jquery-serialize-object/dist/jquery.serialize-object.min.js', 'public/js/jquery.serialize-object.min.js');
     mix.copy('./node_modules/sortablejs/Sortable.min.js', 'public/js/sortable.js');
     //copy css file from bower_components
