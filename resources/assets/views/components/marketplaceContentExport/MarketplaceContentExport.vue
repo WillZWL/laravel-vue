@@ -47,7 +47,7 @@
               <form class="form-horizontal" id="marketplace-content-export-form" role="form">
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group form-group-sm">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Marketplace ID <font color="red">*</font>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Marketplace ID
                       </label>
                       <div class="col-md-9 col-sm-9 col-xs-12">
                           <select class="select2_single form-control" tabindex="-1" name="marketplace_id">
@@ -58,7 +58,7 @@
                   </div>
 
                   <div class="form-group form-group-sm">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Country  <font color="red">*</font></label>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Country</label>
                       <div class="col-md-9 col-sm-9 col-xs-12">
                           <select class="select2_single form-control" tabindex="-1" name="country_id">
                               <option value=""></option>
@@ -71,15 +71,60 @@
 
                   <comp-version :select-version="0"></comp-version>
 
-                  <comp-brand :select-brand="0"></comp-brand>
-
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
                   <comp-category :select-cid="0" :select-scid="0" :select-sscid="0"></comp-category>
 
-                  <comp-hscode-category :select-hcid="0" :hs-code="0"></comp-hscode-category>
+                  <comp-brand :select-brand="0"></comp-brand>
 
-                  <div class="col-md-9 col-sm-9 col-sm-offset-3">
+                  <comp-hscode-category :select-hcid="0" :hs-code="0"></comp-hscode-category>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group form-group-sm">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Type</label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                      <select class="form-control" name="date_type">
+                        <option value=""></option>
+                        <option value="C">Use Created Date</option>
+                        <option value="M">Use Modified Date</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group form-group-sm">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Start Date</label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <datepicker :format="format" :input-class="inputClass" name="start_date"></datepicker>
+                    </div>
+                  </div>
+
+                  <div class="form-group form-group-sm">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">End Date</label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <datepicker :format="format" :input-class="inputClass" name="end_date"></datepicker>
+                    </div>
+                  </div>
+
+                  <div class="form-group form-group-sm">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Merchant</label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                      <select class="select2_single form-control" name="merchant_id" id="merchant_id">
+                        <option></option>
+                        <template v-for="merchant in merchantList | orderBy 'merchant_name'">
+                          <option :value="merchant.merchant_id">
+                            {{ merchant.merchant_name }}
+                          </option>
+                        </template>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group form-group-sm">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Bulk SKU</label>
+                      <div class="col-md-9 col-sm-9 col-xs-12">
+                          <textarea name="skus" class="form-control" style="height:140px;" placeholder="Please Input ESG SKU"></textarea>
+                      </div>
+                  </div>
+
+                  <div class="col-md-9 col-sm-9 col-sm-offset-4">
                     <button type="button" class="btn btn-success pull-left" @click="submitForm('search')">
                       <i class="fa fa-search" aria-hidden="true"></i>
                       PREVIEW
@@ -131,6 +176,7 @@
 </template>
 
 <script>
+  import Datepicker from 'vuejs-datepicker';
   import CompCategory from '../product/Category.vue'
   import CompColour from '../product/Colour.vue'
   import CompVersion from '../product/Version.vue'
@@ -138,6 +184,7 @@
   import CompHscodeCategory from '../product/HscodeCategory.vue'
   import {
     fetchCountryLists,
+    fetchMerchantLists,
     submitMarketplaceContentExportForm,
   } from '../../../vuex/actions';
   import {
@@ -145,6 +192,7 @@
     getMarketplaces,
     getMarketplaceLists,
     getCountryLists,
+    getMerchantLists,
     getMarketplaceContentExportList,
     getMarketplaceProductContentList,
   } from '../../../vuex/getters';
@@ -152,6 +200,7 @@
     vuex: {
       actions: {
         fetchCountryLists,
+        fetchMerchantLists,
         submitForm: submitMarketplaceContentExportForm,
       },
       getters: {
@@ -159,6 +208,7 @@
         marketplaceLists: getMarketplaceLists,
         countryLists: getCountryLists,
         marketplaceId: getMarketplaceId,
+        merchantList: getMerchantLists,
         contentFieldExportList: getMarketplaceContentExportList,
         productContentList: getMarketplaceProductContentList,
       }
@@ -190,12 +240,20 @@
       CompVersion,
       CompBrand,
       CompHscodeCategory,
+      Datepicker,
+    },
+    created() {
+      this.fetchCountryLists();
+      this.fetchMerchantLists();
     },
     ready() {
       this.removeRequired();
-      this.fetchCountryLists();
+      this.initForm();
     },
     methods: {
+      initForm () {
+        // $(".select2_single").select2();
+      },
       removeRequired() {
         $("#marketplace-content-export-form *").removeAttr("required");
         $("#marketplace-content-export-form *.required").remove();
@@ -208,9 +266,10 @@
       return {
         headers: {},
         contentItems: null,
+        format: 'yyyy-MM-dd',
+        disable: {},
+        inputClass: 'form-control',
       }
-    },
-
-
+    }
   }
 </script>

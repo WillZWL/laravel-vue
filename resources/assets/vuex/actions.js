@@ -922,6 +922,9 @@ export const submitMarketplaceContentExportForm = ({dispatch, state}, action='se
     if ( state.marketplaceId ) {
         var marketId = $("select[name=marketplace_id]").val();
         var countryId = $("select[name=country_id]").val();
+        var dateType = $("select[name=date_type]").val();
+        var startDate = $("input[name=start_date]").val();
+        var endDate = $("input[name=end_date]").val();
         if (! marketId) {
             msgBox("Please selected a marketplace ID", "F", 1000);
             return false;
@@ -930,9 +933,18 @@ export const submitMarketplaceContentExportForm = ({dispatch, state}, action='se
             msgBox("Please selected a country", "F", 1000);
             return false;
         }
+
+        if (! startDate && dateType) {
+            msgBox("Please input start date", "F", 1000);
+            return false;
+        }
+        if (! endDate && dateType) {
+            msgBox("Please input end date", "F", 1000);
+            return false;
+        }
         queryStr = (queryStr != '') ? queryStr : $('#marketplace-content-export-form').serialize();
         if (action == "export") {
-            var downloadLink = API_URL + 'marketplace-content-export/download?' + queryStr + '&marketplace='+ state.marketplaceId +'&access_token=' + ACCESS_TOKEN;
+            var downloadLink = API_URL + 'marketplace-content-export/download?marketplace='+ state.marketplaceId +'&access_token=' + ACCESS_TOKEN +"&"+ queryStr;
             window.open(downloadLink);
             $.isLoading("hide");
         }
@@ -945,7 +957,12 @@ export const submitMarketplaceContentExportForm = ({dispatch, state}, action='se
             }).then(function (response) {
                 if (response.statusText == 'OK' && response.status == "200") {
                     dispatch('SET_MARKETPLACE_PRODUCT_CONTENT_LIST', response.data);
-                    msgBox(response.data.msg, "S", 600);
+                    if (response.data) {
+                        msgBox("Successful", "S", 1000);
+
+                    } else {
+                        msgBox("Failed, No record", "F", 1000);
+                    }
                 } else {
                     msgBox("Error 500, Internal Server Error", "F", 1000);
                 }
