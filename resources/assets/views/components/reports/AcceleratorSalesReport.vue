@@ -49,9 +49,11 @@
       <label class="control-label col-md-4">Business Unit</label>
       <div class="col-md-8 col-xs-12">
         <select class="select2_single form-control" v-model='business_unit' name="business_unit">
+          <option value="">All</option>
           <option value="1">Brands</option>
-          <option value="2">Tranding</option>
+          <option value="2">Trading</option>
           <option value="3">Private Label</option>
+          <option value="4">NA</option>
         </select>
       </div>
     </div>
@@ -216,6 +218,9 @@ export default {
   computed: {
     marketplaces: function () {
       var marketplaces = [{
+        'short_id': '',
+        'value': 'All'
+      }, {
         'short_id': 'AZ',
         'value': 'AMAZON'
       },{
