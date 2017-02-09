@@ -43,11 +43,20 @@ const state = {
     weightList: [],
     selectedCouriers: [],
     marketplaceProductContentList: {},
-    marketplaceStores: [],
-    marketplaces: [{
-        'key': 'az',
-        'label': 'amazon'
-    }]
+    marketplaces: {
+      'allegro': 'ALLEGRO',
+      'amazon': 'AMAZON',
+      'ebay': 'EBAY',
+      'fnac': 'FNAC',
+      'lazada': 'LAZADA',
+      'linio': 'LINIO',
+      'priceminister': 'PRICEMINISTER',
+      'mercadolibre': 'MERCADOLIBRE',
+      'newegg': 'NEWEGG',
+      'qoo10': 'QOO10',
+      'tanga': 'TANGA'
+    },
+    marketplaceStores: []
 };
 
 const mutations = {
