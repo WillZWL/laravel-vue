@@ -74,8 +74,8 @@
     <div class="col-md-6 col-sm-12 col-xs-12">
       <div class="x_panel">
         <div class="form-group">
-          <h2 for="Marketplace ID">Marketplace</h2>
-          <select class="form-control" tabindex="-1" name="marketplace" @change="changeMarketplaceId()">
+          <label for="exampleInputName2" class="col-sm-2"><h2 for="Marketplace ID">MARKETPLACE</h2></label>
+          <select class="form-control input" tabindex="-1" name="marketplace" @change="changeMarketplaceId()">
             <option></option>
 
             <template v-for="(index, marketplace) in marketplaces">

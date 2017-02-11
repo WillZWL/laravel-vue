@@ -92,7 +92,6 @@ export const fetchSelectedCouriers = ({ dispatch }, country) => {
 };
 
 export const fetchMarketplaceLists = ({ dispatch }, marketplaceId='') => {
-        console.log(marketplaceId);
     Vue.http({
         url:API_URL+'marketplace?marketplace='+marketplaceId,
         method: 'GET'
@@ -182,6 +181,15 @@ export const fetchMarketplaceContentFieldLists = ({ dispatch }) => {
     })
 };
 
+export const fetchMarketplaceStores = ({ dispatch }) => {
+    Vue.http({
+        url: API_URL + 'stores',
+        method: 'GET'
+    }).then(function (response) {
+        return dispatch('FETCH_MARKETPLACE_STORES', response.data.data);
+    })
+};
+
 // end of fetch Lists
 
 //Price Overview
@@ -214,6 +222,7 @@ export const priceOverviewSearch = ({ dispatch }, queryStr = '') => {
 export const exportAcceleratorSalesReport = ({ dispatch }, queryStr = '') => {
     queryStr = (queryStr != '') ? queryStr : $("form[name='export-sales-report-form'") .serialize();
     var downloadLink = API_URL + 'accelerator-sales-report?' + queryStr + '&access_token=' + ACCESS_TOKEN;
+    console.log(downloadLink);
     window.open(downloadLink);
 };
 
@@ -870,6 +879,8 @@ export const changeMarketplaceId = ({dispatch, state}) => {
     } else {
         $("#marketplace-content-setting .marketplace-list-box").hide();
     }
+
+    dispatch('SET_MARKETPLACE_CONTENT_EXPORT_LIST', {});
     dispatch('SET_MARKETPLACE_ID', marketplaceId);
 
     Vue.http({
@@ -909,30 +920,70 @@ export const submitMarketplaceContentSettingForm = ({dispatch, state}) => {
     } else {
         $.isLoading("hide");
         // $("select[name='marketplace']").focus();
-        msgBox("Please selected a marketplace Id", "F", 1000);
+        msgBox("Please selected a marketplace ID", "F", 1000);
     }
 }
 // Marketplace Content Setting End
 
 
 // Marketplace Content Export
-export const submitMarketplaceContentExportForm = ({dispatch, state}, queryStr='') => {
+export const submitMarketplaceContentExportForm = ({dispatch, state}, action='search', queryStr='') => {
+    $.isLoading({ text: "loading", class:"fa fa-refresh fa-spin" });
     if ( state.marketplaceId ) {
+        var mskuMap = $("select[name=msku_map]").val();
         var marketId = $("select[name=marketplace_id]").val();
         var countryId = $("select[name=country_id]").val();
+        var dateType = $("select[name=date_type]").val();
+        var startDate = $("input[name=start_date]").val();
+        var endDate = $("input[name=end_date]").val();
         if (! marketId) {
-            msgBox("Please selected a marketplace Id", "F", 1000);
+            msgBox("Please selected a marketplace ID", "F", 1000);
             return false;
         }
         if (! countryId) {
             msgBox("Please selected a country", "F", 1000);
             return false;
         }
+
+        if (! startDate && dateType) {
+            msgBox("Please input start date", "F", 1000);
+            return false;
+        }
+        if (! endDate && dateType) {
+            msgBox("Please input end date", "F", 1000);
+            return false;
+        }
         queryStr = (queryStr != '') ? queryStr : $('#marketplace-content-export-form').serialize();
-        var downloadLink = API_URL + 'marketplace-content-export/download?' + queryStr + '&marketplace='+ state.marketplaceId +'&access_token=' + ACCESS_TOKEN;
-        window.open(downloadLink);
+        if (action == "export") {
+            var downloadLink = API_URL + 'marketplace-content-export/download?marketplace='+ state.marketplaceId +'&access_token=' + ACCESS_TOKEN +"&"+ queryStr;
+            window.open(downloadLink);
+            $.isLoading("hide");
+        }
+        if (action == 'search') {
+            var SEARCH_URL = API_URL + 'marketplace-content-export/query-content?' + queryStr + '&marketplace='+ state.marketplaceId +'&access_token=' + ACCESS_TOKEN;
+
+            Vue.http({
+                url: SEARCH_URL,
+                method: 'GET',
+            }).then(function (response) {
+                if (response.statusText == 'OK' && response.status == "200") {
+                    dispatch('SET_MARKETPLACE_PRODUCT_CONTENT_LIST', response.data);
+                    if (response.data) {
+                        msgBox("Successful", "S", 1000);
+
+                    } else {
+                        msgBox("Failed, No record", "F", 1000);
+                    }
+                } else {
+                    msgBox("Error 500, Internal Server Error", "F", 1000);
+                }
+            }).catch(function(){
+                msgBox("Error 500, Internal Server Error", "F", 1000);
+            });
+
+        }
     } else {
-        msgBox("Please selected a marketplace Id", "F", 1000);
+        msgBox("Please selected a marketplace ID", "F", 1000);
     }
 };
 // Marketplace Content Export

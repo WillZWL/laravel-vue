@@ -8,13 +8,13 @@
               <li role="presentation" class="active">
                 <a href="#export-setting" role="tab" id="export" data-toggle="tab" aria-expanded="true">
                   <i class="fa fa-gear" aria-hidden="true"></i>
-                  Marketplace Content Export Setting
+                  Marketplace Export Setting
                 </a>
               </li>
-              <li role="presentation" class=""  v-if='marketplaceId && contentFieldExportList[0]'>
+              <li role="presentation" class=""  v-if='contentFieldExportList[0]'>
                 <a href="#download-content" role="tab" id="download" data-toggle="tab" aria-expanded="false">
                   <i class="fa fa-cloud-download" aria-hidden="true"></i>
-                  Export <b>{{ marketplaces[marketplaceId] }}</b> Product Feed
+                  <b>{{ marketplaces[marketplaceId] }}</b> Product Feed
                 </a>
               </li>
             </ul>
@@ -22,7 +22,7 @@
               <div role="tabpanel" class="tab-pane fade active in" id="export-setting" aria-labelledby="export-setting">
                 <marketplace-content-setting></marketplace-content-setting>
               </div>
-              <div  v-if='marketplaceId && contentFieldExportList[0]'
+              <div  v-if='contentFieldExportList[0]'
                 role="tabpanel" class="tab-pane fade" id="download-content" aria-labelledby="download-content">
                 <marketplace-content-export></marketplace-content-export>
               </div>
