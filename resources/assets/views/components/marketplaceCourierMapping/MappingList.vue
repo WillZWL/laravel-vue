@@ -5,7 +5,6 @@
         <table class="table table-striped table-bordered bulk_action jambo_table" width="100%">
           <thead>
             <tr>
-              <th>NO. </th>
               <th>Courier ID</th>
               <th>Courier Code</th>
               <th>Marketplace</th>
@@ -14,7 +13,6 @@
           </thead>
           <tbody>
             <tr v-for="mapping in mappings">
-              <td>{{ mapping.id }}</td>
               <td>{{ mapping.courier_id}}</td>
               <td>{{ mapping.courier_code }}</td>
               <td>{{ mapping.marketplace }}</td>
