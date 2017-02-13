@@ -190,6 +190,24 @@ export const fetchMarketplaceStores = ({ dispatch }) => {
     })
 };
 
+export const fetchCourierLists = ({ dispatch }) => {
+    Vue.http({
+        url:API_URL + 'couriers',
+        method: 'GET'
+    }).then(function (response) {
+        return dispatch('FETCH_COURIER_LIST', response.data.data);
+    })
+};
+
+export const fetchMarketplaceCourierMappingLists = ({ dispatch }) => {
+    Vue.http({
+        url: API_URL + 'marketplace-courier-mapping-list',
+        method: 'GET'
+    }).then(function (response) {
+        return dispatch('FETCH_MARKETPLACE_COURIER_MAPPINGS', response.data.data);
+    })
+};
+
 // end of fetch Lists
 
 //Price Overview
@@ -994,3 +1012,48 @@ export const resetMarketplaceId = ({dispatch, state}) => {
     changeMarketplaceId({dispatch, state});
 };
 // Reset Marketplace Id
+
+export const marketplaceCourierMappingSearch = ({ dispatch}, queryStr = '') => {
+    $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
+    if (queryStr == '') {
+        var queryStr = $("form[name='fm']").serialize();
+    }
+    window.history.pushState(null, null, 'marketplace-courier-mapping?'+queryStr);
+    Vue.http({
+        url:API_URL+'marketplace-courier-mapping?'+queryStr,
+        method: 'GET'
+    }).then(function (response) {
+        $.isLoading("hide");
+        dispatch('FETCH_MARKETPLACE_COURIER_MAPPINGS', response.data.data);
+    }).catch(function(){
+        $.isLoading("hide");
+        $.isLoading({ text: "Error 500, Internal Server Error", class:"fa fa-exclamation-triangle" });
+        setTimeout( function(){
+            $.isLoading("hide");
+        }, 3000)
+    });
+}
+
+export const addMarketplaceCourierMapping = ({ dispatch, state}) => {
+    $.isLoading({ text: "Adding", class:"fa fa-refresh fa-spin" });
+    var form = $("form#fm-add");
+    form.parsley().validate();
+    if (form.parsley().isValid()) {
+        var jsonData = form.serializeObject();
+        Vue.http({
+            url: API_URL + "marketplace-courier-mapping",
+            method: 'POST',
+            data: jsonData,
+        }).then(function (response) {
+            if (response.data.status === true) {
+                msgBox(response.data.message, "S", 600);
+            } else if (response.data.status === false) {
+              msgBox(response.data.message, "F", 1000);
+            } else {
+                msgBox("Error 500, Internal Server Error", "F", 1000);
+            }
+        }).catch(function(){
+            msgBox("Error 500, Internal Server Error", "F", 1000);
+        });
+    }
+}

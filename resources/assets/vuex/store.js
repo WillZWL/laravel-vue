@@ -56,7 +56,9 @@ const state = {
       'qoo10': 'QOO10',
       'tanga': 'TANGA'
     },
-    marketplaceStores: []
+    marketplaceStores: [],
+    marketplaceCourierMappingList: [],
+    courierList: [],
 };
 
 const mutations = {
@@ -137,6 +139,14 @@ const mutations = {
 
     FETCH_MARKETPLACE_STORES(state, marketplaceStores) {
         state.marketplaceStores = marketplaceStores;
+    },
+
+    FETCH_COURIER_LIST(state, courierList) {
+        state.courierList = courierList;
+    },
+
+    FETCH_MARKETPLACE_COURIER_MAPPINGS(state, marketplaceCourierMappingList) {
+        state.marketplaceCourierMappingList = marketplaceCourierMappingList;
     },
 
     SET_PRODUCT_SKU(state, newSku) {

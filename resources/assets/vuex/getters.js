@@ -71,3 +71,7 @@ export const getMarketplaces = (state) => state.marketplaces;
 export const getMarketplaceProductContentList = (state) => state.marketplaceProductContentList;
 
 export const getMarketplaceStores = (state) => state.marketplaceStores;
+
+export const getCourierList = (state) => state.courierList;
+
+export const getMarketplaceCourierMappingList = (state) => state.marketplaceCourierMappingList;
