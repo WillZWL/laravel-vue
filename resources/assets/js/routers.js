@@ -62,11 +62,11 @@ export default function(router) {
             component: require('../views/components/reports/AcceleratorSalesReport.vue'),
             auth: true
         },
-        // '/order_fulfillment/': {
-        //     name: 'Order Fulfilment',
-        //     component: require('../views/components/OrderFulfillment.vue'),
-        //     auth: true
-        // }
+        'marketplace-courier-mapping/': {
+            name: 'Marketplace Courier Mappings',
+            component: require('../views/components/MarketplaceCourierMapping.vue'),
+            auth: true
+        }
     })
 
     //todo
