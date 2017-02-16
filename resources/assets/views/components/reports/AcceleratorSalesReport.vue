@@ -110,7 +110,6 @@
           id="operator"
           :selected="selectedOperator"
           :options="operators"
-          key="id"
           label="username"
           @update="updateSelectedOperator">
         </multiselect>
@@ -124,7 +123,6 @@
           id="buyer"
           :selected="selectedBuyer"
           :options="buyers"
-          key="id"
           label="username"
           @update="updateSelectedBuyer">
         </multiselect>
