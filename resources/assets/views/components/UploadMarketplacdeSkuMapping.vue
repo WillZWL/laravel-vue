@@ -29,6 +29,7 @@
                 <option value="newegg">NEWEGG</option>
                 <option value="qoo10">QOO10</option>
                 <option value="tanga">TANGA</option>
+                <option value="alibaba">ALIBABA</option>
                 <!--option value="wish">Wish</option-->
               </select>
             </div>
