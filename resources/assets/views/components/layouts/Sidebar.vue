@@ -36,6 +36,7 @@
                 <li><a v-link="'marketplace-product-field-mapping'">Marketplace product field mapping</a></li>
                 <li><a v-link="'update-sku-buyer'">SKU Buyer and Operator</a></li>
                 <li><a v-link="'marketplace-courier-mapping'">Marketplace Courier Mappings</a></li>
+                <li><a v-link="'update-sku-ad-cost'">Upload SKU Advertising Cost</a></li>
               </ul>
             </li>
 
