@@ -59,6 +59,13 @@ const state = {
     marketplaceStores: [],
     marketplaceCourierMappingList: [],
     courierList: [],
+    orderLists: [],
+    orderMeta: {
+        pagination: {
+            'current_page': 0
+        }
+    },
+    paymentGatewatList: []
 };
 
 const mutations = {
@@ -196,6 +203,15 @@ const mutations = {
     SET_MARKETPLACE_PRODUCT_CONTENT_LIST(state, newMarketplaceProductContentList) {
         state.marketplaceProductContentList = newMarketplaceProductContentList;
     },
+
+    FETCH_ORDER_SETTLEMENT_LISTS(state, orderLists, orderMeta) {
+        state.orderLists = orderLists;
+        state.orderMeta= orderMeta
+    },
+
+    FETCH_PAYMENT_GATEWAY_LISTS(state, paymentGatewatList) {
+        state.paymentGatewatList = paymentGatewatList;
+    }
 
 };
 
