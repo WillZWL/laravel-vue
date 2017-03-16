@@ -16,6 +16,7 @@
                 <label class="control-label col-md-4">Payment Gateway: </label>
                 <div class="col-md-6 col-xs-12">
                   <select name="payment_gateway" class="form-control"  required="required">
+                    <option></option>
                     <option v-for="paymentGateway in paymentGateways" value="{{paymentGateway.id}}">{{paymentGateway.name}}</option>
                   </select>
                 </div>
@@ -26,10 +27,29 @@
                 <label class="control-label col-md-4">Business Type: </label>
                 <div class="col-md-6 col-xs-12">
                   <select name="biz_type" class="form-control"  required="required">
+                    <option></option>
                     <template v-for="(index, marketplace) in marketplaces">
                       <option value="{{ marketplace }}">{{ marketplace }}</option>
                     </template>
                   </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-xs-12">
+              <div class="form-group">
+                <label class="control-label col-md-4">So No: </label>
+                <div class="col-md-6 col-xs-12">
+                  <input type="text" name="so_no" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-12">
+              <div class="form-group">
+                <label class="control-label col-md-4">Platform Order No: </label>
+                <div class="col-md-6 col-xs-12">
+                  <input type="text" name="so_no" class="form-control">
                 </div>
               </div>
             </div>
@@ -45,31 +65,16 @@
             </div>
             <div class="col-md-6 col-xs-12">
               <div class="form-group">
-                <label class="control-label col-md-4">So No: </label>
+                <label class="control-label col-md-4">Validation Status: </label>
                 <div class="col-md-6 col-xs-12">
-                  <input type="text" name="so_no" class="form-control">
+                  <select name="validation_status" class="form-control"  required="required">
+                    <option></option>
+                    <option v-for="(index, validation_status) in validation_status_list" value="{{index}}">{{validation_status}}</option>
+                  </select>
                 </div>
               </div>
             </div>
           </div>
-<!--           <div class="row">
-            <div class="col-md-6 col-xs-12">
-              <div class="form-group">
-                <label class="control-label col-md-4">Order Create Date: </label>
-                <div class="col-md-6 col-xs-12">
-                  <input type="text" name="order_create_date" class="form-control">
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-xs-12">
-              <div class="form-group">
-                <label class="control-label col-md-4">Dispatch Date: </label>
-                <div class="col-md-6 col-xs-12">
-                  <input type="text" name="dispatch_date" class="form-control">
-                </div>
-              </div>
-            </div>
-          </div> -->
           <div class="form-group col-md-12">
             <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
               <input type="button" class="btn btn-success" name="search" value="Search" @click="search()">&nbsp;&nbsp;
@@ -85,6 +90,9 @@
 import { fetchPaymentGatewayLists, orderSearch } from '../../../vuex/actions';
 import { getMarketplaces, getPaymentGatewayList } from '../../../vuex/getters';
 export default {
+  props: [
+      'validation_status_list'
+  ],
   vuex: {
     actions: {
       fetchPaymentGatewayLists,

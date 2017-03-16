@@ -1066,7 +1066,7 @@ export const addMarketplaceCourierMapping = ({ dispatch, state}) => {
         });
     }
 }
-var defalut_order_hidden_columns = [11, 12, 13, 14]
+var defalut_order_hidden_columns = [12, 13, 14, 15]
 
 export const initOrderListDatatable =  ({ dispatch }) => {
     _initOrderListDatatable();
