@@ -156,24 +156,26 @@
     <div class="x_content">
       <div class="x_content">
         <div class="row">
-          <template v-if="images" v-for="image in images | orderBy 'priority'">
-            <div class="col-xs-12 col-md-4  col-sm-4" id="show-img-box-{{image.id}}">
-              <div class="thumbnail">
-                <div class="image view view-first">
-                  <img style="width: 100%; display: block;" :src="image.url" :alt="image.url">
-                  <div class="mask">
-                    <p class="title"><a :href="image.url" target="_blank">{{image.alt_text}}</a></p>
-                    <div class="tools tools-bottom">
-                      <a :href="image.url" target="_blank"><i class="fa fa-link"></i></a>
-                      <a href="javascripe:void(0)" v-on:click="deleteImg(image.id)"><i class="fa fa-times"></i></a>
+          <template v-if="images">
+            <template v-for="image in images | orderBy 'priority'">
+              <div class="col-xs-12 col-md-4  col-sm-4" id="show-img-box-{{image.id}}">
+                <div class="thumbnail">
+                  <div class="image view view-first">
+                    <img style="width: 100%; display: block;" :src="image.url" :alt="image.url">
+                    <div class="mask">
+                      <p class="title"><a :href="image.url" target="_blank">{{image.alt_text}}</a></p>
+                      <div class="tools tools-bottom">
+                        <a :href="image.url" target="_blank"><i class="fa fa-link"></i></a>
+                        <a href="javascripe:void(0)" v-on:click="deleteImg(image.id)"><i class="fa fa-times"></i></a>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="caption">
-                  <p>{{image.alt_text}}</p>
+                  <div class="caption">
+                    <p>{{image.alt_text}}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </template>
           </template>
         </div>
       </div>

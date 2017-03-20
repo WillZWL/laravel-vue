@@ -10,13 +10,15 @@
     <div class="col-md-9 col-sm-9 col-xs-12">
       <select name="cat_id" id="cat_id" class="form-control" v-on:change="changeCatId()" required="required">
         <option></option>
-        <template  v-for="category in categoryList | orderBy 'category_name'" v-if="category.category_parent_cat_id == 0 && category.category_id > 0">
+        <template  v-for="category in categoryList | orderBy 'category_name'">
+          <template v-if="category.category_parent_cat_id == 0 && category.category_id > 0">
             <option :value="category.category_id" v-if="category.category_id == selectCid" selected>
                 {{ category.category_name }}
             </option>
             <option :value="category.category_id" v-else>
                 {{ category.category_name }}
             </option>
+          </template>
         </template>
       </select>
     </div>
