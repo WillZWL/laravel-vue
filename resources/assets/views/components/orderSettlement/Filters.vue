@@ -49,7 +49,7 @@
               <div class="form-group">
                 <label class="control-label col-md-4">Platform Order No: </label>
                 <div class="col-md-6 col-xs-12">
-                  <input type="text" name="so_no" class="form-control">
+                  <input type="text" name="platform_order_id" class="form-control">
                 </div>
               </div>
             </div>
