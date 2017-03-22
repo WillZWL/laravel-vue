@@ -208,6 +208,15 @@ export const fetchMarketplaceCourierMappingLists = ({ dispatch }) => {
     })
 };
 
+export const fetchPaymentGatewayLists = ({ dispatch }) => {
+    Vue.http({
+        url: API_URL + 'payment-gateways',
+        method: 'GET'
+    }).then(function (response) {
+        return dispatch('FETCH_PAYMENT_GATEWAY_LISTS', response.data.data);
+    })
+}
+
 // end of fetch Lists
 
 //Price Overview
@@ -1056,4 +1065,92 @@ export const addMarketplaceCourierMapping = ({ dispatch, state}) => {
             msgBox("Error 500, Internal Server Error", "F", 1000);
         });
     }
+}
+var defalut_order_hidden_columns = [12, 13, 14, 15]
+
+export const initOrderListDatatable =  ({ dispatch }) => {
+    _initOrderListDatatable();
+}
+
+const _initOrderListDatatable = () => {
+    Vue.http({}).then(function() {
+        var hidden_columns = defalut_order_hidden_columns;
+        if (Cookies.getJSON("orderListHeaderHiddenList")) {
+            hidden_columns = Cookies.getJSON("orderListHeaderHiddenList")
+        }
+        var table = $('#order-list').DataTable({
+            fixedHeader: true,
+            iDisplayLength: 30,
+            "paging": false,
+            "info": false,
+            buttion: []
+        });
+        for (var i = 0; i < hidden_columns.length; i++){
+            var column = table.column(hidden_columns[i]);
+            column.visible( ! column.visible() );
+            $('a.toggle-vis').eq(hidden_columns[i]).removeClass("btn-success").addClass('btn-danger');
+        }
+        $('a.toggle-vis').on( 'click', function (e) {
+            e.preventDefault();
+            var columnId = $(this).attr('data-column');
+            var column = table.column($(this).attr('data-column'));
+            column.visible( ! column.visible() );
+            if (!column.visible()) {
+                $(this).removeClass("btn-success").addClass('btn-danger');
+                _saveColumnStateForOrderList(columnId, true);
+            } else {
+                $(this).removeClass("btn-danger").addClass('btn-success');
+               _saveColumnStateForOrderList(columnId, false);
+            }
+        });
+    }).then(function(){
+
+    });
+}
+
+const _saveColumnStateForOrderList = (column, isHidden) => {
+    var hidden_columns, index;
+    if (!Cookies.getJSON("orderListHeaderHiddenList")) {
+        hidden_columns = defalut_order_hidden_columns;
+    } else {
+        hidden_columns = Cookies.getJSON("orderListHeaderHiddenList");
+    }
+
+    index = $.inArray(parseInt(column), hidden_columns);
+    if (isHidden) {
+        if (index > -1) {
+            hidden_columns.splice(index, 1);
+        }
+        hidden_columns.push(parseInt(column));
+    } else {
+        if (index > -1) {
+            hidden_columns.splice($.inArray(parseInt(column), hidden_columns), 1);
+        }
+    }
+    Cookies.set("orderListHeaderHiddenList", hidden_columns);
+}
+
+export const orderSearch = ({ dispatch }, queryStr = '') => {
+    $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
+    if (queryStr == '') {
+        var queryStr = $("form[name='fm']").serialize();
+    }
+    window.history.pushState(null, null, 'order-settlement?'+queryStr);
+    Vue.http({
+        url: API_URL+'orders-settlement?'+queryStr,
+        method: 'GET'
+    }).then(function (response) {
+        $.isLoading("hide");
+        var table = $('#order-list').DataTable();
+        table.destroy();
+        dispatch('FETCH_ORDER_SETTLEMENT_LISTS', response.data.data, response.data.meta);
+    }).then(function() {
+        _initOrderListDatatable();
+    }).catch(function() {
+        $.isLoading("hide");
+        $.isLoading({ text: "Error 500, Internal Server Error", class:"fa fa-exclamation-triangle" });
+        setTimeout( function(){
+            $.isLoading("hide");
+        }, 3000)
+    });
 }

@@ -66,6 +66,16 @@ export default function(router) {
             name: 'Marketplace Courier Mappings',
             component: require('../views/components/MarketplaceCourierMapping.vue'),
             auth: true
+        },
+        'update-sku-ad-cost': {
+            name: 'Upload SKU Advertising Cost',
+            component: require('../views/components/UploadSkuAdCost.vue'),
+            auth: true
+        },
+        'order-settlement': {
+            name: 'Marketplace Settlement - Exception List',
+            component: require('../views/components/OrderSettlement.vue'),
+            auth: true
         }
     })
 

@@ -74,8 +74,6 @@
             </td>
           </tr>
           </template>
-
-
         </tbody>
       </table>
     </section>

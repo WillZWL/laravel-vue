@@ -75,3 +75,9 @@ export const getMarketplaceStores = (state) => state.marketplaceStores;
 export const getCourierList = (state) => state.courierList;
 
 export const getMarketplaceCourierMappingList = (state) => state.marketplaceCourierMappingList;
+
+export const getOrderLists = (state) => state.orderLists;
+
+export const getOrderMeta = (state) => state.orderMeta;
+
+export const getPaymentGatewayList = (state) => state.paymentGatewatList;
