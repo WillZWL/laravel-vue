@@ -16,7 +16,7 @@
               <div class="form-group">
                 <label class="control-label col-md-4">Payment Gateway: </label>
                 <div class="col-md-6 col-xs-12">
-                  <select name="payment_gateway" class="form-control"  required="required">
+                  <select name="payment_gateway" class="form-control payment_gateway"  required="required">
                     <option></option>
                     <option v-for="paymentGateway in paymentGateways" value="{{paymentGateway.id}}">{{paymentGateway.name}}</option>
                   </select>
