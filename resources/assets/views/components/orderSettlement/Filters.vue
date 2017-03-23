@@ -10,6 +10,7 @@
       </div>
       <div class="x_content">
         <form name="fm" class="form_search form-horizontal form-label-left" onsubmit="return false">
+          <input type="hidden" name="type" value="ACCELERATOR">
           <div class="row">
             <div class="col-md-6 col-xs-12">
               <div class="form-group">
@@ -78,7 +79,7 @@
           <div class="form-group col-md-12">
             <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
               <input type="button" class="btn btn-success" name="search" value="Search" @click="search()">&nbsp;&nbsp;
-              <button type="button" class="btn btn-primary" @click=""><i class="fa fa-print"></i> Download</button>
+              <input type="button" class="btn btn-primary" value="Download" @click="downloadExcel()">
             </div>
           </div>
         </form>
@@ -89,6 +90,7 @@
 <script>
 import { fetchPaymentGatewayLists, orderSearch } from '../../../vuex/actions';
 import { getMarketplaces, getPaymentGatewayList } from '../../../vuex/getters';
+import {api_url, ACCESS_TOKEN} from '../../../js/vue.config.js'
 export default {
   props: [
       'validation_status_list'
@@ -103,12 +105,24 @@ export default {
       paymentGateways: getPaymentGatewayList
     }
   },
+  data () {
+    return {
+      api_url: api_url
+    }
+  },
   ready() {
     this.fetchPaymentGatewayLists();
     $(".select2").select2({
       placeholder: "",
       allowClear: true
     });
+  },
+  methods: {
+    downloadExcel () {
+      var queryStr = $("form[name='fm']").serialize();
+      var url = this.api_url + 'orders-settlement?' + queryStr + '&download=1&access_token='+ACCESS_TOKEN
+      window.open(url);
+    }
   }
 }
 </script>
