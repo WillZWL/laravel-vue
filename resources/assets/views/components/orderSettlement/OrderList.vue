@@ -34,8 +34,8 @@
                     <td>{{item.validation_status | convertValidationStatus}}</td>
                     <td>{{item.estimated_settlement_date}}</td>
                     <td>{{item.marketplace_contact_name}}</td>
-                    <td>{{item.marketplace_contact_phone}}</td>
                     <td>{{item.marketplace_email}}</td>
+                    <td>{{item.marketplace_contact_phone}}</td>
                 </tr>
               </tbody>
             </table>
