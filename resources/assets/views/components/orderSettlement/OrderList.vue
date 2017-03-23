@@ -6,6 +6,7 @@
             <customheader :headers="headers"></customheader>
         </div>
         <form name='fm_orders' class="post_orders">
+            <b class="btn btn-success pull-right" data-toggle="modal" data-target=".custom_header">Header</b>
             <table id="order-list" class="table table-striped table-bordered bulk_action jambo_table" width="100%">
               <thead>
                 <tr>
@@ -13,9 +14,6 @@
                       <input type="checkbox" id="check-all" class="flat">
                     </th>
                     <th v-for="header in headers">{{ header }}</th>
-                    <th width="">
-                        <b class="btn btn-success pull-right" data-toggle="modal" data-target=".custom_header">Header</b>
-                    </th>
                 </tr>
               </thead>
               <tbody>
@@ -38,10 +36,6 @@
                     <td>{{item.marketplace_contact_name}}</td>
                     <td>{{item.marketplace_contact_phone}}</td>
                     <td>{{item.marketplace_email}}</td>
-                    <td>
-                        <input type="button" name="action" class="btn btn-primary" value="Action" data-toggle="modal" data-target=".action-modal{{item.so_no}}"><br/>
-                        <action-modal :item="item"></action-modal>
-                    </td>
                 </tr>
               </tbody>
             </table>
@@ -57,10 +51,12 @@
                             </select>
                         </div>
                         <input type="button" class="btn btn-success" value="Update Validation Status" @click="updateStatus()">
+                        <input type="button" name="action" class="btn btn-primary" value="Action" data-toggle="modal" data-target=".action-modal" @click="action"><br/>
                     </div>
                   </div>
                 </div>
             </div>
+            <action-modal :marketplace="marketplace" :payment_gateway="payment_gateway" :modal_class="modal_class"></action-modal>
         </form>
       </div>
     </div>
@@ -113,12 +109,15 @@
                     13: 'Marketplace Main Contact Person',
                     14: 'Marketplace Email address(es)',
                     15: 'Marketplace Contact Number'
-                }
+                },
+                modal_class: 'action-modal',
+                payment_gateway: {},
+                marketplace: {}
             }
         },
         methods: {
             pagination: function (url) {
-                var query_str = $.url('query', url)
+                var query_str = $("form[name='fm']").serialize() + '&' +$.url('query', url)
                 this.search(query_str)
             },
             updateStatus: function () {
@@ -137,7 +136,7 @@
                         api_url + 'order-settlement/bulk-update',
                         post_data
                     ).then(function(response){
-                        $.isLoading({ text: "Update Success", class:"fa fa-check" });
+                        $.isLoading({ text: "Send Success", class:"fa fa-check" });
                         this.search();
                     }).then(function(){
                         $.isLoading("hide");
@@ -149,6 +148,37 @@
                     });
                 } else {
                     alert('Please Select Order first');
+                }
+            },
+            action: function () {
+                var payment_gateway_id = $(".payment_gateway").val();
+                if (payment_gateway_id) {
+                    this.modal_class = 'action-modal'
+                    $.isLoading({ text: "Loading", class:"fa fa-refresh fa-spin" });
+                    this.$http.get(api_url + 'payment-gateways?payment_gateway='+ payment_gateway_id)
+                    .then(function (response) {
+                        this.payment_gateway = response.data.data[0]
+                        var marketplace_id = response.data.data[0].marketplace_id
+                        this.$http.get(api_url + 'marketplace?marketplace=' + marketplace_id)
+                        .then(function (response) {
+                            $.isLoading("hide");
+                            this.marketplace = response.data.data[0]
+                        })
+                        .catch(function(){
+                            $.isLoading({ text: "Error 500, Internal Server Error", class:"fa fa-exclamation-triangle" });
+                            setTimeout( function(){
+                                $.isLoading("hide");
+                            }, 3000)
+                        })
+                    }).catch(function(){
+                        $.isLoading({ text: "Error 500, Internal Server Error", class:"fa fa-exclamation-triangle" });
+                        setTimeout( function(){
+                            $.isLoading("hide");
+                        }, 3000)
+                    })
+                } else {
+                    this.modal_class = '';
+                    alert('Please select a payment gateway first');
                 }
             }
         },
